@@ -5,10 +5,13 @@ import HeroPost from '../components/hero-post';
 import Header from '../components/header';
 import Intro from '../components/intro';
 import Layout from '../components/layout';
+import FeaturedBagel from '../components/featuredBagel';
+import BagelDefinition from '../components/bagelDefinition';
 import { getAllPostsForHome, getHomePageData } from '../lib/api';
 import { CMS_NAME } from '../lib/constants';
 
-export default function Index({ allPosts: { edges }, preview }) {
+export default function Index({ allPosts: { edges }, preview, homeData }) {
+  console.log(homeData);
   const heroPost = edges[0]?.node;
   const morePosts = edges.slice(1);
 
@@ -20,7 +23,16 @@ export default function Index({ allPosts: { edges }, preview }) {
       <Container>
         {' '}
         <Header />
-        <Intro />
+        <FeaturedBagel
+          title={homeData.featuredBagel.bagelTitle}
+          subtitle={homeData.featuredBagel.bagelSubtitle}
+          desc={homeData.featuredBagel.bagelDescription}
+        />
+        <BagelDefinition
+          title={homeData.bagelDefinition.bagelTitle}
+          quote={homeData.bagelDefinition.bagelQuote}
+          desc={homeData.bagelDefinition.bagelDescription}
+        />
         {heroPost && (
           <HeroPost
             title={heroPost.title}
@@ -38,8 +50,8 @@ export default function Index({ allPosts: { edges }, preview }) {
 export async function getStaticProps({ preview = false }) {
   const homeData = await getHomePageData();
   const allPosts = await getAllPostsForHome(preview);
-  console.log(homeData);
+  // console.log(homeData);
   return {
-    props: { allPosts, preview },
+    props: { allPosts, preview, homeData },
   };
 }
