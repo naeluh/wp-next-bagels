@@ -1,6 +1,7 @@
 @tailwind base;
 
 /* Write your own custom base styles here */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700;900&family=Vollkorn:ital,wght@0,700;0,900;1,400&display=swap');
 
 /* Start purging... */
 @tailwind components;
