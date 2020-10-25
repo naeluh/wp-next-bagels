@@ -15,21 +15,24 @@ export default function Index({ preview, homeData }) {
   return (
     <Layout preview={preview}>
       <Head>
-        <title>Next.js Blog Example with {CMS_NAME}</title>
+        <title>{CMS_NAME}</title>
       </Head>
       <Container>
-        {' '}
         <Header />
-        <FeaturedBagel
-          title={homeData.featuredBagel.bagelTitle}
-          subtitle={homeData.featuredBagel.bagelSubtitle}
-          desc={homeData.featuredBagel.bagelDescription}
-        />
-        <BagelDefinition
-          title={homeData.bagelDefinition.bagelTitle}
-          quote={homeData.bagelDefinition.bagelQuote}
-          desc={homeData.bagelDefinition.bagelDescription}
-        />
+        {homeData.featuredBagel && (
+          <FeaturedBagel
+            title={homeData.featuredBagel.bagelTitle}
+            subtitle={homeData.featuredBagel.bagelSubtitle}
+            desc={homeData.featuredBagel.bagelDescription}
+          />
+        )}
+        {homeData.bagelDefinition && (
+          <BagelDefinition
+            title={homeData.bagelDefinition.bagelTitle}
+            quote={homeData.bagelDefinition.bagelQuote}
+            desc={homeData.bagelDefinition.bagelDescription}
+          />
+        )}
       </Container>
     </Layout>
   );
