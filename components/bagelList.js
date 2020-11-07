@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './bagelDefinition.module.css';
+import styles from './bagelList.module.css';
 
-const bagelDefinition = ({ title, quote, desc }) => {
+const bagelList = ({ title, desc, priceTitle, priceDesc }) => {
   return (
     <section
       style={{
@@ -15,14 +15,15 @@ const bagelDefinition = ({ title, quote, desc }) => {
         </h3>
         <span className={styles.borderBottom}></span>
         <h4 className='text-2xl md:text-4xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4 text-white'>
-          {quote}
+          {desc}
         </h4>
-        <div className='text-lg leading-relaxed mb-4 text-white'>
-          <p>{desc}</p>
-        </div>
+        <span className={styles.borderBottom}></span>
+        <h4 className='text-2xl md:text-4xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4 text-white'>
+          {priceDesc}
+        </h4>
       </div>
     </section>
   );
 };
 
-export default bagelDefinition;
+export default bagelList;

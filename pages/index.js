@@ -7,6 +7,8 @@ import Intro from '../components/intro';
 import Layout from '../components/layout';
 import FeaturedBagel from '../components/featuredBagel';
 import BagelDefinition from '../components/bagelDefinition';
+import BagelList from '../components/bagelList';
+import BagelDetails from '../components/bagelDetails';
 import { getAllPostsForHome, getHomePageData } from '../lib/api';
 import { CMS_NAME } from '../lib/constants';
 
@@ -17,8 +19,8 @@ export default function Index({ preview, homeData }) {
       <Head>
         <title>{CMS_NAME}</title>
       </Head>
+      <Header />
       <Container>
-        <Header />
         {homeData.featuredBagel && (
           <FeaturedBagel
             title={homeData.featuredBagel.bagelTitle}
@@ -32,6 +34,17 @@ export default function Index({ preview, homeData }) {
             quote={homeData.bagelDefinition.bagelQuote}
             desc={homeData.bagelDefinition.bagelDescription}
           />
+        )}
+        {homeData.bagelList && (
+          <BagelList
+            title={homeData.bagelList.bagelListTitle}
+            desc={homeData.bagelList.bagelListDescription}
+            priceTitle={homeData.bagelList.bagelPriceTitle}
+            priceDesc={homeData.bagelList.bagelPriceDescription}
+          />
+        )}
+        {homeData.bagelDetails && (
+          <BagelDetails bagels={homeData.bagelDetails.bagel} />
         )}
       </Container>
     </Layout>
