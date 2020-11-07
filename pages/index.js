@@ -9,6 +9,7 @@ import FeaturedBagel from '../components/featuredBagel';
 import BagelDefinition from '../components/bagelDefinition';
 import BagelList from '../components/bagelList';
 import BagelDetails from '../components/bagelDetails';
+import LocationsTimes from '../components/locationsTimes';
 import { getAllPostsForHome, getHomePageData } from '../lib/api';
 import { CMS_NAME } from '../lib/constants';
 
@@ -45,6 +46,12 @@ export default function Index({ preview, homeData }) {
         )}
         {homeData.bagelDetails && (
           <BagelDetails bagels={homeData.bagelDetails.bagel} />
+        )}
+        {homeData.locationsTimes && (
+          <LocationsTimes
+            locations={homeData.locationsTimes.location}
+            times={homeData.locationsTimes.times}
+          />
         )}
       </Container>
     </Layout>
