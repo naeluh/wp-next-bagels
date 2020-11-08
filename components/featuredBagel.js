@@ -16,9 +16,9 @@ const featuredBagel = ({ title, subtitle, desc }) => {
         <h4 className='text-2xl md:text-4xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4'>
           {subtitle}
         </h4>
-        <div className='text-lg leading-relaxed mb-4'>
+        {/* <div className='text-lg leading-relaxed mb-4'>
           <p>{desc}</p>
-        </div>
+        </div> */}
       </div>
     </section>
   );
