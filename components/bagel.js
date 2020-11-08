@@ -4,7 +4,7 @@ import styles from './bagel.module.css';
 const bagel = ({ title, desc, price }) => {
   return (
     <div>
-      <div className='w-full overflow-hidden mb-4'>
+      <div className='w-full overflow-hidden mb-6'>
         <img
           className='object-cover h-48 w-full'
           src='/static/images/bagel.jpg'

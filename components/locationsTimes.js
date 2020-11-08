@@ -11,7 +11,7 @@ const locationsTimes = ({ locations }) => {
       >
         <div className='flex-1 z-10'>
           <h3 className='text-4xl md:text-6xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4 text-black'>
-            {'Come Visit Us'}
+            {'Locations & Times'}
           </h3>
           <span className={styles.borderBottom}></span>
         </div>
