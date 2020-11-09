@@ -27,6 +27,7 @@ export default function Index({ preview, homeData }) {
             title={homeData.featuredBagel.bagelTitle}
             subtitle={homeData.featuredBagel.bagelSubtitle}
             desc={homeData.featuredBagel.bagelDescription}
+            img={homeData.featuredBagel.bagelImage}
           />
         )}
         {homeData.bagelDefinition && (

@@ -1,6 +1,7 @@
 import Container from './container';
 import { EXAMPLE_PATH } from '../lib/constants';
 import Link from 'next/link';
+import ContactForm from './contactForm';
 
 export default function Footer() {
   const image = (
@@ -28,6 +29,7 @@ export default function Footer() {
               href={`https://github.com/zeit/next.js/tree/canary/examples/${EXAMPLE_PATH}`}
               className='mx-3 font-bold hover:underline'
             ></a> */}
+            <ContactForm />
           </div>
         </div>
       </Container>

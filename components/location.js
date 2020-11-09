@@ -8,11 +8,11 @@ const location = ({ location, times }) => {
     <div>
       <div className='w-full overflow-hidden mb-6'>
         <img
-          className='object-cover h-48 w-full'
+          className='object-cover object-top h-48 w-full'
           src='/static/images/tent.jpg'
         />
       </div>
-      <h4 className='text-xl font-normal tracking-tighter leading-tight md:pr-8 font-serif mb-4'>
+      <h4 className='text-xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4'>
         {location}
       </h4>
       {times.map((item, index) => (
