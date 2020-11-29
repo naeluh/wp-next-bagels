@@ -20,7 +20,6 @@ const bagel = ({ title, desc, img, price }) => {
       <h4 className='text-xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4'>
         {title}
       </h4>{' '}
-      {desc && <p className={styles.p}>{desc}</p>}
     </div>
   );
 };
