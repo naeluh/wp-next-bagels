@@ -14,7 +14,6 @@ import { getAllPostsForHome, getHomePageData } from '../lib/api';
 import { CMS_NAME } from '../lib/constants';
 
 export default function Index({ preview, homeData }) {
-  console.log(homeData);
   return (
     <Layout preview={preview}>
       <Head>
