@@ -10,7 +10,7 @@ export default function Header() {
     />
   );
   return (
-    <nav className='mx-auto px-5 py-5 flex items-center justify-between flex-wrap '>
+    <nav className='mx-auto px-5 py-5 flex items-center justify-between flex-wrap fixed top-0 z-10'>
       <div className='flex items-center flex-shrink-0 text-black mr-6'>
         <Link href='/'>
           <a>{image}</a>

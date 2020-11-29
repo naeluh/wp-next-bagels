@@ -1,0 +1,30 @@
+@media (min-width: 768px) {
+  .offset::before {
+    content: '';
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    background-color: #ecc94b;
+    bottom: -18px;
+    right: -18px;
+    display: flex;
+    border-radius: 50%;
+    z-index: 1;
+  }
+  .offset::after {
+    content: '';
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    background-color: #fff;
+    bottom: calc(-18px + 25%);
+    right: calc(-18px + 25%);
+    display: flex;
+    border-radius: 50%;
+    z-index: 2;
+  }
+}
+
+.offset {
+  display: block;
+}

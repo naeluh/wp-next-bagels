@@ -1,0 +1,37 @@
+.formStyles h4 {
+  border-bottom: 2px solid;
+}
+
+.formStyles input,
+.formStyles textarea {
+  font-size: 16px;
+  padding: 0.25em 0.5em;
+  background-color: #fff;
+  border: 2px solid #8b8a8b;
+  width: 100%;
+  @apply font-sans;
+}
+
+.formStyles fieldset {
+  margin-bottom: 10px;
+  @apply font-sans font-medium;
+}
+
+.formStyles label {
+  display: block;
+  letter-spacing: -1px;
+  @apply font-sans text-sm;
+}
+
+.formStyles button {
+  @apply inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium text-black font-sans;
+  border: 2px solid;
+}
+
+.formStyles button:hover {
+  @apply bg-black text-white;
+}
+
+.formStyles button:focus {
+  @apply outline-none;
+}

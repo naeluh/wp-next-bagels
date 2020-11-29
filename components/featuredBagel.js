@@ -1,16 +1,17 @@
 import React from 'react';
+import styles from './featuredBagel.module.css';
 
 const featuredBagel = ({ title, subtitle, img }) => {
   return (
-    <section className='px-5 py-8 flex-col md:flex-row flex lg:items-center md:justify-between mb-16 md:mb-24 md:p-8 border-yellow-500 border-12'>
-      <div className='mb-6 md:mb-0 flex-1 md:mr-4 lg:mr-8 '>
+    <section className='px-5 py-8 flex-col md:flex-row flex lg:items-center md:justify-between mb-16 md:mb-24 md:px-8 md:py-8 md:pb-12 border-yellow-500 border-12'>
+      <div className={`mb-6 md:mb-0 flex-1 md:mr-8 lg:mr-16`}>
         <img
-          className='object-cover w-full'
+          className={`object-cover h-full w-full relative`}
           src='/static/images/penguin-city-pretzel.jpg'
         />
       </div>
-      <div className='flex-1'>
-        <h3 className='text-4xl md:text-6xl font-bold tracking-tighter leading-tight md:pr-10 font-serif mb-4 t'>
+      <div className={`flex-1 relative`}>
+        <h3 className='text-4xl md:text-6xl font-bold tracking-tighter leading-tight md:pr-10 font-serif mb-4'>
           <div className='w-full overflow-hidden mb-6'>
             <img
               className='object-contain'

@@ -3,6 +3,7 @@
 // Finally, add a <MyForm/> element whereever you wish to display the form.
 
 import React, { useState } from 'react';
+import styles from './contactForm.module.css';
 
 const contactForm = () => {
   const [status, setStatus] = useState('');
@@ -31,13 +32,25 @@ const contactForm = () => {
       onSubmit={submitForm}
       action='https://formspree.io/f/xzbkgnpk'
       method='POST'
+      className={`w-full ${styles.formStyles} lg:max-w-xs`}
     >
-      <label>Email:</label>
-      <input type='email' name='email' />
-      <label>Message:</label>
-      <input type='text' name='message' />
+      <h4 className='text-xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4 border-bottom pb-4'>
+        Questions ?
+      </h4>
+      <fieldset>
+        <label>Email:</label>
+        <input type='email' name='email' />
+      </fieldset>
+      <fieldset>
+        <label>Message:</label>
+        <textarea name='message'></textarea>
+      </fieldset>
 
-      {status === 'SUCCESS' ? <p>Thanks!</p> : <button>Submit</button>}
+      {status === 'SUCCESS' ? (
+        <p>Thanks!</p>
+      ) : (
+        <button type='submit'>Submit</button>
+      )}
       {status === 'ERROR' && <p>Ooops! There was an error.</p>}
     </form>
   );
