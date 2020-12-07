@@ -1,37 +1,25 @@
-import { CMS_NAME, CMS_URL } from '../lib/constants';
+import { BAGEL_BUYERS_GUIDE_INTRO } from '../lib/constants';
 
 export default function Intro({}) {
   return (
-    <>
-      {/* 
-      <section className='flex-col md:flex-row flex items-center md:justify-between mb-16 md:mb-12'>
-        <img
-          className='object-cover w-full max-h-10'
-          src='/static/images/the-mamalagel.jpg'
-        />
-      </section>
-        <section className='flex-col md:flex-row flex items-center md:justify-between mt-16 mb-16 md:mb-12'>
-        <h1 className='text-6xl md:text-8xl font-bold tracking-tighter leading-tight md:pr-8 font-serif'>
-          Blog.
-        </h1>
-        <h4 className='text-center md:text-left text-lg mt-5 md:pl-8'>
-          A statically generated blog example using{' '}
-          <a
-            href='https://nextjs.org/'
-            className='underline hover:text-success duration-200 transition-colors'
-          >
-            Next.js
-          </a>{' '}
-          and{' '}
-          <a
-            href={CMS_URL}
-            className='underline hover:text-success duration-200 transition-colors'
-          >
-            {CMS_NAME}
-          </a>
-          .
-        </h4>
-      </section> */}
-    </>
+    <section className='flex-col md:flex-column flex md:justify-between mb-16 md:mb-12'>
+      <h3 className='text-4xl md:text-6xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4 text-black'>
+        {BAGEL_BUYERS_GUIDE_INTRO}
+      </h3>
+      <ol className='list-decimal text-2xl md:text-2xl font-hairline tracking-tighter leading-tight md:pr-8 font-serif mb-4 text-black px-5'>
+        <li>Select a date that work to pickup your bagels.</li>
+        <li>
+          Select the amount of dozens or half dozens you would like to purchase.
+        </li>
+        <li>
+          Select the bagels you would like in the dozens or half dozens (mix and
+          match!).
+        </li>
+        <li>
+          Verify that you have the bagels that you would like to purchase.
+        </li>
+        <li>Use our secure checkout and get ready to enjoy your bagels!</li>
+      </ol>
+    </section>
   );
 }
