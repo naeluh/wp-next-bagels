@@ -1,91 +1,27 @@
 import React, { useEffect, useMemo, useCallback, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import styles from './bagelForm.module.css';
-import Select from 'react-select';
+import RSelect from 'react-select';
+import ReactDatePicker from 'react-datepicker';
+import NumberFormat from 'react-number-format';
+import {
+  TextField,
+  Checkbox,
+  Select,
+  MenuItem,
+  Switch,
+  RadioGroup,
+  FormControlLabel,
+  ThemeProvider,
+  Radio,
+  createMuiTheme,
+  Slider,
+} from '@material-ui/core';
+import ButtonsResult from './buttonResult';
+import BagelNumberField from './bagelNumberField';
 
 function bagelForm({ bagelData }) {
   console.log(bagelData);
-
-  const customStyles = useMemo(
-    () => ({
-      option: (styles, { isSelected, isFocused, isDisabled }) => {
-        let backgroundColor = '#FFFFFF';
-        let color = '#000000';
-        let borderColor = '#C6C6C6';
-
-        if (isSelected) {
-          backgroundColor = '#FFFFFF';
-          color = '#000000';
-          borderColor = '#000000';
-        }
-
-        if (isFocused) {
-          backgroundColor = '#FFFFFF';
-          color = '#000000';
-        }
-
-        if (isDisabled) {
-          backgroundColor = '#FFFFFF';
-          color = '#C6C6C6';
-        }
-
-        return {
-          ...styles,
-          width: '100%',
-          opacity: 1,
-          border: '1px solid #C6C6C6',
-          borderColor,
-          paddingTop: 12,
-          paddingBottom: 12,
-          paddingLeft: '14px',
-          backgroundColor,
-          color,
-          marginTop: 'px',
-          '&:active': {
-            // Overwrittes the different states of border
-            background: '#fff',
-          },
-        };
-      },
-      control: styles => {
-        return {
-          ...styles,
-          width: '100%',
-          minHeight: 52,
-          boxShadow: 'none',
-          borderColor: '#5E79FB',
-        };
-      },
-      menu: styles => {
-        return {
-          ...styles,
-          width: '100%',
-          paddingTop: 0,
-          marginTop: '-1px',
-          minHeight: 52,
-          boxShadow: 'none',
-        };
-      },
-      menuList: styles => {
-        return { ...styles, paddingTop: 0, paddingBottom: 0, minHeight: 52 };
-      },
-      singleValue: (styles, state) => {
-        return { ...styles, marginLeft: '7px' };
-      },
-      indicatorSeparator: (styles, state) => {
-        return { ...styles, border: 'none', backgroundColor: '#fff' };
-      },
-      indicatorContainer: (styles, state) => {
-        return {
-          ...styles,
-          border: 'none',
-          backgroundColor: '#fff',
-          flexDirection: 'column',
-        };
-      },
-    }),
-    []
-  );
 
   const dozen = 12;
   const halfDozen = 6;
@@ -95,22 +31,6 @@ function bagelForm({ bagelData }) {
   const [bagelSelections, setBagelSelections] = useState({
     bagelSetId: null,
     bagels: [],
-  });
-
-  const { register } = useForm({
-    mode: 'onSubmit',
-    reValidateMode: 'onChange',
-    defaultValues: {
-      bagelSets,
-      dozen: 12,
-      halfDozen: 6,
-      bagelSelections,
-    },
-    resolver: undefined,
-    context: undefined,
-    criteriaMode: 'firstError',
-    shouldFocusError: true,
-    shouldUnregister: true,
   });
 
   const formatDate = date => {
@@ -138,7 +58,33 @@ function bagelForm({ bagelData }) {
     return dateArr;
   };
 
-  const { handleSubmit, errors, control } = useForm();
+  const theme = createMuiTheme({
+    palette: {
+      type: 'light',
+    },
+  });
+
+  const defaultValues = {
+    Native: '',
+    TextField: '',
+    Select: '',
+    ReactSelect: { value: 'vanilla', label: 'Vanilla' },
+    Checkbox: false,
+    switch: false,
+    RadioGroup: '',
+    numberFormat: 123456789,
+    downShift: 'apple',
+    bagelSets,
+    dozen: 12,
+    halfDozen: 6,
+    bagelSelections,
+  };
+
+  const { handleSubmit, errors, control, register, reset } = useForm({
+    defaultValues,
+  });
+
+  const [data, setData] = useState(null);
 
   const onSubmit = data => console.log(data);
 
@@ -148,24 +94,69 @@ function bagelForm({ bagelData }) {
   }, []);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.bagelForm}>
-      <Controller
-        as={Select}
-        control={control}
-        styles={customStyles}
-        value={selectedDateOption}
-        defaultValue={selectedDateOption}
-        onChange={setSelectedDateOption}
-        options={dates}
-        name='dates'
-        ref={register({ required: true })}
-        isSearchable={false}
-      />
-      <input name='example' defaultValue='test' ref={register} />
-      <input name='exampleRequired' ref={register({ required: true })} />
-      {errors.exampleRequired && <span>This field is required</span>}
-      <input type='submit' />
-    </form>
+    <ThemeProvider theme={theme}>
+      <form
+        onSubmit={handleSubmit(data => setData(data))}
+        className={`form ${styles.bagelForm}`}
+      >
+        <section>
+          <label>Native Input:</label>
+          <input name='Native' className='input' ref={register} />
+        </section>
+
+        <section>
+          <label>Select Bagels</label>
+          {bagelData.map(bagel => (
+            <BagelNumberField
+              control={control}
+              bagel={bagel}
+              key={bagel.node.bagelInfo.bagelTitle}
+            />
+          ))}
+        </section>
+
+        <section>
+          <label>MUI Checkbox</label>
+          <Controller
+            as={Checkbox}
+            name='Checkbox'
+            type='checkbox'
+            control={control}
+          />
+        </section>
+
+        <section>
+          <label>React Select</label>
+          <Controller
+            as={RSelect}
+            control={control}
+            value={selectedDateOption}
+            defaultValue={selectedDateOption}
+            onChange={setSelectedDateOption}
+            options={dates}
+            name='dates'
+            for={register({ required: true })}
+            isSearchable={false}
+          />
+        </section>
+
+        <section>
+          <label>NumberFormat</label>
+          <Controller
+            as={NumberFormat}
+            thousandSeparator
+            name='numberFormat'
+            className='input'
+            control={control}
+            displayType='input'
+            type='number'
+          />
+        </section>
+
+        {errors.exampleRequired && <span>This field is required</span>}
+        <ButtonsResult {...{ data, reset, defaultValues }} />
+      </form>
+    </ThemeProvider>
   );
 }
 

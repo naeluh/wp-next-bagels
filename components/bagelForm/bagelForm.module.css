@@ -5,7 +5,6 @@ form.bagelForm {
 
 .bagelForm h1 {
   font-weight: 100;
-  color: white;
   text-align: center;
   padding-bottom: 10px;
   border-bottom: 1px solid rgb(79, 98, 148);
@@ -43,10 +42,8 @@ form.bagelForm {
   display: block;
   margin-bottom: 13px;
   margin-top: 20px;
-  color: white;
   font-size: 14px;
   font-weight: 200;
-  text-align: center;
 }
 
 .bagelForm button[type='submit'],
@@ -114,4 +111,10 @@ form.bagelForm {
   text-transform: uppercase;
   padding: 10px 20px;
   border-radius: 4px;
+}
+
+.numberContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
 }
