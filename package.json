@@ -8,16 +8,23 @@
     "start": "next start"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.57",
     "classnames": "2.2.6",
     "date-fns": "2.14.0",
     "dotenv": "^8.2.0",
+    "downshift": "^6.0.7",
     "next": "latest",
     "react": "^16.13.1",
+    "react-datepicker": "^3.3.0",
     "react-dom": "^16.13.1",
     "react-hook-form": "^6.12.2",
+    "react-number-format": "^4.4.1",
+    "react-scripts": "^4.0.1",
     "react-select": "^3.1.1",
     "react-spring": "^8.0.27",
-    "react-visibility-sensor": "^5.1.1"
+    "react-visibility-sensor": "^5.1.1",
+    "skypack": "^0.2.0"
   },
   "devDependencies": {
     "postcss-flexbugs-fixes": "4.2.1",
