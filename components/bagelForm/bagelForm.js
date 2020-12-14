@@ -1,37 +1,30 @@
-import React, { useEffect, useMemo, useCallback, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import styles from './bagelForm.module.css';
 import RSelect from 'react-select';
 import ReactDatePicker from 'react-datepicker';
 import NumberFormat from 'react-number-format';
 import {
-  TextField,
   Checkbox,
-  Select,
-  MenuItem,
-  Switch,
-  RadioGroup,
-  FormControlLabel,
   ThemeProvider,
-  Radio,
   createMuiTheme,
-  Slider,
+  Button,
 } from '@material-ui/core';
 import ButtonsResult from './buttonResult';
 import BagelNumberField from './bagelNumberField';
+import BagelSelections from './BagelSelections';
+import updateAction from '../../lib/updateAction';
+import { useStateMachine } from 'little-state-machine';
 
 function bagelForm({ bagelData }) {
-  console.log(bagelData);
-
   const dozen = 12;
   const halfDozen = 6;
   const [dates, setDates] = useState([]);
   const [selectedDateOption, setSelectedDateOption] = useState(null);
-  const [bagelSets, setBagelSets] = useState(0);
-  const [bagelSelections, setBagelSelections] = useState({
-    bagelSetId: null,
-    bagels: [],
-  });
+
+  const [bagelSelections, setBagelSelections] = useState([]);
+
+  const { state, action } = useStateMachine(updateAction);
 
   const formatDate = date => {
     const d = new Date(date);
@@ -74,7 +67,6 @@ function bagelForm({ bagelData }) {
     RadioGroup: '',
     numberFormat: 123456789,
     downShift: 'apple',
-    bagelSets,
     dozen: 12,
     halfDozen: 6,
     bagelSelections,
@@ -86,33 +78,85 @@ function bagelForm({ bagelData }) {
 
   const [data, setData] = useState(null);
 
-  const onSubmit = data => console.log(data);
+  const onSubmit = data => {
+    console.log(data);
+    setData(data);
+    action(data);
+  };
 
   useEffect(() => {
     setDates(nextSevenDays(new Date()));
     return () => {};
   }, []);
 
+  const [bagelID, setBagelID] = useState(0);
+
+  const addGroup = type => {
+    setBagelID(bagelID + 1);
+    setBagelSelections(bagelSelections => [
+      ...bagelSelections,
+      {
+        id: bagelID,
+        bagelSetType: type,
+        bagels: [],
+      },
+    ]);
+    console.log(bagelSelections, bagelID);
+  };
+
+  const getBagelSet = id => {};
+
+  /* const removeGroup = id => {
+    console.log(type, bagelSelections);
+    if (bagelID === id) {
+    }
+    setBagelSelections({
+      bagelSetId: bagelID,
+      bagelSetType: type,
+      bagels: [],
+    });
+  }; */
+
   return (
     <ThemeProvider theme={theme}>
       <form
-        onSubmit={handleSubmit(data => setData(data))}
+        onSubmit={handleSubmit(onSubmit)}
         className={`form ${styles.bagelForm}`}
       >
-        <section>
-          <label>Native Input:</label>
-          <input name='Native' className='input' ref={register} />
+        <section className={styles.grid}>
+          <Button onClick={() => addGroup('dozen')} variant='contained'>
+            Add Dozen
+          </Button>
+          <Button onClick={() => addGroup('halfDozen')} variant='contained'>
+            Add 1/2 Dozen
+          </Button>
         </section>
 
         <section>
-          <label>Select Bagels</label>
-          {bagelData.map(bagel => (
-            <BagelNumberField
-              control={control}
-              bagel={bagel}
-              key={bagel.node.bagelInfo.bagelTitle}
-            />
-          ))}
+          {bagelSelections &&
+            bagelSelections.map(bagelSelection => (
+              <BagelSelections
+                bagelData={bagelData}
+                bagelSetType={bagelSelection.bagelSetType}
+                id={bagelSelections.id}
+                bagels={bagelSelection.bagels}
+                key={`${bagelSelections.id}${bagelSelection.bagelSetType}`}
+                control={control}
+              />
+            ))}
+        </section>
+
+        <section>
+          {bagelSelections && (
+            <pre style={{ textAlign: 'left' }}>
+              {JSON.stringify(bagelSelections, null, 2)}
+            </pre>
+          )}
+        </section>
+
+        <section>
+          <label>Native Input:</label>
+          <input name='Native' className='input' ref={register} />
         </section>
 
         <section>
@@ -137,19 +181,6 @@ function bagelForm({ bagelData }) {
             name='dates'
             for={register({ required: true })}
             isSearchable={false}
-          />
-        </section>
-
-        <section>
-          <label>NumberFormat</label>
-          <Controller
-            as={NumberFormat}
-            thousandSeparator
-            name='numberFormat'
-            className='input'
-            control={control}
-            displayType='input'
-            type='number'
           />
         </section>
 
