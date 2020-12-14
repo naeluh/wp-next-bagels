@@ -21,36 +21,15 @@ function bagelForm({ bagelData }) {
   const halfDozen = 6;
   const [dates, setDates] = useState([]);
   const [selectedDateOption, setSelectedDateOption] = useState(null);
-
-  const [bagelSelections, setBagelSelections] = useState([]);
-
   const { state, action } = useStateMachine(updateAction);
-
-  const formatDate = date => {
-    const d = new Date(date);
-    const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
-    const mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(d);
-    const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
-    return `${da}-${mo}-${ye}`;
-  };
-
-  const nextSevenDays = () => {
-    const curr = new Date();
-    const first = curr.getDate();
-    const dateArr = [];
-
-    for (var i = 0; i < 8; i++) {
-      let next = new Date(curr.getTime());
-      next.setDate(first + i);
-      dateArr.push({
-        value: formatDate(next.toString()),
-        label: formatDate(next.toString()),
-      });
-    }
-    dateArr.shift();
-    return dateArr;
-  };
-
+  const [bagelID, setBagelID] = useState(0);
+  const [bagelSelections, setBagelSelections] = useState([
+    {
+      id: bagelID,
+      bagelSetType: '',
+      bagels: [],
+    },
+  ]);
   const theme = createMuiTheme({
     palette: {
       type: 'light',
@@ -78,21 +57,42 @@ function bagelForm({ bagelData }) {
 
   const [data, setData] = useState(null);
 
+  const formatDate = date => {
+    const d = new Date(date);
+    const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
+    const mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(d);
+    const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
+    return `${da}-${mo}-${ye}`;
+  };
+
+  const nextSevenDays = () => {
+    const curr = new Date();
+    const first = curr.getDate();
+    const dateArr = [];
+
+    for (var i = 0; i < 8; i++) {
+      let next = new Date(curr.getTime());
+      next.setDate(first + i);
+      dateArr.push({
+        value: formatDate(next.toString()),
+        label: formatDate(next.toString()),
+      });
+    }
+    dateArr.shift();
+    return dateArr;
+  };
+
   const onSubmit = data => {
     console.log(data);
     setData(data);
     action(data);
   };
-
   useEffect(() => {
     setDates(nextSevenDays(new Date()));
     return () => {};
   }, []);
 
-  const [bagelID, setBagelID] = useState(0);
-
   const addGroup = type => {
-    setBagelID(bagelID + 1);
     setBagelSelections(bagelSelections => [
       ...bagelSelections,
       {
@@ -101,21 +101,9 @@ function bagelForm({ bagelData }) {
         bagels: [],
       },
     ]);
+    setBagelID(bagelID + 1);
     console.log(bagelSelections, bagelID);
   };
-
-  const getBagelSet = id => {};
-
-  /* const removeGroup = id => {
-    console.log(type, bagelSelections);
-    if (bagelID === id) {
-    }
-    setBagelSelections({
-      bagelSetId: bagelID,
-      bagelSetType: type,
-      bagels: [],
-    });
-  }; */
 
   return (
     <ThemeProvider theme={theme}>
@@ -138,7 +126,7 @@ function bagelForm({ bagelData }) {
               <BagelSelections
                 bagelData={bagelData}
                 bagelSetType={bagelSelection.bagelSetType}
-                id={bagelSelections.id}
+                idx={bagelSelections.id}
                 bagels={bagelSelection.bagels}
                 key={`${bagelSelections.id}${bagelSelection.bagelSetType}`}
                 control={control}

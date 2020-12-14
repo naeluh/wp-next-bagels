@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import BagelNumberField from './bagelNumberField';
 
-const bagelSelections = ({ bagelData, bagelSetType, id, bagels, control }) => {
+const bagelSelections = ({ bagelData, bagelSetType, idx, bagels, control }) => {
   console.log(control);
   return (
     <div>
@@ -17,7 +17,7 @@ const bagelSelections = ({ bagelData, bagelSetType, id, bagels, control }) => {
           <BagelNumberField
             control={control}
             bagel={bagel}
-            id={id}
+            idx={idx}
             bagels={bagels}
             key={bagel.node.bagelInfo.bagelTitle}
           />
