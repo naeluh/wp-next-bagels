@@ -1,15 +1,14 @@
 import Head from 'next/head';
-import Container from '../components/container';
-import Header from '../components/header';
-import Layout from '../components/layout';
-import Intro from '../components/intro';
-import BagelForm from '../components/bagelForm';
+import Container from '../../components/container';
+import Header from '../../components/header';
+import Layout from '../../components/layout';
+import Intro from '../../components/intro';
+import BagelForm from '../../components/bagelForm';
 
-import { getBagelsData } from '../lib/api';
-import { CMS_NAME } from '../lib/constants';
+import { getBagelsData } from '../../lib/api';
+import { CMS_NAME } from '../../lib/constants';
 
 export default function Index({ preview, allBagels }) {
-  console.log(allBagels);
   return (
     <Layout preview={preview}>
       <Head>
