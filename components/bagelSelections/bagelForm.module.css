@@ -1,0 +1,126 @@
+form.bagelForm {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.bagelForm h1 {
+  font-weight: 100;
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgb(79, 98, 148);
+}
+
+.form {
+  background: #0e101c;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.bagelForm p {
+  color: #bf1650;
+}
+
+.bagelForm p::before {
+  display: inline;
+  content: '⚠ ';
+}
+
+.bagelForm input {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid #000;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.bagelForm label {
+  line-height: 2;
+  text-align: left;
+  display: block;
+  margin-bottom: 13px;
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 200;
+}
+
+.bagelForm button[type='submit'],
+.bagelForm input[type='submit'] {
+  background: #ec5990;
+  color: white;
+  text-transform: uppercase;
+  border: none;
+  margin-top: 40px;
+  padding: 20px;
+  font-size: 16px;
+  font-weight: 100;
+  letter-spacing: 10px;
+}
+
+.bagelForm button[type='submit']:hover,
+.bagelForm input[type='submit']:hover {
+  background: #bf1650;
+}
+
+.bagelForm button[type='submit']:active,
+.bagelForm input[type='button']:active,
+.bagelForm input[type='submit']:active {
+  transition: 0.3s all;
+  transform: translateY(3px);
+  border: 1px solid transparent;
+  opacity: 0.8;
+}
+
+.bagelForm input:disabled {
+  opacity: 0.4;
+}
+
+.bagelForm input[type='button']:hover {
+  transition: 0.3s all;
+}
+
+.bagelForm button[type='submit'],
+.bagelForm input[type='button'],
+.bagelForm input[type='submit'] {
+  -webkit-appearance: none;
+}
+
+.bagelForm button[type='button'] {
+  display: block;
+  appearance: none;
+  background: #333;
+  color: white;
+  border: none;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+
+.bagelForm .bagelForm hr {
+  margin-top: 30px;
+}
+
+.bagelForm button {
+  display: block;
+  appearance: none;
+  margin-top: 40px;
+  border: 1px solid #333;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+
+.numberContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}
+
+.bagelForm section.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}

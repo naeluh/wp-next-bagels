@@ -17,7 +17,7 @@ export default function Index({ preview, allBagels }) {
       <Header />
       <Container>
         <Intro />
-        <BagelForm bagelData={allBagels} />
+        <h4>add-bagels</h4>
       </Container>
     </Layout>
   );
