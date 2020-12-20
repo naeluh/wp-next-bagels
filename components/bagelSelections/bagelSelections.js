@@ -12,15 +12,16 @@ const bagelSelections = ({ bagelData, bagelSetType, idx, bagels, control }) => {
           {bagels}
         </h5>
         <label>Select Bagels</label>
-        {bagelData.map(bagel => (
-          <BagelNumberField
-            control={control}
-            bagel={bagel}
-            idx={idx}
-            bagels={bagels}
-            key={bagel.node.bagelInfo.bagelTitle}
-          />
-        ))}
+        {bagelData &&
+          bagelData.map(bagel => (
+            <BagelNumberField
+              control={control}
+              bagel={bagel}
+              idx={idx}
+              bagels={bagels}
+              key={bagel.node.bagelInfo.bagelTitle}
+            />
+          ))}
       </section>
     </div>
   );
