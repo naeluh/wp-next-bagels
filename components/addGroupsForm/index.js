@@ -23,6 +23,7 @@ const addGroupsForm = ({ bagelData }) => {
   const [selectedDateOption, setSelectedDateOption] = useState(null);
   const { state, action } = useStateMachine(updateAction);
   const [bagelID, setBagelID] = useState(0);
+  const [bagelSetType, setBagelSetType] = useState('');
   const [bagelSelections, setBagelSelections] = useState([
     {
       id: bagelID,
@@ -69,7 +70,6 @@ const addGroupsForm = ({ bagelData }) => {
 
   const onSubmit = data => {
     console.log(data);
-    setData(data);
     action(data);
   };
 
@@ -92,11 +92,13 @@ const addGroupsForm = ({ bagelData }) => {
   });
 
   const addGroup = type => {
+    console.log(type);
+    setBagelSetType(type);
     setBagelSelections(bagelSelections => [
       ...bagelSelections,
       {
         id: bagelID,
-        bagelSetType: type,
+        bagelSetType: bagelSetType,
         bagels: [],
       },
     ]);
@@ -104,12 +106,17 @@ const addGroupsForm = ({ bagelData }) => {
     router.push({
       pathname: '/bagels/add-bagels',
     });
-    console.log(bagelSelections, bagelID);
+    state.data.bagelSelections = bagelSelections[0];
+    state.data.bagelSelections.bagelSetType = type;
+    console.log(bagelSelections, bagelID, bagelSetType);
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <form className={`form ${styles.bagelForm}`}>
+      <form
+        className={`form ${styles.bagelForm}`}
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <section>
           <label>Select Date</label>
           <Controller
@@ -126,18 +133,20 @@ const addGroupsForm = ({ bagelData }) => {
         </section>
         <section className={styles.grid}>
           <Button
+            type='submit'
+            name='dozen'
             onClick={e => {
               addGroup('dozen');
-              onSubmit(e);
             }}
             variant='contained'
           >
             Add Dozen
           </Button>
           <Button
+            type='submit'
+            name='halfDozen'
             onClick={e => {
               addGroup('halfDozen');
-              onSubmit(e);
             }}
             variant='contained'
           >
