@@ -55,9 +55,7 @@ function bagelForm({ bagelData }) {
   });
 
   const onSubmit = data => {
-    console.log(data);
-    setData(data);
-    action(data);
+    state.data.bagelSelections.bagels = data;
   };
 
   return (
@@ -83,7 +81,7 @@ function bagelForm({ bagelData }) {
         <section>
           {bagelSelections && (
             <pre style={{ textAlign: 'left' }}>
-              {JSON.stringify(bagelSelections, null, 2)}
+              {JSON.stringify(state.data.bagelSelections, null, 2)}
             </pre>
           )}
         </section>

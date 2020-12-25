@@ -6,20 +6,15 @@ import updateAction from '../../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 
 const bagelNumberField = ({ onChange, control, bagel }) => {
-  const { state, action } = useStateMachine(updateAction);
-
-  const setChange = data => {
-    action();
-  };
-
   return (
     <div className={styles.numberContainer}>
       <label>{bagel.node.bagelInfo.bagelTitle}</label>
       <Controller
         as={NumberFormat}
         thousandSeparator
-        name='numberFormat'
+        name={bagel.node.bagelInfo.bagelTitle}
         className='input'
+        defaultValue={0}
         control={control}
         displayType='input'
         type='number'
