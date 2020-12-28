@@ -5,12 +5,12 @@ createStore({
   data: {},
 });
 
-function MyApp({ Component, pageProps }) {
+const App = ({ Component, pageProps }) => {
   return (
     <StateMachineProvider>
       <Component {...pageProps} />
     </StateMachineProvider>
   );
-}
+};
 
-export default MyApp;
+export default App;
