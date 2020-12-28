@@ -1,0 +1,42 @@
+.outerNumberContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 2px solid #000;
+}
+
+.numberContainer {
+  display: inline-flex;
+}
+
+.numberContainer,
+.numberContainer * {
+  box-sizing: border-box;
+}
+
+.numberContainer button {
+  height: 4rem;
+  margin: 0;
+}
+
+.numberContainer input[type='number'] {
+  font-family: sans-serif;
+  width: 5rem;
+  border: solid #ddd;
+  border-width: 0 2px;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0;
+  padding: 0;
+}
+
+.add *,
+.remove * {
+  pointer-events: none;
+}

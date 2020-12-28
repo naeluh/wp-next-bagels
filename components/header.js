@@ -17,13 +17,13 @@ export default function Header() {
         </Link>
       </div>
 
-      {/* <div className='mt-4 text-sm flex-grow md:text-right md:mt-0'>
-        <Link href='/about'>
+      <div className='mt-4 text-sm flex-grow md:text-right md:mt-0'>
+        <Link href='/bagels'>
           <a className='pr-4 pl-4 pt-2 pb-2 md:inline-block md:mt-0 font-serif font-bold leading-tight text-lg text-black-500 border-white hover:text-black border-4 hover:border-yellow-500'>
-            About
+            Bagels
           </a>
         </Link>
-      </div> */}
+      </div>
     </nav>
   );
 }

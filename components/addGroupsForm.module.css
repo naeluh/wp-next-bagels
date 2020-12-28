@@ -17,12 +17,7 @@ form.bagelForm {
 }
 
 .bagelForm p {
-  color: #bf1650;
-}
-
-.bagelForm p::before {
-  display: inline;
-  content: '⚠ ';
+  margin-bottom: 10px;
 }
 
 .bagelForm input {
