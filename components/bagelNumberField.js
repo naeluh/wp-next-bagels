@@ -1,66 +1,76 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './bagelNumberField.module.css';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
-import { Controller, useForm } from 'react-hook-form';
 
-function bagelNumberField({
-  bagel,
+const bagelNumberField = ({
   control,
-  register,
-  defaultValues,
-  getValues,
-  setValue,
-}) {
-  const [currentValue, setCurrentValue] = useState(defaultValues.bagelVal);
-
-  const handleUpdate = e => {
-    if (e.target.classList.contains('add')) {
-      if (currentValue <= 11) {
-        setCurrentValue(currentValue + 1);
-      }
-    } else {
-      if (currentValue >= 1) {
-        setCurrentValue(currentValue - 1);
-      }
-    }
-  };
+  bagel,
+  setTotalBagels,
+  totalBagels,
+  amount,
+  bagelSet,
+}) => {
+  const [currentValue, setCurrentValue] = useState(
+    bagelSet
+      ? bagelSet.bagels.filter(
+          b => b.key === bagel.node.bagelInfo.bagelTitle
+        )[0].value
+      : control.defaultValuesRef.current.bagelVal
+  );
 
   useEffect(() => {
-    setValue(bagel.node.bagelInfo.bagelTitle, currentValue);
-    return () => {};
-  }, []);
+    const vals = control.getValues();
+    const valArr = Object.keys(vals).map(key => vals[key]);
+    const sum = valArr.reduce((a, b) => a + b, 0);
+    setTotalBagels(sum);
+  }, [currentValue]);
 
   return (
     <div className={styles.outerNumberContainer}>
-      <label className='text-xl md:text-xl font-hairline tracking-tighter leading-tight md:pr-8 font-serif mb-4 text-black px-5'>
+      <label className='text-xl md:text-xl font-hairline tracking-tighter leading-tight md:pr-8 font-serif text-black px-5 flex items-center justify-center'>
         {bagel.node.bagelInfo.bagelTitle}
       </label>
+
       <div className={styles.numberContainer}>
         <button
           type='button'
-          onClick={handleUpdate}
-          className={`${styles.add} add`}
+          variant='contained'
+          onClick={() => {
+            totalBagels !== amount &&
+              currentValue <= 12 &&
+              setCurrentValue(currentValue + 1);
+          }}
+          className={`${styles.add} add ${totalBagels >= amount && ` limit`}`}
         >
           <AddIcon />
         </button>
 
         <input
-          control={control}
-          ref={register({ min: 0, max: 12 })}
+          ref={control.register({
+            min: 0,
+            max: amount,
+            valueAsNumber: true,
+            valueAsDate: true,
+          })}
           className='quantity'
-          type='number'
-          max='12'
           min='0'
+          max='12'
+          type='number'
           step='1'
-          value={currentValue}
           name={bagel.node.bagelInfo.bagelTitle}
-          disabled
+          value={currentValue}
+          readOnly
         />
 
         <button
           type='button'
-          onClick={handleUpdate}
+          variant='contained'
+          onClick={() => {
+            currentValue <= 12 &&
+              currentValue >= 1 &&
+              setCurrentValue(currentValue - 1);
+          }}
           className={`${styles.remove} remove`}
         >
           <RemoveIcon />
@@ -68,6 +78,6 @@ function bagelNumberField({
       </div>
     </div>
   );
-}
+};
 
 export default bagelNumberField;

@@ -7,6 +7,8 @@ import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import { useRouter } from 'next/router';
 import BagelSetAddRemove from './bagelSetAddRemove';
+import BagelPickupLocations from './bagelPickupLocations';
+import BagelPickupDates from './bagelPickupDates';
 
 const addGroupsForm = ({ bagelData }) => {
   const router = useRouter();
@@ -15,6 +17,48 @@ const addGroupsForm = ({ bagelData }) => {
   const { state, action } = useStateMachine(updateAction);
   const [bagelID, setBagelID] = useState(0);
   const [bagelSelections, setBagelSelections] = useState([]);
+  const locations = [
+    {
+      label: 'Location 1',
+      value: 'location_1',
+    },
+    {
+      label: 'Location 2',
+      value: 'location_2',
+    },
+    {
+      label: 'Location 3',
+      value: 'location_3',
+    },
+    {
+      label: 'Location 4',
+      value: 'location_4',
+    },
+    {
+      label: 'Location 5',
+      value: 'location_5',
+    },
+  ];
+
+  const defaultValues = {
+    Native: '',
+    TextField: '',
+    Select: '',
+    ReactSelect: { value: 'vanilla', label: 'Vanilla' },
+    Checkbox: false,
+    switch: false,
+    RadioGroup: '',
+    numberFormat: 123456789,
+    downShift: 'apple',
+    dozen: 12,
+    halfDozen: 6,
+    bagelPickupDates: '',
+    bagelPickupLocations: '',
+  };
+
+  const { handleSubmit, errors, control, register, reset } = useForm({
+    defaultValues,
+  });
 
   const formatDate = date => {
     const d = new Date(date);
@@ -62,34 +106,12 @@ const addGroupsForm = ({ bagelData }) => {
     );
   };
 
-  const defaultValues = {
-    Native: '',
-    TextField: '',
-    Select: '',
-    ReactSelect: { value: 'vanilla', label: 'Vanilla' },
-    Checkbox: false,
-    switch: false,
-    RadioGroup: '',
-    numberFormat: 123456789,
-    downShift: 'apple',
-    dozen: 12,
-    halfDozen: 6,
-  };
-
-  const { handleSubmit, errors, control, register, reset } = useForm({
-    defaultValues,
-  });
-
   const addGroup = type => {
     setBagelID(bagelID + 1);
-    setBagelSelections(bagelSelections => [
-      ...bagelSelections,
-      {
-        id: bagelID + 1,
-        bagelSetType: type,
-        bagels: [],
-      },
-    ]);
+    router.push(
+      `/bagels/add-bagels?bagelSelectionsID=${bagelID}&type=${type}`,
+      `/bagels/add-bagels`
+    );
   };
 
   return (
@@ -98,22 +120,14 @@ const addGroupsForm = ({ bagelData }) => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <section>
-        <label>Select Date</label>
-        <Controller
-          as={RSelect}
-          control={control}
-          value={selectedDateOption}
-          defaultValue={selectedDateOption}
-          onChange={setSelectedDateOption}
-          options={dates}
-          name='dates'
-          for={register({ required: true })}
-          isSearchable={false}
-        />
+        <BagelPickupLocations locations={locations} />
+      </section>
+      <section>
+        <BagelPickupDates dates={dates} />
       </section>
       <section className={styles.grid}>
         <Button
-          type='submit'
+          type='button'
           name='dozen'
           onClick={e => addGroup('dozen')}
           variant='contained'
@@ -121,7 +135,7 @@ const addGroupsForm = ({ bagelData }) => {
           Add Dozen
         </Button>
         <Button
-          type='submit'
+          type='button'
           name='halfDozen'
           onClick={e => addGroup('halfDozen')}
           variant='contained'

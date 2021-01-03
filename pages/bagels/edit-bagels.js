@@ -3,7 +3,7 @@ import Container from '../../components/container';
 import Header from '../../components/header';
 import Layout from '../../components/layout';
 import Intro from '../../components/intro';
-import BagelForm from '../../components/bagelForm';
+import BagelSelections from '../../components/bagelSelections';
 
 import { getBagelsData } from '../../lib/api';
 import { CMS_NAME } from '../../lib/constants';
@@ -17,7 +17,7 @@ export default function Index({ preview, allBagels }) {
       <Header />
       <Container>
         <Intro />
-        <BagelForm bagelData={allBagels} />
+        <BagelSelections bagelData={allBagels} />
       </Container>
     </Layout>
   );
