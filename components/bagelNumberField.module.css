@@ -8,7 +8,7 @@
 }
 
 .numberContainer {
-  display: inline-flex;
+  display: flex;
 }
 
 .numberContainer,
@@ -18,25 +18,59 @@
 
 .numberContainer button {
   height: 4rem;
+  width: 4rem;
   margin: 0;
 }
 
 .numberContainer input[type='number'] {
   font-family: sans-serif;
-  width: 5rem;
-  border: solid #ddd;
-  border-width: 0 2px;
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 0;
-  padding: 0;
+  border: 2px solid #000;
+  border-radius: 4px;
+  height: 4rem;
+  width: 4rem;
+  padding-left: 12px;
+  margin: 0 12px;
 }
 
 .add *,
 .remove * {
   pointer-events: none;
+}
+
+.numberContainer input[type='button']:active {
+  transition: 0.3s all;
+  transform: translateY(3px);
+  border: 1px solid transparent;
+  opacity: 0.8;
+}
+
+.numberContainer input:disabled {
+  opacity: 0.4;
+}
+
+.numberContainer input[type='button']:hover {
+  transition: 0.3s all;
+}
+
+.numberContainer input[type='button'] {
+  -webkit-appearance: none;
+}
+
+.numberContainer button[type='button'] {
+  display: block;
+  appearance: none;
+  background: #333;
+  color: white;
+  border: none;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+
+.limit {
+  background-color: #bf1650;
+  color: #fff;
 }

@@ -8,12 +8,12 @@ const bagelSetAddRemove = ({ bagelSelection }) => {
       <h4>{bagelSelection.bagelSetType}</h4>
       <p>
         {bagelSelection.bagels.map(bagel => (
-          <span>{`${bagel.key} ${bagel.value},`}</span>
+          <span key={bagel.key}>{`${bagel.key} ${bagel.value},`}</span>
         ))}
       </p>
       <p>
         <Link
-          href={`/bagels/edit-bagels?bagelSelectionsID=${bagelSelection.id}`}
+          href={`/bagels/edit-bagels?bagelSelectionsID=${bagelSelection.id}&type=${bagelSelection.bagelSetType}`}
           as={`/bagels/edit-bagels`}
         >
           Edit
@@ -21,7 +21,7 @@ const bagelSetAddRemove = ({ bagelSelection }) => {
       </p>
       <p>
         <Link
-          href={`/bagels/remove-bagels?bagelSelectionsID=${bagelSelection.id}`}
+          href={`/bagels/remove-bagels?bagelSelectionsID=${bagelSelection.id}&type=${bagelSelection.bagelSetType}`}
           as={`/bagels/remove-bagels`}
         >
           Remove
