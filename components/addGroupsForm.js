@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import styles from './addGroupsForm.module.css';
-import RSelect from 'react-select';
-import { Button } from '@material-ui/core';
+import { Button, FormControl, makeStyles } from '@material-ui/core';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import { useRouter } from 'next/router';
@@ -10,47 +9,32 @@ import BagelSetAddRemove from './bagelSetAddRemove';
 import BagelPickupLocations from './bagelPickupLocations';
 import BagelPickupDates from './bagelPickupDates';
 
+const useStyles = makeStyles(theme => ({
+  button: {
+    display: 'block',
+    marginTop: theme.spacing(2),
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 500,
+  },
+}));
+
 const addGroupsForm = ({ bagelData, pickupLocations }) => {
+  const classes = useStyles();
   const router = useRouter();
   const [dates, setDates] = useState([]);
-  const [selectedDateOption, setSelectedDateOption] = useState(null);
   const { state, action } = useStateMachine(updateAction);
   const [bagelID, setBagelID] = useState(0);
   const [bagelSelections, setBagelSelections] = useState([]);
-  const locations = [
-    {
-      label: 'Location 1',
-      value: 'location_1',
-    },
-    {
-      label: 'Location 2',
-      value: 'location_2',
-    },
-    {
-      label: 'Location 3',
-      value: 'location_3',
-    },
-    {
-      label: 'Location 4',
-      value: 'location_4',
-    },
-    {
-      label: 'Location 5',
-      value: 'location_5',
-    },
-  ];
 
-  console.log(pickupLocations);
-
-  const locationsArray = pickupLocations.map(({ node }) => {
+  const locations = pickupLocations.map(({ node }) => {
     return {
       label: node.location.locationName,
       value: node.location.locationName.toLowerCase().replace(/\s/g, '-'),
       locationData: node.location,
     };
   });
-
-  console.log(locationsArray);
 
   const defaultValues = {
     Native: '',
@@ -109,13 +93,9 @@ const addGroupsForm = ({ bagelData, pickupLocations }) => {
   }, []);
 
   const onSubmit = data => {
-    state.data.bagelSelections = bagelSelections;
+    // state.data.bagelSelections = bagelSelections;
+    console.log(data);
     action(data);
-
-    router.push(
-      `/bagels/add-bagels?bagelSelectionsID=${bagelID}`,
-      `/bagels/add-bagels`
-    );
   };
 
   const addGroup = type => {
@@ -127,15 +107,28 @@ const addGroupsForm = ({ bagelData, pickupLocations }) => {
   };
 
   return (
-    <div className={`form ${styles.bagelForm}`}>
-      <section>
-        <BagelPickupLocations locations={locationsArray} />
-      </section>
-      <section>
-        {state.data.BagelPickupLocation && (
-          <BagelPickupDates dates={dates} locations={locationsArray} />
-        )}
-      </section>
+    <FormControl variant='outlined'>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className={`form ${styles.bagelForm}`}
+      >
+        <section>
+          <BagelPickupLocations locations={locations} control={control} />
+        </section>
+
+        <section>
+          <BagelPickupDates
+            dates={dates}
+            locations={locations}
+            control={control}
+          />
+        </section>
+
+        <Button variant='outlined' type='submit'>
+          Ok
+        </Button>
+      </form>
+
       <section className={styles.grid}>
         <Button
           type='button'
@@ -154,6 +147,7 @@ const addGroupsForm = ({ bagelData, pickupLocations }) => {
           Add 1/2 Dozen
         </Button>
       </section>
+
       <section>
         {state.data && state.data.bagelSelections !== undefined
           ? state.data.bagelSelections.map(bagelSelection => (
@@ -164,12 +158,15 @@ const addGroupsForm = ({ bagelData, pickupLocations }) => {
             ))
           : `Let's start by adding a dozen or half dozen`}
       </section>
-      {state.data && (
-        <pre style={{ textAlign: 'left' }}>
-          {JSON.stringify(state.data, null, 2)}
-        </pre>
-      )}
-    </div>
+
+      <section>
+        {state.data && (
+          <pre style={{ textAlign: 'left' }}>
+            {JSON.stringify(state.data, null, 2)}
+          </pre>
+        )}
+      </section>
+    </FormControl>
   );
 };
 

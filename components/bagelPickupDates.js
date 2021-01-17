@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import {
-  FormControl,
-  InputLabel,
-  Button,
-  Select,
-  MenuItem,
-  makeStyles,
-} from '@material-ui/core';
-import { Controller, useForm } from 'react-hook-form';
+import { MenuItem, makeStyles } from '@material-ui/core';
+import { useForm } from 'react-hook-form';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
+import SelectList from './selectList';
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -22,16 +16,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const bagelPickupDates = ({ dates, locations }) => {
+const bagelPickupDates = ({ dates, locations, control }) => {
   const classes = useStyles();
-  const {
-    control,
-    handleSubmit,
-    setValue,
-    setError,
-    errors,
-    clearErrors,
-  } = useForm({ mode: 'onChange' });
+  const { setValue, setError, errors, clearErrors } = useForm({
+    mode: 'onChange',
+  });
+
   const { state, action } = useStateMachine(updateAction);
   const [date, setDate] = useState('');
 
@@ -41,16 +31,12 @@ const bagelPickupDates = ({ dates, locations }) => {
     return array;
   };
 
-  let blackOutDates = locations.map(location => {
+  const blackOutDates = locations.map(location => {
     return {
       dates: convertDateArray(location.locationData.blackoutDates),
       location: location.value,
     };
   });
-
-  const onSubmit = data => {
-    action(data);
-  };
 
   const handleChange = event => {
     if (state.data.BagelPickupLocation) {
@@ -84,38 +70,31 @@ const bagelPickupDates = ({ dates, locations }) => {
   }, []);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      {errors.BagelPickupDate && <p>{errors.BagelPickupDate.message}</p>}
-      <FormControl variant='outlined' className={classes.formControl}>
-        <InputLabel id='demo-simple-select-outlined-label'>
-          Select Date
-        </InputLabel>
-        <Controller
-          render={({ onChange, onBlur, value }) => (
-            <Select
-              labelId='demo-simple-select-outlined-label'
-              id='demo-simple-select-outlined'
-              value={date}
-              label='Select Date'
-              onChange={handleChange}
-            >
-              {dates &&
-                dates.map(date => (
-                  <MenuItem key={date.value} value={date.value}>
-                    {date.label}
-                  </MenuItem>
-                ))}
-            </Select>
-          )}
-          name={`BagelPickupDate`}
-          control={control}
-          defaultValue={date}
-        />
-        <Button variant='outlined' type='submit'>
-          Ok
-        </Button>
-      </FormControl>
-    </form>
+    <>
+      <SelectList
+        id='BagelPickupDate'
+        label='Select Date'
+        handleChange={handleChange}
+        value={date}
+        name='BagelPickupDate'
+        className={classes.formControl}
+        control={control}
+        defaultValue={date || ''}
+        variant='outlined'
+        margin='normal'
+      >
+        {dates &&
+          dates.map(date => (
+            <MenuItem key={date.value} value={date.value}>
+              {date.label}
+            </MenuItem>
+          ))}
+      </SelectList>
+
+      {errors.BagelPickupDate && (
+        <p style={{ color: 'red' }}>{errors.BagelPickupDate.message}</p>
+      )}
+    </>
   );
 };
 
