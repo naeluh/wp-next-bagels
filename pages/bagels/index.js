@@ -6,10 +6,10 @@ import Intro from '../../components/intro';
 
 import AddGroups from '../../components/addGroupsForm';
 
-import { getBagelsData } from '../../lib/api';
+import { getBagelsData, getLocationsData } from '../../lib/api';
 import { CMS_NAME } from '../../lib/constants';
 
-export default function Index({ preview, allBagels }) {
+export default function Index({ preview, allBagels, allPickupLocations }) {
   return (
     <Layout preview={preview}>
       <Head>
@@ -18,7 +18,7 @@ export default function Index({ preview, allBagels }) {
       <Header />
       <Container>
         <Intro />
-        <AddGroups bagelData={allBagels} />
+        <AddGroups bagelData={allBagels} pickupLocations={allPickupLocations} />
       </Container>
     </Layout>
   );
@@ -26,7 +26,8 @@ export default function Index({ preview, allBagels }) {
 
 export async function getStaticProps({ preview = false }) {
   const allBagels = await getBagelsData(preview);
+  const allPickupLocations = await getLocationsData(preview);
   return {
-    props: { preview, allBagels },
+    props: { preview, allBagels, allPickupLocations },
   };
 }

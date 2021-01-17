@@ -31,16 +31,6 @@ form.bagelForm {
   font-size: 14px;
 }
 
-.bagelForm label {
-  line-height: 2;
-  text-align: left;
-  display: block;
-  margin-bottom: 13px;
-  margin-top: 20px;
-  font-size: 14px;
-  font-weight: 200;
-}
-
 .bagelForm button[type='submit'],
 .bagelForm input[type='submit'] {
   background: #ec5990;

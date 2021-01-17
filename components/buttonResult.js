@@ -19,6 +19,7 @@ const ButtonResult = ({ data, reset, defaultValues, totalBagels, amount }) => (
       <button
         className={`button`}
         variant='contained'
+        type='submit'
         disabled={totalBagels === amount ? false : true}
       >
         submit
