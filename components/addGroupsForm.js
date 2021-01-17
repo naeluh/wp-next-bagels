@@ -10,7 +10,7 @@ import BagelSetAddRemove from './bagelSetAddRemove';
 import BagelPickupLocations from './bagelPickupLocations';
 import BagelPickupDates from './bagelPickupDates';
 
-const addGroupsForm = ({ bagelData }) => {
+const addGroupsForm = ({ bagelData, pickupLocations }) => {
   const router = useRouter();
   const [dates, setDates] = useState([]);
   const [selectedDateOption, setSelectedDateOption] = useState(null);
@@ -39,6 +39,18 @@ const addGroupsForm = ({ bagelData }) => {
       value: 'location_5',
     },
   ];
+
+  console.log(pickupLocations);
+
+  const locationsArray = pickupLocations.map(({ node }) => {
+    return {
+      label: node.location.locationName,
+      value: node.location.locationName.toLowerCase().replace(/\s/g, '-'),
+      locationData: node.location,
+    };
+  });
+
+  console.log(locationsArray);
 
   const defaultValues = {
     Native: '',
@@ -115,15 +127,14 @@ const addGroupsForm = ({ bagelData }) => {
   };
 
   return (
-    <form
-      className={`form ${styles.bagelForm}`}
-      onSubmit={handleSubmit(onSubmit)}
-    >
+    <div className={`form ${styles.bagelForm}`}>
       <section>
-        <BagelPickupLocations locations={locations} />
+        <BagelPickupLocations locations={locationsArray} />
       </section>
       <section>
-        <BagelPickupDates dates={dates} />
+        {state.data.BagelPickupLocation && (
+          <BagelPickupDates dates={dates} locations={locationsArray} />
+        )}
       </section>
       <section className={styles.grid}>
         <Button
@@ -153,7 +164,12 @@ const addGroupsForm = ({ bagelData }) => {
             ))
           : `Let's start by adding a dozen or half dozen`}
       </section>
-    </form>
+      {state.data && (
+        <pre style={{ textAlign: 'left' }}>
+          {JSON.stringify(state.data, null, 2)}
+        </pre>
+      )}
+    </div>
   );
 };
 

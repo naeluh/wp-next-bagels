@@ -3,7 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 import styles from './bagelForm.module.css';
 import RSelect from 'react-select';
 import { Checkbox, Button } from '@material-ui/core';
-import ButtonsResult from './buttonResult';
+import ButtonResult from './buttonResult';
 import BagelSelections from './BagelSelections';
 import updateAction from '../../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
@@ -171,7 +171,7 @@ function bagelForm({ bagelData }) {
       </section>
 
       {errors.exampleRequired && <span>This field is required</span>}
-      <ButtonsResult {...{ data, reset, defaultValues }} />
+      <ButtonResult {...{ data, reset, defaultValues }} />
     </form>
   );
 }

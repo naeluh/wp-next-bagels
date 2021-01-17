@@ -39,6 +39,7 @@ const bagelSelections = ({ bagelData }) => {
     )[0];
 
   const onSubmit = data => {
+    console.log(data);
     if (!state.data.bagelSelections[router.query.bagelSelectionsID]) {
       state.data.bagelSelections.push({
         id: router.query.bagelSelectionsID,
