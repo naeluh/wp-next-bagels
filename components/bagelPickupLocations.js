@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
 const bagelPickupLocations = ({ locations, control }) => {
   const classes = useStyles();
   const { setValue } = useForm();
-  const { state, action } = useStateMachine(updateAction);
+  const { state } = useStateMachine(updateAction);
 
   const [location, setLocation] = useState('');
 
