@@ -1,27 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styles from './addGroupsForm.module.css';
-import { Button, FormControl, makeStyles } from '@material-ui/core';
+import { Button, FormControl, makeStyles, MenuItem } from '@material-ui/core';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import { useRouter } from 'next/router';
 import BagelSetAddRemove from './bagelSetAddRemove';
-import BagelPickupLocations from './bagelPickupLocations';
-import BagelPickupDates from './bagelPickupDates';
-
-const useStyles = makeStyles(theme => ({
-  button: {
-    display: 'block',
-    marginTop: theme.spacing(2),
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 500,
-  },
-}));
+import AddDateLocation from './addDateLocation';
 
 const addGroupsForm = ({ bagelData, pickupLocations }) => {
-  const classes = useStyles();
   const router = useRouter();
   const [dates, setDates] = useState([]);
   const { state, action } = useStateMachine(updateAction);
@@ -37,24 +24,11 @@ const addGroupsForm = ({ bagelData, pickupLocations }) => {
   });
 
   const defaultValues = {
-    Native: '',
-    TextField: '',
-    Select: '',
-    ReactSelect: { value: 'vanilla', label: 'Vanilla' },
-    Checkbox: false,
-    switch: false,
-    RadioGroup: '',
-    numberFormat: 123456789,
-    downShift: 'apple',
     dozen: 12,
     halfDozen: 6,
     bagelPickupDates: '',
     bagelPickupLocations: '',
   };
-
-  const { handleSubmit, errors, control, register, reset } = useForm({
-    defaultValues,
-  });
 
   const formatDate = date => {
     const d = new Date(date);
@@ -92,12 +66,6 @@ const addGroupsForm = ({ bagelData, pickupLocations }) => {
     return () => {};
   }, []);
 
-  const onSubmit = data => {
-    // state.data.bagelSelections = bagelSelections;
-    console.log(data);
-    action(data);
-  };
-
   const addGroup = type => {
     setBagelID(bagelID + 1);
     router.push(
@@ -107,28 +75,8 @@ const addGroupsForm = ({ bagelData, pickupLocations }) => {
   };
 
   return (
-    <FormControl variant='outlined'>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className={`form ${styles.bagelForm}`}
-      >
-        <section>
-          <BagelPickupLocations locations={locations} control={control} />
-        </section>
-
-        <section>
-          <BagelPickupDates
-            dates={dates}
-            locations={locations}
-            control={control}
-          />
-        </section>
-
-        <Button variant='outlined' type='submit'>
-          Ok
-        </Button>
-      </form>
-
+    <>
+      <AddDateLocation locations={locations} dates={dates} />
       <section className={styles.grid}>
         <Button
           type='button'
@@ -166,7 +114,7 @@ const addGroupsForm = ({ bagelData, pickupLocations }) => {
           </pre>
         )}
       </section>
-    </FormControl>
+    </>
   );
 };
 
