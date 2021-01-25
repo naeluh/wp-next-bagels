@@ -9,6 +9,8 @@ const SelectList = ({
   defaultValue,
   children,
   handleChange,
+  errors,
+  rules,
   ...props
 }) => {
   const labelId = `${name}-label`;
@@ -33,6 +35,7 @@ const SelectList = ({
         name={name}
         control={control}
         defaultValue={defaultValue}
+        rules={rules}
       />
     </FormControl>
   );

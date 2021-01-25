@@ -39,9 +39,9 @@ const bagelPickupDates = ({ dates, locations, control }) => {
   });
 
   const handleChange = event => {
-    if (state.data.BagelPickupLocation) {
+    if (state.BagelPickupLocation) {
       let dates = blackOutDates.filter(
-        bod => state.data.BagelPickupLocation === bod.location
+        bod => state.BagelPickupLocation === bod.location
       )[0].dates;
 
       let isDateBad = dates.filter(
@@ -64,8 +64,7 @@ const bagelPickupDates = ({ dates, locations, control }) => {
   };
 
   useEffect(() => {
-    state.data.BagelPickupDate &&
-      setValue('BagelPickupDate', state.data.BagelPickupDate);
+    state.BagelPickupDate && setValue('BagelPickupDate', state.BagelPickupDate);
     return () => {};
   }, []);
 

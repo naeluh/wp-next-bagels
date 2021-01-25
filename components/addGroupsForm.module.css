@@ -1,5 +1,4 @@
 form.bagelForm {
-  max-width: 500px;
   margin: 0 auto;
 }
 
@@ -31,56 +30,8 @@ form.bagelForm {
   font-size: 14px;
 }
 
-.bagelForm button[type='submit'],
-.bagelForm input[type='submit'] {
-  background: #ec5990;
-  color: white;
-  text-transform: uppercase;
-  border: none;
-  margin-top: 40px;
-  padding: 20px;
-  font-size: 16px;
-  font-weight: 100;
-  letter-spacing: 10px;
-}
-
-.bagelForm button[type='submit']:hover,
-.bagelForm input[type='submit']:hover {
-  background: #bf1650;
-}
-
-.bagelForm button[type='submit']:active,
-.bagelForm input[type='button']:active,
-.bagelForm input[type='submit']:active {
-  transition: 0.3s all;
-  transform: translateY(3px);
-  border: 1px solid transparent;
-  opacity: 0.8;
-}
-
 .bagelForm input:disabled {
   opacity: 0.4;
-}
-
-.bagelForm input[type='button']:hover {
-  transition: 0.3s all;
-}
-
-.bagelForm button[type='submit'],
-.bagelForm input[type='button'],
-.bagelForm input[type='submit'] {
-  -webkit-appearance: none;
-}
-
-.bagelForm button[type='button'] {
-  display: block;
-  appearance: none;
-  background: #333;
-  color: white;
-  border: none;
-  text-transform: uppercase;
-  padding: 10px 20px;
-  border-radius: 4px;
 }
 
 .bagelForm .bagelForm hr {
@@ -96,6 +47,7 @@ form.bagelForm {
   text-transform: uppercase;
   padding: 10px 20px;
   border-radius: 4px;
+  width: 100%;
 }
 
 .numberContainer {

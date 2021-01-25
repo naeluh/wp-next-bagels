@@ -35,8 +35,8 @@ const bagelPickupLocations = ({ locations, control }) => {
   };
 
   useEffect(() => {
-    state.data.BagelPickupLocation &&
-      setValue('BagelPickupLocation', state.data.BagelPickupLocation);
+    state.BagelPickupLocation &&
+      setValue('BagelPickupLocation', state.BagelPickupLocation);
     return () => {};
   }, []);
 

@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 500,
+    minWidth: '100%',
   },
 }));
 
@@ -106,6 +106,10 @@ const addDateLocation = ({ dates, locations }) => {
   };
 
   useEffect(() => {
+    console.log(errors);
+  }, [errors]);
+
+  useEffect(() => {
     state.data.BagelPickupLocation &&
       setValue('BagelPickupLocation', state.data.BagelPickupLocation);
     state.data.BagelPickupDate &&
@@ -114,9 +118,13 @@ const addDateLocation = ({ dates, locations }) => {
   }, []);
 
   const onSubmit = data => {
-    console.log('data', data);
-    action(data);
+    action({
+      location: data.BagelPickupLocation,
+      time: data.BagelPickupDate,
+    });
   };
+
+  console.log('Errors:', errors);
 
   return (
     <form
@@ -144,7 +152,8 @@ const addDateLocation = ({ dates, locations }) => {
               </MenuItem>
             ))}
         </SelectList>
-        {errors.BagelPickupLocation?.type === 'required' && 'Date is required'}
+        {errors.BagelPickupLocation?.type === 'required' &&
+          'Location is required'}
       </section>
 
       <section>
