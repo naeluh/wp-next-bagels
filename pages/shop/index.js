@@ -3,22 +3,13 @@ import Container from '../../components/container';
 import Header from '../../components/header';
 import Layout from '../../components/layout';
 import Intro from '../../components/intro';
-import AddGroups from '../../components/addGroupsForm';
-import { CMS_NAME } from '../../lib/constants';
-import {
-  getBagelsData,
-  getLocationsData,
-  getBagelChipsData,
-  getPricingData,
-} from '../../lib/api';
 
-export default function Index({
-  preview,
-  allBagels,
-  allPickupLocations,
-  allBagelChips,
-  allPricing,
-}) {
+import AddGroups from '../../components/addGroupsForm';
+
+import { getBagelsData, getLocationsData } from '../../lib/api';
+import { CMS_NAME } from '../../lib/constants';
+
+export default function Index({ preview, allBagels, allPickupLocations }) {
   return (
     <Layout preview={preview}>
       <Head>
@@ -27,12 +18,7 @@ export default function Index({
       <Header />
       <Container>
         <Intro />
-        <AddGroups
-          bagelData={allBagels}
-          pickupLocations={allPickupLocations}
-          bagelChipsData={allBagelChips}
-          pricing={allPricing}
-        />
+        <AddGroups bagelData={allBagels} pickupLocations={allPickupLocations} />
       </Container>
     </Layout>
   );
@@ -41,15 +27,7 @@ export default function Index({
 export async function getStaticProps({ preview = false }) {
   const allBagels = await getBagelsData(preview);
   const allPickupLocations = await getLocationsData(preview);
-  const allBagelChips = await getBagelChipsData(preview);
-  const allPricing = await getPricingData(preview);
   return {
-    props: {
-      preview,
-      allBagels,
-      allPickupLocations,
-      allBagelChips,
-      allPricing,
-    },
+    props: { preview, allBagels, allPickupLocations },
   };
 }

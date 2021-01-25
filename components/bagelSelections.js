@@ -7,9 +7,9 @@ import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import { useRouter } from 'next/router';
 
-const bagelSelections = ({ bagelData }) => {
+const bagelSelections = ({ bagelData, pricing }) => {
   const router = useRouter();
-  const { state } = useStateMachine(updateAction);
+  const { action, state } = useStateMachine(updateAction);
   const [data] = useState(null);
   const [type, setType] = useState('');
   const [id, setId] = useState('');
@@ -28,18 +28,18 @@ const bagelSelections = ({ bagelData }) => {
   );
 
   const [totalBagels, setTotalBagels] = useState(defaultValues.totalbagels);
+
   const amount =
     type === 'dozen' ? defaultValues.dozen : defaultValues.halfDozen;
 
   const bagelSet =
     state.data.bagelSelections &&
     router.query &&
-    state.data.bagelSelections.filter(
-      bagelSelection => bagelSelection.id === router.query.bagelSelectionsID
-    )[0];
+    state.data.bagelSelections.filter(bagelSelection => {
+      return bagelSelection.id === router.query.bagelSelectionsID;
+    })[0];
 
   const onSubmit = data => {
-    console.log(data);
     if (!state.data.bagelSelections[router.query.bagelSelectionsID]) {
       state.data.bagelSelections.push({
         id: router.query.bagelSelectionsID,
@@ -50,6 +50,13 @@ const bagelSelections = ({ bagelData }) => {
     const vals = getValues();
     const output = Object.entries(vals).map(([key, value]) => ({ key, value }));
     state.data.bagelSelections[router.query.bagelSelectionsID].bagels = output;
+    action({
+      bagelSelections: {
+        id: router.query.bagelSelectionsID,
+        bagelSetType: router.query.type,
+        bagels: output,
+      },
+    });
     router.push(`/bagels`);
   };
 
