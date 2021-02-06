@@ -32,6 +32,8 @@ const bagelSelections = ({ bagelData, pricing }) => {
   const amount =
     type === 'dozen' ? defaultValues.dozen : defaultValues.halfDozen;
 
+  console.log(state.data, router);
+
   const bagelSet =
     state.data.bagelSelections &&
     router.query &&
@@ -50,13 +52,6 @@ const bagelSelections = ({ bagelData, pricing }) => {
     const vals = getValues();
     const output = Object.entries(vals).map(([key, value]) => ({ key, value }));
     state.data.bagelSelections[router.query.bagelSelectionsID].bagels = output;
-    action({
-      bagelSelections: {
-        id: router.query.bagelSelectionsID,
-        bagelSetType: router.query.type,
-        bagels: output,
-      },
-    });
     router.push(`/bagels`);
   };
 

@@ -9,12 +9,13 @@ import BagelSetAddRemove from './bagelSetAddRemove';
 import AddDateLocation from './addDateLocation';
 import BagelChipsOrderForm from './bagelChipsOrderForm';
 import TotalCost from './totalCost';
+import Modal from './modal';
 
 const addGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
   const router = useRouter();
   const [dates, setDates] = useState([]);
   const { state, action } = useStateMachine(updateAction);
-  const [bagelID, setBagelID] = useState(0);
+  const [bagelID, setBagelID] = useState(state.data.bagelSelections.length);
 
   const locations = pickupLocations.map(({ node }) => {
     return {
@@ -84,12 +85,14 @@ const addGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
         </Button>
       </section>
 
-      <section>
+      <Modal />
+
+      <section className='my-4'>
         <TotalCost pricing={pricing} />
       </section>
 
       <section>
-        {state && state.data.bagelSelections !== undefined
+        {state.data.bagelSelections.length > 0
           ? state.data.bagelSelections.map(bagelSelection => (
               <BagelSetAddRemove
                 bagelSelection={bagelSelection}
