@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
 import styles from './addGroupsForm.module.css';
-import { Button, FormControl, makeStyles, MenuItem } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import { useRouter } from 'next/router';
@@ -9,13 +8,13 @@ import BagelSetAddRemove from './bagelSetAddRemove';
 import AddDateLocation from './addDateLocation';
 import BagelChipsOrderForm from './bagelChipsOrderForm';
 import TotalCost from './totalCost';
-import Modal from './modal';
 
 const addGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
   const router = useRouter();
   const [dates, setDates] = useState([]);
   const { state, action } = useStateMachine(updateAction);
   const [bagelID, setBagelID] = useState(state.data.bagelSelections.length);
+  const [bs, setBS] = useState(state.data.bagelSelections);
 
   const locations = pickupLocations.map(({ node }) => {
     return {
@@ -52,12 +51,14 @@ const addGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
 
   useEffect(() => {
     setDates(nextSevenDays(new Date()));
+    setBagelID(state.data.bagelSelections.length);
   }, []);
 
   const addGroup = type => {
     setBagelID(bagelID + 1);
-    router.push(
-      `/bagels/add-bagels?bagelSelectionsID=${bagelID}&type=${type}`,
+    console.log(state.data.bagelSelections.length);
+    router.replace(
+      `/bagels/add-bagels?bagelSelectionsID=${state.data.bagelSelections.length}&type=${type}`,
       `/bagels/add-bagels`
     );
   };
@@ -84,14 +85,8 @@ const addGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
           Add 1/2 Dozen
         </Button>
       </section>
-
-      <Modal />
-
-      <section className='my-4'>
-        <TotalCost pricing={pricing} />
-      </section>
-
       <section>
+        <p>Bagels:</p>
         {state.data.bagelSelections.length > 0
           ? state.data.bagelSelections.map(bagelSelection => (
               <BagelSetAddRemove
@@ -100,8 +95,24 @@ const addGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
               />
             ))
           : `Let's start by adding a dozen or half dozen`}
+      </section>{' '}
+      <section className='my-4'>
+        <p>Pickup Location: {state.data.location ? state.data.location : ''}</p>
+        <p>Pickup Date: {state.data.time ? state.data.time : ''}</p>
       </section>
-
+      <section className='my-4'>
+        <TotalCost pricing={pricing} />
+      </section>
+      <section className={styles.grid}>
+        <Button
+          type='button'
+          name='dozen'
+          onClick={e => addGroup('dozen')}
+          variant='outlined'
+        >
+          Checkout
+        </Button>
+      </section>
       <section>
         {state && (
           <pre style={{ textAlign: 'left' }}>

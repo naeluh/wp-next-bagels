@@ -207,3 +207,7 @@ section > label {
 pre {
   color: black;
 }
+
+.modal-maxheight {
+  max-height: 25vh;
+}

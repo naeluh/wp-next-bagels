@@ -42,16 +42,17 @@ const bagelSelections = ({ bagelData, pricing }) => {
     })[0];
 
   const onSubmit = data => {
-    if (!state.data.bagelSelections[router.query.bagelSelectionsID]) {
-      state.data.bagelSelections.push({
-        id: router.query.bagelSelectionsID,
-        bagelSetType: router.query.type,
-        bagels: [],
-      });
-    }
     const vals = getValues();
     const output = Object.entries(vals).map(([key, value]) => ({ key, value }));
-    state.data.bagelSelections[router.query.bagelSelectionsID].bagels = output;
+    state.data.bagelSelections[router.query.bagelSelectionsID] = {
+      id: router.query.bagelSelectionsID,
+      bagelSetType: router.query.type,
+      bagels: output,
+    };
+    console.log(state.data.bagelSelections);
+    action({
+      bagelSelections: state.data.bagelSelections,
+    });
     router.push(`/bagels`);
   };
 

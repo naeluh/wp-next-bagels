@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 
-const totalCost = ({ pricing, items }) => {
-  const { state, action } = useStateMachine(updateAction);
-  const [totalCost, setTotalCost] = useState(state.data.totalCost);
+const totalCost = ({ pricing }) => {
+  const { state } = useStateMachine(updateAction);
   const priceHalfDozen = Number(pricing[0].node.prices.halfDozenPrice);
   const priceDozen = Number(pricing[0].node.prices.dozenPrice);
   const priceChips = Number(pricing[0].node.prices.bagelChipsPrice);
@@ -26,12 +25,12 @@ const totalCost = ({ pricing, items }) => {
     let bagelDozenCost = bagelDozens.length * priceHalfDozen;
     let bagelHalfDozenCost = bagelHalfDozens.length * priceDozen;
     let bagelChipsCost = bagelChips * priceChips;
-    setTotalCost(bagelDozenCost + bagelHalfDozenCost + bagelChipsCost);
+    state.data.totalCost = bagelDozenCost + bagelHalfDozenCost + bagelChipsCost;
   }, [state]);
 
   return (
     <div>
-      <h4>Total: ${totalCost}</h4>
+      <h4>Total: ${state.data.totalCost}</h4>
     </div>
   );
 };

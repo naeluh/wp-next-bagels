@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styles from './addGroupsForm.module.css';
-import { Button, FormControl, makeStyles, MenuItem } from '@material-ui/core';
+import { Button, makeStyles, MenuItem } from '@material-ui/core';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
-import { useRouter } from 'next/router';
-import BagelSetAddRemove from './bagelSetAddRemove';
 import SelectList from './selectList';
+import Modal from './modal';
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -29,17 +28,7 @@ const addDateLocation = ({ dates, locations }) => {
     bagelPickupLocations: '',
   };
 
-  const {
-    handleSubmit,
-    errors,
-    setError,
-    clearErrors,
-    control,
-    register,
-    reset,
-    setValue,
-    getValues,
-  } = useForm({
+  const { handleSubmit, errors, control, setValue, getValues } = useForm({
     defaultValues,
     mode: 'onChange',
   });
@@ -67,15 +56,10 @@ const addDateLocation = ({ dates, locations }) => {
     let dates = blackOutDates.filter(
       bod => values.BagelPickupLocation === bod.location
     )[0].dates;
-
     let isDateBad = dates.filter(
       date => date.getTime() === new Date(values.BagelPickupDate).getTime()
     );
-
-    console.log(isDateBad);
-
     let check = isDateBad.length > 0 ? true : false;
-
     return check;
   };
 
@@ -86,10 +70,6 @@ const addDateLocation = ({ dates, locations }) => {
       setValue('BagelPickupDate', '');
       setDateError(true);
     }
-    /* handleSubmit(data => {
-      console.log('data', data);
-      action(data);
-    })(); */
   };
 
   const handleDChange = (event, type) => {
@@ -99,21 +79,17 @@ const addDateLocation = ({ dates, locations }) => {
       setValue('BagelPickupDate', '');
       setDateError(true);
     }
-    /* handleSubmit(data => {
-      console.log('data', data);
-      action(data);
-    })(); */
   };
 
   useEffect(() => {
-    console.log(errors);
-  }, [errors]);
-
-  useEffect(() => {
-    state.data.BagelPickupLocation &&
-      setValue('BagelPickupLocation', state.data.BagelPickupLocation);
-    state.data.BagelPickupDate &&
-      setValue('BagelPickupDate', state.data.BagelPickupDate);
+    if (state.data.location && state.data.time) {
+      setValue('BagelPickupLocation', state.data.location);
+      setValue('BagelPickupDate', state.data.time);
+      setLocation(state.data.location);
+      setDate(state.data.time);
+    } else {
+      setShowModal(true);
+    }
     return () => {};
   }, []);
 
@@ -122,70 +98,82 @@ const addDateLocation = ({ dates, locations }) => {
       location: data.BagelPickupLocation,
       time: data.BagelPickupDate,
     });
+    setShowModal(false);
   };
 
   console.log('Errors:', errors);
 
+  const [showModal, setShowModal] = useState(false);
+
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className={`form ${styles.bagelForm}`}
+    <Modal
+      button={`Set Pickup Location and Pickup date`}
+      title={`Set Pickup Location and Pickup date`}
+      setShowModal={setShowModal}
+      showModal={showModal}
     >
-      <section>
-        <SelectList
-          id='BagelPickupLocation'
-          label='Select Location'
-          handleChange={e => handleLChange(e, 'location')}
-          value={location}
-          name='BagelPickupLocation'
-          className={classes.formControl}
-          control={control}
-          defaultValue={location || ''}
-          variant='outlined'
-          margin='normal'
-          rules={{ required: true }}
-        >
-          {locations &&
-            locations.map(location => (
-              <MenuItem key={location.value} value={location.value}>
-                {location.label}
-              </MenuItem>
-            ))}
-        </SelectList>
-        {errors.BagelPickupLocation?.type === 'required' &&
-          'Location is required'}
-      </section>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className={`form ${styles.bagelForm}`}
+      >
+        <section>
+          <SelectList
+            id='BagelPickupLocation'
+            label='Select Location'
+            handleChange={e => handleLChange(e, 'location')}
+            value={location}
+            name='BagelPickupLocation'
+            className={classes.formControl}
+            control={control}
+            defaultValue={location || ''}
+            variant='outlined'
+            margin='normal'
+            rules={{ required: true }}
+          >
+            {locations &&
+              locations.map(location => (
+                <MenuItem key={location.value} value={location.value}>
+                  {location.label}
+                </MenuItem>
+              ))}
+          </SelectList>
+          {errors.BagelPickupLocation?.type === 'required' &&
+            'Location is required'}
+        </section>
 
-      <section>
-        <SelectList
-          id='BagelPickupDate'
-          label='Select Date'
-          handleChange={e => handleDChange(e, 'date')}
-          value={date}
-          name='BagelPickupDate'
-          className={classes.formControl}
-          control={control}
-          defaultValue={date || ''}
-          variant='outlined'
-          margin='normal'
-          rules={{ required: true }}
-        >
-          {dates &&
-            dates.map(date => (
-              <MenuItem key={date.value} value={date.value}>
-                {date.label}
-              </MenuItem>
-            ))}
-        </SelectList>
+        <section>
+          <SelectList
+            id='BagelPickupDate'
+            label='Select Date'
+            handleChange={e => handleDChange(e, 'date')}
+            value={date}
+            name='BagelPickupDate'
+            className={classes.formControl}
+            control={control}
+            defaultValue={date || ''}
+            variant='outlined'
+            margin='normal'
+            rules={{ required: true }}
+          >
+            {dates &&
+              dates.map(date => (
+                <MenuItem key={date.value} value={date.value}>
+                  {date.label}
+                </MenuItem>
+              ))}
+          </SelectList>
 
-        {dateError && <p style={{ color: 'red' }}>{'Date is not available'}</p>}
-        {errors.BagelPickupDate?.type === 'required' && 'Date is required'}
-      </section>
+          {dateError && (
+            <p style={{ color: 'red' }}>{'Date is not available'}</p>
+          )}
+          {errors.BagelPickupDate?.type === 'required' && 'Date is required'}
+        </section>
 
-      <Button variant='outlined' type='submit'>
-        Ok
-      </Button>
-    </form>
+        <Button variant='outlined' type='submit'>
+          Ok
+        </Button>
+      </form>
+    </Modal>
   );
 };
 
