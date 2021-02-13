@@ -3,7 +3,7 @@ import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 
 const totalCost = ({ pricing }) => {
-  const { state } = useStateMachine(updateAction);
+  const { action, state } = useStateMachine(updateAction);
   const priceHalfDozen = Number(pricing[0].node.prices.halfDozenPrice);
   const priceDozen = Number(pricing[0].node.prices.dozenPrice);
   const priceChips = Number(pricing[0].node.prices.bagelChipsPrice);
@@ -25,7 +25,10 @@ const totalCost = ({ pricing }) => {
     let bagelDozenCost = bagelDozens.length * priceHalfDozen;
     let bagelHalfDozenCost = bagelHalfDozens.length * priceDozen;
     let bagelChipsCost = bagelChips * priceChips;
-    state.data.totalCost = bagelDozenCost + bagelHalfDozenCost + bagelChipsCost;
+    // state.data.totalCost = bagelDozenCost + bagelHalfDozenCost + bagelChipsCost;
+    action({
+      totalCost: bagelDozenCost + bagelHalfDozenCost + bagelChipsCost,
+    });
   }, [state]);
 
   return (
