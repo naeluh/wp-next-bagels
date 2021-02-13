@@ -25,10 +25,7 @@ const totalCost = ({ pricing }) => {
     let bagelDozenCost = bagelDozens.length * priceHalfDozen;
     let bagelHalfDozenCost = bagelHalfDozens.length * priceDozen;
     let bagelChipsCost = bagelChips * priceChips;
-    // state.data.totalCost = bagelDozenCost + bagelHalfDozenCost + bagelChipsCost;
-    action({
-      totalCost: bagelDozenCost + bagelHalfDozenCost + bagelChipsCost,
-    });
+    state.data.totalCost = bagelDozenCost + bagelHalfDozenCost + bagelChipsCost;
   }, [state]);
 
   return (
