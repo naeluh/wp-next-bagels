@@ -14,7 +14,7 @@ import inventory from '../../../data/products.json'
 import Stripe from 'stripe'
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   // https://github.com/stripe/stripe-node#configuration
-  apiVersion: '2020-03-02',
+  apiVersion: '2020-08-27',
 })
 
 export default async function handler(
