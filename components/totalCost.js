@@ -4,6 +4,7 @@ import { useStateMachine } from 'little-state-machine';
 
 const totalCost = ({ pricing }) => {
   const { action, state } = useStateMachine(updateAction);
+  const [cost, setCost] = useState(0);
   const priceHalfDozen = Number(pricing[0].node.prices.halfDozenPrice);
   const priceDozen = Number(pricing[0].node.prices.dozenPrice);
   const priceChips = Number(pricing[0].node.prices.bagelChipsPrice);
@@ -21,12 +22,17 @@ const totalCost = ({ pricing }) => {
       state.data.bagelSelections.length > 0
         ? state.data.bagelSelections.filter(s => s.bagelSetType !== 'dozen')
         : [];
-
     let bagelDozenCost = bagelDozens.length * priceHalfDozen;
     let bagelHalfDozenCost = bagelHalfDozens.length * priceDozen;
     let bagelChipsCost = bagelChips * priceChips;
-    state.data.totalCost = bagelDozenCost + bagelHalfDozenCost + bagelChipsCost;
+    setCost(bagelDozenCost + bagelHalfDozenCost + bagelChipsCost);
   }, [state]);
+
+  useEffect(() => {
+    action({
+      totalCost: cost,
+    });
+  }, [cost]);
 
   return (
     <div>

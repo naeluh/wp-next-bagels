@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
-import CustomDonationInput from '../components/CustomDonationInput'
-import StripeTestCards from '../components/StripeTestCards'
+import CustomDonationInput from './customDonationInput'
+import StripeTestCards from './stripeTestCards'
 
 import getStripe from '../utils/get-stripejs'
 import { fetchPostJSON } from '../utils/api-helpers'
