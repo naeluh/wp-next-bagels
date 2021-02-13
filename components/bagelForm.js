@@ -42,7 +42,7 @@ function bagelForm() {
     defaultValues,
   });
 
-  const formatDate = (date: any) => {
+  const formatDate = date => {
     const d = new Date(date);
     const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
     const mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(d);
