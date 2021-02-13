@@ -101,14 +101,12 @@ const addDateLocation = ({ dates, locations }) => {
     setShowModal(false);
   };
 
-  console.log('Errors:', errors);
-
   const [showModal, setShowModal] = useState(false);
 
   return (
     <Modal
-      button={`Set Pickup Location and Pickup date`}
-      title={`Set Pickup Location and Pickup date`}
+      button={`Edit Pickup Location and Pickup date`}
+      title={`Edit Pickup Location and Pickup date`}
       setShowModal={setShowModal}
       showModal={showModal}
     >

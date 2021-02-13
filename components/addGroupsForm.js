@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import styles from './addGroupsForm.module.css';
-import { Button } from '@material-ui/core';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import { useRouter } from 'next/router';
 import BagelSetAddRemove from './bagelSetAddRemove';
 import AddDateLocation from './addDateLocation';
-import BagelChipsOrderForm from './bagelChipsOrderForm';
+import BagelChipSetAddRemove from './bagelChipSetAddRemove';
 import TotalCost from './totalCost';
 import Link from 'next/link';
 
 const addGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
   const router = useRouter();
   const [dates, setDates] = useState([]);
-  const { state, action } = useStateMachine(updateAction);
+  const { state } = useStateMachine(updateAction);
   const [bagelID, setBagelID] = useState(state.data.bagelSelections.length);
-  const [bs, setBS] = useState(state.data.bagelSelections);
+  const [bagelChips, setBagelChips] = useState(0);
 
   const locations = pickupLocations.map(({ node }) => {
     return {
@@ -24,6 +23,17 @@ const addGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
       locationData: node.location,
     };
   });
+
+  const convertLocation = (location, locations) =>
+    locations.filter(l => location === l.value)[0].label;
+
+  const convertDateFormat = date =>
+    new Date(date).toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
 
   const formatDate = date => {
     const d = new Date(date);
@@ -43,7 +53,7 @@ const addGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
       next.setDate(first + i);
       dateArr.push({
         value: formatDate(next.toString()),
-        label: formatDate(next.toString()),
+        label: convertDateFormat(next.toString()),
       });
     }
     dateArr.shift();
@@ -53,11 +63,15 @@ const addGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
   useEffect(() => {
     setDates(nextSevenDays(new Date()));
     setBagelID(state.data.bagelSelections.length);
+    setBagelChips(
+      Object.keys(state.data.bagelChips)
+        .map(key => state.data.bagelChips[key])
+        .reduce((a, b) => a + b, 0)
+    );
   }, []);
 
   const addGroup = type => {
     setBagelID(bagelID + 1);
-    console.log(state.data.bagelSelections.length);
     router.replace(
       `/bagels/add-bagels?bagelSelectionsID=${state.data.bagelSelections.length}&type=${type}`,
       `/bagels/add-bagels`
@@ -66,40 +80,68 @@ const addGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
 
   return (
     <>
-      <AddDateLocation locations={locations} dates={dates} />
-      <BagelChipsOrderForm pricing={pricing} bagelChipsData={bagelChipsData} />
-      <section className={styles.grid}>
-        <Button
+      <section className='my-4'>
+        <AddDateLocation locations={locations} dates={dates} />
+        <p>
+          Pickup Location:{' '}
+          {state.data.location
+            ? convertLocation(state.data.location, locations)
+            : ''}
+        </p>
+        <p>
+          Pickup Date:{' '}
+          {state.data.time ? convertDateFormat(state.data.time) : ''}
+        </p>
+      </section>
+      <section>
+        <p>Bagels Chips:</p>
+        <Link href={`/bagel-chips`} as={`/bagel-chips`}>
+          <button
+            className='bg-yellow-500 text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1'
+            type='button'
+            style={{ transition: 'all .15s ease' }}
+          >
+            {bagelChips > 0 ? `Edit Bagel Chips` : `Add Bagel Chips`}
+          </button>
+        </Link>
+        {state.data.bagelChips &&
+          Object.entries(state.data.bagelChips).map((key, value) => (
+            <BagelChipSetAddRemove
+              bagelChipValue={value}
+              bagelChipKey={key}
+              key={key}
+            />
+          ))}
+      </section>
+      <section>
+        <p>Bagels:</p>
+        <button
+          className='bg-yellow-500 text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1'
           type='button'
+          style={{ transition: 'all .15s ease' }}
           name='dozen'
           onClick={e => addGroup('dozen')}
           variant='outlined'
         >
           Add Dozen
-        </Button>
-        <Button
+        </button>
+        <button
+          className='bg-yellow-500 text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1'
           type='button'
+          style={{ transition: 'all .15s ease' }}
           name='halfDozen'
           onClick={e => addGroup('halfDozen')}
           variant='outlined'
         >
           Add 1/2 Dozen
-        </Button>
-      </section>
-      <section>
-        <p>Bagels:</p>
-        {state.data.bagelSelections.length > 0
-          ? state.data.bagelSelections.map(bagelSelection => (
-              <BagelSetAddRemove
-                bagelSelection={bagelSelection}
-                key={bagelSelection.id}
-              />
-            ))
-          : `Let's start by adding a dozen or half dozen`}
-      </section>{' '}
-      <section className='my-4'>
-        <p>Pickup Location: {state.data.location ? state.data.location : ''}</p>
-        <p>Pickup Date: {state.data.time ? state.data.time : ''}</p>
+        </button>
+        {state.data.bagelSelections.length > 0 &&
+          state.data.bagelSelections.map(bagelSelection => (
+            <BagelSetAddRemove
+              bagelSelection={bagelSelection}
+              key={bagelSelection.id}
+            />
+          ))}
       </section>
       <section className='my-4'>
         <TotalCost pricing={pricing} />
@@ -107,7 +149,13 @@ const addGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
       <section className={styles.grid}>
         <Link href='/checkout'>
           <a className='card elements-style-background'>
-            <h2 className='bottom'>Checkout</h2>
+            <button
+              className='bg-yellow-500 text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1'
+              type='button'
+              style={{ transition: 'all .15s ease' }}
+            >
+              Checkout
+            </button>
           </a>
         </Link>
       </section>
