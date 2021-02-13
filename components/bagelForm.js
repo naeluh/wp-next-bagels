@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import styles from './bagelForm.module.css';
-import RSelect from 'react-select';
 import { Checkbox, Button } from '@material-ui/core';
 import ButtonResult from './buttonResult';
 import BagelSelections from './bagelSelections';
-import updateAction from '../../lib/updateAction';
+import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 
-function bagelForm({ bagelData }) {
+function bagelForm() {
   const dozen = 12;
   const halfDozen = 6;
   const [dates, setDates] = useState([]);
@@ -43,7 +42,7 @@ function bagelForm({ bagelData }) {
     defaultValues,
   });
 
-  const formatDate = date => {
+  const formatDate = (date: any) => {
     const d = new Date(date);
     const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
     const mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(d);
