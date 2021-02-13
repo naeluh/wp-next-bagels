@@ -4,7 +4,7 @@ import styles from './bagelForm.module.css';
 import RSelect from 'react-select';
 import { Checkbox, Button } from '@material-ui/core';
 import ButtonResult from './buttonResult';
-import BagelSelections from './BagelSelections';
+import BagelSelections from './bagelSelections';
 import updateAction from '../../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 
