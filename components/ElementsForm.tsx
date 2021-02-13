@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 
-import CustomDonationInput from '../components/CustomDonationInput'
-import StripeTestCards from '../components/StripeTestCards'
-import PrintObject from '../components/PrintObject'
+import updateAction from '../lib/updateAction';
+import { useStateMachine } from 'little-state-machine';
+
+import CustomDonationInput from './customDonationInput'
+import StripeTestCards from './stripeTestCards'
+import PrintObject from './printObject'
 
 import { fetchPostJSON } from '../utils/api-helpers'
 import { formatAmountForDisplay } from '../utils/stripe-helpers'
@@ -35,8 +38,9 @@ const CARD_OPTIONS = {
 }
 
 const ElementsForm = () => {
+    const { action, state } = useStateMachine(updateAction);
   const [input, setInput] = useState({
-    customDonation: Math.round(config.MAX_AMOUNT / config.AMOUNT_STEP),
+    customDonation: state.data.totalCost,
     cardholderName: '',
   })
   const [payment, setPayment] = useState({ status: 'initial' })
@@ -121,16 +125,6 @@ const ElementsForm = () => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <CustomDonationInput
-          className="elements-style"
-          name="customDonation"
-          value={input.customDonation}
-          min={config.MIN_AMOUNT}
-          max={config.MAX_AMOUNT}
-          step={config.AMOUNT_STEP}
-          currency={config.CURRENCY}
-          onChange={handleInputChange}
-        />
         <StripeTestCards />
         <fieldset className="elements-style">
           <legend>Your payment details:</legend>
@@ -162,7 +156,7 @@ const ElementsForm = () => {
             !stripe
           }
         >
-          Donate {formatAmountForDisplay(input.customDonation, config.CURRENCY)}
+          Total: {formatAmountForDisplay(input.customDonation, config.CURRENCY)}
         </button>
       </form>
       <PaymentStatus status={payment.status} />

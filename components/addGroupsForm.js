@@ -8,6 +8,7 @@ import BagelSetAddRemove from './bagelSetAddRemove';
 import AddDateLocation from './addDateLocation';
 import BagelChipsOrderForm from './bagelChipsOrderForm';
 import TotalCost from './totalCost';
+import Link from 'next/link';
 
 const addGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
   const router = useRouter();
@@ -104,14 +105,11 @@ const addGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
         <TotalCost pricing={pricing} />
       </section>
       <section className={styles.grid}>
-        <Button
-          type='button'
-          name='dozen'
-          onClick={e => addGroup('dozen')}
-          variant='outlined'
-        >
-          Checkout
-        </Button>
+        <Link href='/checkout'>
+          <a className='card elements-style-background'>
+            <h2 className='bottom'>Checkout</h2>
+          </a>
+        </Link>
       </section>
       <section>
         {state && (
