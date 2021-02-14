@@ -11,6 +11,7 @@ createStore(
     data: {
       bagelSelections: [],
       bagelChips: {},
+      bagelChipData: [],
       location: '',
       time: '',
       totalCost: 0.0,

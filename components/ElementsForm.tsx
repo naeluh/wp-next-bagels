@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import useSWR, { mutate } from 'swr';
 
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
@@ -75,6 +76,31 @@ const ElementsForm = () => {
     }
   };
 
+  async function fetcher(...args) {
+    const res = await fetch(...args)
+    return await res.json()
+  }
+
+  const updateBagelChipsQuantity = async (id: any, quantity: any) => {
+    const { data } = useSWR(`https://mamalagels.com/wp-json/acf/v3/bagel_chips/${id}/quantity`, fetcher)
+    console.log(data.quantity)
+    const newQuantity = data.quantity - quantity;
+    await mutate(
+      `https://mamalagels.com/wp-json/acf/v3/bagel_chips/${id}?fields[quantity]=${newQuantity}`,
+      await fetch(
+        `https://mamalagels.com/wp-json/acf/v3/bagel_chips/${id}?fields[quantity]=${newQuantity}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/plain',
+            Authorization:
+              'Basic ' + btoa(process.env.USER + ':' + process.env.PASS),
+          },
+        }
+      )
+    );
+  };
+
   const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = e =>
     setInput({
       ...input,
@@ -121,10 +147,12 @@ const ElementsForm = () => {
     } else if (paymentIntent) {
       setPayment(paymentIntent);
       // console.log(`reset values`);
+      // state.data.bagelChipData.forEach()
       // Reset Value on 'succeeded'
       action({
         bagelSelections: [],
         bagelChips: {},
+        bagelChipData: [],
         location: '',
         time: '',
         totalCost: 0,
