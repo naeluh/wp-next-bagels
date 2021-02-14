@@ -1,9 +1,9 @@
 import Head from 'next/head';
-import Container from '../../components/container';
-import Header from '../../components/header';
-import Layout from '../../components/layout';
-import Intro from '../../components/intro';
-import BagelSelections from '../../components/bagelSelections';
+import Container from '../../components/Container';
+import Header from '../../components/Header';
+import Layout from '../../components/Layout';
+import Intro from '../../components/Intro';
+import BagelSelections from '../../components/BagelSelections';
 
 import { getBagelsData } from '../../lib/api';
 import { CMS_NAME } from '../../lib/constants';
@@ -24,7 +24,7 @@ export default function Index({ preview, allBagels }) {
 }
 
 export async function getStaticProps({ preview = false }) {
-  console.log(preview);
+  // console.log(preview);
   const allBagels = await getBagelsData(preview);
   return {
     props: { preview, allBagels },

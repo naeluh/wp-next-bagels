@@ -3,10 +3,10 @@ import styles from './addGroupsForm.module.css';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import { useRouter } from 'next/router';
-import BagelSetAddRemove from './bagelSetAddRemove';
-import AddDateLocation from './addDateLocation';
-import BagelChipSetAddRemove from './bagelChipSetAddRemove';
-import TotalCost from './totalCost';
+import BagelSetAddRemove from './BagelSetAddRemove';
+import AddDateLocation from './AddDateLocation';
+import BagelChipSetAddRemove from './BagelChipSetAddRemove';
+import TotalCost from './TotalCost';
 import Link from 'next/link';
 
 const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {

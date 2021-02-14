@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styles from './bagelDetails.module.css';
-import Bagel from './bagel';
+import Bagel from './Bagel';
 
 const BagelDetails = ({ bagels }) => {
   return (

@@ -32,7 +32,7 @@ const BagelSelections = ({ bagelData, pricing }) => {
   const amount =
     type === 'dozen' ? defaultValues.dozen : defaultValues.halfDozen;
 
-  console.log(state.data, router);
+  // console.log(state.data, router);
 
   const bagelSet =
     state.data.bagelSelections &&

@@ -11,7 +11,7 @@ const BagelNumberField = ({
   amount,
   bagelSet,
 }) => {
-  console.log(bagelSet);
+  // console.log(bagelSet);
   const [currentValue, setCurrentValue] = useState(
     bagelSet
       ? bagelSet.bagels.filter(

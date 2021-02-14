@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import { useRouter } from 'next/router';
-import BagelChipNumberField from './bagelChipNumberField';
+import BagelChipNumberField from './BagelChipNumberField';
 
 const BagelChipsOrderPage = ({ bagelChipsData }) => {
   const router = useRouter();
