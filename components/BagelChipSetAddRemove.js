@@ -7,13 +7,9 @@ const BagelChipSetAddRemove = ({ bagelChipKey }) => {
   const { state, action } = useStateMachine(updateAction);
 
   const removeBagelChips = (array, bckey) => {
+    array[bckey[0]] = 0;
     action({
-      bagelChips: Object.entries(array).map((key, value) => {
-        if (bckey === key) {
-          value = 0;
-        }
-        return value;
-      }),
+      bagelChips: array,
     });
   };
 
