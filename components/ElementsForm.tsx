@@ -4,8 +4,8 @@ import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 
 import CustomDonationInput from './customDonationInput';
-import StripeTestCards from './stripeTestCards';
-import PrintObject from './printObject';
+import StripeTestCards from './StripeTestCards';
+import PrintObject from './PrintObject';
 
 import { fetchPostJSON } from '../utils/api-helpers';
 import { formatAmountForDisplay } from '../utils/stripe-helpers';
@@ -13,8 +13,8 @@ import * as config from '../config';
 
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
-import BagelSetAddRemove from './bagelSetAddRemove';
-import BagelChipSetAddRemove from './bagelChipSetAddRemove';
+import BagelSetAddRemove from './BagelSetAddRemove';
+import BagelChipSetAddRemove from './BagelChipSetAddRemove';
 
 const CARD_OPTIONS = {
   iconStyle: 'solid' as const,

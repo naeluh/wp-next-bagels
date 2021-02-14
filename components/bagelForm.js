@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import styles from './bagelForm.module.css';
 import { Checkbox, Button } from '@material-ui/core';
-import ButtonResult from './buttonResult';
-import BagelSelections from './bagelSelections';
+import ButtonResult from './ButtonResult';
+import BagelSelections from './BagelSelections';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 
-function bagelForm() {
+function BagelForm() {
   const dozen = 12;
   const halfDozen = 6;
   const [dates, setDates] = useState([]);
@@ -175,4 +175,4 @@ function bagelForm() {
   );
 }
 
-export default bagelForm;
+export default BagelForm;

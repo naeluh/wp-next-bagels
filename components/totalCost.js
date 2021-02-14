@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 
-const totalCost = ({ pricing }) => {
+const TotalCost = ({ pricing }) => {
   const { action, state } = useStateMachine(updateAction);
   const [cost, setCost] = useState(0);
   const priceHalfDozen = Number(pricing[0].node.prices.halfDozenPrice);
@@ -41,4 +41,4 @@ const totalCost = ({ pricing }) => {
   );
 };
 
-export default totalCost;
+export default TotalCost;

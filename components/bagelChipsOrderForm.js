@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import styles from './addGroupsForm.module.css';
-import { Button, FormControl, makeStyles, MenuItem } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
-import { useRouter } from 'next/router';
-import BagelSetAddRemove from './bagelSetAddRemove';
-import SelectList from './selectList';
-import BagelChipNumberField from './bagelChipNumberField';
-import Modal from './modal';
+import BagelChipNumberField from './BagelChipNumberField';
+import Modal from './Modal';
 
-const bagelChipsOrderForm = ({ pricing, bagelChipsData }) => {
+const BagelChipsOrderForm = ({ pricing, bagelChipsData }) => {
   const { state, action } = useStateMachine(updateAction);
   const [showModal, setShowModal] = useState(false);
   const defaultValues = {
@@ -78,4 +75,4 @@ const bagelChipsOrderForm = ({ pricing, bagelChipsData }) => {
   );
 };
 
-export default bagelChipsOrderForm;
+export default BagelChipsOrderForm;

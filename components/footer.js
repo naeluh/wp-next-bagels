@@ -1,8 +1,8 @@
-import Container from './container';
+import Container from './Container';
 import { EXAMPLE_PATH } from '../lib/constants';
 import Link from 'next/link';
-import ContactForm from './contactForm';
-import ContactInfo from './contactInfo';
+import ContactForm from './ContactForm';
+import ContactInfo from './ContactInfo';
 
 export default function Footer() {
   const image = (

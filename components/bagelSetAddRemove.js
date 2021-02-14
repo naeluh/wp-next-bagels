@@ -7,7 +7,7 @@ const Button = ({ id }) => {
   <button></button>;
 };
 
-const bagelSetAddRemove = ({ bagelSelection }) => {
+const BagelSetAddRemove = ({ bagelSelection }) => {
   const { state, action } = useStateMachine(updateAction);
   const removeBagelSet = (array, value) => {
     action({
@@ -15,7 +15,6 @@ const bagelSetAddRemove = ({ bagelSelection }) => {
         return item.id !== value;
       }),
     });
-    console.log(state);
   };
   return (
     <div className='my-4'>
@@ -49,4 +48,4 @@ const bagelSetAddRemove = ({ bagelSelection }) => {
   );
 };
 
-export default bagelSetAddRemove;
+export default BagelSetAddRemove;

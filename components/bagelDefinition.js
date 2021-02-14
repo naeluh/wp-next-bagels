@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './bagelDefinition.module.css';
 
-const bagelDefinition = ({ title, quote, desc }) => {
+const BagelDefinition = ({ title, quote, desc }) => {
   return (
     <section
       style={{
@@ -25,4 +25,4 @@ const bagelDefinition = ({ title, quote, desc }) => {
   );
 };
 
-export default bagelDefinition;
+export default BagelDefinition;

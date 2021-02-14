@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './bagel.module.css';
 
-const bagel = ({ title, desc, img, price }) => {
+const Bagel = ({ title, desc, img, price }) => {
   return (
     <div>
       <div className='w-full overflow-hidden mb-6 border-black border-12'>
@@ -24,4 +24,4 @@ const bagel = ({ title, desc, img, price }) => {
   );
 };
 
-export default bagel;
+export default Bagel;

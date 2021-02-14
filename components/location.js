@@ -1,9 +1,9 @@
 import React from 'react';
 
 import styles from './locations.module.css';
-import Time from './time';
+import Time from './Time';
 
-const location = ({ location, times }) => {
+const Location = ({ location, times }) => {
   return (
     <div>
       <div className='w-full overflow-hidden mb-6'>
@@ -22,4 +22,4 @@ const location = ({ location, times }) => {
   );
 };
 
-export default location;
+export default Location;

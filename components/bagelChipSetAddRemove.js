@@ -3,7 +3,7 @@ import Link from 'next/link';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 
-const bagelChipSetAddRemove = ({ bagelChipKey }) => {
+const BagelChipSetAddRemove = ({ bagelChipKey }) => {
   const { state, action } = useStateMachine(updateAction);
 
   const removeBagelChips = (array, bckey) => {
@@ -46,4 +46,4 @@ const bagelChipSetAddRemove = ({ bagelChipKey }) => {
   );
 };
 
-export default bagelChipSetAddRemove;
+export default BagelChipSetAddRemove;

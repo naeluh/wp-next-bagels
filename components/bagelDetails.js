@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './bagelDetails.module.css';
 import Bagel from './bagel';
 
-const bagelDetails = ({ bagels }) => {
+const BagelDetails = ({ bagels }) => {
   return (
     <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12'>
       {bagels.map(
@@ -21,4 +21,4 @@ const bagelDetails = ({ bagels }) => {
   );
 };
 
-export default bagelDetails;
+export default BagelDetails;

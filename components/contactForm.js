@@ -5,7 +5,7 @@
 import React, { useState } from 'react';
 import styles from './contactForm.module.css';
 
-const contactForm = () => {
+const ContactForm = () => {
   const [status, setStatus] = useState('');
 
   const submitForm = ev => {
@@ -56,4 +56,4 @@ const contactForm = () => {
   );
 };
 
-export default contactForm;
+export default ContactForm;
