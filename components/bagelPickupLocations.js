@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const bagelPickupLocations = ({ locations, control }) => {
+const BagelPickupLocations = ({ locations, control }) => {
   const classes = useStyles();
   const { setValue } = useForm();
   const { state } = useStateMachine(updateAction);
@@ -70,4 +70,4 @@ const bagelPickupLocations = ({ locations, control }) => {
   );
 };
 
-export default bagelPickupLocations;
+export default BagelPickupLocations;

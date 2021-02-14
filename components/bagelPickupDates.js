@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const bagelPickupDates = ({ dates, locations, control }) => {
+const BagelPickupDates = ({ dates, locations, control }) => {
   const classes = useStyles();
   const { setValue, setError, errors, clearErrors } = useForm({
     mode: 'onChange',
@@ -97,4 +97,4 @@ const bagelPickupDates = ({ dates, locations, control }) => {
   );
 };
 
-export default bagelPickupDates;
+export default BagelPickupDates;

@@ -11,7 +11,7 @@ const LocationFormat = ({ location }) => {
   );
 };
 
-const bagelPickupLocation = ({ location }) => {
+const BagelPickupLocation = ({ location }) => {
   return (
     <FormControlLabel
       value={location.value}
@@ -21,4 +21,4 @@ const bagelPickupLocation = ({ location }) => {
   );
 };
 
-export default bagelPickupLocation;
+export default BagelPickupLocation;

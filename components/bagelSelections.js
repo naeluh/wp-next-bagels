@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import styles from './bagelSelections.module.css';
-import ButtonsResult from './buttonResult';
-import BagelNumberField from './bagelNumberField';
+import ButtonsResult from './ButtonResult';
+import BagelNumberField from './BagelNumberField';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import { useRouter } from 'next/router';
 
-const bagelSelections = ({ bagelData, pricing }) => {
+const BagelSelections = ({ bagelData, pricing }) => {
   const router = useRouter();
   const { action, state } = useStateMachine(updateAction);
   const [data] = useState(null);
@@ -49,7 +49,6 @@ const bagelSelections = ({ bagelData, pricing }) => {
       bagelSetType: router.query.type,
       bagels: output,
     };
-    console.log(state.data.bagelSelections);
     action({
       bagelSelections: state.data.bagelSelections,
     });
@@ -110,4 +109,4 @@ const bagelSelections = ({ bagelData, pricing }) => {
   );
 };
 
-export default bagelSelections;
+export default BagelSelections;

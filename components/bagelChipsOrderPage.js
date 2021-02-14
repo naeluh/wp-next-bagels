@@ -6,7 +6,7 @@ import { useStateMachine } from 'little-state-machine';
 import { useRouter } from 'next/router';
 import BagelChipNumberField from './bagelChipNumberField';
 
-const bagelChipsOrderPage = ({ pricing, bagelChipsData }) => {
+const BagelChipsOrderPage = ({ bagelChipsData }) => {
   const router = useRouter();
   const { state, action } = useStateMachine(updateAction);
   const defaultValues = {
@@ -55,4 +55,4 @@ const bagelChipsOrderPage = ({ pricing, bagelChipsData }) => {
   );
 };
 
-export default bagelChipsOrderPage;
+export default BagelChipsOrderPage;

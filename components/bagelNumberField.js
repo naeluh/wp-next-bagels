@@ -3,7 +3,7 @@ import styles from './bagelNumberField.module.css';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 
-const bagelNumberField = ({
+const BagelNumberField = ({
   control,
   bagel,
   setTotalBagels,
@@ -81,4 +81,4 @@ const bagelNumberField = ({
   );
 };
 
-export default bagelNumberField;
+export default BagelNumberField;

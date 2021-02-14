@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './locationsTimes.module.css';
 import Location from './location';
 
-const locationsTimes = ({ locations }) => {
+const LocationsTimes = ({ locations }) => {
   return (
     <>
       <section
@@ -25,4 +25,4 @@ const locationsTimes = ({ locations }) => {
   );
 };
 
-export default locationsTimes;
+export default LocationsTimes;

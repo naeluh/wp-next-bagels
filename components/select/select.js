@@ -1,7 +1,7 @@
 import React from 'react';
 
-const select = ({ type, data }) => {
+const Select = ({ type, data }) => {
   return <div></div>;
 };
 
-export default select;
+export default Select;

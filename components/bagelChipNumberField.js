@@ -3,7 +3,7 @@ import styles from './bagelNumberField.module.css';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 
-const bagelChipNumberField = ({
+const BagelChipNumberField = ({
   register,
   defaultValues,
   bagelChip,
@@ -19,7 +19,6 @@ const bagelChipNumberField = ({
       keysArr.map((chip, idx) => {
         if (bagelChip.node.title === chip) {
           setCurrentValue(valsArr[idx]);
-          console.log(chip, idx, valsArr[idx]);
           setValue(chip, valsArr[idx]);
         }
       });
@@ -76,4 +75,4 @@ const bagelChipNumberField = ({
   );
 };
 
-export default bagelChipNumberField;
+export default BagelChipNumberField;

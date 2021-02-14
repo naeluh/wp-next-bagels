@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './contactInfo.module.css';
 
-const contactInfo = () => {
+const ContactInfo = () => {
   return (
     <div className={styles.contactInfoContainer}>
       <h4 className='text-xl font-bold tracking-tighter leading-tight md:pr-8 font-serif my-4 pb-4'>
@@ -20,4 +20,4 @@ const contactInfo = () => {
   );
 };
 
-export default contactInfo;
+export default ContactInfo;

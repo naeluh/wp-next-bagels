@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const addDateLocation = ({ dates, locations }) => {
+const AddDateLocation = ({ dates, locations }) => {
   const classes = useStyles();
 
   const defaultValues = {
@@ -175,4 +175,4 @@ const addDateLocation = ({ dates, locations }) => {
   );
 };
 
-export default addDateLocation;
+export default AddDateLocation;

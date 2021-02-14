@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './bagelList.module.css';
 
-const bagelList = ({ title, desc, priceTitle, priceDesc }) => {
+const BagelList = ({ title, desc, priceTitle, priceDesc }) => {
   return (
     <section
       className={`text-center z-0 py-4 bg-cover bg-center flex-col flex md:flex-row md:justify-between mb-4 md:mb-6 md:px-12 md:py-6 lg:items-center`}
@@ -23,4 +23,4 @@ const bagelList = ({ title, desc, priceTitle, priceDesc }) => {
   );
 };
 
-export default bagelList;
+export default BagelList;

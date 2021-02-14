@@ -1,11 +1,11 @@
-import { NextPage } from 'next'
-import { Elements } from '@stripe/react-stripe-js'
-import getStripe from '../../utils/get-stripejs'
-import ElementsForm from '../../components/elementsForm'
+import { NextPage } from 'next';
+import { Elements } from '@stripe/react-stripe-js';
+import getStripe from '../../utils/get-stripejs';
+import ElementsForm from '../../components/ElementsForm';
 import Head from 'next/head';
-import Container from '../../components/container';
-import Header from '../../components/header';
-import Layout from '../../components/layout';
+import Container from '../../components/Container';
+import Header from '../../components/Header';
+import Layout from '../../components/Layout';
 import { CMS_NAME } from '../../lib/constants';
 
 const DonatePage: NextPage = () => {
@@ -21,8 +21,7 @@ const DonatePage: NextPage = () => {
         </Elements>
       </Container>
     </Layout>
+  );
+};
 
-  )
-}
-
-export default DonatePage
+export default DonatePage;

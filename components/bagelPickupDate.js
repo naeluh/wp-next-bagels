@@ -2,7 +2,7 @@ import React from 'react';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-const bagelPickupDate = ({ date }) => {
+const BagelPickupDate = ({ date }) => {
   return (
     <FormControlLabel
       value={date.value}
@@ -12,4 +12,4 @@ const bagelPickupDate = ({ date }) => {
   );
 };
 
-export default bagelPickupDate;
+export default BagelPickupDate;

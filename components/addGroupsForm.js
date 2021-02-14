@@ -9,7 +9,7 @@ import BagelChipSetAddRemove from './bagelChipSetAddRemove';
 import TotalCost from './totalCost';
 import Link from 'next/link';
 
-const addGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
+const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
   const router = useRouter();
   const [dates, setDates] = useState([]);
   const { state } = useStateMachine(updateAction);
@@ -170,4 +170,4 @@ const addGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
   );
 };
 
-export default addGroupsForm;
+export default AddGroupsForm;
