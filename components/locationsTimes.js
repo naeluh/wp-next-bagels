@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styles from './locationsTimes.module.css';
-import Location from './location';
+import Location from './Location';
 
 const LocationsTimes = ({ locations }) => {
   return (

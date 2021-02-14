@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 
-import CustomDonationInput from './customDonationInput';
 import StripeTestCards from './StripeTestCards';
 import PrintObject from './PrintObject';
 
@@ -121,7 +120,7 @@ const ElementsForm = () => {
       setErrorMessage(error.message ?? 'An unknown error occured');
     } else if (paymentIntent) {
       setPayment(paymentIntent);
-      console.log(`reset values`);
+      // console.log(`reset values`);
       // Reset Value on 'succeeded'
       action({
         bagelSelections: [],

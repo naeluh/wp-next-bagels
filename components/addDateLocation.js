@@ -4,8 +4,8 @@ import styles from './addGroupsForm.module.css';
 import { Button, makeStyles, MenuItem } from '@material-ui/core';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
-import SelectList from './selectList';
-import Modal from './modal';
+import SelectList from './SelectList';
+import Modal from './Modal';
 
 const useStyles = makeStyles(theme => ({
   button: {

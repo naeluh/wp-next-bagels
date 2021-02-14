@@ -2,7 +2,7 @@ import '../styles/index.css';
 import { StateMachineProvider, createStore } from 'little-state-machine';
 
 function log(store) {
-  console.log(store);
+  // console.log(store);
   return store;
 }
 

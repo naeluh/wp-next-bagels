@@ -1,16 +1,10 @@
-import Avatar from './avatar';
-import Date from './date';
-import CoverImage from '../components/cover-image';
+import Avatar from './Avatar';
+import Date from './Date';
+import CoverImage from '../components/CoverImage';
 import PostTitle from './PostTitle';
-import Categories from './categories';
+import Categories from './Categories';
 
-export default function PostHeader({
-  title,
-
-  date,
-
-  categories,
-}) {
+export default function PostHeader({ title, date, categories }) {
   return (
     <>
       <PostTitle>{title}</PostTitle>

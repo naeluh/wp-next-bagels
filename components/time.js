@@ -1,6 +1,6 @@
 import React from 'react';
 
-const time = ({ time }) => {
+const Time = ({ time }) => {
   return (
     <div>
       {time.textDate && (
@@ -18,4 +18,4 @@ const time = ({ time }) => {
   );
 };
 
-export default time;
+export default Time;

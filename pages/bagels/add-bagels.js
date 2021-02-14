@@ -1,9 +1,9 @@
 import Head from 'next/head';
-import Container from '../../components/container';
-import Header from '../../components/header';
-import Layout from '../../components/layout';
-import Intro from '../../components/intro';
-import BagelForm from '../../components/bagelSelections';
+import Container from '../../components/Container';
+import Header from '../../components/Header';
+import Layout from '../../components/Layout';
+import Intro from '../../components/Intro';
+import BagelSelections from '../../components/BagelSelections';
 import { CMS_NAME } from '../../lib/constants';
 import { getBagelsData, getPricingData } from '../../lib/api';
 
@@ -16,7 +16,7 @@ export default function Index({ preview, allBagels, allPricing }) {
       <Header />
       <Container>
         <Intro />
-        <BagelForm bagelData={allBagels} pricing={allPricing} />
+        <BagelSelections bagelData={allBagels} pricing={allPricing} />
       </Container>
     </Layout>
   );

@@ -1,9 +1,9 @@
 import Head from 'next/head';
-import Container from '../../components/container';
-import Header from '../../components/header';
-import Layout from '../../components/layout';
-import Intro from '../../components/intro';
-import AddGroups from '../../components/addGroupsForm';
+import Container from '../../components/Container';
+import Header from '../../components/Header';
+import Layout from '../../components/Layout';
+import Intro from '../../components/Intro';
+import AddGroups from '../../components/AddGroupsForm';
 import { CMS_NAME } from '../../lib/constants';
 import {
   getBagelsData,

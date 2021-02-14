@@ -3,7 +3,7 @@ import { MenuItem, makeStyles } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
-import SelectList from './selectList';
+import SelectList from './SelectList';
 
 const useStyles = makeStyles(theme => ({
   button: {

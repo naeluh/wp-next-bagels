@@ -1,15 +1,15 @@
 import Head from 'next/head';
-import Container from '../components/container';
-import MoreStories from '../components/more-stories';
-import HeroPost from '../components/hero-post';
-import Header from '../components/header';
-import Intro from '../components/intro';
-import Layout from '../components/layout';
-import FeaturedBagel from '../components/featuredBagel';
-import BagelDefinition from '../components/bagelDefinition';
-import BagelList from '../components/bagelList';
-import BagelDetails from '../components/bagelDetails';
-import LocationsTimes from '../components/locationsTimes';
+import Container from '../components/Container';
+import MoreStories from '../components/MoreStories';
+import HeroPost from '../components/HeroPost';
+import Header from '../components/Header';
+import Intro from '../components/Intro';
+import Layout from '../components/Layout';
+import FeaturedBagel from '../components/FeaturedBagel';
+import BagelDefinition from '../components/BagelDefinition';
+import BagelList from '../components/BagelList';
+import BagelDetails from '../components/BagelDetails';
+import LocationsTimes from '../components/LocationsTimes';
 import { getAllPostsForHome, getHomePageData } from '../lib/api';
 import { CMS_NAME } from '../lib/constants';
 
