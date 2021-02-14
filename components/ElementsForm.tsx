@@ -76,7 +76,7 @@ const ElementsForm = () => {
     }
   };
 
-  async function fetcher(...args) {
+  async function fetcher(...args: any) {
     const res = await fetch(...args)
     return await res.json()
   }
