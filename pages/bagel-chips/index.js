@@ -20,7 +20,7 @@ export default function Index({ preview, allBagelChips }) {
   );
 }
 
-export async function getStaticProps({ preview = false }) {
+export async function getServerSideProps({ preview = false }) {
   const allBagelChips = await getBagelChipsData(preview);
   return {
     props: {
