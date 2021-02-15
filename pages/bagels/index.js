@@ -38,7 +38,7 @@ export default function Index({
   );
 }
 
-export async function getInitialProps({ preview = false }) {
+export async function getStaticProps({ preview = false }) {
   const allBagels = await getBagelsData(preview);
   const allPickupLocations = await getLocationsData(preview);
   const allBagelChips = await getBagelChipsData(preview);
