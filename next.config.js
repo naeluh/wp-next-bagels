@@ -1,11 +1,9 @@
 // next.config.js
 const Dotenv = require('dotenv-webpack');
-console.log(process.env);
+
 module.exports = {
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    // Add the new plugin to the existing webpack plugins
     config.plugins.push(new Dotenv({ silent: true }));
-
     return config;
   },
   env: {
