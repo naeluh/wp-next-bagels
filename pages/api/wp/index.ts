@@ -29,8 +29,7 @@ export default async function wordPressPost(req: any, res: any ) {
   );
 
   if (response.ok) {
-    // Cache the Twitter response for 3 seconds, to avoid hitting the Twitter API limits
-    // of 450 requests every 15 minutes (with app auth)
+    // Cache the Wordpress response for 3 seconds
     res.setHeader('Cache-Control', 's-maxage=3, stale-while-revalidate');
     res.status(200).json({
       success: [{ message: `${response.status}` }],
