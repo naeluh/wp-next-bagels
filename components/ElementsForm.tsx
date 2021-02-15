@@ -76,23 +76,24 @@ const ElementsForm = () => {
     }
   };
 
-  const updateBagelChipsQuantity = async (chips: any, chipData: any) => {
-    if (!chips && !chipData) return;
+  const updateBagelChipsQuantity = (chips: any, chipData: any) => {
+    if (!chips && !chipData) return false;
 
-    async function post(id: any, quantity: any) {
+    const handleUpdateQuantity = async (id: any, quantity: any) =>
       await fetchGetJSON(`/api/wp?id=${id}&quantity=${quantity}`);
-    }
 
     Object.entries(chips).forEach((chip: any) => {
       chipData.forEach((data: any) => {
         if (chip[0] === data.title) {
           if (chip[1] > 0) {
             const newQuantity = data.quantity - chip[1];
-            post(data.id, newQuantity);
+            handleUpdateQuantity(data.id, newQuantity);
           }
         }
       });
     });
+
+    return true;
   };
 
   const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = e =>

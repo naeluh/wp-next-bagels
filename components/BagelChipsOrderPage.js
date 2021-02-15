@@ -1,6 +1,5 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Button } from '@material-ui/core';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import { useRouter } from 'next/router';
@@ -12,7 +11,6 @@ const BagelChipsOrderPage = ({ bagelChipsData }) => {
   const defaultValues = {
     bagelChipVal: 0,
   };
-
   const { handleSubmit, errors, register, setValue } = useForm({
     defaultValues,
     mode: 'onChange',
