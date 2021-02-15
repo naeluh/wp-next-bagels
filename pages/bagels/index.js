@@ -11,8 +11,6 @@ import {
   getBagelChipsData,
   getPricingData,
 } from '../../lib/api';
-import updateAction from '../lib/updateAction';
-import { useStateMachine } from 'little-state-machine';
 
 export default function Index({
   preview,
@@ -45,15 +43,6 @@ export async function getStaticProps({ preview = false }) {
   const allPickupLocations = await getLocationsData(preview);
   const allBagelChips = await getBagelChipsData(preview);
   const allPricing = await getPricingData(preview);
-  action({
-    bagelChipData: allBagelChips.map(({ node }) => {
-      return {
-        id: node.databaseId,
-        quantity: node.bagelChipsDetails.quantity,
-        title: node.title,
-      };
-    }),
-  });
   return {
     props: {
       preview,

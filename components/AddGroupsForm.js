@@ -12,7 +12,7 @@ import Link from 'next/link';
 const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
   const router = useRouter();
   const [dates, setDates] = useState([]);
-  const { state } = useStateMachine(updateAction);
+  const { state, action } = useStateMachine(updateAction);
   const [bagelID, setBagelID] = useState(state.data.bagelSelections.length);
   const [bagelChips, setBagelChips] = useState(0);
 
@@ -68,6 +68,15 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
         .map(key => state.data.bagelChips[key])
         .reduce((a, b) => a + b, 0)
     );
+    action({
+      bagelChipData: bagelChipsData.map(({ node }) => {
+        return {
+          id: node.databaseId,
+          quantity: node.bagelChipsDetails.quantity,
+          title: node.title,
+        };
+      }),
+    });
   }, []);
 
   const addGroup = type => {

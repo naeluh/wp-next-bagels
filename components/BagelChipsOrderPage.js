@@ -29,17 +29,23 @@ const BagelChipsOrderPage = ({ bagelChipsData }) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <section className='flex-col md:flex-column flex md:justify-between mb-16 md:mb-12'>
         {bagelChipsData &&
-          bagelChipsData.map(bagelChip => (
-            <BagelChipNumberField
-              register={register}
-              defaultValues={defaultValues}
-              bagelChip={bagelChip}
-              key={bagelChip.node.title}
-              errors={errors}
-              setValue={setValue}
-              state={state}
-            />
-          ))}
+          bagelChipsData.map(bagelChip => {
+            return bagelChip.node.bagelChipsDetails
+              .isThisBagelChipTypeAvailable !== null ||
+              bagelChip.node.bagelChipsDetails.quantity > 0 ? (
+              <BagelChipNumberField
+                register={register}
+                defaultValues={defaultValues}
+                bagelChip={bagelChip}
+                key={bagelChip.node.databaseId}
+                errors={errors}
+                setValue={setValue}
+                state={state}
+              />
+            ) : (
+              <span></span>
+            );
+          })}
       </section>
       <section className='flex-col md:flex-column flex md:justify-between mb-16 md:mb-12'>
         <button

@@ -7,7 +7,7 @@ import { useStateMachine } from 'little-state-machine';
 import StripeTestCards from './StripeTestCards';
 import PrintObject from './PrintObject';
 
-import { fetchPostJSON } from '../utils/api-helpers';
+import { fetchPostJSON, fetchGetJSON } from '../utils/api-helpers';
 import { formatAmountForDisplay } from '../utils/stripe-helpers';
 import * as config from '../config';
 
@@ -76,29 +76,23 @@ const ElementsForm = () => {
     }
   };
 
-  async function fetcher(...args: any) {
-    const res = await fetch(...args)
-    return await res.json()
-  }
+  const updateBagelChipsQuantity = async (chips: any, chipData: any) => {
+    if (!chips && !chipData) return;
 
-  const updateBagelChipsQuantity = async (id: any, quantity: any) => {
-    const { data } = useSWR(`https://mamalagels.com/wp-json/acf/v3/bagel_chips/${id}/quantity`, fetcher)
-    console.log(data.quantity)
-    const newQuantity = data.quantity - quantity;
-    await mutate(
-      `https://mamalagels.com/wp-json/acf/v3/bagel_chips/${id}?fields[quantity]=${newQuantity}`,
-      await fetch(
-        `https://mamalagels.com/wp-json/acf/v3/bagel_chips/${id}?fields[quantity]=${newQuantity}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'text/plain',
-            Authorization:
-              'Basic ' + btoa(process.env.USER + ':' + process.env.PASS),
-          },
+    async function post(id: any, quantity: any) {
+      await fetchGetJSON(`/api/wp?id=${id}&quantity=${quantity}`);
+    }
+
+    Object.entries(chips).forEach((chip: any) => {
+      chipData.forEach((data: any) => {
+        if (chip[0] === data.title) {
+          if (chip[1] > 0) {
+            const newQuantity = data.quantity - chip[1];
+            post(data.id, newQuantity);
+          }
         }
-      )
-    );
+      });
+    });
   };
 
   const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = e =>
@@ -147,7 +141,7 @@ const ElementsForm = () => {
     } else if (paymentIntent) {
       setPayment(paymentIntent);
       // console.log(`reset values`);
-      // state.data.bagelChipData.forEach()
+      updateBagelChipsQuantity(state.data.bagelChips, state.data.bagelChipData);
       // Reset Value on 'succeeded'
       action({
         bagelSelections: [],
