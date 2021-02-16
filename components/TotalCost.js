@@ -22,8 +22,8 @@ const TotalCost = ({ pricing }) => {
       state.data.bagelSelections.length > 0
         ? state.data.bagelSelections.filter(s => s.bagelSetType !== 'dozen')
         : [];
-    let bagelDozenCost = bagelDozens.length * priceHalfDozen;
-    let bagelHalfDozenCost = bagelHalfDozens.length * priceDozen;
+    let bagelDozenCost = bagelDozens.length * priceDozen;
+    let bagelHalfDozenCost = bagelHalfDozens.length * priceHalfDozen;
     let bagelChipsCost = bagelChips * priceChips;
     setCost(bagelDozenCost + bagelHalfDozenCost + bagelChipsCost);
   }, [state]);
