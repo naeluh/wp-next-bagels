@@ -209,3 +209,11 @@ pre {
 .modal-maxheight {
   max-height: 25vh;
 }
+
+.bagelBackgroundYellow {
+  background-color: #ecc94b;
+}
+
+.bagelBorderYellow {
+  border-color: #ecc94b;
+}

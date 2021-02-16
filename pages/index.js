@@ -7,10 +7,10 @@ import BagelDefinition from '../components/BagelDefinition';
 import BagelList from '../components/BagelList';
 import BagelDetails from '../components/BagelDetails';
 import LocationsTimes from '../components/LocationsTimes';
-import { getAllPostsForHome, getHomePageData } from '../lib/api';
+import { getBagelsData, getHomePageData } from '../lib/api';
 import { CMS_NAME } from '../lib/constants';
 
-export default function Index({ preview, homeData }) {
+export default function Index({ preview, homeData, allBagels }) {
   return (
     <Layout preview={preview}>
       <Head>
@@ -41,9 +41,7 @@ export default function Index({ preview, homeData }) {
             priceDesc={homeData.bagelList.bagelPriceDescription}
           />
         )}
-        {homeData.bagelDetails && (
-          <BagelDetails bagels={homeData.bagelDetails.bagel} />
-        )}
+        {allBagels && <BagelDetails bagels={allBagels} />}
         {homeData.locationsTimes && (
           <LocationsTimes
             locations={homeData.locationsTimes.location}
@@ -57,8 +55,8 @@ export default function Index({ preview, homeData }) {
 
 export async function getStaticProps({ preview = false }) {
   const homeData = await getHomePageData();
-  const allPosts = await getAllPostsForHome(preview);
+  const allBagels = await getBagelsData(preview);
   return {
-    props: { preview, homeData },
+    props: { preview, homeData, allBagels },
   };
 }

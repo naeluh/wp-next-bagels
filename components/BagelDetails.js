@@ -6,17 +6,15 @@ import Bagel from './Bagel';
 const BagelDetails = ({ bagels }) => {
   return (
     <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12'>
-      {bagels.map(
-        ({ bagelTitle, bagelDescription, bagelImage, price }, index) => (
-          <Bagel
-            title={bagelTitle}
-            desc={bagelDescription}
-            price={price}
-            img={bagelImage}
-            key={bagelTitle + index}
-          />
-        )
-      )}
+      {bagels.map(({ node }) => (
+        <Bagel
+          title={node.title}
+          desc={node.bagelInfo.bagelDescription}
+          price={node.bagelInfo.price}
+          img={node.bagelInfo.bagelImage}
+          key={node.title}
+        />
+      ))}
     </section>
   );
 };

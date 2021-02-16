@@ -106,7 +106,7 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
         <p>Bagels Chips:</p>
         <Link href={`/bagel-chips`} as={`/bagel-chips`}>
           <button
-            className='bg-yellow-500 text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1'
+            className='bagelBackgroundYellow text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1'
             type='button'
             style={{ transition: 'all .15s ease' }}
           >
@@ -125,7 +125,7 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
       <section>
         <p>Bagels:</p>
         <button
-          className='bg-yellow-500 text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1'
+          className='bagelBackgroundYellow text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1'
           type='button'
           style={{ transition: 'all .15s ease' }}
           name='dozen'
@@ -135,7 +135,7 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
           Add Dozen
         </button>
         <button
-          className='bg-yellow-500 text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1'
+          className='bagelBackgroundYellow text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1'
           type='button'
           style={{ transition: 'all .15s ease' }}
           name='halfDozen'
@@ -159,7 +159,7 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
         <Link href='/checkout'>
           <a className='card elements-style-background'>
             <button
-              className='bg-yellow-500 text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1'
+              className='bagelBackgroundYellow text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1'
               type='button'
               style={{ transition: 'all .15s ease' }}
             >

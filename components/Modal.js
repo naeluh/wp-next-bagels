@@ -11,7 +11,7 @@ export default function Modal({
   return (
     <>
       <button
-        className='bg-yellow-500 text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1'
+        className='bagelBackgroundYellow text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1'
         type='button'
         style={{ transition: 'all .15s ease' }}
         onClick={() => setShowModal(true)}
