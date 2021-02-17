@@ -37,6 +37,7 @@ const AddDateLocation = ({ dates, locations }) => {
   const [date, setDate] = useState('');
   const [location, setLocation] = useState('');
   const [dateError, setDateError] = useState(false);
+  const [locationError, setLocationError] = useState(false);
 
   const convertDateArray = string => {
     let array = string.replace(/\n/g, ' ').split(' ');
@@ -65,6 +66,7 @@ const AddDateLocation = ({ dates, locations }) => {
 
   const handleLChange = (event, type) => {
     setDateError(false);
+    setLocationError(false);
     setValue('BagelPickupLocation', event.target.value);
     if (checkDate(getValues())) {
       setValue('BagelPickupDate', '');
@@ -73,11 +75,17 @@ const AddDateLocation = ({ dates, locations }) => {
   };
 
   const handleDChange = (event, type) => {
-    setDateError(false);
-    setValue('BagelPickupDate', event.target.value);
-    if (checkDate(getValues())) {
+    const values = getValues();
+    if (values.BagelPickupLocation !== '') {
+      setDateError(false);
+      setValue('BagelPickupDate', event.target.value);
+      if (checkDate(getValues())) {
+        setValue('BagelPickupDate', '');
+        setDateError(true);
+      }
+    } else {
+      setLocationError(true);
       setValue('BagelPickupDate', '');
-      setDateError(true);
     }
   };
 
@@ -135,6 +143,9 @@ const AddDateLocation = ({ dates, locations }) => {
                 </MenuItem>
               ))}
           </SelectList>
+          {locationError && (
+            <p style={{ color: 'red', fontWeight: 400 }}>{'Set Location'}</p>
+          )}
           {errors.BagelPickupLocation?.type === 'required' &&
             'Location is required'}
         </section>
@@ -160,7 +171,6 @@ const AddDateLocation = ({ dates, locations }) => {
                 </MenuItem>
               ))}
           </SelectList>
-
           {dateError && (
             <p style={{ color: 'red' }}>{'Date is not available'}</p>
           )}

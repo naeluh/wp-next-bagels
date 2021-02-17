@@ -46,9 +46,9 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
   const nextSevenDays = () => {
     const curr = new Date();
     const first = curr.getDate();
-    const dateArr = [];
+    let dateArr = [];
 
-    for (var i = 0; i < 8; i++) {
+    for (var i = 0; i < 18; i++) {
       let next = new Date(curr.getTime());
       next.setDate(first + i);
       dateArr.push({
@@ -56,7 +56,7 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
         label: convertDateFormat(next.toString()),
       });
     }
-    dateArr.shift();
+    dateArr = dateArr.slice(3);
     return dateArr;
   };
 
