@@ -18,7 +18,7 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
 
   const locations = pickupLocations.map(({ node }) => {
     return {
-      label: node.location.locationName,
+      label: `${node.location.locationName}, ${node.location.locationAddress}`,
       value: node.location.locationName.toLowerCase().replace(/\s/g, '-'),
       locationData: node.location,
     };
@@ -43,7 +43,7 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
     return `${da}-${mo}-${ye}`;
   };
 
-  const nextSevenDays = () => {
+  const nextFourteenDays = () => {
     const curr = new Date();
     const first = curr.getDate();
     let dateArr = [];
@@ -61,7 +61,7 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
   };
 
   useEffect(() => {
-    setDates(nextSevenDays(new Date()));
+    setDates(nextFourteenDays(new Date()));
     setBagelID(state.data.bagelSelections.length);
     setBagelChips(
       Object.keys(state.data.bagelChips)
