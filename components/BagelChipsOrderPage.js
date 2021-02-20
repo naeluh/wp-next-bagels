@@ -47,12 +47,11 @@ const BagelChipsOrderPage = ({ bagelChipsData }) => {
       </section>
       <section className='flex-col md:flex-column flex md:justify-between mb-16 md:mb-12'>
         <button
-          className='bagelBackgroundYellow text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1'
-          type='button'
+          className='bg-m-yellow text-white active:bg-yellow-400 font-bold uppercase text-sm px-6 py-3 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 disabled:opacity-25'
           style={{ transition: 'all .15s ease' }}
           type='submit'
         >
-          Ok
+          Submit
         </button>
       </section>
     </form>

@@ -22,7 +22,7 @@ p {
 @layer utilities {
   @variants responsive {
     .mama-border-bottom {
-      border-bottom: 12px solid #ecc94b;
+      border-bottom: 12px solid #fad113;
       width: 100%;
       display: flex;
       margin: 25px auto;
@@ -38,7 +38,7 @@ p {
       position: absolute;
       height: 100%;
       width: 100%;
-      background-color: #ecc94b;
+      background-color: #fad113;
     }
   }
 }
@@ -210,10 +210,10 @@ pre {
   max-height: 25vh;
 }
 
-.bagelBackgroundYellow {
-  background-color: #ecc94b;
+.bg-m-yellow {
+  background-color: #fad113;
 }
 
 .bagelBorderYellow {
-  border-color: #ecc94b;
+  border-color: #fad113;
 }

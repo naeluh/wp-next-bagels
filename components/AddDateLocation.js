@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styles from './addGroupsForm.module.css';
-import { Button, makeStyles, MenuItem } from '@material-ui/core';
+import { makeStyles, MenuItem } from '@material-ui/core';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import SelectList from './SelectList';
 import Modal from './Modal';
+import Button from './Button';
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -64,6 +65,17 @@ const AddDateLocation = ({ dates, locations }) => {
     return check;
   };
 
+  const convertLocation = (location, locations) =>
+    locations.filter(l => location === l.value)[0].label;
+
+  const convertDateFormat = date =>
+    new Date(date).toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+
   const handleLChange = (event, type) => {
     setDateError(false);
     setLocationError(false);
@@ -105,6 +117,8 @@ const AddDateLocation = ({ dates, locations }) => {
     action({
       location: data.BagelPickupLocation,
       time: data.BagelPickupDate,
+      formattedDate: convertDateFormat(data.BagelPickupDate),
+      formattedLocation: convertLocation(data.BagelPickupLocation, locations),
     });
     setShowModal(false);
   };
@@ -176,10 +190,12 @@ const AddDateLocation = ({ dates, locations }) => {
           )}
           {errors.BagelPickupDate?.type === 'required' && 'Date is required'}
         </section>
-
-        <Button variant='outlined' type='submit'>
-          Ok
-        </Button>
+        <Button
+          type={'Ok'}
+          style={{ transition: 'all .15s ease' }}
+          text={'Checkout'}
+          disabled={false}
+        />
       </form>
     </Modal>
   );

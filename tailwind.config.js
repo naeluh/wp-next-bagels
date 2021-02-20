@@ -3,6 +3,15 @@ module.exports = {
     removeDeprecatedGapUtilities: true,
     purgeLayersByDefault: true,
   },
+  variants: {
+    extend: {
+      opacity: ['disabled'],
+      textColor: ['visited'],
+      backgroundColor: ['checked'],
+      borderColor: ['checked'],
+      backgroundColor: ['active'],
+    },
+  },
   purge: ['./components/**/*.js', './pages/**/*.js'],
   theme: {
     extend: {
@@ -47,6 +56,8 @@ module.exports = {
         'accent-1': '#FAFAFA',
         'accent-2': '#EAEAEA',
         'accent-7': '#333',
+        'm-yellow': '#fad113',
+        'm-black': '#242020',
         success: '#0070f3',
         cyan: '#79FFE1',
       },

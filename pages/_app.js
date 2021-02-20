@@ -15,6 +15,8 @@ createStore(
       location: '',
       time: '',
       totalCost: 0.0,
+      formattedDate: '',
+      formattedLocation: '',
     },
   },
   {

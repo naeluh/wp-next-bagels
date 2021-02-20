@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './modal.module.css';
+import Button from './Button';
 
 export default function Modal({
   button,
@@ -10,14 +11,13 @@ export default function Modal({
 }) {
   return (
     <>
-      <button
-        className='bagelBackgroundYellow text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1'
-        type='button'
+      <Button
+        type={'button'}
         style={{ transition: 'all .15s ease' }}
+        text={button ? button : `Open`}
+        disabled={false}
         onClick={() => setShowModal(true)}
-      >
-        {button ? button : `Open`}
-      </button>
+      />
       {showModal ? (
         <>
           <div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none'>

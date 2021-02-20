@@ -20,7 +20,7 @@ const CARD_OPTIONS = {
   iconStyle: 'solid' as const,
   style: {
     base: {
-      iconColor: '#ecc94b',
+      iconColor: '#fad113',
       color: '#000',
       fontWeight: '500',
       fontSize: '16px',
@@ -34,7 +34,7 @@ const CARD_OPTIONS = {
     },
     invalid: {
       iconColor: '#000',
-      color: '#ecc94b',
+      color: '#fad113',
     },
   },
 };
@@ -44,6 +44,8 @@ const ElementsForm = () => {
   const [input, setInput] = useState({
     customDonation: state.data.totalCost,
     cardholderName: '',
+    cardholderEmail: '',
+    cardholderPhone: '',
   });
   const [payment, setPayment] = useState({ status: 'initial' });
   const [errorMessage, setErrorMessage] = useState('');
@@ -131,7 +133,11 @@ const ElementsForm = () => {
       {
         payment_method: {
           card: cardElement!,
-          billing_details: { name: input.cardholderName },
+          billing_details: {
+            name: input.cardholderName,
+            email: input.cardholderEmail,
+            phone: input.cardholderPhone,
+          },
         },
       }
     );
@@ -141,7 +147,6 @@ const ElementsForm = () => {
       setErrorMessage(error.message ?? 'An unknown error occured');
     } else if (paymentIntent) {
       setPayment(paymentIntent);
-      // console.log(`reset values`);
       updateBagelChipsQuantity(state.data.bagelChips, state.data.bagelChipData);
       // Reset Value on 'succeeded'
       action({
@@ -175,8 +180,14 @@ const ElementsForm = () => {
           ))}
       </section>
       <section className='my-4'>
-        <p>Pickup Location: {state.data.location ? state.data.location : ''}</p>
-        <p>Pickup Date: {state.data.time ? state.data.time : ''}</p>
+        <p>
+          Pickup Location:{' '}
+          {state.data.formattedLocation ? state.data.formattedLocation : ''}
+        </p>
+        <p>
+          Pickup Date:{' '}
+          {state.data.formattedDate ? state.data.formattedDate : ''}
+        </p>
       </section>
       <form onSubmit={handleSubmit}>
         <StripeTestCards />
@@ -187,6 +198,22 @@ const ElementsForm = () => {
             className='elements-style border border-gray-300 p-2 my-2 rounded-md focus:outline-none focus:ring-2 ring-blue-200'
             type='Text'
             name='cardholderName'
+            onChange={handleInputChange}
+            required
+          />
+          <input
+            placeholder='Cardholder email'
+            className='elements-style border border-gray-300 p-2 my-2 rounded-md focus:outline-none focus:ring-2 ring-blue-200'
+            type='Email'
+            name='cardholderEmail'
+            onChange={handleInputChange}
+            required
+          />
+          <input
+            placeholder='Cardholder phone'
+            className='elements-style border border-gray-300 p-2 my-2 rounded-md focus:outline-none focus:ring-2 ring-blue-200'
+            type='Phone'
+            name='cardholderPhone'
             onChange={handleInputChange}
             required
           />
@@ -206,7 +233,7 @@ const ElementsForm = () => {
           </div>
         </fieldset>
         <button
-          className='bagelBackgroundYellow text-white active:bg-yellow-600 font-bold uppercase text-sm px-6 py-3 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1'
+          className='bg-m-yellow text-white active:bg-yellow-400 font-bold uppercase text-sm px-6 py-3 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 disabled:opacity-25'
           style={{ transition: 'all .15s ease' }}
           type='submit'
           disabled={
