@@ -102,6 +102,7 @@ const AddDateLocation = ({ dates, locations }) => {
   };
 
   useEffect(() => {
+    console.log(state.data);
     if (state.data.location && state.data.time) {
       setValue('BagelPickupLocation', state.data.location);
       setValue('BagelPickupDate', state.data.time);
@@ -128,7 +129,7 @@ const AddDateLocation = ({ dates, locations }) => {
   return (
     <Modal
       button={`Edit Pickup Location and Pickup date`}
-      title={`Edit Pickup Location and Pickup date`}
+      title={`Pickup Location and Pickup date`}
       setShowModal={setShowModal}
       showModal={showModal}
     >

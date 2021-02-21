@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './bagel.module.css';
 
-const Bagel = ({ title, img }) => {
+const Bagel = ({ title, img, desc }) => {
+  const imageSrc = `/static/images/bagels.jpg`;
   return (
     <div>
       <div className='w-full overflow-hidden mb-6 border-black border-12'>
@@ -16,7 +17,12 @@ const Bagel = ({ title, img }) => {
       </div>
       <h4 className='text-xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4'>
         {title}
-      </h4>{' '}
+      </h4>
+      {desc && (
+        <p className='text-base font-normal tracking-tighter leading-tight md:pr-8 font-sans mb-4'>
+          {desc}
+        </p>
+      )}
     </div>
   );
 };

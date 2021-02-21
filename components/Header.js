@@ -18,7 +18,7 @@ export default function Header() {
         active ? `bg-white z-10 h-screen` : `bg-transparent`
       } sm:h-auto sm:bg-transparent mx-auto px-5 py-5 flex sm:items-center justify-between fixed top-0 w-full flex-col sm:flex-row`}
     >
-      <div className='flex flex-row justify-between w-full flex-1'>
+      <div className='flex flex-row justify-between w-full sm:flex-1'>
         <Link href='/'>
           <a>{image}</a>
         </Link>

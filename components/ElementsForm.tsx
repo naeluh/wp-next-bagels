@@ -5,6 +5,8 @@ import { useRouter } from 'next/router';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 
+import desc from '../lib/description';
+
 import StripeTestCards from './StripeTestCards';
 import PrintObject from './PrintObject';
 
@@ -55,9 +57,18 @@ const ElementsForm = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const stripe = useStripe();
   const elements = useElements();
+  const hideBagelChipsHeader =
+    Object.values(state.data.bagelChips).reduce((a, b) => a + b, 0) === 0
+      ? false
+      : true;
 
   // if total cost is 0 we dont need to checkout.
   useEffect(() => {
+    console.log(
+      Object.values(state.data.bagelChips).reduce((a, b) => a + b, 0),
+      state.data
+    );
+    desc(state);
     if (state.data.totalCost === 0) {
       router.push(`/bagels/add-bagels`);
     }
@@ -180,7 +191,9 @@ const ElementsForm = () => {
   return (
     <>
       <section>
-        {state.data.bagelSelections.length > 0 && <p>Bagels:</p>}
+        {state.data.bagelSelections.length > 0 && (
+          <p className='text-xl font-serif'>Bagels:</p>
+        )}
         {state.data.bagelSelections.length > 0 &&
           state.data.bagelSelections.map((bagelSelection: any) => (
             <BagelSetAddRemove
@@ -190,7 +203,9 @@ const ElementsForm = () => {
           ))}
       </section>
       <section>
-        {state.data.bagelChips && <p>Bagels Chips:</p>}
+        {hideBagelChipsHeader && (
+          <p className='text-xl font-serif'>Bagels Chips:</p>
+        )}
         {state.data.bagelChips &&
           Object.entries(state.data.bagelChips).map((key: any, value: any) => (
             <BagelChipSetAddRemove bagelChipKey={key} key={key} />
@@ -208,8 +223,8 @@ const ElementsForm = () => {
       </section>
       <form onSubmit={handleSubmit}>
         <StripeTestCards />
-        <fieldset className='elements-style'>
-          <legend>Your payment details:</legend>
+        <fieldset className='elements-style my-4'>
+          <legend className='text-xl font-serif'>Your payment details:</legend>
           <Input
             placeholder={'Cardholder name'}
             type={'text'}
@@ -217,6 +232,7 @@ const ElementsForm = () => {
             onChange={handleInputChange}
             required
           />
+
           <Input
             placeholder={'Cardholder email'}
             type={'email'}
@@ -224,6 +240,7 @@ const ElementsForm = () => {
             onChange={handleInputChange}
             required
           />
+
           <Input
             placeholder={'Cardholder phone'}
             type={'phone'}
@@ -234,7 +251,7 @@ const ElementsForm = () => {
 
           <CardElement
             options={CARD_OPTIONS}
-            className='elements-style border border-gray-300 p-4 my-4  focus:outline-none focus:ring-2 ring-blue-200 w-full'
+            className='bg-white w-full border-4 border-m-black p-4 my-4 block focus:outline-none focus:ring-2 ring-m-yellow'
             onChange={e => {
               if (e.error) {
                 setPayment({ status: 'error' });

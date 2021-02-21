@@ -20,8 +20,13 @@ module.exports = function ({ addComponents }) {
       spacing: 6,
       barHeight: 6,
     },
+    14: {
+      hamburgerWidth: 60,
+      spacing: 8,
+      barHeight: 8,
+    },
   };
-  const barRadius = 4;
+  const barRadius = 0;
   const color = '#000';
   const baseTransition = {
     transitionTimingFunction: 'ease',
