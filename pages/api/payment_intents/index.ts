@@ -19,6 +19,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
+    // Create vars from body
     const { amount }: { amount: number } = req.body;
     const { email }: { email: string } = req.body;
     const { phone }: { phone: string } = req.body;
@@ -53,12 +54,15 @@ export default async function handler(
         description: description ?? 'no description',
       };
 
+      // Create payment
       const payment_intent: Stripe.PaymentIntent = await stripe.paymentIntents.create(
         params
       );
 
+      // List current customers
       const customers = await stripe.customers.list();
 
+      // Check it customer exists
       const existingCustomer = customers.data.filter(
         customer =>
           customer.email === email ||
@@ -66,6 +70,7 @@ export default async function handler(
           customer.name === name
       )[0];
 
+      // if customer exists update or create
       if (!existingCustomer) {
         await stripe.customers.create(paramsCustomer);
       } else {
