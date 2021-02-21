@@ -1,14 +1,12 @@
 import { NextPage } from 'next';
-import { Elements } from '@stripe/react-stripe-js';
-import getStripe from '../../utils/get-stripejs';
-import ElementsForm from '../../components/ElementsForm';
 import Head from 'next/head';
 import Container from '../../components/Container';
 import Header from '../../components/Header';
 import Layout from '../../components/Layout';
 import { CMS_NAME } from '../../lib/constants';
+import SpecialRequestForm from '../../components/SpecialRequestForm';
 
-const CheckoutPage: NextPage = () => {
+const SpecialRequestPage: NextPage = () => {
   return (
     <Layout preview={false}>
       <Head>
@@ -16,12 +14,10 @@ const CheckoutPage: NextPage = () => {
       </Head>
       <Header />
       <Container>
-        <Elements stripe={getStripe()}>
-          <ElementsForm />
-        </Elements>
+        <SpecialRequestForm />
       </Container>
     </Layout>
   );
 };
 
-export default CheckoutPage;
+export default SpecialRequestPage;
