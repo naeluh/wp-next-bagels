@@ -4,6 +4,7 @@ import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import { useRouter } from 'next/router';
 import BagelChipNumberField from './BagelChipNumberField';
+import Button from './Button';
 
 const BagelChipsOrderPage = ({ bagelChipsData }) => {
   const router = useRouter();
@@ -11,6 +12,7 @@ const BagelChipsOrderPage = ({ bagelChipsData }) => {
   const defaultValues = {
     bagelChipVal: 0,
   };
+
   const { handleSubmit, errors, register, setValue } = useForm({
     defaultValues,
     mode: 'onChange',
@@ -46,13 +48,12 @@ const BagelChipsOrderPage = ({ bagelChipsData }) => {
           })}
       </section>
       <section className='flex-col md:flex-column flex md:justify-between mb-16 md:mb-12'>
-        <button
-          className='bg-m-yellow text-white active:bg-yellow-400 font-bold uppercase text-sm px-6 py-3 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 disabled:opacity-25'
+        <Button
+          type={'submit'}
+          text={'Submit'}
+          disabled={false}
           style={{ transition: 'all .15s ease' }}
-          type='submit'
-        >
-          Submit
-        </button>
+        />
       </section>
     </form>
   );

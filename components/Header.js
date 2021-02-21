@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import cn from 'classnames';
+import Button from './Button';
 
 export default function Header() {
   const image = (
@@ -19,16 +20,26 @@ export default function Header() {
 
       <div className='mt-4 text-sm flex-grow md:text-right md:mt-0'>
         <Link href='/bagels'>
-          <a className='pr-4 pl-4 pt-2 pb-2 md:inline-block md:mt-0 font-serif font-bold leading-tight text-lg text-black-500 border-white hover:text-black border-4 border-m-yellow'>
-            Bagels
+          <a>
+            <Button
+              type={'button'}
+              text={'Bagels'}
+              disabled={false}
+              style={{ transition: 'all .15s ease' }}
+            />
           </a>
         </Link>
       </div>
 
       <div className='mt-4 text-sm flex-grow md:text-right md:mt-0 mx-4'>
         <Link href='/special-request'>
-          <a className='pr-4 pl-4 pt-2 pb-2 md:inline-block md:mt-0 font-serif font-bold leading-tight text-lg text-black-500 border-white hover:text-black border-4 border-m-yellow'>
-            Special Request
+          <a>
+            <Button
+              type={'button'}
+              text={'Special Request'}
+              disabled={false}
+              style={{ transition: 'all .15s ease' }}
+            />
           </a>
         </Link>
       </div>

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useSWR, { mutate } from 'swr';
+import { useRouter } from 'next/router';
 
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
@@ -15,6 +16,8 @@ import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
 import BagelSetAddRemove from './BagelSetAddRemove';
 import BagelChipSetAddRemove from './BagelChipSetAddRemove';
+import Button from './Button';
+import Input from './Input';
 
 const CARD_OPTIONS = {
   iconStyle: 'solid' as const,
@@ -40,6 +43,7 @@ const CARD_OPTIONS = {
 };
 
 const ElementsForm = () => {
+  const router = useRouter();
   const { action, state } = useStateMachine(updateAction);
   const [input, setInput] = useState({
     customDonation: state.data.totalCost,
@@ -51,6 +55,13 @@ const ElementsForm = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const stripe = useStripe();
   const elements = useElements();
+
+  // if total cost is 0 we dont need to checkout.
+  useEffect(() => {
+    if (state.data.totalCost === 0) {
+      router.push(`/bagels/add-bagels`);
+    }
+  }, []);
 
   const PaymentStatus = ({ status }: { status: string }) => {
     switch (status) {
@@ -110,10 +121,16 @@ const ElementsForm = () => {
     if (!e.currentTarget.reportValidity()) return;
     setPayment({ status: 'processing' });
 
+    console.log(input);
+
     // Create a PaymentIntent with the specified amount.
     const response = await fetchPostJSON('/api/payment_intents', {
       amount: input.customDonation,
+      name: input.cardholderName,
+      email: input.cardholderEmail,
+      phone: input.cardholderPhone,
     });
+
     setPayment(response);
 
     if (response.statusCode === 500) {
@@ -193,56 +210,52 @@ const ElementsForm = () => {
         <StripeTestCards />
         <fieldset className='elements-style'>
           <legend>Your payment details:</legend>
-          <input
-            placeholder='Cardholder name'
-            className='elements-style border border-gray-300 p-2 my-2 rounded-md focus:outline-none focus:ring-2 ring-blue-200'
-            type='Text'
-            name='cardholderName'
+          <Input
+            placeholder={'Cardholder name'}
+            type={'Text'}
+            name={'cardholderName'}
             onChange={handleInputChange}
             required
           />
-          <input
-            placeholder='Cardholder email'
-            className='elements-style border border-gray-300 p-2 my-2 rounded-md focus:outline-none focus:ring-2 ring-blue-200'
-            type='Email'
-            name='cardholderEmail'
+          <Input
+            placeholder={'Cardholder email'}
+            type={'Email'}
+            name={'cardholderEmail'}
             onChange={handleInputChange}
             required
           />
-          <input
-            placeholder='Cardholder phone'
-            className='elements-style border border-gray-300 p-2 my-2 rounded-md focus:outline-none focus:ring-2 ring-blue-200'
-            type='Phone'
-            name='cardholderPhone'
+          <Input
+            placeholder={'Cardholder phone'}
+            type={'Phone'}
+            name={'cardholderPhone'}
             onChange={handleInputChange}
             required
           />
-          <div className='FormRow elements-style'>
-            <CardElement
-              options={CARD_OPTIONS}
-              className='elements-style border border-gray-300 p-2 my-4 rounded-md focus:outline-none focus:ring-2 ring-blue-200'
-              onChange={e => {
-                if (e.error) {
-                  setPayment({ status: 'error' });
-                  setErrorMessage(
-                    e.error.message ?? 'An unknown error occured'
-                  );
-                }
-              }}
-            />
-          </div>
+
+          <CardElement
+            options={CARD_OPTIONS}
+            className='elements-style border border-gray-300 p-4 my-4  focus:outline-none focus:ring-2 ring-blue-200 w-full'
+            onChange={e => {
+              if (e.error) {
+                setPayment({ status: 'error' });
+                setErrorMessage(e.error.message ?? 'An unknown error occured');
+              }
+            }}
+          />
         </fieldset>
-        <button
-          className='bg-m-yellow text-white active:bg-yellow-400 font-bold uppercase text-sm px-6 py-3 shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 disabled:opacity-25'
-          style={{ transition: 'all .15s ease' }}
-          type='submit'
+        <Button
+          type={'submit'}
+          text={`Total: ${formatAmountForDisplay(
+            input.customDonation,
+            config.CURRENCY
+          )}`}
           disabled={
             !['initial', 'succeeded', 'error'].includes(payment.status) ||
             !stripe
           }
-        >
-          Total: {formatAmountForDisplay(input.customDonation, config.CURRENCY)}
-        </button>
+          style={{ transition: 'all .15s ease' }}
+          onClick={() => {}}
+        />
       </form>
       <PaymentStatus status={payment.status} />
       <PrintObject content={payment} />

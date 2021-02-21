@@ -53,7 +53,7 @@ export default function Index({ preview, homeData, allBagels }) {
   );
 }
 
-export async function getStaticProps({ preview = false }) {
+export async function getServerSideProps({ preview = false }) {
   const homeData = await getHomePageData();
   const allBagels = await getBagelsData(preview);
   return {

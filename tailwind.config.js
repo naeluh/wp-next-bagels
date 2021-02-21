@@ -6,10 +6,13 @@ module.exports = {
   variants: {
     extend: {
       opacity: ['disabled'],
+      backgroundColor: ['disabled'],
+      borderColor: ['disabled'],
       textColor: ['visited'],
       backgroundColor: ['checked'],
       borderColor: ['checked'],
       backgroundColor: ['active'],
+      borderColor: ['active'],
     },
   },
   purge: ['./components/**/*.js', './pages/**/*.js'],
@@ -57,7 +60,7 @@ module.exports = {
         'accent-2': '#EAEAEA',
         'accent-7': '#333',
         'm-yellow': '#fad113',
-        'm-black': '#242020',
+        'm-black': '#333',
         success: '#0070f3',
         cyan: '#79FFE1',
       },

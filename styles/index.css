@@ -210,10 +210,20 @@ pre {
   max-height: 25vh;
 }
 
-.bg-m-yellow {
-  background-color: #fad113;
+section {
+  width: 100%;
 }
 
-.bagelBorderYellow {
-  border-color: #fad113;
+.MuiInputBase-root {
+  border-radius: 0 !important;
+}
+
+.MuiOutlinedInput-root {
+  border-radius: 0 !important;
+}
+
+.MuiFormControl-root,
+.makeStyles-formControl-2 {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }

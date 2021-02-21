@@ -22,7 +22,7 @@ export default function Index({ preview, allBagels, allPricing }) {
   );
 }
 
-export async function getStaticProps({ preview = false }) {
+export async function getServerSideProps({ preview = false }) {
   const allPricing = await getPricingData(preview);
   const allBagels = await getBagelsData(preview);
   return {

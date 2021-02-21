@@ -61,6 +61,15 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
   useEffect(() => {
     setDates(nextFourteenDays(new Date()));
     setBagelID(state.data.bagelSelections.length);
+    action({
+      bagelChipData: bagelChipsData.map(({ node }) => {
+        return {
+          id: node.databaseId,
+          quantity: node.bagelChipsDetails.quantity,
+          title: node.title,
+        };
+      }),
+    });
   }, []);
 
   const addGroup = type => {

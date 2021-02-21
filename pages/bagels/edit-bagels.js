@@ -23,7 +23,7 @@ export default function Index({ preview, allBagels }) {
   );
 }
 
-export async function getStaticProps({ preview = false }) {
+export async function getServerSideProps({ preview = false }) {
   // console.log(preview);
   const allBagels = await getBagelsData(preview);
   return {

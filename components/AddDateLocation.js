@@ -147,7 +147,6 @@ const AddDateLocation = ({ dates, locations }) => {
             control={control}
             defaultValue={location || ''}
             variant='outlined'
-            margin='normal'
             rules={{ required: true }}
           >
             {locations &&
@@ -175,7 +174,6 @@ const AddDateLocation = ({ dates, locations }) => {
             control={control}
             defaultValue={date || ''}
             variant='outlined'
-            margin='normal'
             rules={{ required: true }}
           >
             {dates &&
@@ -191,9 +189,9 @@ const AddDateLocation = ({ dates, locations }) => {
           {errors.BagelPickupDate?.type === 'required' && 'Date is required'}
         </section>
         <Button
-          type={'Ok'}
+          type={'submit'}
           style={{ transition: 'all .15s ease' }}
-          text={'Checkout'}
+          text={'Ok'}
           disabled={false}
         />
       </form>

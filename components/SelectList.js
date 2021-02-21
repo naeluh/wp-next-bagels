@@ -1,6 +1,39 @@
 import React from 'react';
-import { FormControl, InputLabel, Select } from '@material-ui/core';
+import { FormControl, InputLabel, Select, withStyles } from '@material-ui/core';
 import { Controller } from 'react-hook-form';
+
+const StyledFormControl = withStyles({
+  root: {
+    borderRadius: 0,
+    margin: '8px 0',
+    backgroundColor: 'white',
+  },
+})(FormControl);
+
+const StyledInputLabel = withStyles({
+  root: {
+    borderRadius: 0,
+    '&:hover': {
+      borderRadius: 0,
+    },
+    '&:focus': {
+      borderRadius: 0,
+    },
+  },
+})(InputLabel);
+
+const StyledSelect = withStyles({
+  root: {
+    borderRadius: 0,
+    '&:hover': {
+      borderRadius: 0,
+    },
+    '&:focus': {
+      borderRadius: 0,
+    },
+    backgroundColor: 'white',
+  },
+})(Select);
 
 const SelectList = ({
   name,
@@ -13,13 +46,15 @@ const SelectList = ({
   rules,
   ...props
 }) => {
+  // We can inject some CSS into the DOM.
   const labelId = `${name}-label`;
+
   return (
-    <FormControl {...props}>
-      <InputLabel id={labelId}>{label}</InputLabel>
+    <StyledFormControl {...props}>
+      <StyledInputLabel id={labelId}>{label}</StyledInputLabel>
       <Controller
         render={({ onChange, value, name }) => (
-          <Select
+          <StyledSelect
             labelId={labelId}
             label={label}
             onChange={e => {
@@ -30,14 +65,14 @@ const SelectList = ({
             name={name}
           >
             {children}
-          </Select>
+          </StyledSelect>
         )}
         name={name}
         control={control}
         defaultValue={defaultValue}
         rules={rules}
       />
-    </FormControl>
+    </StyledFormControl>
   );
 };
 
