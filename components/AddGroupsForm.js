@@ -13,7 +13,7 @@ import Button from './Button';
 const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
   const router = useRouter();
   const [dates, setDates] = useState([]);
-  const { state, action } = useStateMachine(updateAction);
+  const { state, actions } = useStateMachine({ updateAction });
   const [bagelID, setBagelID] = useState(state.data.bagelSelections.length);
   const [bagelChips, setBagelChips] = useState(0);
 
@@ -61,7 +61,7 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
   useEffect(() => {
     setDates(nextFourteenDays(new Date()));
     setBagelID(state.data.bagelSelections.length);
-    action({
+    actions.updateAction({
       bagelChipData: bagelChipsData.map(({ node }) => {
         return {
           id: node.databaseId,

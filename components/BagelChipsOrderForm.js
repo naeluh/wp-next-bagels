@@ -8,7 +8,7 @@ import BagelChipNumberField from './BagelChipNumberField';
 import Modal from './Modal';
 
 const BagelChipsOrderForm = ({ pricing, bagelChipsData }) => {
-  const { state, action } = useStateMachine(updateAction);
+  const { state, actions } = useStateMachine({ updateAction });
   const [showModal, setShowModal] = useState(false);
   const defaultValues = {
     bagelChipVal: 0,
@@ -30,7 +30,7 @@ const BagelChipsOrderForm = ({ pricing, bagelChipsData }) => {
   });
 
   const onSubmit = data => {
-    action({
+    actions.updateAction({
       bagelChips: data,
     });
     setShowModal(false);

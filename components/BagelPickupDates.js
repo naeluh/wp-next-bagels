@@ -22,7 +22,7 @@ const BagelPickupDates = ({ dates, locations, control }) => {
     mode: 'onChange',
   });
 
-  const { state, action } = useStateMachine(updateAction);
+  const { state, actions } = useStateMachine({ updateAction });
   const [date, setDate] = useState('');
 
   const convertDateArray = string => {

@@ -8,9 +8,9 @@ const Button = ({ id }) => {
 };
 
 const BagelSetAddRemove = ({ bagelSelection }) => {
-  const { state, action } = useStateMachine(updateAction);
+  const { state, actions } = useStateMachine({ updateAction });
   const removeBagelSet = (array, value) => {
-    action({
+    actions.updateAction({
       bagelSelections: array.filter(item => {
         return item.id !== value;
       }),

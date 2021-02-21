@@ -34,7 +34,7 @@ const AddDateLocation = ({ dates, locations }) => {
     mode: 'onChange',
   });
 
-  const { state, action } = useStateMachine(updateAction);
+  const { state, actions } = useStateMachine({ updateAction });
   const [date, setDate] = useState('');
   const [location, setLocation] = useState('');
   const [dateError, setDateError] = useState(false);
@@ -114,7 +114,7 @@ const AddDateLocation = ({ dates, locations }) => {
   }, []);
 
   const onSubmit = data => {
-    action({
+    actions.updateAction({
       location: data.BagelPickupLocation,
       time: data.BagelPickupDate,
       formattedDate: convertDateFormat(data.BagelPickupDate),

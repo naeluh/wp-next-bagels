@@ -3,7 +3,7 @@ import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 
 const TotalCost = ({ pricing }) => {
-  const { action, state } = useStateMachine(updateAction);
+  const { actions, state } = useStateMachine({ updateAction });
   const [cost, setCost] = useState(0);
   const priceHalfDozen = Number(pricing[0].node.prices.halfDozenPrice);
   const priceDozen = Number(pricing[0].node.prices.dozenPrice);
@@ -29,7 +29,7 @@ const TotalCost = ({ pricing }) => {
   }, [state]);
 
   useEffect(() => {
-    action({
+    actions.updateAction({
       totalCost: cost,
     });
   }, [cost]);

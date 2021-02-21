@@ -12,7 +12,7 @@ function BagelForm() {
   const halfDozen = 6;
   const [dates, setDates] = useState([]);
   const [selectedDateOption, setSelectedDateOption] = useState(null);
-  const { state, action } = useStateMachine(updateAction);
+  const { state, actions } = useStateMachine({ updateAction });
   const [data, setData] = useState(null);
   const [bagelID, setBagelID] = useState(0);
   const [bagelSelections, setBagelSelections] = useState([
@@ -70,7 +70,7 @@ function BagelForm() {
   const onSubmit = data => {
     // console.log(data);
     setData(data);
-    action(data);
+    actions.updateAction(data);
     setBagelSelections(bagelSelections => [
       ...bagelSelections,
       {

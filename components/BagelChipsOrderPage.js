@@ -8,7 +8,7 @@ import Button from './Button';
 
 const BagelChipsOrderPage = ({ bagelChipsData }) => {
   const router = useRouter();
-  const { state, action } = useStateMachine(updateAction);
+  const { state, actions } = useStateMachine({ updateAction });
   const defaultValues = {
     bagelChipVal: 0,
   };
@@ -19,7 +19,7 @@ const BagelChipsOrderPage = ({ bagelChipsData }) => {
   });
 
   const onSubmit = data => {
-    action({
+    actions.updateAction({
       bagelChips: data,
     });
     router.replace(`/bagels`, `/bagels`);

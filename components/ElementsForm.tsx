@@ -44,7 +44,7 @@ const CARD_OPTIONS = {
 
 const ElementsForm = () => {
   const router = useRouter();
-  const { action, state } = useStateMachine(updateAction);
+  const { actions, state } = useStateMachine({ updateAction });
   const [input, setInput] = useState({
     customDonation: state.data.totalCost,
     cardholderName: '',
@@ -166,7 +166,7 @@ const ElementsForm = () => {
       setPayment(paymentIntent);
       updateBagelChipsQuantity(state.data.bagelChips, state.data.bagelChipData);
       // Reset Value on 'succeeded'
-      action({
+      actions.updateAction({
         bagelSelections: [],
         bagelChips: {},
         bagelChipData: [],
@@ -212,21 +212,21 @@ const ElementsForm = () => {
           <legend>Your payment details:</legend>
           <Input
             placeholder={'Cardholder name'}
-            type={'Text'}
+            type={'text'}
             name={'cardholderName'}
             onChange={handleInputChange}
             required
           />
           <Input
             placeholder={'Cardholder email'}
-            type={'Email'}
+            type={'email'}
             name={'cardholderEmail'}
             onChange={handleInputChange}
             required
           />
           <Input
             placeholder={'Cardholder phone'}
-            type={'Phone'}
+            type={'phone'}
             name={'cardholderPhone'}
             onChange={handleInputChange}
             required

@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 
 const BagelSelections = ({ bagelData, pricing }) => {
   const router = useRouter();
-  const { action, state } = useStateMachine(updateAction);
+  const { actions, state } = useStateMachine({ updateAction });
   const [data] = useState(null);
   const [type, setType] = useState('');
   const [id, setId] = useState('');
@@ -49,7 +49,7 @@ const BagelSelections = ({ bagelData, pricing }) => {
       bagelSetType: router.query.type,
       bagels: output,
     };
-    action({
+    actions.updateAction({
       bagelSelections: state.data.bagelSelections,
     });
     router.push(`/bagels`);

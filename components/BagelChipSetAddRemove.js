@@ -4,11 +4,11 @@ import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 
 const BagelChipSetAddRemove = ({ bagelChipKey }) => {
-  const { state, action } = useStateMachine(updateAction);
+  const { state, actions } = useStateMachine({ updateAction });
 
   const removeBagelChips = (array, bckey) => {
     array[bckey[0]] = 0;
-    action({
+    actions.updateAction({
       bagelChips: array,
     });
   };
