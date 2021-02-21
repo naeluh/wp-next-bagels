@@ -69,7 +69,7 @@ const SpecialRequestForm = () => {
       </fieldset>
 
       {status === 'SUCCESS' ? (
-        <p>Thanks!</p>
+        <p>Thanks! We'll be in touch soon!</p>
       ) : (
         <Button
           type={'submit'}
