@@ -121,8 +121,6 @@ const ElementsForm = () => {
     if (!e.currentTarget.reportValidity()) return;
     setPayment({ status: 'processing' });
 
-    console.log(input);
-
     // Create a PaymentIntent with the specified amount.
     const response = await fetchPostJSON('/api/payment_intents', {
       amount: input.customDonation,
@@ -172,6 +170,8 @@ const ElementsForm = () => {
         bagelChipData: [],
         location: '',
         time: '',
+        formattedDate: '',
+        formattedLocation: '',
         totalCost: 0,
       });
     }

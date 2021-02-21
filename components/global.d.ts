@@ -8,6 +8,8 @@ declare module 'little-state-machine' {
       bagelChipData: array;
       location: string;
       time: string;
+      formattedDate: string;
+      formattedLocation: string;
       totalCost: number;
     };
   }
