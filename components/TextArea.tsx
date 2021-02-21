@@ -4,6 +4,7 @@ type Props = {
   placeholder: any;
   name: any;
   required: any;
+  onChange: any;
 };
 
 const TextArea = ({ placeholder, name, onChange, required }: Props) => {

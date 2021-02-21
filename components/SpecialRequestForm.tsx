@@ -64,6 +64,7 @@ const SpecialRequestForm = () => {
         <TextArea
           name='message'
           placeholder='Please type your request here.'
+          onChange={() => {}}
           required
         />
       </fieldset>
