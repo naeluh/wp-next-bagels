@@ -150,13 +150,6 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
           onClick={() => state.data.totalCost > 0 && router.push('/checkout')}
         />
       </section>
-      <section>
-        {state && (
-          <pre style={{ textAlign: 'left' }}>
-            {JSON.stringify(state, null, 2)}
-          </pre>
-        )}
-      </section>
     </>
   );
 };

@@ -3,6 +3,7 @@ module.exports = {
     removeDeprecatedGapUtilities: true,
     purgeLayersByDefault: true,
   },
+  plugins: [require('./plugins/tailwind-hamburger/index.js')],
   variants: {
     extend: {
       opacity: ['disabled'],
