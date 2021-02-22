@@ -19,8 +19,8 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
 
   const locations = pickupLocations.map(({ node }) => {
     return {
-      label: `${node.location.locationName}, ${node.location.locationAddress}`,
-      value: node.location.locationName.toLowerCase().replace(/\s/g, '-'),
+      label: `${node.title}, ${node.location.locationAddress}`,
+      value: node.title.toLowerCase().replace(/\s/g, '-'),
       locationData: node.location,
     };
   });
