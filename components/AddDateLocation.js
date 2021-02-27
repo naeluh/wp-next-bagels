@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import styles from './addGroupsForm.module.css';
 import { makeStyles, MenuItem } from '@material-ui/core';
@@ -14,31 +14,39 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(2),
   },
   formControl: {
-    margin: theme.spacing(1),
+    marginBottom: theme.spacing(2),
     minWidth: '100%',
   },
 }));
 
 const AddDateLocation = ({ dates, locations }) => {
+  const lRef = useRef(null);
+  const dRef = useRef(null);
   const classes = useStyles();
-
   const defaultValues = {
     dozen: 12,
     halfDozen: 6,
     bagelPickupDates: '',
     bagelPickupLocations: '',
   };
-
   const { handleSubmit, errors, control, setValue, getValues } = useForm({
     defaultValues,
     mode: 'onChange',
   });
-
   const { state, actions } = useStateMachine({ updateAction });
   const [date, setDate] = useState('');
   const [location, setLocation] = useState('');
   const [dateError, setDateError] = useState(false);
   const [locationError, setLocationError] = useState(false);
+  const [dateOptions, setDateOptions] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+
+  const locationOptions = locations.map(location => {
+    return {
+      label: location.label,
+      value: location.value,
+    };
+  });
 
   const convertDateArray = string => {
     let array = string.replace(/\n/g, ' ').split(' ');
@@ -53,56 +61,37 @@ const AddDateLocation = ({ dates, locations }) => {
     };
   });
 
-  const checkDate = () => {
-    const values = getValues();
-    let dates = blackOutDates.filter(
-      bod => values.BagelPickupLocation === bod.location
-    )[0].dates;
-    let isDateBad = dates.filter(
-      date => date.getTime() === new Date(values.BagelPickupDate).getTime()
+  const checkDate = (location, dates) => {
+    let bods = blackOutDates.filter(bod => location === bod.location)[0].dates;
+    bods = bods.map(b => new Date(b).getTime());
+    dates = dates.filter(
+      date => !bods.includes(new Date(date.value).getTime())
     );
-    let check = isDateBad.length > 0 ? true : false;
-    return check;
+    setDateOptions(dates);
   };
 
-  const convertLocation = (location, locations) =>
-    locations.filter(l => location === l.value)[0].label;
-
-  const convertDateFormat = date =>
-    new Date(date).toLocaleDateString('en-US', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-
-  const handleLChange = (event, type) => {
-    setDateError(false);
+  const handleLChange = selectedOption => {
     setLocationError(false);
-    setValue('BagelPickupLocation', event.target.value);
-    if (checkDate(getValues())) {
-      setValue('BagelPickupDate', '');
-      setDateError(true);
-    }
+    setValue('BagelPickupLocation', selectedOption);
+    setLocation(selectedOption);
+    setValue('BagelPickupDate', '');
+    setDate('');
+    dRef.current.select.clearValue();
+    checkDate(selectedOption.value, dates);
   };
 
-  const handleDChange = (event, type) => {
+  const handleDChange = selectedOption => {
     const values = getValues();
-    if (values.BagelPickupLocation !== '') {
-      setDateError(false);
-      setValue('BagelPickupDate', event.target.value);
-      if (checkDate(getValues())) {
-        setValue('BagelPickupDate', '');
-        setDateError(true);
-      }
+    setLocationError(false);
+    if (values.BagelPickupLocation) {
+      setValue('BagelPickupDate', selectedOption);
+      setDate(selectedOption);
     } else {
       setLocationError(true);
-      setValue('BagelPickupDate', '');
     }
   };
 
   useEffect(() => {
-    console.log(state.data);
     if (state.data.location && state.data.time) {
       setValue('BagelPickupLocation', state.data.location);
       setValue('BagelPickupDate', state.data.time);
@@ -118,13 +107,11 @@ const AddDateLocation = ({ dates, locations }) => {
     actions.updateAction({
       location: data.BagelPickupLocation,
       time: data.BagelPickupDate,
-      formattedDate: convertDateFormat(data.BagelPickupDate),
-      formattedLocation: convertLocation(data.BagelPickupLocation, locations),
+      formattedDate: data.BagelPickupDate.label,
+      formattedLocation: data.BagelPickupLocation.label,
     });
     setShowModal(false);
   };
-
-  const [showModal, setShowModal] = useState(false);
 
   return (
     <Modal
@@ -141,22 +128,16 @@ const AddDateLocation = ({ dates, locations }) => {
           <SelectList
             id='BagelPickupLocation'
             label='Select Location'
-            handleChange={e => handleLChange(e, 'location')}
+            handleChange={handleLChange}
             value={location}
             name='BagelPickupLocation'
             className={classes.formControl}
             control={control}
-            defaultValue={location || ''}
-            variant='outlined'
             rules={{ required: true }}
-          >
-            {locations &&
-              locations.map(location => (
-                <MenuItem key={location.value} value={location.value}>
-                  {location.label}
-                </MenuItem>
-              ))}
-          </SelectList>
+            options={locationOptions}
+            ref={lRef}
+            placeholder={'Select Pickup Location'}
+          />
           {locationError && (
             <p style={{ color: 'red', fontWeight: 400 }}>{'Set Location'}</p>
           )}
@@ -168,22 +149,16 @@ const AddDateLocation = ({ dates, locations }) => {
           <SelectList
             id='BagelPickupDate'
             label='Select Date'
-            handleChange={e => handleDChange(e, 'date')}
+            handleChange={handleDChange}
             value={date}
             name='BagelPickupDate'
             className={classes.formControl}
             control={control}
-            defaultValue={date || ''}
-            variant='outlined'
             rules={{ required: true }}
-          >
-            {dates &&
-              dates.map(date => (
-                <MenuItem key={date.value} value={date.value}>
-                  {date.label}
-                </MenuItem>
-              ))}
-          </SelectList>
+            options={dateOptions}
+            ref={dRef}
+            placeholder={'Select Pickup Date'}
+          />
           {dateError && (
             <p style={{ color: 'red' }}>{'Date is not available'}</p>
           )}

@@ -40,9 +40,7 @@ export default function Modal({
                   </button>
                 </div>
 
-                <div
-                  className={`${styles.maxheight} relative p-6 flex-auto max-h-96`}
-                >
+                <div className={`${styles.maxheight} relative p-6 flex-auto `}>
                   <div className='my-4 text-gray-600 text-lg leading-relaxed'>
                     {children}
                   </div>
