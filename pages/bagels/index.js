@@ -3,6 +3,8 @@ import Container from '../../components/Container';
 import Header from '../../components/Header';
 import Layout from '../../components/Layout';
 import Intro from '../../components/Intro';
+import FeaturedBagel from '../../components/FeaturedBagel';
+
 import AddGroups from '../../components/AddGroupsForm';
 import { CMS_NAME } from '../../lib/constants';
 import {
@@ -10,10 +12,12 @@ import {
   getLocationsData,
   getBagelChipsData,
   getPricingData,
+  getHomePageData,
 } from '../../lib/api';
 
 export default function Index({
   preview,
+  homeData,
   allBagels,
   allPickupLocations,
   allBagelChips,
@@ -26,7 +30,12 @@ export default function Index({
       </Head>
       <Header />
       <Container>
-        <Intro />
+        <FeaturedBagel
+          title={homeData.featuredBagel.bagelTitle}
+          subtitle={homeData.featuredBagel.bagelSubtitle}
+          desc={homeData.featuredBagel.bagelDescription}
+          img={homeData.featuredBagel.bagelImage}
+        />
         <AddGroups
           bagelData={allBagels}
           pickupLocations={allPickupLocations}
@@ -39,6 +48,7 @@ export default function Index({
 }
 
 export async function getServerSideProps({ preview = false }) {
+  const homeData = await getHomePageData();
   const allBagels = await getBagelsData(preview);
   const allPickupLocations = await getLocationsData(preview);
   const allBagelChips = await getBagelChipsData(preview);
@@ -46,6 +56,7 @@ export async function getServerSideProps({ preview = false }) {
   return {
     props: {
       preview,
+      homeData,
       allBagels,
       allPickupLocations,
       allBagelChips,
