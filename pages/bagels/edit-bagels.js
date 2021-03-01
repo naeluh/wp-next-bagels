@@ -24,7 +24,6 @@ export default function Index({ preview, allBagels }) {
 }
 
 export async function getStaticProps({ preview = false }) {
-  // console.log(preview);
   const allBagels = await getBagelsData(preview);
   return {
     props: { preview, allBagels },

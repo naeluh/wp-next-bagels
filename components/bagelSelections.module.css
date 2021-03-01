@@ -2,3 +2,7 @@
   background-color: #bf1650;
   color: #fff;
 }
+
+.error button[type='button'] {
+  background-color: #bf1650;
+}

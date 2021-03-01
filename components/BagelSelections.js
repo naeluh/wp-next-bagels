@@ -6,8 +6,9 @@ import BagelNumberField from './BagelNumberField';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import { useRouter } from 'next/router';
+import AlertModal from './AlertModal';
 
-const BagelSelections = ({ bagelData, pricing }) => {
+const BagelSelections = ({ bagelData }) => {
   const router = useRouter();
   const { actions, state } = useStateMachine({ updateAction });
   const [data] = useState(null);
@@ -31,8 +32,6 @@ const BagelSelections = ({ bagelData, pricing }) => {
 
   const amount =
     type === 'dozen' ? defaultValues.dozen : defaultValues.halfDozen;
-
-  // console.log(state.data, router);
 
   const bagelSet =
     state.data.bagelSelections &&
@@ -70,41 +69,62 @@ const BagelSelections = ({ bagelData, pricing }) => {
     }
   }, []);
 
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    setShowModal(totalBagels === amount);
+  }, [totalBagels]);
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className={`form ${styles.bagelForm}`}
+      className={`form ${totalBagels === amount ? styles.error : ``}`}
     >
-      <section className='flex-col md:flex-column flex md:justify-between mb-16 md:mb-12'>
-        <h5 className='text-lg font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4 text-black'>
-          Let's add some bagels for {` ${type}  ${id}`}
+      <section className='flex-col md:flex-column flex md:justify-between md:mb-4'>
+        <h5 className='text-2xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4 text-black'>
+          Let's add a {` ${type === `halfDozen` ? `half dozen` : `dozen`}`}{' '}
+          bagels ...
         </h5>
-        <h6 className={`${totalBagels === amount ? styles.limit : ``}`}>
+        <h6
+          className={`${
+            totalBagels === amount ? styles.limit : ``
+          } text-2xl font-bold tracking-tighter leading-tight font-serif  text-black mb-4 py-4 px-8`}
+        >
           Total Bagels: {totalBagels}
         </h6>
         <p>
-          {totalBagels === amount &&
-            `You have reached the limit of ${amount}, reduced the amount of one of your selections or go back and add another dozen or half dozen`}
+          <AlertModal
+            showModal={showModal}
+            setShowModal={setShowModal}
+            alertText={`You have reached the limit of ${amount}, reduced the amount of one of your selections or go back and add another dozen or half dozen`}
+          />
         </p>
       </section>
-      <section className='flex-col md:flex-column flex md:justify-between mb-16 md:mb-12'>
+      <section className='flex-col md:flex-column flex md:justify-between'>
         {bagelData &&
-          bagelData.map(bagel => (
-            <BagelNumberField
-              bagelSet={bagelSet}
-              amount={amount}
-              totalBagels={totalBagels}
-              setTotalBagels={setTotalBagels}
-              control={control}
-              bagel={bagel}
-              defaultValues={defaultValues}
-              key={bagel.node.bagelInfo.bagelTitle}
-            />
-          ))}
+          bagelData.map(
+            bagel =>
+              bagel.node.bagelInfo.bagelTitle && (
+                <BagelNumberField
+                  bagelSet={bagelSet}
+                  amount={amount}
+                  totalBagels={totalBagels}
+                  setTotalBagels={setTotalBagels}
+                  control={control}
+                  bagel={bagel}
+                  defaultValues={defaultValues}
+                  key={bagel.node.bagelInfo.bagelTitle}
+                />
+              )
+          )}
       </section>
 
       {errors.exampleRequired && <span>This field is required</span>}
-      <ButtonsResult {...{ data, reset, defaultValues, totalBagels, amount }} />
+      <section className='w-full mb-8 flex items-center justify-center'>
+        <ButtonsResult
+          {...{ data, reset, defaultValues, totalBagels, amount }}
+        />
+      </section>
     </form>
   );
 };

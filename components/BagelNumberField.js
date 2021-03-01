@@ -11,7 +11,6 @@ const BagelNumberField = ({
   amount,
   bagelSet,
 }) => {
-  // console.log(bagelSet);
   const [currentValue, setCurrentValue] = useState(
     bagelSet
       ? bagelSet.bagels.filter(
@@ -29,7 +28,7 @@ const BagelNumberField = ({
 
   return (
     <div className={styles.outerNumberContainer}>
-      <label className='text-xl md:text-xl font-hairline tracking-tighter leading-tight md:pr-8 font-serif text-black px-5 flex items-center justify-center'>
+      <label className='text-xl md:text-2xl tracking-tighter leading-tight md:pr-8 font-serif text-black px-5 flex items-center justify-center'>
         {bagel.node.bagelInfo.bagelTitle}
       </label>
 

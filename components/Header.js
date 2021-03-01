@@ -16,7 +16,7 @@ export default function Header() {
     <nav
       className={` ${
         active ? `bg-white z-10 h-screen` : `bg-transparent`
-      } sm:h-auto sm:bg-transparent mx-auto px-5 py-5 flex sm:items-center justify-between fixed top-0 w-full flex-col sm:flex-row`}
+      } sm:h-auto sm:bg-transparent mx-auto px-5 py-5 flex sm:items-center justify-between fixed top-0 w-full flex-col sm:flex-row z-10`}
     >
       <div className='flex flex-row justify-between w-full sm:flex-1'>
         <Link href='/'>

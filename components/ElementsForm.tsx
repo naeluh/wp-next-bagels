@@ -21,6 +21,8 @@ import BagelChipSetAddRemove from './BagelChipSetAddRemove';
 import Button from './Button';
 import Input from './Input';
 
+import Link from 'next/link';
+
 const CARD_OPTIONS = {
   iconStyle: 'solid' as const,
   style: {
@@ -47,30 +49,35 @@ const CARD_OPTIONS = {
 const ElementsForm = () => {
   const router = useRouter();
   const { actions, state } = useStateMachine({ updateAction });
+  const processingFee = 1;
   const [input, setInput] = useState({
-    customDonation: state.data.totalCost,
+    customDonation: state.data.totalCost + processingFee,
     cardholderName: '',
     cardholderEmail: '',
     cardholderPhone: '',
   });
   const [payment, setPayment] = useState({ status: 'initial' });
   const [errorMessage, setErrorMessage] = useState('');
+  const [description, setDescription] = useState('');
+  // Set state so it can used even though its stale
+  const [oldState, setOldState] = useState(state.data);
   const stripe = useStripe();
   const elements = useElements();
   const hideBagelChipsHeader =
     Object.values(state.data.bagelChips).reduce((a, b) => a + b, 0) === 0
       ? false
       : true;
+  const hideBagelChipsHeaderfromOldState =
+    Object.values(oldState.bagelChips).reduce((a, b) => a + b, 0) === 0
+      ? false
+      : true;
 
   // if total cost is 0 we dont need to checkout.
+  // Redirect back to the bagels page
   useEffect(() => {
-    console.log(
-      Object.values(state.data.bagelChips).reduce((a, b) => a + b, 0),
-      state.data
-    );
-    desc(state);
+    setDescription(desc(state));
     if (state.data.totalCost === 0) {
-      router.push(`/bagels/add-bagels`);
+      router.push(`/bagels`);
     }
   }, []);
 
@@ -138,6 +145,7 @@ const ElementsForm = () => {
       name: input.cardholderName,
       email: input.cardholderEmail,
       phone: input.cardholderPhone,
+      description: description,
     });
 
     setPayment(response);
@@ -189,94 +197,181 @@ const ElementsForm = () => {
   };
 
   return (
-    <>
-      <section>
-        {state.data.bagelSelections.length > 0 && (
-          <p className='text-xl font-serif'>Bagels:</p>
-        )}
-        {state.data.bagelSelections.length > 0 &&
-          state.data.bagelSelections.map((bagelSelection: any) => (
-            <BagelSetAddRemove
-              bagelSelection={bagelSelection}
-              key={bagelSelection.id}
-            />
-          ))}
-      </section>
-      <section>
-        {hideBagelChipsHeader && (
-          <p className='text-xl font-serif'>Bagels Chips:</p>
-        )}
-        {state.data.bagelChips &&
-          Object.entries(state.data.bagelChips).map((key: any, value: any) => (
-            <BagelChipSetAddRemove bagelChipKey={key} key={key} />
-          ))}
-      </section>
-      <section className='my-4'>
-        <p>
-          Pickup Location:{' '}
-          {state.data.formattedLocation ? state.data.formattedLocation : ''}
-        </p>
-        <p>
-          Pickup Date:{' '}
-          {state.data.formattedDate ? state.data.formattedDate : ''}
-        </p>
-      </section>
-      <form onSubmit={handleSubmit}>
-        <StripeTestCards />
-        <fieldset className='elements-style my-4'>
-          <legend className='text-xl font-serif'>Your payment details:</legend>
-          <Input
-            placeholder={'Cardholder name'}
-            type={'text'}
-            name={'cardholderName'}
-            onChange={handleInputChange}
-            required
-          />
+    <article>
+      {['succeeded'].includes(payment.status) ? (
+        <>
+          {' '}
+          <section className='my-4 flex justify-start items-center border-b-4 border-m-yellow'>
+            <p className=' text-3xl font-serif mr-4'>Order Details 🥯</p>
+          </section>
+          <section className='my-4'>
+            <p className=' text-xl my-4'>
+              🥳 &nbsp;Payment Succeeded! Thank you for your order! &nbsp;🥳
+            </p>
+            <p className=' text-xl my-4'>
+              A receipt has been emailed to {input.cardholderEmail} with the
+              details of your order.
+            </p>
+            <p className='my-2 text-xl'>
+              Please arrive on{' '}
+              {oldState.formattedDate ? oldState.formattedDate : ''} at{' '}
+              {oldState.formattedLocation ? oldState.formattedLocation : ''} to
+              pick up your order.
+            </p>
+          </section>
+          <section className='my-4 pt-4 flex justify-start items-center border-t-4 border-m-yellow'>
+            <p className=' text-2xl font-serif mr-4'>
+              Here is what you ordered &nbsp;🥯
+            </p>
+          </section>
+          <section className='my-4'>
+            {oldState.bagelSelections.length > 0 && (
+              <p className='text-xl'>Bagels:</p>
+            )}
+            {oldState.bagelSelections.length > 0 &&
+              oldState.bagelSelections.map((bagelSelection: any) => (
+                <BagelSetAddRemove
+                  bagelSelection={bagelSelection}
+                  key={bagelSelection.id}
+                  show={false}
+                />
+              ))}
+          </section>
+          <section>
+            {hideBagelChipsHeaderfromOldState && (
+              <p className='text-xl'>Bagels Chips:</p>
+            )}
+            {oldState.bagelChips &&
+              Object.entries(
+                oldState.bagelChips
+              ).map((key: any, value: any) => (
+                <BagelChipSetAddRemove
+                  show={false}
+                  bagelChipKey={key}
+                  key={key}
+                />
+              ))}
+          </section>
+        </>
+      ) : (
+        <>
+          <section className='my-4 border-b-4 border-m-yellow flex justify-start items-center'>
+            <p className=' text-3xl font-serif mr-4'>Cart</p>
+            <p className='flex-auto mr-4'>
+              <Link href={`/bagels`} as={`/bagels`}>
+                <Button
+                  type={'button'}
+                  text={'Edit Cart'}
+                  style={{ transition: 'all .15s ease' }}
+                  disabled={false}
+                  onClick={() => {}}
+                />
+              </Link>
+            </p>
+          </section>
+          <section className='my-4 border-b-4 border-m-yellow'>
+            {state.data.bagelSelections.length > 0 && (
+              <p className='text-xl'>Bagels:</p>
+            )}
+            {state.data.bagelSelections.length > 0 &&
+              state.data.bagelSelections.map((bagelSelection: any) => (
+                <BagelSetAddRemove
+                  bagelSelection={bagelSelection}
+                  key={bagelSelection.id}
+                  show={false}
+                />
+              ))}
+          </section>
+          <section>
+            {hideBagelChipsHeader && <p className='text-xl'>Bagels Chips:</p>}
+            {state.data.bagelChips &&
+              Object.entries(
+                state.data.bagelChips
+              ).map((key: any, value: any) => (
+                <BagelChipSetAddRemove
+                  show={false}
+                  bagelChipKey={key}
+                  key={key}
+                />
+              ))}
+          </section>
+          <section className='my-4'>
+            <p className='my-2'>
+              Pickup Location:{' '}
+              {state.data.formattedLocation ? state.data.formattedLocation : ''}
+            </p>
+            <p className='my-2'>
+              Pickup Date:{' '}
+              {state.data.formattedDate ? state.data.formattedDate : ''}
+            </p>
+          </section>
+          <form onSubmit={handleSubmit} className='mb-8'>
+            <StripeTestCards />
+            <fieldset className='elements-style my-4'>
+              <legend className='text-xl font-serif'>
+                Your payment details:
+              </legend>
+              <Input
+                placeholder={'Cardholder name'}
+                type={'text'}
+                name={'cardholderName'}
+                onChange={handleInputChange}
+                required
+              />
 
-          <Input
-            placeholder={'Cardholder email'}
-            type={'email'}
-            name={'cardholderEmail'}
-            onChange={handleInputChange}
-            required
-          />
+              <Input
+                placeholder={'Cardholder email'}
+                type={'email'}
+                name={'cardholderEmail'}
+                onChange={handleInputChange}
+                required
+              />
 
-          <Input
-            placeholder={'Cardholder phone'}
-            type={'phone'}
-            name={'cardholderPhone'}
-            onChange={handleInputChange}
-            required
-          />
+              <Input
+                placeholder={'Cardholder phone'}
+                type={'phone'}
+                name={'cardholderPhone'}
+                onChange={handleInputChange}
+                required
+              />
 
-          <CardElement
-            options={CARD_OPTIONS}
-            className='bg-white w-full border-4 border-m-black p-4 my-4 block focus:outline-none focus:ring-2 ring-m-yellow'
-            onChange={e => {
-              if (e.error) {
-                setPayment({ status: 'error' });
-                setErrorMessage(e.error.message ?? 'An unknown error occured');
+              <CardElement
+                options={CARD_OPTIONS}
+                className='bg-white w-full border-4 border-m-black p-4 my-4 block focus:outline-none focus:ring-2 ring-m-yellow'
+                onChange={e => {
+                  if (e.error) {
+                    setPayment({ status: 'error' });
+                    setErrorMessage(
+                      e.error.message ?? 'An unknown error occured'
+                    );
+                  }
+                }}
+              />
+            </fieldset>
+            <p className='mb-4'>Processing Fee:&nbsp;$1.00</p>
+            <p className='text-2xl font-serif'>
+              Total:&nbsp;
+              <span className=' font-sans'>
+                {formatAmountForDisplay(input.customDonation, config.CURRENCY)}
+              </span>
+            </p>
+            <Button
+              type={'submit'}
+              text={`Pay`}
+              disabled={
+                !['initial', 'succeeded', 'error'].includes(payment.status) ||
+                !stripe
               }
-            }}
-          />
-        </fieldset>
-        <Button
-          type={'submit'}
-          text={`Total: ${formatAmountForDisplay(
-            input.customDonation,
-            config.CURRENCY
-          )}`}
-          disabled={
-            !['initial', 'succeeded', 'error'].includes(payment.status) ||
-            !stripe
-          }
-          style={{ transition: 'all .15s ease' }}
-          onClick={() => {}}
-        />
-      </form>
-      <PaymentStatus status={payment.status} />
-      <PrintObject content={payment} />
-    </>
+              style={{ transition: 'all .15s ease' }}
+              onClick={() => {}}
+            />
+          </form>
+        </>
+      )}
+
+      {/* <PaymentStatus status={payment.status} />
+      <PrintObject content={payment} /> */}
+    </article>
   );
 };
 

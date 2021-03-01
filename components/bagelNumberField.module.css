@@ -4,7 +4,7 @@
   grid-gap: 20px;
   margin-bottom: 10px;
   padding: 10px;
-  border: 2px solid #000;
+  border: 4px solid #333;
 }
 
 @media only screen and (min-width: 768px) {
@@ -14,7 +14,7 @@
     grid-gap: 20px;
     margin-bottom: 10px;
     padding: 10px;
-    border: 2px solid #000;
+    border: 4px solid #333;
   }
 }
 
@@ -29,8 +29,6 @@
 }
 
 .numberContainer button {
-  height: 4rem;
-  width: 4rem;
   margin: 0;
 }
 
@@ -39,12 +37,16 @@
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
-  border: 2px solid #000;
-  border-radius: 4px;
-  height: 4rem;
-  width: 4rem;
-  padding-left: 12px;
+  border: 4px solid #333;
+  padding: 12px;
   margin: 0 12px;
+  color: #333;
+  max-width: 76px;
+}
+
+.numberContainer input[type='number']::-webkit-inner-spin-button,
+.numberContainer input[type='number']::-webkit-outer-spin-button {
+  display: none;
 }
 
 .add *,
@@ -71,6 +73,10 @@
   -webkit-appearance: none;
 }
 
+.numberContainer input[type='button'] svg {
+  pointer-events: none;
+}
+
 .numberContainer button[type='button'] {
   display: block;
   appearance: none;
@@ -78,8 +84,7 @@
   color: white;
   border: none;
   text-transform: uppercase;
-  padding: 10px 20px;
-  border-radius: 4px;
+  padding: 22px 26px;
 }
 
 .limit {

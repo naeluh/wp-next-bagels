@@ -29,7 +29,7 @@ const BagelChipNumberField = ({
 
   return (
     <div className={styles.outerNumberContainer}>
-      <label className='text-xl md:text-xl font-hairline tracking-tighter leading-tight md:pr-8 font-serif text-black px-5 flex items-center justify-center'>
+      <label className='text-xl md:text-2xl tracking-tighter leading-tight md:pr-8 font-serif text-black px-5 flex items-center justify-center'>
         {bagelChip.node.title}
       </label>
 

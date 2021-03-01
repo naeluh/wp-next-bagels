@@ -82,19 +82,19 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
 
   return (
     <>
-      <section className='my-4'>
+      <section className='my-8 border-b-4 border-m-yellow pb-8'>
         <AddDateLocation locations={locations} dates={dates} />
-        <p>
+        <p className='text-lg my-4'>
           Pickup Location:{' '}
           {state.data.formattedLocation ? state.data.formattedLocation : ''}
         </p>
-        <p>
+        <p className='text-lg'>
           Pickup Date:{' '}
           {state.data.formattedDate ? state.data.formattedDate : ''}
         </p>
       </section>
-      <section>
-        <p>Bagels Chips:</p>
+      <section className='my-8 border-b-4 border-m-yellow pb-4'>
+        <p className='text-xl'>Bagels Chips:</p>
         <Link href={`/bagel-chips`} as={`/bagel-chips`}>
           <Button
             type={'button'}
@@ -106,14 +106,15 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
         {state.data.bagelChips &&
           Object.entries(state.data.bagelChips).map((key, value) => (
             <BagelChipSetAddRemove
+              show
               bagelChipValue={value}
               bagelChipKey={key}
               key={key}
             />
           ))}
-      </section>
-      <section>
-        <p>Bagels:</p>
+      </section>{' '}
+      <section className='my-8 border-b-4 border-m-yellow'>
+        <p className='text-xl'>Bagels:</p>
         <Button
           type={'button'}
           style={{ transition: 'all .15s ease' }}
@@ -133,15 +134,16 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
         {state.data.bagelSelections.length > 0 &&
           state.data.bagelSelections.map(bagelSelection => (
             <BagelSetAddRemove
+              show
               bagelSelection={bagelSelection}
               key={bagelSelection.id}
             />
           ))}
       </section>
-      <section className='my-4'>
+      <section className='my-8'>
         <TotalCost pricing={pricing} />
       </section>
-      <section className={styles.grid}>
+      <section className={`${styles.grid} mb-12`}>
         <Button
           type={'button'}
           style={{ transition: 'all .15s ease' }}

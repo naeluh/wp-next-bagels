@@ -68,7 +68,6 @@ function BagelForm() {
   };
 
   const onSubmit = data => {
-    // console.log(data);
     setData(data);
     actions.updateAction(data);
     setBagelSelections(bagelSelections => [
@@ -80,7 +79,6 @@ function BagelForm() {
       },
     ]);
     setBagelID(bagelID + 1);
-    // console.log(bagelSelections, bagelID);
   };
 
   useEffect(() => {
@@ -100,7 +98,6 @@ function BagelForm() {
     setBagelID(bagelID + 1);
     setData(data);
     action(data);
-    // console.log(bagelSelections, bagelID);
   };
 
   return (

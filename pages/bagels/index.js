@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Container from '../../components/Container';
 import Header from '../../components/Header';
 import Layout from '../../components/Layout';
-import Intro from '../../components/Intro';
+import FullWidthHero from '../../components/FullWidthHero';
 import FeaturedBagel from '../../components/FeaturedBagel';
 
 import AddGroups from '../../components/AddGroupsForm';
@@ -29,13 +29,8 @@ export default function Index({
         <title>{CMS_NAME}</title>
       </Head>
       <Header />
+      <FullWidthHero image={`/static/images/penguin-city-pretzel.jpg`} />
       <Container>
-        <FeaturedBagel
-          title={homeData.featuredBagel.bagelTitle}
-          subtitle={homeData.featuredBagel.bagelSubtitle}
-          desc={homeData.featuredBagel.bagelDescription}
-          img={homeData.featuredBagel.bagelImage}
-        />
         <AddGroups
           bagelData={allBagels}
           pickupLocations={allPickupLocations}

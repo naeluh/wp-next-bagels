@@ -42,7 +42,7 @@ export default async function handler(
         payment_method_types: ['card'],
         amount: formatAmountForStripe(amount, CURRENCY),
         currency: CURRENCY,
-        description: process.env.STRIPE_PAYMENT_DESCRIPTION ?? '',
+        description: description ?? '',
         receipt_email: email,
       };
 
