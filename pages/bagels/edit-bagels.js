@@ -16,7 +16,6 @@ export default function Index({ preview, allBagels }) {
       </Head>
       <Header />
       <Container>
-        <Intro />
         <BagelSelections bagelData={allBagels} />
       </Container>
     </Layout>

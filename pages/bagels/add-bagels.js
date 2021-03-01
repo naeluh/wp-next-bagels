@@ -15,7 +15,6 @@ export default function Index({ preview, allBagels, allPricing }) {
       </Head>
       <Header />
       <Container>
-        <Intro />
         <BagelSelections bagelData={allBagels} pricing={allPricing} />
       </Container>
     </Layout>
