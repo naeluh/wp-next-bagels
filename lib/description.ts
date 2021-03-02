@@ -3,14 +3,23 @@ type Props = {
 };
 
 const desc = (data: Props) => {
-  const state = data.data;
+  const {
+    formattedLocation,
+    formattedDate,
+    bagelSelections,
+    bagelChips,
+    totalCost,
+  } = data.data;
+
   let bagelArray: any = [];
-  let string = `<br>Pickup Location: ${state.formattedLocation}<br> Pickup Date: ${state.formattedDate}<br><br>`;
-  string += state.bagelSelections.length > 0 ? `Bagels <br>` : ``;
-  for (let index = 0; index < state.bagelSelections.length; index++) {
-    const bagelSet = state.bagelSelections[index];
-    string +=
-      bagelSet.bagelSetType === 'halfDozen' ? 'Half Dozen<br> ' : 'Dozen<br> ';
+
+  let string = `Pickup Location:${formattedLocation} Pickup Date: ${formattedDate}<br>`;
+
+  string += bagelSelections.length > 0 ? `Bagels<br>` : ``;
+
+  for (let index = 0; index < bagelSelections.length; index++) {
+    const bagelSet = bagelSelections[index];
+    string += bagelSet.bagelSetType === 'halfDozen' ? 'Half Dozen' : 'Dozen';
     for (let index = 0; index < bagelSet.bagels.length; index++) {
       const bagel = bagelSet.bagels[index];
       let bagelArrayData = bagel.value > 0 ? bagelArray.push(bagel) : ``;
@@ -24,20 +33,22 @@ const desc = (data: Props) => {
           : ``;
     }
   }
+
   string +=
-    Object.entries(state.bagelChips).filter((chip: any) => chip[1] > 0).length >
-    0
-      ? `Bagels Chips <br>`
+    Object.entries(bagelChips).filter((chip: any) => chip[1] > 0).length > 0
+      ? `Bagels Chips<br>`
       : ``;
-  string += Object.entries(state.bagelChips)
+
+  string += Object.entries(bagelChips)
     .filter((chip: any) => chip[1] > 0)
     .map(
       (chip: any) =>
-        `${chip[0]} ${chip[1]} ${chip[1] >= 2 ? `bags` : `bag`} <br>`
+        `${chip[0]} ${chip[1]} ${chip[1] >= 2 ? `bags` : `bag`}<br>`
     )
     .join('');
-  string += `Total Cost: ${state.totalCost + 1}.00<br>`;
-  string += `<br>`;
+
+  string += `Total Cost: ${totalCost + 1}.00`;
+
   return string;
 };
 
