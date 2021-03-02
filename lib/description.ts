@@ -4,6 +4,7 @@ type Props = {
 
 const desc = (data: Props) => {
   const state = data.data;
+  let bagelArray: any = [];
   let string = `<br>Pickup Location: ${state.formattedLocation}<br> Pickup Date: ${state.formattedDate}<br><br>`;
   string += state.bagelSelections.length > 0 ? `Bagels <br>` : ``;
   for (let index = 0; index < state.bagelSelections.length; index++) {
@@ -12,9 +13,14 @@ const desc = (data: Props) => {
       bagelSet.bagelSetType === 'halfDozen' ? 'Half Dozen<br> ' : 'Dozen<br> ';
     for (let index = 0; index < bagelSet.bagels.length; index++) {
       const bagel = bagelSet.bagels[index];
-      string += `${bagel.key} ${bagel.value}${
-        bagelSet.bagels.length - 1 !== index ? `,` : `<br>`
-      } `;
+      let bagelArrayData = bagel.value > 0 && bagelArray.push(bagel);
+      string +=
+        bagel.value > 0 &&
+        `${bagel.key} ${bagel.value}${
+          bagelSet.bagels.length - 1 !== bagelArrayData.length - 1
+            ? `,`
+            : `<br>`
+        } `;
     }
   }
   string +=

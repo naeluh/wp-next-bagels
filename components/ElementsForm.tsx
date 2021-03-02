@@ -224,34 +224,35 @@ const ElementsForm = () => {
               Here is what you ordered &nbsp;🥯
             </p>
           </section>
-          <section className='my-4'>
-            {oldState.bagelSelections.length > 0 && (
+          {oldState.bagelSelections.length > 0 && (
+            <section className='my-4'>
               <p className='text-xl'>Bagels:</p>
-            )}
-            {oldState.bagelSelections.length > 0 &&
-              oldState.bagelSelections.map((bagelSelection: any) => (
+              {oldState.bagelSelections.map((bagelSelection: any) => (
                 <BagelSetAddRemove
                   bagelSelection={bagelSelection}
                   key={bagelSelection.id}
                   show={false}
                 />
               ))}
-          </section>
-          <section>
-            {hideBagelChipsHeaderfromOldState && (
-              <p className='text-xl'>Bagels Chips:</p>
-            )}
-            {oldState.bagelChips &&
-              Object.entries(
-                oldState.bagelChips
-              ).map((key: any, value: any) => (
-                <BagelChipSetAddRemove
-                  show={false}
-                  bagelChipKey={key}
-                  key={key}
-                />
-              ))}
-          </section>
+            </section>
+          )}
+          {hideBagelChipsHeaderfromOldState && (
+            <section>
+              {hideBagelChipsHeaderfromOldState && (
+                <p className='text-xl'>Bagels Chips:</p>
+              )}
+              {oldState.bagelChips &&
+                Object.entries(
+                  oldState.bagelChips
+                ).map((key: any, value: any) => (
+                  <BagelChipSetAddRemove
+                    show={false}
+                    bagelChipKey={key}
+                    key={key}
+                  />
+                ))}
+            </section>
+          )}
         </>
       ) : (
         <>
@@ -269,32 +270,34 @@ const ElementsForm = () => {
               </Link>
             </p>
           </section>
-          <section className='my-4 border-b-4 border-m-yellow'>
-            {state.data.bagelSelections.length > 0 && (
+          {state.data.bagelSelections.length > 0 && (
+            <section className='my-4 border-b-4 border-m-yellow'>
               <p className='text-xl'>Bagels:</p>
-            )}
-            {state.data.bagelSelections.length > 0 &&
-              state.data.bagelSelections.map((bagelSelection: any) => (
+
+              {state.data.bagelSelections.map((bagelSelection: any) => (
                 <BagelSetAddRemove
                   bagelSelection={bagelSelection}
                   key={bagelSelection.id}
                   show={false}
                 />
               ))}
-          </section>
-          <section>
-            {hideBagelChipsHeader && <p className='text-xl'>Bagels Chips:</p>}
-            {state.data.bagelChips &&
-              Object.entries(
-                state.data.bagelChips
-              ).map((key: any, value: any) => (
-                <BagelChipSetAddRemove
-                  show={false}
-                  bagelChipKey={key}
-                  key={key}
-                />
-              ))}
-          </section>
+            </section>
+          )}
+          {hideBagelChipsHeader && (
+            <section>
+              {hideBagelChipsHeader && <p className='text-xl'>Bagels Chips:</p>}
+              {state.data.bagelChips &&
+                Object.entries(
+                  state.data.bagelChips
+                ).map((key: any, value: any) => (
+                  <BagelChipSetAddRemove
+                    show={false}
+                    bagelChipKey={key}
+                    key={key}
+                  />
+                ))}
+            </section>
+          )}
           <section className='my-4'>
             <p className='my-2'>
               Pickup Location:{' '}
