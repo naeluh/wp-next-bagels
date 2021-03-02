@@ -15,12 +15,13 @@ const desc = (data: Props) => {
       const bagel = bagelSet.bagels[index];
       let bagelArrayData = bagel.value > 0 ? bagelArray.push(bagel) : ``;
       string +=
-        bagel.value > 0 &&
-        `${bagel.key} ${bagel.value}${
-          bagelSet.bagels.length - 1 !== bagelArrayData.length - 1
-            ? `,`
-            : `<br>`
-        } `;
+        bagel.value > 0
+          ? `${bagel.key} ${bagel.value}${
+              bagelSet.bagels.length - 1 !== bagelArrayData.length - 1
+                ? `,`
+                : `<br>`
+            } `
+          : ``;
     }
   }
   string +=
