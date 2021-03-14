@@ -13,13 +13,15 @@ const desc = (data: Props) => {
 
   let bagelArray: any = [];
 
-  let string = `Pickup Location:${formattedLocation} Pickup Date: ${formattedDate}<br>`;
+  // let string = `Pickup Location:${formattedLocation} Pickup Date: ${formattedDate}<br>`;
+  let string = '';
 
   string += bagelSelections.length > 0 ? `Bagels<br>` : ``;
 
   for (let index = 0; index < bagelSelections.length; index++) {
     const bagelSet = bagelSelections[index];
-    string += bagelSet.bagelSetType === 'halfDozen' ? 'Half Dozen' : 'Dozen';
+    string +=
+      bagelSet.bagelSetType === 'halfDozen' ? 'Half Dozen<br>' : 'Dozen<br>';
     for (let index = 0; index < bagelSet.bagels.length; index++) {
       const bagel = bagelSet.bagels[index];
       let bagelArrayData = bagel.value > 0 ? bagelArray.push(bagel) : ``;
@@ -47,7 +49,7 @@ const desc = (data: Props) => {
     )
     .join('');
 
-  string += `Total Cost: ${totalCost + 1}.00`;
+  // string += `Total Cost: ${totalCost + 1}.00`;
 
   return string;
 };

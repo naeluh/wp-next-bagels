@@ -181,6 +181,11 @@ const ElementsForm = () => {
       setErrorMessage(error.message ?? 'An unknown error occured');
     } else if (paymentIntent) {
       setPayment(paymentIntent);
+      await fetchGetJSON(
+        encodeURI(
+          `/api/email?desc=${description}&name=${input.cardholderName}&phone=${input.cardholderPhone}&email=${input.cardholderEmail}&time=${oldState.formattedDate}&location=${oldState.formattedLocation}&cost=${oldState.totalCost}`
+        )
+      );
       updateBagelChipsQuantity(state.data.bagelChips, state.data.bagelChipData);
       // Reset Value on 'succeeded'
       actions.updateAction({
