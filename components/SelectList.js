@@ -121,6 +121,7 @@ const SelectList = forwardRef(
               name={name}
               options={options}
               placeholder={placeholder}
+              className='font-serif font-bold'
             />
           )}
           name={name}

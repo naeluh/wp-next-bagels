@@ -83,7 +83,7 @@ const BagelSelections = ({ bagelData }) => {
       <section className='flex-col md:flex-column flex md:justify-between md:mb-4'>
         <h5 className='text-2xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4 text-black'>
           Let's add a {` ${type === `halfDozen` ? `half dozen` : `dozen`}`}{' '}
-          bagels ...
+          bagels ... Total Bagels: {totalBagels}
         </h5>
         <h6
           className={`${
@@ -99,6 +99,11 @@ const BagelSelections = ({ bagelData }) => {
             alertText={`You have reached the limit of ${amount}, reduced the amount of one of your selections or go back and add another dozen or half dozen`}
           />
         </p>
+      </section>
+      <section className='w-full mb-8 flex items-center justify-center'>
+        <ButtonsResult
+          {...{ data, reset, defaultValues, totalBagels, amount }}
+        />
       </section>
       <section className='flex-col md:flex-column flex md:justify-between'>
         {bagelData &&
@@ -117,13 +122,6 @@ const BagelSelections = ({ bagelData }) => {
                 />
               )
           )}
-      </section>
-
-      {errors.exampleRequired && <span>This field is required</span>}
-      <section className='w-full mb-8 flex items-center justify-center'>
-        <ButtonsResult
-          {...{ data, reset, defaultValues, totalBagels, amount }}
-        />
       </section>
     </form>
   );

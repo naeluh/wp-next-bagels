@@ -16,6 +16,9 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
   const { state, actions } = useStateMachine({ updateAction });
   const [bagelID, setBagelID] = useState(state.data.bagelSelections.length);
   const [bagelChips, setBagelChips] = useState(0);
+  const priceHalfDozen = Number(pricing[0].node.prices.halfDozenPrice);
+  const priceDozen = Number(pricing[0].node.prices.dozenPrice);
+  const priceChips = Number(pricing[0].node.prices.bagelChipsPrice);
 
   const locations = pickupLocations.map(({ node }) => {
     return {
@@ -99,7 +102,11 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
           <Button
             type={'button'}
             style={{ transition: 'all .15s ease' }}
-            text={bagelChips > 0 ? `Edit Bagel Chips` : `Add Bagel Chips`}
+            text={
+              bagelChips > 0
+                ? `Edit Bagel Chips - ${priceChips}.00`
+                : `Add Bagel Chips - ${priceChips}.00`
+            }
             disabled={false}
           />
         </Link>
@@ -113,12 +120,12 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
             />
           ))}
       </section>{' '}
-      <section className='my-8 border-b-4 border-m-yellow'>
+      <section className='pb-4 my-8 border-b-4 border-m-yellow'>
         <p className='text-xl'>Bagels:</p>
         <Button
           type={'button'}
           style={{ transition: 'all .15s ease' }}
-          text={'Add Dozen'}
+          text={`Add Dozen - ${priceDozen}.00`}
           disabled={false}
           name='dozen'
           onClick={e => addGroup('dozen')}
@@ -126,7 +133,7 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
         <Button
           type={'button'}
           style={{ transition: 'all .15s ease' }}
-          text={'Add 1/2 Dozen'}
+          text={`Add 1/2 Dozen - ${priceHalfDozen}.00`}
           disabled={false}
           name='halfDozen'
           onClick={e => addGroup('halfDozen')}

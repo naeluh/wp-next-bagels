@@ -3,6 +3,12 @@
 /* Write your own custom base styles here */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600;700;900&family=Vollkorn:ital,wght@0,700;0,900;1,400&display=swap');
 
+@font-face {
+  font-family: 'autumn';
+  font-display: swap;
+  src: url('autumn-webfont.woff2') format('woff2'),
+    url('autumn-webfont.woff') format('woff');
+}
 /* Start purging... */
 @tailwind components;
 /* Stop purging. */
@@ -15,7 +21,7 @@
 
 /* Your own custom utilities */
 p {
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.5px;
 }
 
