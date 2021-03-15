@@ -9,7 +9,7 @@ const LocationsTimes = ({ locations }) => {
       <section
         className={`text-center z-0 py-4 bg-cover bg-center flex-col flex md:flex-row md:justify-between mb-4 md:mb-6 md:px-12 md:py-6 lg:items-center`}
       >
-        <div className='flex-1 z-10'>
+        <div className='flex-1'>
           <h3 className='text-4xl md:text-6xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4 text-black'>
             {'Locations & Times'}
           </h3>
@@ -17,8 +17,12 @@ const LocationsTimes = ({ locations }) => {
         </div>
       </section>
       <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12'>
-        {locations.map(({ location, times }, index) => (
-          <Location location={location} times={times} key={location + index} />
+        {locations.map(({ node }, index) => (
+          <Location
+            location={node.title}
+            times={node.dateTime.dateAndTime}
+            key={node.title + index}
+          />
         ))}
       </section>
     </>

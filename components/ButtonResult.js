@@ -9,6 +9,7 @@ const ButtonResult = ({ data, reset, defaultValues, totalBagels, amount }) => (
         text={'Submit'}
         style={{ transition: 'all .15s ease' }}
         disabled={totalBagels === amount ? false : true}
+        fullWidth
       />
     )}
   </>

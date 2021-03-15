@@ -169,6 +169,7 @@ const AddDateLocation = ({ dates, locations }) => {
           style={{ transition: 'all .15s ease' }}
           text={'Ok'}
           disabled={false}
+          fullWidth
         />
       </form>
     </Modal>

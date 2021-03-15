@@ -157,6 +157,7 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
           text={'Checkout'}
           disabled={state.data.totalCost > 0 ? false : true}
           onClick={() => state.data.totalCost > 0 && router.push('/checkout')}
+          fullWidth
         />
       </section>
     </>

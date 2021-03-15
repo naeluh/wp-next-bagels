@@ -6,12 +6,22 @@ type Props = {
   disabled: any;
   style: any;
   onClick: any;
+  fullWidth: boolean;
 };
 
-const Button = ({ type, text, disabled, style, onClick }: Props) => {
+const Button = ({
+  type,
+  text,
+  disabled,
+  style,
+  onClick,
+  fullWidth = false,
+}: Props) => {
   return (
     <button
-      className='font-serif font-bold leading-tight text-lg text-m-black border-m-yellow bg-white hover:border-m-black hover:text-m-yellow active:border-m-yellow hover:bg-m-black focus:outline-none disabled:opacity-25 border-4 px-4 py-2 my-4 block'
+      className={`font-serif font-bold leading-tight text-lg text-m-black border-m-yellow bg-white hover:border-m-black hover:text-m-yellow active:border-m-yellow hover:bg-m-black focus:outline-none disabled:opacity-25 border-4 px-4 py-2 my-4 block ${
+        fullWidth ? `w-full` : ``
+      }`}
       type={type}
       style={style}
       disabled={disabled}

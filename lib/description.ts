@@ -3,17 +3,9 @@ type Props = {
 };
 
 const desc = (data: Props) => {
-  const {
-    formattedLocation,
-    formattedDate,
-    bagelSelections,
-    bagelChips,
-    totalCost,
-  } = data.data;
+  const { bagelSelections, bagelChips } = data.data;
 
   let bagelArray: any = [];
-
-  // let string = `Pickup Location:${formattedLocation} Pickup Date: ${formattedDate}<br>`;
   let string = '';
 
   string += bagelSelections.length > 0 ? `Bagels<br>` : ``;
@@ -48,8 +40,6 @@ const desc = (data: Props) => {
         `${chip[0]} ${chip[1]} ${chip[1] >= 2 ? `bags` : `bag`}<br>`
     )
     .join('');
-
-  // string += `Total Cost: ${totalCost + 1}.00`;
 
   return string;
 };

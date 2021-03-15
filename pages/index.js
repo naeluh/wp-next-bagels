@@ -7,10 +7,15 @@ import BagelDefinition from '../components/BagelDefinition';
 import BagelList from '../components/BagelList';
 import BagelDetails from '../components/BagelDetails';
 import LocationsTimes from '../components/LocationsTimes';
-import { getBagelsData, getHomePageData } from '../lib/api';
+import {
+  getBagelsData,
+  getHomePageData,
+  getLocationsTimesData,
+} from '../lib/api';
 import { CMS_NAME } from '../lib/constants';
 
-export default function Index({ preview, homeData, allBagels }) {
+export default function Index({ preview, homeData, allBagels, locationTimes }) {
+  console.log(locationTimes);
   return (
     <Layout preview={preview}>
       <Head>
@@ -42,12 +47,7 @@ export default function Index({ preview, homeData, allBagels }) {
           />
         )}
         {allBagels && <BagelDetails bagels={allBagels} />}
-        {homeData.locationsTimes && (
-          <LocationsTimes
-            locations={homeData.locationsTimes.location}
-            times={homeData.locationsTimes.times}
-          />
-        )}
+        {locationTimes && <LocationsTimes locations={locationTimes} />}
       </Container>
     </Layout>
   );
@@ -56,7 +56,8 @@ export default function Index({ preview, homeData, allBagels }) {
 export async function getStaticProps({ preview = false }) {
   const homeData = await getHomePageData();
   const allBagels = await getBagelsData(preview);
+  const locationTimes = await getLocationsTimesData(preview);
   return {
-    props: { preview, homeData, allBagels },
+    props: { preview, homeData, allBagels, locationTimes },
   };
 }
