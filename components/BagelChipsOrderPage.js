@@ -68,6 +68,7 @@ const BagelChipsOrderPage = ({ bagelChipsData }) => {
               text={'Submit'}
               disabled={false}
               style={{ transition: 'all .15s ease' }}
+              fullWidth={false}
             />
           </section>
         </form>
@@ -83,6 +84,7 @@ const BagelChipsOrderPage = ({ bagelChipsData }) => {
               text={'Back to Bagel order page!'}
               style={{ transition: 'all .15s ease' }}
               disabled={false}
+              fullWidth={false}
             />
           </Link>
         </section>

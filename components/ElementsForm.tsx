@@ -271,6 +271,7 @@ const ElementsForm = () => {
                   style={{ transition: 'all .15s ease' }}
                   disabled={false}
                   onClick={() => {}}
+                  fullWidth={false}
                 />
               </Link>
             </p>
@@ -372,6 +373,7 @@ const ElementsForm = () => {
               }
               style={{ transition: 'all .15s ease' }}
               onClick={() => {}}
+              fullWidth={false}
             />
           </form>
         </>

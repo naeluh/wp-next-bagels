@@ -39,6 +39,7 @@ const BagelSetAddRemove = ({ bagelSelection, show }) => {
                 text={'Edit'}
                 style={{ transition: 'all .15s ease' }}
                 disabled={false}
+                fullWidth={false}
               />
             </Link>
           </p>
@@ -48,6 +49,7 @@ const BagelSetAddRemove = ({ bagelSelection, show }) => {
               text={'Remove'}
               style={{ transition: 'all .15s ease' }}
               disabled={false}
+              fullWidth={false}
               onClick={() =>
                 removeBagelSet(state.data.bagelSelections, bagelSelection.id)
               }

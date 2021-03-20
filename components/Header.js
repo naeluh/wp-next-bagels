@@ -47,6 +47,7 @@ export default function Header() {
                 text={'Bagels'}
                 disabled={false}
                 style={{ transition: 'all .15s ease' }}
+                fullWidth={false}
               />
             </a>
           </Link>
@@ -59,6 +60,7 @@ export default function Header() {
                 text={'Special Request'}
                 disabled={false}
                 style={{ transition: 'all .15s ease' }}
+                fullWidth={false}
               />
             </a>
           </Link>

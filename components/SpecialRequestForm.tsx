@@ -78,6 +78,7 @@ const SpecialRequestForm = () => {
           disabled={false}
           onClick={() => {}}
           style={{ transition: 'all .15s ease' }}
+          fullWidth={false}
         />
       )}
       {status === 'ERROR' && <p>Ooops! There was an error.</p>}

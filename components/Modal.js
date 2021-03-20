@@ -17,6 +17,7 @@ export default function Modal({
         text={button ? button : `Open`}
         disabled={false}
         onClick={() => setShowModal(true)}
+        fullWidth={false}
       />
       {showModal ? (
         <>
