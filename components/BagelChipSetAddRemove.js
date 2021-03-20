@@ -33,6 +33,7 @@ const BagelChipSetAddRemove = ({ bagelChipKey, show }) => {
                 text={'Edit'}
                 style={{ transition: 'all .15s ease' }}
                 disabled={false}
+                fullWidth={false}
               />
             </Link>
           </p>
@@ -42,6 +43,7 @@ const BagelChipSetAddRemove = ({ bagelChipKey, show }) => {
               text={'Remove'}
               style={{ transition: 'all .15s ease' }}
               disabled={false}
+              fullWidth={false}
               onClick={() =>
                 removeBagelChips(state.data.bagelChips, bagelChipKey)
               }

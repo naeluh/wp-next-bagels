@@ -110,6 +110,7 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
                 : `Add Bagel Chips - ${priceChips}.00`
             }
             disabled={false}
+            fullWidth={false}
           />
         </Link>
         {state.data.bagelChips &&
@@ -131,6 +132,7 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
           disabled={false}
           name='dozen'
           onClick={e => addGroup('dozen')}
+          fullWidth={false}
         />
         <Button
           type={'button'}
@@ -139,6 +141,7 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
           disabled={false}
           name='halfDozen'
           onClick={e => addGroup('halfDozen')}
+          fullWidth={false}
         />
         {state.data.bagelSelections.length > 0 &&
           state.data.bagelSelections.map(bagelSelection => (
