@@ -4,12 +4,11 @@ import styles from './bagelSelections.module.css';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import { useRouter } from 'next/router';
-import dynamic from 'next/dynamic';
+import AlertModal from './AlertModal';
+import ButtonsResult from './ButtonResult';
+import BagelNumberField from './BagelNumberField';
 
 const BagelSelections = ({ bagelData }) => {
-  const AlertModal = dynamic(import('./AlertModal'));
-  const ButtonsResult = dynamic(import('./ButtonResult'));
-  const BagelNumberField = dynamic(import('./BagelNumberField'));
   const router = useRouter();
   const { actions, state } = useStateMachine({ updateAction });
   const [data] = useState(null);
