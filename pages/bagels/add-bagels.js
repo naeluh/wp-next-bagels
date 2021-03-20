@@ -4,9 +4,9 @@ import { CMS_NAME } from '../../lib/constants';
 import { getBagelsData, getPricingData } from '../../lib/api';
 
 export default function Index({ preview, allBagels, allPricing }) {
-  const Container = dynamic(import('../components/Container'));
-  const Header = dynamic(import('../components/Header'));
-  const Layout = dynamic(import('../components/Layout'));
+  const Container = dynamic(import('../../components/Container'));
+  const Header = dynamic(import('../../components/Header'));
+  const Layout = dynamic(import('../../components/Layout'));
   const BagelSelections = dynamic(import('../../components/BagelSelections'));
   return (
     <Layout preview={preview}>
