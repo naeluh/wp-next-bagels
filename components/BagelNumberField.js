@@ -13,9 +13,7 @@ const BagelNumberField = ({
 }) => {
   const [currentValue, setCurrentValue] = useState(
     bagelSet
-      ? bagelSet.bagels.filter(
-          b => b.key === bagel.node.bagelInfo.bagelTitle
-        )[0].value
+      ? bagelSet.bagels.filter(b => b.key === bagel.node.title)[0].value
       : control.defaultValuesRef.current.bagelVal
   );
 
@@ -29,7 +27,7 @@ const BagelNumberField = ({
   return (
     <div className={styles.outerNumberContainer}>
       <label className='text-xl md:text-2xl tracking-tighter leading-tight md:pr-8 font-serif text-black px-5 flex items-center justify-center'>
-        {bagel.node.bagelInfo.bagelTitle}
+        {bagel.node.title}
       </label>
 
       <div className={styles.numberContainer}>
@@ -58,7 +56,7 @@ const BagelNumberField = ({
           max='12'
           type='number'
           step='1'
-          name={bagel.node.bagelInfo.bagelTitle}
+          name={bagel.node.title}
           value={currentValue}
           readOnly
         />

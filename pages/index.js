@@ -1,12 +1,5 @@
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
-import Container from '../components/Container';
-import Header from '../components/Header';
-import Layout from '../components/Layout';
-import FeaturedBagel from '../components/FeaturedBagel';
-import BagelDefinition from '../components/BagelDefinition';
-import BagelList from '../components/BagelList';
-import BagelDetails from '../components/BagelDetails';
-import LocationsTimes from '../components/LocationsTimes';
 import {
   getBagelsData,
   getHomePageData,
@@ -15,7 +8,14 @@ import {
 import { CMS_NAME } from '../lib/constants';
 
 export default function Index({ preview, homeData, allBagels, locationTimes }) {
-  console.log(locationTimes);
+  const Container = dynamic(import('../components/Container'));
+  const Header = dynamic(import('../components/Header'));
+  const Layout = dynamic(import('../components/Layout'));
+  const FeaturedBagel = dynamic(import('../components/FeaturedBagel'));
+  const BagelDefinition = dynamic(import('../components/BagelDefinition'));
+  const BagelList = dynamic(import('../components/BagelList'));
+  const BagelDetails = dynamic(import('../components/BagelDetails'));
+  const LocationsTimes = dynamic(import('../components/LocationsTimes'));
   return (
     <Layout preview={preview}>
       <Head>

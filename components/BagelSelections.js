@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import styles from './bagelSelections.module.css';
-import ButtonsResult from './ButtonResult';
-import BagelNumberField from './BagelNumberField';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import { useRouter } from 'next/router';
-import AlertModal from './AlertModal';
+import dynamic from 'next/dynamic';
 
 const BagelSelections = ({ bagelData }) => {
+  const AlertModal = dynamic(import('./AlertModal'));
+  const ButtonsResult = dynamic(import('./ButtonResult'));
+  const BagelNumberField = dynamic(import('./BagelNumberField'));
   const router = useRouter();
   const { actions, state } = useStateMachine({ updateAction });
   const [data] = useState(null);
@@ -109,7 +110,7 @@ const BagelSelections = ({ bagelData }) => {
         {bagelData &&
           bagelData.map(
             bagel =>
-              bagel.node.bagelInfo.bagelTitle && (
+              bagel.node.title && (
                 <BagelNumberField
                   bagelSet={bagelSet}
                   amount={amount}
@@ -118,7 +119,7 @@ const BagelSelections = ({ bagelData }) => {
                   control={control}
                   bagel={bagel}
                   defaultValues={defaultValues}
-                  key={bagel.node.bagelInfo.bagelTitle}
+                  key={bagel.node.title}
                 />
               )
           )}

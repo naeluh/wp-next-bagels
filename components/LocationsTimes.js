@@ -1,9 +1,10 @@
 import React from 'react';
+import dynamic from 'next/dynamic';
 
 import styles from './locationsTimes.module.css';
-import Location from './Location';
 
 const LocationsTimes = ({ locations }) => {
+  const Location = dynamic(import('./Location'));
   return (
     <>
       <section
@@ -17,11 +18,12 @@ const LocationsTimes = ({ locations }) => {
         </div>
       </section>
       <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12'>
-        {locations.map(({ node }, index) => (
+        {locations.map(({ node }) => (
           <Location
-            location={node.title}
+            title={node.title}
+            img={node.featuredImage}
             times={node.dateTime.dateAndTime}
-            key={node.title + index}
+            key={node.id}
           />
         ))}
       </section>

@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import styles from './addGroupsForm.module.css';
+import Link from 'next/link';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import { useRouter } from 'next/router';
-import BagelSetAddRemove from './BagelSetAddRemove';
-import AddDateLocation from './AddDateLocation';
-import BagelChipSetAddRemove from './BagelChipSetAddRemove';
-import TotalCost from './TotalCost';
-import Link from 'next/link';
-import Button from './Button';
+import dynamic from 'next/dynamic';
 
 const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
+  const BagelSetAddRemove = dynamic(import('./BagelSetAddRemove'));
+  const AddDateLocation = dynamic(import('./AddDateLocation'));
+  const BagelChipSetAddRemove = dynamic(import('./BagelChipSetAddRemove'));
+  const TotalCost = dynamic(import('./TotalCost'));
+  const Button = dynamic(import('./Button'));
+
   const router = useRouter();
   const [dates, setDates] = useState([]);
   const { state, actions } = useStateMachine({ updateAction });
