@@ -73,6 +73,13 @@ const BagelSelections = ({ bagelData }) => {
 
   useEffect(() => {
     setShowModal(totalBagels === amount);
+    if (totalBagels === amount) {
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth',
+      });
+    }
   }, [totalBagels]);
 
   return (
@@ -83,12 +90,12 @@ const BagelSelections = ({ bagelData }) => {
       <section className='flex-col md:flex-column flex md:justify-between md:mb-4'>
         <h5 className='text-2xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4 text-black'>
           Let's add a {` ${type === `halfDozen` ? `half dozen` : `dozen`}`}{' '}
-          bagels ... Total Bagels: {totalBagels}
+          bagels ...
         </h5>
         <h6
           className={`${
-            totalBagels === amount ? styles.limit : ``
-          } text-2xl font-bold tracking-tighter leading-tight font-serif  text-black mb-4 py-4 px-8`}
+            totalBagels === amount ? `${styles.limit} px-8` : ``
+          } text-2xl font-bold tracking-tighter leading-tight font-serif  text-black mb-4 py-4`}
         >
           Total Bagels: {totalBagels}
         </h6>

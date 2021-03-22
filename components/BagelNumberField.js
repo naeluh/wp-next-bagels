@@ -51,7 +51,7 @@ const BagelNumberField = ({
             valueAsNumber: true,
             valueAsDate: true,
           })}
-          className='quantity'
+          className='quantity font-serif'
           min='0'
           max='12'
           type='number'
