@@ -6,7 +6,7 @@ const BagelList = ({ title, desc, priceTitle, priceDesc }) => {
     <section
       className={`text-center z-0 py-4 bg-cover bg-center flex-col flex md:flex-row md:justify-between mb-4 md:mb-6 md:px-12 md:py-6 lg:items-center`}
     >
-      <div className='flex-1 z-10'>
+      <div className='flex-1'>
         <h3 className='text-4xl md:text-6xl font-bold tracking-tighter leading-tight font-serif mb-4 text-black'>
           {title}
         </h3>

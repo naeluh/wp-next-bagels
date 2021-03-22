@@ -4,6 +4,7 @@
 
 import React, { useState } from 'react';
 import styles from './contactForm.module.css';
+import Button from './Button';
 
 const ContactForm = () => {
   const [status, setStatus] = useState('');
@@ -38,18 +39,33 @@ const ContactForm = () => {
         Questions ?
       </h4>
       <fieldset>
-        <label>Email:</label>
-        <input type='email' name='email' />
+        <input
+          aria-label='Email'
+          placeholder={`Email`}
+          type='email'
+          name='email'
+          required
+        />
       </fieldset>
       <fieldset>
-        <label>Message:</label>
-        <textarea name='message'></textarea>
+        <textarea
+          aria-label='Message'
+          name='message'
+          placeholder={`Message`}
+          required
+        ></textarea>
       </fieldset>
 
       {status === 'SUCCESS' ? (
         <p>Thanks!</p>
       ) : (
-        <button type='submit'>Submit</button>
+        <Button
+          type={'submit'}
+          text={'Submit'}
+          style={{ transition: 'all .15s ease' }}
+          disabled={false}
+          fullWidth
+        />
       )}
       {status === 'ERROR' && <p>Ooops! There was an error.</p>}
     </form>

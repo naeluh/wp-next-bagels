@@ -6,7 +6,7 @@
 }
 
 .backgroundimage {
-  filter: hue-rotate(17deg) saturate(1.4);
+  /* filter: hue-rotate(17deg) saturate(1.4); */
   position: relative;
   flex: 1;
   padding-bottom: 25%;
