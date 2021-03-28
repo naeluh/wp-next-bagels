@@ -285,6 +285,7 @@ const ElementsForm = () => {
                   bagelSelection={bagelSelection}
                   key={bagelSelection.id}
                   show={false}
+                  editGroup={() => {}}
                 />
               ))}
             </section>
