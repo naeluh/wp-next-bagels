@@ -2,7 +2,8 @@ import React from 'react';
 
 import styles from './locations.module.css';
 import Time from './Time';
-import { Spring } from 'react-spring/renderprops.cjs';
+import { Spring } from 'react-spring';
+
 import dynamic from 'next/dynamic';
 
 const Location = ({ title, img, times }) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './bagel.module.css';
-import { Spring } from 'react-spring/renderprops.cjs';
+import { Spring } from 'react-spring';
 import dynamic from 'next/dynamic';
 
 const Bagel = ({ title, img, desc }) => {

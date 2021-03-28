@@ -4,7 +4,7 @@ import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import Button from './Button';
 
-const BagelSetAddRemove = ({ bagelSelection, show }) => {
+const BagelSetAddRemove = ({ editGroup, bagelSelection, show }) => {
   const { state, actions } = useStateMachine({ updateAction });
   const removeBagelSet = (array, value) => {
     actions.updateAction({
@@ -30,18 +30,16 @@ const BagelSetAddRemove = ({ bagelSelection, show }) => {
       {show && (
         <>
           <p className='inline-block mr-4'>
-            <Link
-              href={`/bagels/edit-bagels?bagelSelectionsID=${bagelSelection.id}&type=${bagelSelection.bagelSetType}`}
-              as={`/bagels/edit-bagels`}
-            >
-              <Button
-                type={'button'}
-                text={'Edit'}
-                style={{ transition: 'all .15s ease' }}
-                disabled={false}
-                fullWidth={false}
-              />
-            </Link>
+            <Button
+              type={'button'}
+              text={'Edit'}
+              style={{ transition: 'all .15s ease' }}
+              disabled={false}
+              fullWidth={false}
+              onClick={() => {
+                editGroup(bagelSelection.bagelSetType, bagelSelection.id);
+              }}
+            />
           </p>
           <p className='inline-block'>
             <Button

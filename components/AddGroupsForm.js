@@ -4,13 +4,20 @@ import Link from 'next/link';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import { useRouter } from 'next/router';
-import BagelSetAddRemove from './BagelSetAddRemove';
 import AddDateLocation from './AddDateLocation';
-import BagelChipSetAddRemove from './BagelChipSetAddRemove';
 import TotalCost from './TotalCost';
 import Button from './Button';
+import BagelChipsOrderModal from './BagelChipsOrderModal';
+import BagelSelectionsModal from './BagelSelectionsModal';
+import BagelChipSetAddRemove from './BagelChipSetAddRemove';
+import BagelSetAddRemove from './BagelSetAddRemove';
 
-const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
+const AddGroupsForm = ({
+  pickupLocations,
+  bagelChipsData,
+  bagelData,
+  pricing,
+}) => {
   const router = useRouter();
   const [dates, setDates] = useState([]);
   const { state, actions } = useStateMachine({ updateAction });
@@ -19,6 +26,35 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
   const priceHalfDozen = Number(pricing[0].node.prices.halfDozenPrice);
   const priceDozen = Number(pricing[0].node.prices.dozenPrice);
   const priceChips = Number(pricing[0].node.prices.bagelChipsPrice);
+
+  const [bagelSetId, setBagelSetId] = useState(
+    state.data.bagelSelections.length
+  );
+  const [bagelSetType, setBagelSetType] = useState('');
+  const [open, setOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [showChipModal, setShowChipModal] = useState(false);
+
+  const addGroup = type => {
+    setBagelID(bagelID + 1);
+    setBagelSetType(type);
+    setBagelSetId(state.data.bagelSelections.length);
+    setOpen(!open);
+    setShowModal(!showModal);
+  };
+
+  const editGroup = (type, id) => {
+    setBagelSetType(type);
+    setBagelSetId(id);
+    setOpen(!open);
+    setShowModal(!showModal);
+  };
+
+  const addChipGroup = () => {
+    setShowChipModal(!showChipModal);
+  };
+
+  const editChipGroup = () => {};
 
   const locations = pickupLocations.map(({ node }) => {
     return {
@@ -75,14 +111,6 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
     });
   }, []);
 
-  const addGroup = type => {
-    setBagelID(bagelID + 1);
-    router.replace(
-      `/bagels/add-bagels?bagelSelectionsID=${state.data.bagelSelections.length}&type=${type}`,
-      `/bagels/add-bagels`
-    );
-  };
-
   return (
     <>
       <section className='my-8 border-b-4 border-m-yellow pb-8'>
@@ -98,19 +126,28 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
       </section>
       <section className='my-8 border-b-4 border-m-yellow pb-4'>
         <p className='text-xl'>Bagels Chips:</p>
-        <Link href={`/bagel-chips`} as={`/bagel-chips`}>
-          <Button
-            type={'button'}
-            style={{ transition: 'all .15s ease' }}
-            text={
-              bagelChips > 0
-                ? `Edit Bagel Chips - ${priceChips}.00`
-                : `Add Bagel Chips - ${priceChips}.00`
-            }
-            disabled={false}
-            fullWidth={false}
-          />
-        </Link>
+
+        <Button
+          type={'button'}
+          style={{ transition: 'all .15s ease' }}
+          text={
+            bagelChips > 0
+              ? `Edit Bagel Chips - ${priceChips}.00`
+              : `Add Bagel Chips - ${priceChips}.00`
+          }
+          onClick={() => {
+            addChipGroup();
+          }}
+          disabled={false}
+          fullWidth={false}
+        />
+
+        <BagelChipsOrderModal
+          show={open}
+          setShowModal={setShowChipModal}
+          showModal={showChipModal}
+          bagelChipsData={bagelChipsData}
+        />
         {state.data.bagelChips &&
           Object.entries(state.data.bagelChips).map((key, value) => (
             <BagelChipSetAddRemove
@@ -146,10 +183,19 @@ const AddGroupsForm = ({ pickupLocations, bagelChipsData, pricing }) => {
             <BagelSetAddRemove
               show
               bagelSelection={bagelSelection}
+              editGroup={editGroup}
               key={bagelSelection.id}
             />
           ))}
       </section>
+      <BagelSelectionsModal
+        show={open}
+        setShowModal={setShowModal}
+        showModal={showModal}
+        bagelData={bagelData}
+        bagelSetType={bagelSetType}
+        bagelSelectionsID={bagelSetId}
+      />
       <section className='my-8'>
         <TotalCost pricing={pricing} />
       </section>

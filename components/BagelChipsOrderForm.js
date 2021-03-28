@@ -14,17 +14,7 @@ const BagelChipsOrderForm = ({ pricing, bagelChipsData }) => {
     bagelChipVal: 0,
   };
 
-  const {
-    handleSubmit,
-    errors,
-    setError,
-    clearErrors,
-    control,
-    register,
-    reset,
-    setValue,
-    getValues,
-  } = useForm({
+  const { handleSubmit, errors, control, register, setValue } = useForm({
     defaultValues,
     mode: 'onChange',
   });
@@ -33,15 +23,8 @@ const BagelChipsOrderForm = ({ pricing, bagelChipsData }) => {
     actions.updateAction({
       bagelChips: data,
     });
-    setShowModal(false);
+    setShowModal(!showModal);
   };
-
-  const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
-    {
-      control,
-      name: 'test',
-    }
-  );
 
   return (
     <Modal
@@ -49,6 +32,7 @@ const BagelChipsOrderForm = ({ pricing, bagelChipsData }) => {
       title={`Select Bagel Chips`}
       setShowModal={setShowModal}
       showModal={showModal}
+      hideButton={true}
     >
       <form onSubmit={handleSubmit(onSubmit)}>
         <section className='flex-col md:flex-column flex md:justify-between mb-16 md:mb-12'>
