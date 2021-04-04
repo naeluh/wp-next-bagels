@@ -25,7 +25,7 @@ const Location = ({ title, img, times }) => {
                 <Img
                   className='object-cover object-top h-48 w-full'
                   src={img ? img.node.sourceUrl : `/static/images/tent.jpg`}
-                  layout='fill'
+                  layout='responsive'
                   alt={title}
                 />
               </div>

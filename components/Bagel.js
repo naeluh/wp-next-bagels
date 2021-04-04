@@ -25,14 +25,14 @@ const Bagel = ({ title, img, desc }) => {
                     className='object-cover h-48 w-full object-top'
                     src={img.node.sourceUrl}
                     alt={title}
-                    layout='fill'
+                    layout='responsive'
                   />
                 ) : (
                   <Img
                     className='object-cover h-48 w-full object-top'
                     src={imageSrc}
                     alt={title}
-                    layout='fill'
+                    layout='responsive'
                   />
                 )}
               </div>
