@@ -11,7 +11,6 @@ const Modal = ({
   hideButton,
 }) => {
   useEffect(() => {
-    console.log(showModal);
     if (showModal) {
       document.body.classList.add('modal-open');
     } else {

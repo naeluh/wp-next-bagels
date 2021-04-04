@@ -82,10 +82,6 @@ const BagelSelectionsModal = ({
     }
   }, [totalBagels]);
 
-  useEffect(() => {
-    console.log(showModal, bagelSetType, bagelSelectionsID, type);
-  }, [showModal, bagelSetType, bagelSelectionsID, type]);
-
   return (
     <Modal
       button={`bagels`}
