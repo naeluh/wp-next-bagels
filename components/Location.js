@@ -3,6 +3,7 @@ import React from 'react';
 import styles from './locations.module.css';
 import Time from './Time';
 import { Spring } from 'react-spring';
+import Img from 'next/image';
 
 import dynamic from 'next/dynamic';
 
@@ -21,9 +22,11 @@ const Location = ({ title, img, times }) => {
           {({ transform, opacity }) => (
             <div style={{ transform, opacity }}>
               <div className='w-full overflow-hidden mb-6'>
-                <img
+                <Img
                   className='object-cover object-top h-48 w-full'
                   src={img ? img.node.sourceUrl : `/static/images/tent.jpg`}
+                  layout='fill'
+                  alt={title}
                 />
               </div>
               <h4 className='text-xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4'>

@@ -17,11 +17,13 @@ const FeaturedBagel = ({ title, subtitle, img }) => {
       <div className={`flex-1 relative`}>
         <h3 className='text-4xl md:text-6xl font-bold tracking-tighter leading-tight md:pr-10 font-serif mb-4'>
           <div className='w-full overflow-hidden mb-6'>
-            <img
+            <Img
               className='object-contain'
               src={img.sourceUrl}
               alt={title}
               width='200'
+              width={200}
+              height={100}
             />
           </div>
         </h3>
