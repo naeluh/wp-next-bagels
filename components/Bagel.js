@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './bagel.module.css';
 import { Spring } from 'react-spring';
 import dynamic from 'next/dynamic';
+import Img from 'next/image';
 
 const Bagel = ({ title, img, desc }) => {
   const VsensorAnimate = dynamic(import('./VsensorAnimate'));
@@ -20,14 +21,18 @@ const Bagel = ({ title, img, desc }) => {
             <div style={{ transform, opacity }}>
               <div className='w-full overflow-hidden mb-6 border-black border-12'>
                 {img ? (
-                  <img
+                  <Img
                     className='object-cover h-48 w-full object-top'
                     src={img.node.sourceUrl}
+                    alt={title}
+                    layout='fill'
                   />
                 ) : (
-                  <img
+                  <Img
                     className='object-cover h-48 w-full object-top'
                     src={imageSrc}
+                    alt={title}
+                    layout='fill'
                   />
                 )}
               </div>
