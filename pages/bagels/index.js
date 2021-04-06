@@ -8,6 +8,9 @@ import {
   getPricingData,
   getHomePageData,
 } from '../../lib/api';
+import Container from '../../components/Container';
+import Header from '../../components/Header';
+import Layout from '../../components/Layout';
 
 export default function Index({
   preview,
@@ -17,9 +20,6 @@ export default function Index({
   allBagelChips,
   allPricing,
 }) {
-  const Container = dynamic(import('../../components/Container'));
-  const Header = dynamic(import('../../components/Header'));
-  const Layout = dynamic(import('../../components/Layout'));
   const FullWidthHero = dynamic(import('../../components/FullWidthHero'));
   const AddGroups = dynamic(import('../../components/AddGroupsForm'));
   return (
