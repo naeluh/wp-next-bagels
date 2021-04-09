@@ -1,10 +1,9 @@
 import React from 'react';
 import styles from './bagel.module.css';
 import { Spring } from 'react-spring';
-import dynamic from 'next/dynamic';
+import VsensorAnimate from './VsensorAnimate';
 
 const Bagel = ({ title, img, desc }) => {
-  const VsensorAnimate = dynamic(import('./VsensorAnimate'));
   const imageSrc = `/static/images/bagels.jpg`;
   return (
     <VsensorAnimate once>

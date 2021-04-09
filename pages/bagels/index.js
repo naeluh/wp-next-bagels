@@ -11,6 +11,8 @@ import {
 import Container from '../../components/Container';
 import Header from '../../components/Header';
 import Layout from '../../components/Layout';
+import FullWidthHero from '../../components/FullWidthHero';
+import AddGroups from '../../components/AddGroupsForm';
 
 export default function Index({
   preview,
@@ -20,8 +22,6 @@ export default function Index({
   allBagelChips,
   allPricing,
 }) {
-  const FullWidthHero = dynamic(import('../../components/FullWidthHero'));
-  const AddGroups = dynamic(import('../../components/AddGroupsForm'));
   return (
     <Layout preview={preview}>
       <Head>

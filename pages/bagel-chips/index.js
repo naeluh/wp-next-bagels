@@ -2,14 +2,12 @@ import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import { CMS_NAME } from '../../lib/constants';
 import { getBagelChipsData } from '../../lib/api';
+import Container from '../../components/Container';
+import Header from '../../components/Header';
+import Layout from '../../components/Layout';
+import BagelChipsOrderPage from '../../components/BagelChipsOrderPage';
 
 export default function Index({ preview, allBagelChips }) {
-  const Container = dynamic(import('../../components/Container'));
-  const Header = dynamic(import('../../components/Header'));
-  const Layout = dynamic(import('../../components/Layout'));
-  const BagelChipsOrderPage = dynamic(
-    import('../../components/BagelChipsOrderPage')
-  );
   return (
     <Layout preview={preview}>
       <Head>

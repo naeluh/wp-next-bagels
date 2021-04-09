@@ -6,16 +6,16 @@ import {
   getLocationsTimesData,
 } from '../lib/api';
 import { CMS_NAME } from '../lib/constants';
-import Container from '../../components/Container';
-import Header from '../../components/Header';
-import Layout from '../../components/Layout';
+import Container from '../components/Container';
+import Header from '../components/Header';
+import Layout from '../components/Layout';
+import FeaturedBagel from '../components/FeaturedBagel';
+import BagelDefinition from '../components/BagelDefinition';
+import BagelList from '../components/BagelList';
+import BagelDetails from '../components/BagelDetails';
+import LocationsTimes from '../components/LocationsTimes';
 
 export default function Index({ preview, homeData, allBagels, locationTimes }) {
-  const FeaturedBagel = dynamic(import('../components/FeaturedBagel'));
-  const BagelDefinition = dynamic(import('../components/BagelDefinition'));
-  const BagelList = dynamic(import('../components/BagelList'));
-  const BagelDetails = dynamic(import('../components/BagelDetails'));
-  const LocationsTimes = dynamic(import('../components/LocationsTimes'));
   return (
     <Layout preview={preview}>
       <Head>

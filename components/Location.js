@@ -4,10 +4,9 @@ import styles from './locations.module.css';
 import Time from './Time';
 import { Spring } from 'react-spring';
 
-import dynamic from 'next/dynamic';
+import VsensorAnimate from './VsensorAnimate';
 
 const Location = ({ title, img, times }) => {
-  const VsensorAnimate = dynamic(import('./VsensorAnimate'));
   return (
     <VsensorAnimate once>
       {({ isVisible }) => (

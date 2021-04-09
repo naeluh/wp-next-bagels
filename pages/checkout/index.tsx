@@ -4,13 +4,12 @@ import { Elements } from '@stripe/react-stripe-js';
 import getStripe from '../../utils/get-stripejs';
 import Head from 'next/head';
 import { CMS_NAME } from '../../lib/constants';
+import Container from '../../components/Container';
+import Header from '../../components/Header';
+import Layout from '../../components/Layout';
+import ElementsForm from '../../components/ElementsForm';
 
 const CheckoutPage: NextPage = () => {
-  const Container = dynamic(import('../../components/Container'));
-  const Header = dynamic(import('../../components/Header'));
-  const Layout = dynamic(import('../../components/Layout'));
-  const ElementsForm = dynamic(import('../../components/ElementsForm'));
-
   return (
     <Layout preview={false}>
       <Head>
