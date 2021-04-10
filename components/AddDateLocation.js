@@ -29,13 +29,7 @@ const AddDateLocation = ({ dates, locations }) => {
     bagelPickupDates: '',
     bagelPickupLocations: '',
   };
-  const {
-    handleSubmit,
-    formState: { errors },
-    control,
-    setValue,
-    getValues,
-  } = useForm({
+  const { handleSubmit, errors, control, setValue, getValues } = useForm({
     defaultValues,
     mode: 'onChange',
   });
@@ -126,6 +120,7 @@ const AddDateLocation = ({ dates, locations }) => {
       title={`Pickup Location and date`}
       setShowModal={setShowModal}
       showModal={showModal}
+      hideCloseButton={true}
     >
       <form onSubmit={handleSubmit(onSubmit)} className={`form ${bagelForm}`}>
         <section>

@@ -30,11 +30,9 @@ const BagelSelectionsModal = ({
     totalbagels: 0,
   };
 
-  const { handleSubmit, errors, control, reset, getValues, setValue } = useForm(
-    {
-      defaultValues,
-    }
-  );
+  const { handleSubmit, control, reset, getValues } = useForm({
+    defaultValues,
+  });
 
   const [totalBagels, setTotalBagels] = useState(defaultValues.totalbagels);
 

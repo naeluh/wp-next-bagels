@@ -2,10 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
-import { useRouter } from 'next/router';
 import BagelChipNumberField from './BagelChipNumberField';
 import Button from './Button';
-import Link from 'next/link';
 import Modal from './Modal';
 import { positionFixed } from './bagelSelections.module.css';
 
@@ -59,7 +57,7 @@ const BagelChipsOrderModal = ({ bagelChipsData, showModal, setShowModal }) => {
                     register={register}
                     defaultValues={defaultValues}
                     bagelChip={bagelChip}
-                    key={bagelChip.node.databaseId}
+                    key={bagelChip.node.id}
                     errors={errors}
                     setValue={setValue}
                     state={state}

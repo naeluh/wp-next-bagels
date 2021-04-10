@@ -82,6 +82,8 @@ const BagelSelections = ({ bagelData }) => {
     }
   }, [totalBagels]);
 
+  console.log(getValues);
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -122,7 +124,7 @@ const BagelSelections = ({ bagelData }) => {
                   amount={amount}
                   totalBagels={totalBagels}
                   setTotalBagels={setTotalBagels}
-                  control={control}
+                  getValues={getValues}
                   bagel={bagel}
                   defaultValues={defaultValues}
                   key={bagel.node.title}

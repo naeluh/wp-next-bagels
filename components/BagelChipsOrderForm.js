@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { useForm, useFieldArray } from 'react-hook-form';
-import styles from './addGroupsForm.module.css';
+import { useForm } from 'react-hook-form';
 import { Button } from '@material-ui/core';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import BagelChipNumberField from './BagelChipNumberField';
 import Modal from './Modal';
 
-const BagelChipsOrderForm = ({ pricing, bagelChipsData }) => {
+const BagelChipsOrderForm = ({ bagelChipsData }) => {
   const { state, actions } = useStateMachine({ updateAction });
   const [showModal, setShowModal] = useState(false);
   const defaultValues = {

@@ -1,5 +1,4 @@
 import { NextPage } from 'next';
-import dynamic from 'next/dynamic';
 import { Elements } from '@stripe/react-stripe-js';
 import getStripe from '../../utils/get-stripejs';
 import Head from 'next/head';
