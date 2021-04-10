@@ -153,7 +153,7 @@ const AddGroupsForm = ({
               show
               bagelChipValue={value}
               bagelChipKey={key}
-              key={key}
+              key={value}
             />
           ))}
       </section>{' '}
