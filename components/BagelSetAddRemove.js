@@ -16,7 +16,7 @@ const BagelSetAddRemove = ({ editGroup, bagelSelection, show }) => {
 
   return (
     <div className='my-4'>
-      <h4 className=' font-bold leading-tight text-lg text-m-black mb-2'>
+      <h4 className='font-serif font-black leading-tight text-lg text-m-black mb-2'>
         {bagelSelection.bagelSetType === `halfDozen` ? `Half Dozen` : `Dozen`}
       </h4>
       <p>

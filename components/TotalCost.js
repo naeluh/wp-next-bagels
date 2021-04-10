@@ -36,7 +36,7 @@ const TotalCost = ({ pricing }) => {
 
   return (
     <div>
-      <p className='text-2xl font-serif'>
+      <p className='text-2xl font-serif font-black'>
         Total:{' '}
         <span className='font-normal font-sans'>
           ${state.data.totalCost}.00

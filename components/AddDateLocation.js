@@ -116,7 +116,7 @@ const AddDateLocation = ({ dates, locations }) => {
 
   return (
     <Modal
-      button={`Edit Pickup Location and date`}
+      button={`Edit Location and Date`}
       title={`Pickup Location and date`}
       setShowModal={setShowModal}
       showModal={showModal}

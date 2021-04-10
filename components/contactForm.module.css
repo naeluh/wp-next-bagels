@@ -1,5 +1,5 @@
 .formStyles h4 {
-  border-bottom: 2px solid;
+  border-bottom: 4px solid;
 }
 
 .formStyles input,
@@ -7,7 +7,7 @@
   font-size: 16px;
   padding: 0.25em 0.5em;
   background-color: #fff;
-  border: 5px solid #fad113;
+  border: 4px solid #fad113;
   width: 100%;
   @apply font-sans;
 }

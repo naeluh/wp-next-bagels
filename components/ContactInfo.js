@@ -4,12 +4,12 @@ import styles from './contactInfo.module.css';
 const ContactInfo = () => {
   return (
     <div className={styles.contactInfoContainer}>
-      <h4 className='text-xl font-bold tracking-tighter leading-tight md:pr-8 font-serif my-4 pb-4'>
+      <h4 className='text-xl font-bold tracking-tighter leading-tight md:pr-8 font-serif my-4 pb-4 border-m-black'>
         Contact Information
       </h4>
       <div>
         <ul>
-          <li>9715 Cherry Hills Dr, Canfield, OH 44406</li>
+          <li>Youngstown, Ohio</li>
           <li>
             Email:
             <a href='mailto:sales@mamalagels.com'> sales@mamalagels.com</a>

@@ -16,14 +16,19 @@ const BagelChipSetAddRemove = ({ bagelChipKey, show }) => {
 
   const bags = bagelChipKey[1] > 1 ? `bags` : `bag`;
 
-  const bagelChip =
-    bagelChipKey[1] > 0
-      ? `${bagelChipKey[0]} Bagel Chips: ${bagelChipKey[1]} ${bags} `
-      : ``;
-
   return bagelChipKey[1] > 0 ? (
     <div className='my-4'>
-      <p className='text-lg'>{bagelChip}</p>
+      {bagelChipKey[1] > 0 && (
+        <p className='text-lg'>
+          <span className='text-lg font-serif font-black'>
+            {bagelChipKey[0]} Bagel Chips
+          </span>
+          <span>
+            : {bagelChipKey[1]} {bags}
+          </span>
+        </p>
+      )}
+
       {show && (
         <>
           <p className='inline-block mr-4'>

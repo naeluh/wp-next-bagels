@@ -115,16 +115,19 @@ const AddGroupsForm = ({
       <section className='my-8 border-b-4 border-m-yellow pb-8'>
         <AddDateLocation locations={locations} dates={dates} />
         <p className='text-lg my-4'>
-          Pickup Location:{' '}
-          {state.data.formattedLocation ? state.data.formattedLocation : ''}
+          <span className='text-xl font-serif font-black'>Pickup Location</span>
+          : {state.data.formattedLocation ? state.data.formattedLocation : ''}
         </p>
         <p className='text-lg'>
-          Pickup Date:{' '}
+          <span className='text-xl font-serif font-black'>Pickup Date</span>:{' '}
           {state.data.formattedDate ? state.data.formattedDate : ''}
         </p>
       </section>
       <section className='my-8 border-b-4 border-m-yellow pb-4'>
-        <p className='text-xl'>Bagels Chips:</p>
+        <p className='text-xl'>
+          {' '}
+          <span className='text-xl font-serif font-black'>Bagels Chips</span>:
+        </p>
 
         <Button
           type={'button'}
@@ -158,7 +161,9 @@ const AddGroupsForm = ({
           ))}
       </section>{' '}
       <section className='pb-4 my-8 border-b-4 border-m-yellow'>
-        <p className='text-xl'>Bagels:</p>
+        <p className='text-xl'>
+          <span className='text-xl font-serif font-black'>Bagels</span>:
+        </p>
         <Button
           type={'button'}
           style={{ transition: 'all .15s ease' }}

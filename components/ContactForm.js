@@ -35,7 +35,7 @@ const ContactForm = () => {
       method='POST'
       className={`w-full ${formStyles} lg:max-w-xs`}
     >
-      <h4 className='text-xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4 border-bottom pb-4'>
+      <h4 className='text-xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4 border-bottom pb-4 border-m-black'>
         Questions ?
       </h4>
       <fieldset>
