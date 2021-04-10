@@ -1,6 +1,4 @@
 import React from 'react';
-import Button from './Button';
-import { errorModalButton } from './bagelSelections.module.css'
 import ButtonsResult from './ButtonResult';
 
 type Props = {
@@ -72,7 +70,7 @@ const AlertModal = ({ alertText, setShowModal, showModal, buttonProps }: Props) 
                 <button
                   type='button'
                   onClick={() => setShowModal(false)}
-                  className={`font-serif font-black leading-tight text-lg text-m-black w-full inline-flex justify-center border shadow-sm px-4 py-2 border-red-600  hover:border-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 ${errorModalButton}`}
+                  className='font-serif font-black leading-tight text-lg text-m-black border-m-red bg-white hover:border-m-black hover:text-m-yellow active:border-m-yellow hover:bg-m-black focus:outline-none disabled:opacity-25 border-4 px-4 py-2 my-4 block focus:ring-red-500 focus:ring-offset-2'
                 >
                  
                   Change Bagel Choices
