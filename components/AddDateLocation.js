@@ -29,10 +29,17 @@ const AddDateLocation = ({ dates, locations }) => {
     bagelPickupDates: '',
     bagelPickupLocations: '',
   };
-  const { handleSubmit, errors, control, setValue, getValues } = useForm({
+  const {
+    handleSubmit,
+    formState: { errors },
+    control,
+    setValue,
+    getValues,
+  } = useForm({
     defaultValues,
     mode: 'onChange',
   });
+
   const { state, actions } = useStateMachine({ updateAction });
   const [date, setDate] = useState('');
   const [location, setLocation] = useState('');

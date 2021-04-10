@@ -1,10 +1,9 @@
 import React from 'react';
-import dynamic from 'next/dynamic';
 
-import styles from './locationsTimes.module.css';
+import { borderBottom } from './locationsTimes.module.css';
+import Location from './Location';
 
 const LocationsTimes = ({ locations }) => {
-  const Location = dynamic(import('./Location'));
   return (
     <>
       <section
@@ -14,7 +13,7 @@ const LocationsTimes = ({ locations }) => {
           <h3 className='text-4xl md:text-6xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4 text-black'>
             {'Locations & Times'}
           </h3>
-          <span className={styles.borderBottom}></span>
+          <span className={borderBottom}></span>
         </div>
       </section>
       <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12'>

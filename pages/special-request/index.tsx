@@ -1,15 +1,12 @@
-import { NextPage } from 'next';
+
 import Head from 'next/head';
-import dynamic from 'next/dynamic';
 import { CMS_NAME } from '../../lib/constants';
 import Container from '../../components/Container';
 import Header from '../../components/Header';
 import Layout from '../../components/Layout';
+import SpecialRequestForm from '../../components/SpecialRequestForm';
 
-const SpecialRequestPage: NextPage = () => {
-  const SpecialRequestForm = dynamic(
-    import('../../components/SpecialRequestForm')
-  );
+const SpecialRequestPage = () => {
   return (
     <Layout preview={false}>
       <Head>

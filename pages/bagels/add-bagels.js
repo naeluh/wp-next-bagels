@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import dynamic from 'next/dynamic';
 import { CMS_NAME } from '../../lib/constants';
 import { getBagelsData, getPricingData } from '../../lib/api';
 import Container from '../../components/Container';

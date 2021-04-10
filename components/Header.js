@@ -48,6 +48,7 @@ export default function Header() {
                 disabled={false}
                 style={{ transition: 'all .15s ease' }}
                 fullWidth={false}
+                onClick={() => {}}
               />
             </a>
           </Link>
@@ -61,6 +62,7 @@ export default function Header() {
                 disabled={false}
                 style={{ transition: 'all .15s ease' }}
                 fullWidth={false}
+                onClick={() => {}}
               />
             </a>
           </Link>
