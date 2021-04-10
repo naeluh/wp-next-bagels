@@ -3,7 +3,7 @@
 // Finally, add a <MyForm/> element whereever you wish to display the form.
 
 import React, { useState } from 'react';
-import styles from './contactForm.module.css';
+import { formStyles } from './contactForm.module.css';
 import Button from './Button';
 
 const ContactForm = () => {
@@ -33,7 +33,7 @@ const ContactForm = () => {
       onSubmit={submitForm}
       action='https://formspree.io/f/xzbkgnpk'
       method='POST'
-      className={`w-full ${styles.formStyles} lg:max-w-xs`}
+      className={`w-full ${formStyles} lg:max-w-xs`}
     >
       <h4 className='text-xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4 border-bottom pb-4'>
         Questions ?

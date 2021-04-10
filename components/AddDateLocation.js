@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
-import styles from './addGroupsForm.module.css';
-import { makeStyles, MenuItem } from '@material-ui/core';
+import { bagelForm } from './addGroupsForm.module.css';
+import { makeStyles } from '@material-ui/core';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import SelectList from './SelectList';
@@ -127,10 +127,7 @@ const AddDateLocation = ({ dates, locations }) => {
       setShowModal={setShowModal}
       showModal={showModal}
     >
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className={`form ${styles.bagelForm}`}
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className={`form ${bagelForm}`}>
         <section>
           <SelectList
             id='BagelPickupLocation'

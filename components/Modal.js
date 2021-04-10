@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { fullscreen, maxheight, wrapperClass } from './modal.module.css';
+import { maxheight, wrapperClass } from './modal.module.css';
 import Button from './Button';
 
 const Modal = ({
@@ -17,7 +17,7 @@ const Modal = ({
       document.body.classList.remove('modal-open');
     }
   }, [showModal]);
-  // justify-center items-center flex overflow-x-hidden overflow-y-hidden fixed inset-0 z-50 outline-none focus:outline-none
+
   return (
     <>
       {!hideButton && (

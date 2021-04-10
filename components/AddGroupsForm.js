@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from './addGroupsForm.module.css';
-import Link from 'next/link';
+import { grid } from './addGroupsForm.module.css';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import { useRouter } from 'next/router';
@@ -199,7 +198,7 @@ const AddGroupsForm = ({
       <section className='my-8'>
         <TotalCost pricing={pricing} />
       </section>
-      <section className={`${styles.grid} mb-12`}>
+      <section className={`${grid} mb-12`}>
         <Button
           type={'button'}
           style={{ transition: 'all .15s ease' }}

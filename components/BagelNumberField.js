@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import styles from './bagelNumberField.module.css';
+import {
+  outerNumberContainer,
+  numberContainer,
+  add,
+  remove,
+} from './bagelNumberField.module.css';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 
@@ -25,12 +30,12 @@ const BagelNumberField = ({
   }, [currentValue]);
 
   return (
-    <div className={styles.outerNumberContainer}>
+    <div className={outerNumberContainer}>
       <label className='text-xl md:text-2xl tracking-tighter leading-tight md:pr-8 font-serif text-black px-5 flex items-center justify-center'>
         {bagel.node.title}
       </label>
 
-      <div className={styles.numberContainer}>
+      <div className={numberContainer}>
         <button
           type='button'
           variant='contained'
@@ -39,7 +44,7 @@ const BagelNumberField = ({
               currentValue <= 12 &&
               setCurrentValue(currentValue + 1);
           }}
-          className={`${styles.add} add ${totalBagels >= amount && ` limit`}`}
+          className={`${add} add ${totalBagels >= amount && ` limit`}`}
         >
           <AddIcon />
         </button>
@@ -69,7 +74,7 @@ const BagelNumberField = ({
               currentValue >= 1 &&
               setCurrentValue(currentValue - 1);
           }}
-          className={`${styles.remove} remove`}
+          className={`${remove} remove`}
         >
           <RemoveIcon />
         </button>

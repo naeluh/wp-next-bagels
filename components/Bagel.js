@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './bagel.module.css';
 import { Spring } from 'react-spring';
 import VsensorAnimate from './VsensorAnimate';
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import styles from './bagelForm.module.css';
+import { bagelForm, grid } from './bagelForm.module.css';
 import { Checkbox, Button } from '@material-ui/core';
 import ButtonResult from './ButtonResult';
 import BagelSelections from './BagelSelections';
@@ -101,11 +101,8 @@ function BagelForm() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className={`form ${styles.bagelForm}`}
-    >
-      <section className={styles.grid}>
+    <form onSubmit={handleSubmit(onSubmit)} className={`form ${bagelForm}`}>
+      <section className={grid}>
         <Button onClick={() => addGroup('dozen')} variant='contained'>
           Add Dozen
         </Button>
