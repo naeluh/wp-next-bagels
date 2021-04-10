@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { positionFixed, limit, error } from './bagelSelections.module.css';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
-import { useRouter } from 'next/router';
 import AlertModal from './AlertModal';
 import ButtonsResult from './ButtonResult';
 import BagelNumberField from './BagelNumberField';
@@ -12,7 +11,6 @@ import Modal from './Modal';
 const BagelSelectionsModal = ({
   showModal,
   setShowModal,
-  show,
   bagelData,
   bagelSetType,
   bagelSelectionsID,
@@ -109,6 +107,7 @@ const BagelSelectionsModal = ({
               showModal={showAlertModal}
               setShowModal={setAlertShowModal}
               alertText={`You have reached the limit of ${amount}, reduced the amount of one of your selections or go back and add another dozen or half dozen`}
+              buttonProps={(data, reset, defaultValues, totalBagels, amount)}
             />
           </p>
         </section>

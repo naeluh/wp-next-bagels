@@ -86,7 +86,7 @@
   padding: 22px 26px;
 }
 
-.limit {
+button[type='button'].limit {
   background-color: #bf1650;
   color: #fff;
 }

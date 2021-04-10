@@ -4,6 +4,8 @@ import {
   numberContainer,
   add,
   remove,
+  errorColor,
+  limit,
 } from './bagelNumberField.module.css';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
@@ -44,7 +46,7 @@ const BagelNumberField = ({
               currentValue <= 12 &&
               setCurrentValue(currentValue + 1);
           }}
-          className={`${add} add ${totalBagels >= amount && ` limit`}`}
+          className={`${add} add ${totalBagels >= amount && limit}`}
         >
           <AddIcon />
         </button>
@@ -74,7 +76,7 @@ const BagelNumberField = ({
               currentValue >= 1 &&
               setCurrentValue(currentValue - 1);
           }}
-          className={`${remove} remove`}
+          className={`${remove} remove ${totalBagels >= amount && limit}`}
         >
           <RemoveIcon />
         </button>

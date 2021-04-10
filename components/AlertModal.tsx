@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import Button from './Button';
+import { errorModalButton } from './bagelSelections.module.css'
+import ButtonsResult from './ButtonResult';
 
 type Props = {
   alertText: string;
   setShowModal: any;
   showModal: any;
+  buttonProps: any;
 };
 
-const AlertModal = ({ alertText, setShowModal, showModal }: Props) => {
+const AlertModal = ({ alertText, setShowModal, showModal, buttonProps }: Props) => {
   return (
     <>
       {showModal ? (
@@ -62,14 +66,20 @@ const AlertModal = ({ alertText, setShowModal, showModal }: Props) => {
                   </div>
                 </div>
               </div>
+              
               <div className='bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse'>
+
                 <button
                   type='button'
                   onClick={() => setShowModal(false)}
-                  className='w-full inline-flex justify-center border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm'
+                  className={`font-serif font-black leading-tight text-lg text-m-black w-full inline-flex justify-center border shadow-sm px-4 py-2 border-red-600  hover:border-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 ${errorModalButton}`}
                 >
-                  Close
+                 
+                  Change Bagel Choices
                 </button>
+              </div>
+              <div className='bg-gray-50 px-4 sm:px-6 sm:flex sm:flex-row-reverse regularButton'>
+                <ButtonsResult {...buttonProps} />
               </div>
             </div>
           </div>
