@@ -60,9 +60,10 @@ module.exports = {
       colors: {
         'accent-1': '#FAFAFA',
         'accent-2': '#EAEAEA',
-        'accent-7': '#333',
+        'accent-7': '#333333',
         'm-yellow': '#fad113',
-        'm-black': '#333',
+        'm-black': '#333333',
+        'm-red': '#bf1650',
         success: '#0070f3',
         cyan: '#79FFE1',
       },
