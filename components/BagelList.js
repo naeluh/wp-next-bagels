@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './bagelList.module.css';
+import { borderBottom } from './bagelList.module.css';
 
 const BagelList = ({ title, desc, priceTitle, priceDesc }) => {
   return (
@@ -10,11 +10,11 @@ const BagelList = ({ title, desc, priceTitle, priceDesc }) => {
         <h3 className='text-4xl md:text-6xl font-bold tracking-tighter leading-tight font-serif mb-4 text-black'>
           {title}
         </h3>
-        <span className={styles.borderBottom}></span>
+        <span className={borderBottom}></span>
         <h4 className='text-2xl font-regular tracking-tighter leading-tight mb-4 text-black'>
           {desc}
         </h4>
-        <span className={styles.borderBottom}></span>
+        <span className={borderBottom}></span>
         <h4 className='text-2xl font-medium tracking-tighter leading-tight font-serif mb-4 text-black'>
           {priceDesc}
         </h4>

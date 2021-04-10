@@ -1,5 +1,5 @@
 import React from 'react';
-import { image } from './bagelDefinition.module.css';
+import { image, borderBottom } from './bagelDefinition.module.css';
 
 const BagelDefinition = ({ title, quote, desc }) => {
   return (
