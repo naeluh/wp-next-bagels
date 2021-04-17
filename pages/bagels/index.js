@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import { CMS_NAME } from '../../lib/constants';
 import {
   getBagelsData,
@@ -15,7 +16,6 @@ import AddGroups from '../../components/AddGroupsForm';
 
 export default function Index({
   preview,
-  homeData,
   allBagels,
   allPickupLocations,
   allBagelChips,
@@ -41,7 +41,6 @@ export default function Index({
 }
 
 export async function getServerSideProps({ preview = false }) {
-  const homeData = await getHomePageData();
   const allBagels = await getBagelsData(preview);
   const allPickupLocations = await getLocationsData(preview);
   const allBagelChips = await getBagelChipsData(preview);
@@ -49,7 +48,6 @@ export async function getServerSideProps({ preview = false }) {
   return {
     props: {
       preview,
-      homeData,
       allBagels,
       allPickupLocations,
       allBagelChips,
