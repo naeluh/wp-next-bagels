@@ -111,13 +111,6 @@ const BagelSelectionsModal = ({
             />
           </p>
         </section>
-        <section
-          className={`w-full flex items-center justify-center shadow-lg ${positionFixed}`}
-        >
-          <ButtonsResult
-            {...{ data, reset, defaultValues, totalBagels, amount }}
-          />
-        </section>
         <section className='flex-col md:flex-column flex md:justify-between'>
           {bagelData &&
             bagelData.map(
