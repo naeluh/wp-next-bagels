@@ -21,7 +21,7 @@ const BagelSetAddRemove = ({ editGroup, bagelSelection, show }) => {
       </h4>
       <p>
         {bagelSelection.bagels.map((bagel, index) => (
-          <span className='text-lg'>
+          <span className='text-lg' key={bagel}>
             {bagel.key} {bagel.value}
             {bagelSelection.bagels.length - 1 !== index && `,`}&nbsp;
           </span>

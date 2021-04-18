@@ -1,15 +1,17 @@
 import Container from './Container';
-import { EXAMPLE_PATH } from '../lib/constants';
+import Image from 'next/image';
 import Link from 'next/link';
 import ContactForm from './ContactForm';
 import ContactInfo from './ContactInfo';
 
 export default function Footer() {
   const image = (
-    <img
-      src='https://mamalagels.com/wp-content/uploads/2019/04/mamalagels-notag.png?fit=400%2C200&ssl=1'
+    <Image
+      src='/static/images/mamalagels-notag.png'
       alt='Mamalagels'
-      width='175'
+      layout='fixed'
+      width={175}
+      height={88}
     />
   );
   return (

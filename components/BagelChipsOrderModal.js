@@ -36,6 +36,11 @@ const BagelChipsOrderModal = ({ bagelChipsData, showModal, setShowModal }) => {
     );
   }, []);
 
+  const checkBagelChipNode = bagelChip =>
+    (bagelChip.node.bagelChipsDetails.isThisBagelChipTypeAvailable !== null &&
+      bagelChip.node.bagelChipsDetails.quantity > 0) ||
+    bagelChip.node.bagelChipsDetails.quantity !== null;
+
   return (
     <Modal
       button={`bagels`}
@@ -46,27 +51,23 @@ const BagelChipsOrderModal = ({ bagelChipsData, showModal, setShowModal }) => {
     >
       {!allBagelChipsEmpty ? (
         <form onSubmit={handleSubmit(onSubmit)}>
-          <section className='flex-col md:flex-column flex md:justify-between'>
-            {bagelChipsData &&
-              bagelChipsData.map(bagelChip => {
-                return (bagelChip.node.bagelChipsDetails
-                  .isThisBagelChipTypeAvailable !== null &&
-                  bagelChip.node.bagelChipsDetails.quantity > 0) ||
-                  bagelChip.node.bagelChipsDetails.quantity !== null ? (
-                  <BagelChipNumberField
-                    register={register}
-                    defaultValues={defaultValues}
-                    bagelChip={bagelChip}
-                    key={bagelChip.node.id}
-                    errors={errors}
-                    setValue={setValue}
-                    state={state}
-                  />
-                ) : (
-                  <span></span>
-                );
-              })}
-          </section>
+          <div className='flex-col md:flex-column flex md:justify-between'>
+            {bagelChipsData.map(bagelChip =>
+              checkBagelChipNode(bagelChip) ? (
+                <BagelChipNumberField
+                  register={register}
+                  defaultValues={defaultValues}
+                  bagelChip={bagelChip}
+                  key={bagelChip.node.databaseId}
+                  errors={errors}
+                  setValue={setValue}
+                  state={state}
+                />
+              ) : (
+                <span></span>
+              )
+            )}
+          </div>
           <section
             className={`flex-col md:flex-column flex md:justify-between ${positionFixed}`}
           >

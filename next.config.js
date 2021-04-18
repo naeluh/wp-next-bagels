@@ -3,9 +3,13 @@ const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+    config.node = {
+      fs: 'empty',
+    };
     config.plugins.push(new Dotenv({ silent: true }));
     return config;
   },
+  reactStrictMode: true,
   env: {
     WORDPRESS_API_URL: process.env.WORDPRESS_API_URL,
     WORDPRESS_AUTH_REFRESH_TOKEN: process.env.WORDPRESS_AUTH_REFRESH_TOKEN,

@@ -137,11 +137,9 @@ const AddDateLocation = ({ dates, locations }) => {
             ref={lRef}
             placeholder={'Select Pickup Location'}
           />
-          {locationError && (
-            <p style={{ color: 'red', fontWeight: 400 }}>{'Set Location'}</p>
+          {errors.BagelPickupLocation?.type === 'required' && (
+            <p style={{ color: 'red' }}>Location is required</p>
           )}
-          {errors.BagelPickupLocation?.type === 'required' &&
-            'Location is required'}
         </section>
 
         <section>
@@ -158,10 +156,9 @@ const AddDateLocation = ({ dates, locations }) => {
             ref={dRef}
             placeholder={'Select Pickup Date'}
           />
-          {dateError && (
-            <p style={{ color: 'red' }}>{'Date is not available'}</p>
+          {errors.BagelPickupDate?.type === 'required' && (
+            <p style={{ color: 'red' }}>Date is required</p>
           )}
-          {errors.BagelPickupDate?.type === 'required' && 'Date is required'}
         </section>
         <Button
           type={'submit'}

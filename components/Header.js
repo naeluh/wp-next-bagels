@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import cn from 'classnames';
 import Button from './Button';
+import Image from 'next/image';
 
 export default function Header() {
   const [active, setActive] = useState(false);
   const image = (
-    <img
-      src='https://mamalagels.com/wp-content/uploads/2019/04/mamalagels-notag.png?fit=400%2C200&ssl=1'
+    <Image
+      src='/static/images/mamalagels-notag.png'
       alt='Mamalagels'
-      width='175'
+      layout='fixed'
+      width={175}
+      height={88}
     />
   );
   return (
@@ -29,7 +31,7 @@ export default function Header() {
           }`}
         >
           <div className='tham-box'>
-            <div className='tham-inner bg-m-black' />
+            <div className='tham-inner bg-m-yellow' />
           </div>
         </div>
       </div>
