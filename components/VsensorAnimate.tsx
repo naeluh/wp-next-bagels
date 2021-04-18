@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import VSensor from 'react-visibility-sensor';
 
 type Props = {
@@ -10,7 +9,6 @@ type Props = {
 
 const VsensorAnimate = ({ once, children, ...theRest }: Props) => {
   const [active, setActive] = useState(true);
-
   return (
     <VSensor
       active={active}

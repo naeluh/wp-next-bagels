@@ -9,7 +9,7 @@ module.exports = {
     config.plugins.push(new Dotenv({ silent: true }));
     return config;
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
   env: {
     WORDPRESS_API_URL: process.env.WORDPRESS_API_URL,
     WORDPRESS_AUTH_REFRESH_TOKEN: process.env.WORDPRESS_AUTH_REFRESH_TOKEN,
