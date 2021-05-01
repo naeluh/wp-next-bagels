@@ -55,6 +55,20 @@ export default function Header() {
             </a>
           </Link>
         </li>
+        <li className='pr-5'>
+          <Link href='/brunch-bag'>
+            <a>
+              <Button
+                type={'button'}
+                text={'Brunch Bag'}
+                disabled={false}
+                style={{ transition: 'all .15s ease' }}
+                fullWidth={false}
+                onClick={() => {}}
+              />
+            </a>
+          </Link>
+        </li>
         <li className=''>
           <Link href='/special-request'>
             <a>

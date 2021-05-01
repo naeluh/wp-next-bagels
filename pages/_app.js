@@ -2,7 +2,7 @@ import '../styles/index.css';
 import { StateMachineProvider, createStore } from 'little-state-machine';
 
 function log(store) {
-  // console.log(store);
+  console.log(store);
   return store;
 }
 
@@ -17,6 +17,17 @@ createStore(
       totalCost: 0.0,
       formattedDate: '',
       formattedLocation: '',
+      brunchBag: {
+        bags: [],
+        deliveryDate: null,
+        address: {
+          addressOne: null,
+          addressTwo: null,
+          city: null,
+          state: null,
+          zip: null,
+        },
+      },
     },
   },
   {

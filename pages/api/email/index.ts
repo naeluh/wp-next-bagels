@@ -6,18 +6,39 @@ export default async function emailPost(req: any, res: any) {
     return res.status(405).end();
   }
 
-  const DESC = req.query.desc;
-  const EMAIL = req.query.email;
-  const PHONE = req.query.phone;
-  const NAME = req.query.name;
-  const COST = req.query.cost;
-  const LOCATION = req.query.location;
-  const TIME = req.query.time;
+  const {
+    desc,
+    email,
+    phone,
+    name,
+    cost,
+    location,
+    time,
+    addresOne,
+    addresTwo,
+    city,
+    state,
+    zip,
+  } = req.query;
+
+  const DESC = desc ? desc : ``;
+  const EMAIL = email ? email : ``;
+  const PHONE = phone ? phone : ``;
+  const NAME = name ? name : ``;
+  const COST = cost ? cost : ``;
+  const LOCATION = location ? location : ``;
+  const TIME = time ? desc : ``;
+  const ADDRESS_ONE = addresOne ? addresOne : ``;
+  const ADDRESS_TWO = addresTwo ? addresTwo : ``;
+  const CITY = city ? city : ``;
+  const STATE = state ? state : ``;
+  const ZIP = zip ? zip : ``;
+
   console.log(req.query);
 
   const response = await fetch(
     encodeURI(
-      `https://receipts.mamalagels.com/receipt?desc=${DESC}&name=${NAME}&phone=${PHONE}&email=${EMAIL}&time=${TIME}&location=${LOCATION}&cost=${COST}`
+      `https://receipts.mamalagels.com/receipt?desc=${DESC}&name=${NAME}&phone=${PHONE}&email=${EMAIL}&time=${TIME}&location=${LOCATION}&cost=${COST}&addresOne=${ADDRESS_ONE}&addresTwo=${ADDRESS_TWO}&city=${CITY}&state=${STATE}&zip=${ZIP}`
     )
   );
 

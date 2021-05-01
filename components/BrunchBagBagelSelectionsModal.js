@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { limit, error } from './bagelSelections.module.css';
+import { limit, error } from './brunchBagBagelSelectionsModal.module.css';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import AlertModal from './AlertModal';
 import BagelNumberField from './BagelNumberField';
 import Modal from './Modal';
 
-const BagelSelectionsModal = ({
+const BrunchBagBagelSelectionsModal = ({
   showModal,
   setShowModal,
   bagelData,
-  bagelSetType,
-  bagelSelectionsID,
+  brunchBagType,
+  brunchBagID,
 }) => {
   const { actions, state } = useStateMachine({ updateAction });
   const [data] = useState(null);
@@ -21,8 +21,8 @@ const BagelSelectionsModal = ({
   const [showAlertModal, setAlertShowModal] = useState(false);
 
   const defaultValues = {
-    dozen: 12,
-    halfDozen: 6,
+    large: 6,
+    small: 3,
     bagelVal: 0,
     totalbagels: 0,
   };
@@ -33,38 +33,40 @@ const BagelSelectionsModal = ({
 
   const [totalBagels, setTotalBagels] = useState(defaultValues.totalbagels);
 
-  const amount =
-    type === 'dozen' ? defaultValues.dozen : defaultValues.halfDozen;
+  const amount = type === 'large' ? defaultValues.large : defaultValues.small;
 
   const bagelSet =
-    state.data.bagelSelections &&
-    state.data.bagelSelections.filter(bagelSelection => {
-      return bagelSelection.id === bagelSelectionsID;
+    state.data.brunchBag.bags &&
+    state.data.brunchBag.bags.filter(bag => {
+      return bag.id === brunchBagID;
     })[0];
 
   const onSubmit = data => {
     const vals = getValues();
     const output = Object.entries(vals).map(([key, value]) => ({ key, value }));
-    state.data.bagelSelections[bagelSelectionsID] = {
-      id: bagelSelectionsID,
-      bagelSetType: bagelSetType,
+    state.data.brunchBag.bags[brunchBagID] = {
+      id: brunchBagID,
+      type: brunchBagType,
       bagels: output,
     };
     actions.updateAction({
-      bagelSelections: state.data.bagelSelections,
+      brunchBag: {
+        ...state.data.brunchBag,
+        bags: state.data.brunchBag.bags,
+      },
     });
     setShowModal(!showModal);
   };
 
   useEffect(() => {
     if (bagelSet) {
-      setType(bagelSet.bagelSetType);
+      setType(bagelSet.type);
       setId(bagelSet.id);
     } else {
-      setType(bagelSetType);
-      setId(bagelSelectionsID);
+      setType(brunchBagType);
+      setId(brunchBagID);
     }
-  }, [type, bagelSetType, bagelSelectionsID]);
+  }, [type, brunchBagType, brunchBagID]);
 
   useEffect(() => {
     setAlertShowModal(totalBagels === amount);
@@ -91,8 +93,7 @@ const BagelSelectionsModal = ({
       >
         <section className='flex-col md:flex-column flex md:justify-between md:mb-4'>
           <h5 className='text-2xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4 text-black'>
-            Let's add a {` ${type === `halfDozen` ? `half dozen` : `dozen`}`}{' '}
-            bagels ...
+            Let's add {`${type === `small` ? 3 : 6}`} bagels ...
           </h5>
           <h6
             className={`${
@@ -105,7 +106,7 @@ const BagelSelectionsModal = ({
             <AlertModal
               showModal={showAlertModal}
               setShowModal={setAlertShowModal}
-              alertText={`You have reached the limit of ${amount}, reduced the amount of one of your selections or go back and add another dozen or half dozen`}
+              alertText={`You have reached the limit of ${amount}, reduced the amount of one of your selections or go back and add another large or half large`}
               buttonProps={(data, reset, defaultValues, totalBagels, amount)}
             />
           </p>
@@ -134,4 +135,4 @@ const BagelSelectionsModal = ({
   );
 };
 
-export default BagelSelectionsModal;
+export default BrunchBagBagelSelectionsModal;
