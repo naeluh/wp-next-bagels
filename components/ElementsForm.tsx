@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import useSWR, { mutate } from 'swr';
 import { useRouter } from 'next/router';
-
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import desc from '../lib/description';
@@ -12,7 +10,6 @@ import * as config from '../config';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import Button from './Button';
 import Input from './Input';
-
 import AddressForm from './AddressForm';
 import SuccessfulPaymentResponse from './SuccessfulPaymentResponse';
 import OrderDetails from './OrderDetails';
@@ -167,17 +164,12 @@ const ElementsForm = () => {
       setErrorMessage(error.message ?? 'An unknown error occured');
     } else if (paymentIntent) {
       setPayment(paymentIntent);
-      const {
-        addresOne,
-        addresTwo,
-        city,
-        state,
-        zip,
-      } = oldState?.brunchBag?.address;
+
+      const { address } = oldState?.brunchBag;
 
       await fetchGetJSON(
         encodeURI(
-          `/api/email?desc=${description}&name=${input.cardholderName}&phone=${input.cardholderPhone}&email=${input.cardholderEmail}&time=${oldState.formattedDate}&location=${oldState.formattedLocation}&cost=${oldState.totalCost}&addresOne=${addresOne}&addresTwo=${addresTwo}&city=${city}&state=${state}&zip=${zip}`
+          `/api/email?desc=${description}&name=${input.cardholderName}&phone=${input.cardholderPhone}&email=${input.cardholderEmail}&time=${oldState.formattedDate}&location=${oldState.formattedLocation}&cost=${oldState.totalCost}&addresOne=${address.addressOne}&addresTwo=${address.addressTwo}&city=${address.city}&state=${address.state}&zip=${address.zip}`
         )
       );
 

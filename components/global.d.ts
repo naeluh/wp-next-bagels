@@ -11,6 +11,17 @@ declare module 'little-state-machine' {
       formattedDate: string;
       formattedLocation: string;
       totalCost: number;
+      brunchBag: {
+        bags: array;
+        deliveryDate: string;
+        address: {
+          addressOne: string;
+          addressTwo: string;
+          city: string;
+          state: string;
+          zip: string;
+        };
+      };
     };
   }
 }
