@@ -15,18 +15,29 @@ const BrunchBagAddRemove = ({ editGroup, bag, show }) => {
     });
   };
 
+  const bagels = bag.bagels.filter(({ value }) => value > 0);
+
+  const bagDetails =
+    bag.type === `small`
+      ? '6 Farm Fresh Eggs, and Microgreens'
+      : '12 Farm Fresh Eggs, and Microgreens';
+
+  const plural = v => (v >= 2 ? 'bagels' : 'bagel');
+
   return (
     <div className='my-4'>
-      <h4 className='font-serif font-black leading-tight text-xl text-m-black mb-2'>
+      <h4 className='font-serif font-black leading-tight text-lg text-m-black mb-2'>
         {bag.type === `small` ? `Small` : `Large`}
       </h4>
       <p>
-        {bag.bagels.map((bagel, index) => (
+        {bagels.map((bagel, index) => (
           <span className='text-lg' key={bagel}>
-            {bagel.key} {bagel.value}
-            {bag.bagels.length - 1 !== index && `,`}&nbsp;
+            {bagel.value} {bagel.key} {plural(bagel.value)}
+            {`,`}
+            &nbsp;
           </span>
         ))}
+        <span className='text-lg'>{bagDetails}</span>
       </p>
       {show && (
         <>

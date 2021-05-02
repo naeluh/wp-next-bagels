@@ -27,7 +27,7 @@ export default async function emailPost(req: any, res: any) {
   const NAME = name ? name : ``;
   const COST = cost ? cost : ``;
   const LOCATION = location ? location : ``;
-  const TIME = time ? desc : ``;
+  const TIME = time ? time : ``;
   const ADDRESS_ONE = addresOne ? addresOne : ``;
   const ADDRESS_TWO = addresTwo ? addresTwo : ``;
   const CITY = city ? city : ``;

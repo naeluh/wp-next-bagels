@@ -4,26 +4,18 @@ import { useRouter } from 'next/router';
 
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
-
 import desc from '../lib/description';
-
 import StripeTestCards from './StripeTestCards';
-import PrintObject from './PrintObject';
-
 import { fetchPostJSON, fetchGetJSON } from '../utils/api-helpers';
 import { formatAmountForDisplay } from '../utils/stripe-helpers';
 import * as config from '../config';
-
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-
-import BagelSetAddRemove from './BagelSetAddRemove';
-import BagelChipSetAddRemove from './BagelChipSetAddRemove';
 import Button from './Button';
 import Input from './Input';
 
 import AddressForm from './AddressForm';
-
-import Link from 'next/link';
+import SuccessfulPaymentResponse from './SuccessfulPaymentResponse';
+import OrderDetails from './OrderDetails';
 
 const CARD_OPTIONS = {
   iconStyle: 'solid' as const,
@@ -53,7 +45,7 @@ const ElementsForm = () => {
   const { actions, state } = useStateMachine({ updateAction });
   const processingFee = 1;
   const [input, setInput] = useState({
-    customDonation: state.data.totalCost + processingFee,
+    customDonation: state?.data?.totalCost + processingFee,
     cardholderName: '',
     cardholderEmail: '',
     cardholderPhone: '',
@@ -62,23 +54,15 @@ const ElementsForm = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [description, setDescription] = useState('');
   // Set state so it can used even though its stale
-  const [oldState, setOldState] = useState(state.data);
+  const [oldState, setOldState] = useState(state?.data);
   const stripe = useStripe();
   const elements = useElements();
-  const hideBagelChipsHeader =
-    Object.values(state.data.bagelChips).reduce((a, b) => a + b, 0) === 0
-      ? false
-      : true;
-  const hideBagelChipsHeaderfromOldState =
-    Object.values(oldState.bagelChips).reduce((a, b) => a + b, 0) === 0
-      ? false
-      : true;
 
   // if total cost is 0 we dont need to checkout.
   // Redirect back to the bagels page
   useEffect(() => {
     setDescription(desc(state));
-    if (state.data.totalCost === 0) {
+    if (state?.data?.totalCost === 0) {
       router.push(`/bagels`);
     }
   }, []);
@@ -183,12 +167,25 @@ const ElementsForm = () => {
       setErrorMessage(error.message ?? 'An unknown error occured');
     } else if (paymentIntent) {
       setPayment(paymentIntent);
+      const {
+        addresOne,
+        addresTwo,
+        city,
+        state,
+        zip,
+      } = oldState?.brunchBag?.address;
+
       await fetchGetJSON(
         encodeURI(
-          `/api/email?desc=${description}&name=${input.cardholderName}&phone=${input.cardholderPhone}&email=${input.cardholderEmail}&time=${oldState.formattedDate}&location=${oldState.formattedLocation}&cost=${oldState.totalCost}`
+          `/api/email?desc=${description}&name=${input.cardholderName}&phone=${input.cardholderPhone}&email=${input.cardholderEmail}&time=${oldState.formattedDate}&location=${oldState.formattedLocation}&cost=${oldState.totalCost}&addresOne=${addresOne}&addresTwo=${addresTwo}&city=${city}&state=${state}&zip=${zip}`
         )
       );
-      updateBagelChipsQuantity(state.data.bagelChips, state.data.bagelChipData);
+
+      updateBagelChipsQuantity(
+        state?.data?.bagelChips,
+        state?.data?.bagelChipData
+      );
+
       // Reset Value on 'succeeded'
       actions.updateAction({
         bagelSelections: [],
@@ -199,6 +196,17 @@ const ElementsForm = () => {
         formattedDate: '',
         formattedLocation: '',
         totalCost: 0,
+        brunchBag: {
+          bags: [],
+          deliveryDate: null,
+          address: {
+            addressOne: null,
+            addressTwo: null,
+            city: null,
+            state: null,
+            zip: null,
+          },
+        },
       });
     }
   };
@@ -206,144 +214,20 @@ const ElementsForm = () => {
   return (
     <article>
       {['succeeded'].includes(payment.status) ? (
-        <>
-          {' '}
-          <section className='my-4 flex justify-start items-center border-b-4 border-m-yellow'>
-            <p className=' text-3xl font-serif mr-4'>Order Details 🥯</p>
-          </section>
-          <section className='my-4'>
-            <p className=' text-xl my-4'>
-              🥳 &nbsp;Payment Succeeded! Thank you for your order! &nbsp;🥳
-            </p>
-            <p className=' text-xl my-4'>
-              A receipt has been emailed to {input.cardholderEmail} with the
-              details of your order.
-            </p>
-            <p className='my-2 text-xl'>
-              Please arrive on{' '}
-              {oldState.formattedDate ? oldState.formattedDate : ''} at{' '}
-              {oldState.formattedLocation ? oldState.formattedLocation : ''} to
-              pick up your order.
-            </p>
-          </section>
-          <section className='my-4 pt-4 flex justify-start items-center border-t-4 border-m-yellow'>
-            <p className=' text-2xl font-serif mr-4'>
-              Here is what you ordered &nbsp;🥯
-            </p>
-          </section>
-          {oldState.bagelSelections.length > 0 && (
-            <section className='my-4'>
-              <p className='text-xl'>
-                <span className='text-xl font-serif font-black'>Bagels</span>:
-              </p>
-              {oldState.bagelSelections.map((bagelSelection: any) => (
-                <BagelSetAddRemove
-                  bagelSelection={bagelSelection}
-                  key={bagelSelection.id}
-                  show={false}
-                  editGroup={() => {}}
-                />
-              ))}
-            </section>
-          )}
-          {hideBagelChipsHeaderfromOldState && (
-            <section>
-              {hideBagelChipsHeaderfromOldState && (
-                <p className='text-xl'>
-                  <span className='text-xl font-serif font-black'>
-                    Bagels Chips
-                  </span>
-                  :
-                </p>
-              )}
-              {oldState.bagelChips &&
-                Object.entries(
-                  oldState.bagelChips
-                ).map((key: any, value: any) => (
-                  <BagelChipSetAddRemove
-                    show={false}
-                    bagelChipKey={key}
-                    key={key}
-                  />
-                ))}
-            </section>
-          )}
-        </>
+        <SuccessfulPaymentResponse oldState={oldState} />
       ) : (
         <>
-          <section className='my-4 border-b-4 border-m-yellow flex justify-start items-center'>
-            <p className=' text-3xl font-serif mr-4 text-black'>Cart</p>
-            <p className='flex-auto mr-4'>
-              <Link href={`/bagels`} as={`/bagels`}>
-                <Button
-                  type={'button'}
-                  text={'Edit Cart'}
-                  style={{ transition: 'all .15s ease' }}
-                  disabled={false}
-                  onClick={() => {}}
-                  fullWidth={false}
-                />
-              </Link>
-            </p>
-          </section>
-          {state.data.bagelSelections.length > 0 && (
-            <section className='my-4 border-b-4 border-m-yellow'>
-              <p className='text-xl'>
-                <span className='text-xl font-serif font-black'>Bagels</span>:
-              </p>
-
-              {state.data.bagelSelections.map((bagelSelection: any) => (
-                <BagelSetAddRemove
-                  bagelSelection={bagelSelection}
-                  key={bagelSelection.id}
-                  show={false}
-                  editGroup={() => {}}
-                />
-              ))}
-            </section>
-          )}
-          {hideBagelChipsHeader && (
-            <section>
-              {hideBagelChipsHeader && (
-                <p className='text-xl'>
-                  <span className='text-xl font-serif font-black'>
-                    Bagels Chips
-                  </span>
-                  :
-                </p>
-              )}
-              {state.data.bagelChips &&
-                Object.entries(
-                  state.data.bagelChips
-                ).map((key: any, value: any) => (
-                  <BagelChipSetAddRemove
-                    show={false}
-                    bagelChipKey={key}
-                    key={key}
-                  />
-                ))}
-            </section>
-          )}
-          <section className='my-4'>
-            <p className='my-2'>
-              <span className='text-xl font-serif font-black'>
-                Pickup Location
-              </span>
-              :{' '}
-              {state.data.formattedLocation ? state.data.formattedLocation : ''}
-            </p>
-            <p className='my-2'>
-              <span className='text-xl font-serif font-black'>Pickup Date</span>
-              : {state.data.formattedDate ? state.data.formattedDate : ''}
-            </p>
-          </section>
+          <OrderDetails currentState={state} />
           <form onSubmit={handleSubmit} className='mb-8'>
             <StripeTestCards />
-            <AddressForm />
+
             <fieldset className='elements-style my-4'>
+              <AddressForm handleInputChange={handleInputChange} />
+
               <legend className='text-xl font-serif font-black'>
                 Your payment details:
               </legend>
+
               <Input
                 placeholder={'Cardholder name'}
                 type={'text'}
@@ -371,7 +255,7 @@ const ElementsForm = () => {
               <CardElement
                 options={CARD_OPTIONS}
                 className='bg-white w-full border-4 border-m-black p-4 my-4 block focus:outline-none focus:ring-2 ring-m-yellow'
-                onChange={e => {
+                onChange={(e: any) => {
                   if (e.error) {
                     setPayment({ status: 'error' });
                     setErrorMessage(

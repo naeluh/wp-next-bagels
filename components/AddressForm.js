@@ -1,70 +1,59 @@
 import React, { useEffect, useState } from 'react';
-import Button from './Button';
 import Input from './Input';
-import TextArea from './TextArea';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
-import styles from './contactForm.module.css';
+import styles from './addressForm.module.css';
 
-const AddressForm = () => {
+const AddressForm = ({ handleInputChange }) => {
   const { state, actions } = useStateMachine({ updateAction });
 
-  return (
+  return state?.data?.brunchBag?.bags.length > 0 ? (
     <>
-      <fieldset>
-        <legend className='text-xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4 border-bottom pb-4'>
-          Delivery Address
-        </legend>
-        <Input
-          placeholder={'Address'}
-          type={'text'}
-          name={'addressOne'}
-          onChange={() => {}}
-          required
-        />
-        <Input
-          placeholder={'Address Apt or Suite'}
-          type={'email'}
-          name={'addressTwo'}
-          onChange={() => {}}
-        />
-        <Input
-          placeholder={'City'}
-          type={'text'}
-          name={'city'}
-          onChange={() => {}}
-          required
-        />
-        <Input
-          placeholder={'State'}
-          type={'text'}
-          name={'state'}
-          onChange={() => {}}
-          required
-        />
-        <Input
-          placeholder={'Zip'}
-          type={'text'}
-          name={'zip'}
-          onChange={() => {}}
-          required
-        />
-      </fieldset>
-
-      {status === 'SUCCESS' ? (
-        <p>Thanks! We'll be in touch soon!</p>
-      ) : (
-        <Button
-          type={'submit'}
-          text={'Submit'}
-          disabled={false}
-          onClick={() => {}}
-          style={{ transition: 'all .15s ease' }}
-          fullWidth={false}
-        />
-      )}
-      {status === 'ERROR' && <p>Ooops! There was an error.</p>}
+      <legend className='text-xl font-serif font-black'>
+        Brunch Bag Delivery Details:
+      </legend>
+      <span>
+        This order includes brunch bags. We need your address to deliver the
+        brunch bag on {state?.data?.brunchBag?.deliveryDate}. Please fill out
+        Delivery Details below.
+      </span>
+      <Input
+        placeholder={'Address'}
+        type={'text'}
+        name={'addressOne'}
+        onChange={handleInputChange}
+        required
+      />
+      <Input
+        placeholder={'Address Apt or Suite'}
+        type={'email'}
+        name={'addressTwo'}
+        onChange={handleInputChange}
+      />
+      <Input
+        placeholder={'City'}
+        type={'text'}
+        name={'city'}
+        onChange={handleInputChange}
+        required
+      />
+      <Input
+        placeholder={'State'}
+        type={'text'}
+        name={'state'}
+        onChange={handleInputChange}
+        required
+      />
+      <Input
+        placeholder={'Zip'}
+        type={'text'}
+        name={'zip'}
+        onChange={handleInputChange}
+        required
+      />
     </>
+  ) : (
+    <></>
   );
 };
 

@@ -14,16 +14,20 @@ const BagelSetAddRemove = ({ editGroup, bagelSelection, show }) => {
     });
   };
 
+  const bagels = bagelSelection.bagels.filter(({ value }) => value > 0);
+
+  const plural = v => (v >= 2 ? 'bagels' : 'bagel');
+
   return (
     <div className='my-4'>
       <h4 className='font-serif font-black leading-tight text-lg text-m-black mb-2'>
         {bagelSelection.bagelSetType === `halfDozen` ? `Half Dozen` : `Dozen`}
       </h4>
       <p>
-        {bagelSelection.bagels.map((bagel, index) => (
+        {bagels.map((bagel, index) => (
           <span className='text-lg' key={bagel}>
-            {bagel.key} {bagel.value}
-            {bagelSelection.bagels.length - 1 !== index && `,`}&nbsp;
+            {bagel.value} {bagel.key} {plural(bagel.value)}
+            {bagels.length >= 2 && bagels.length - 1 !== index && `,`}&nbsp;
           </span>
         ))}
       </p>
