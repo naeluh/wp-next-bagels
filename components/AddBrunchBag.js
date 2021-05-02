@@ -14,8 +14,8 @@ const AddBrunchBag = ({ bagelData, pricing }) => {
   const [dates, setDates] = useState([]);
   const { state, actions } = useStateMachine({ updateAction });
   const [bagelID, setBagelID] = useState(state.data.brunchBag.bags.length);
-  const priceSmall = Number(pricing[0].node.prices.halfDozenPrice);
-  const priceLarge = Number(pricing[0].node.prices.dozenPrice);
+  const priceSmall = Number(pricing[0].node.prices.brunchBagSmall);
+  const priceLarge = Number(pricing[0].node.prices.brunchBagLarge);
   const [brunchBagType, setBrunchBagType] = useState('');
   const [brunchBagID, setBrunchBagId] = useState(
     state.data.brunchBag.bags.length

@@ -21,6 +21,8 @@ import BagelChipSetAddRemove from './BagelChipSetAddRemove';
 import Button from './Button';
 import Input from './Input';
 
+import AddressForm from './AddressForm';
+
 import Link from 'next/link';
 
 const CARD_OPTIONS = {
@@ -231,7 +233,9 @@ const ElementsForm = () => {
           </section>
           {oldState.bagelSelections.length > 0 && (
             <section className='my-4'>
-              <p className='text-xl'><span className='text-xl font-serif font-black'>Bagels</span>:</p>
+              <p className='text-xl'>
+                <span className='text-xl font-serif font-black'>Bagels</span>:
+              </p>
               {oldState.bagelSelections.map((bagelSelection: any) => (
                 <BagelSetAddRemove
                   bagelSelection={bagelSelection}
@@ -245,7 +249,12 @@ const ElementsForm = () => {
           {hideBagelChipsHeaderfromOldState && (
             <section>
               {hideBagelChipsHeaderfromOldState && (
-                <p className='text-xl'><span className='text-xl font-serif font-black'>Bagels Chips</span>:</p>
+                <p className='text-xl'>
+                  <span className='text-xl font-serif font-black'>
+                    Bagels Chips
+                  </span>
+                  :
+                </p>
               )}
               {oldState.bagelChips &&
                 Object.entries(
@@ -279,7 +288,9 @@ const ElementsForm = () => {
           </section>
           {state.data.bagelSelections.length > 0 && (
             <section className='my-4 border-b-4 border-m-yellow'>
-              <p className='text-xl'><span className='text-xl font-serif font-black'>Bagels</span>:</p>
+              <p className='text-xl'>
+                <span className='text-xl font-serif font-black'>Bagels</span>:
+              </p>
 
               {state.data.bagelSelections.map((bagelSelection: any) => (
                 <BagelSetAddRemove
@@ -293,7 +304,14 @@ const ElementsForm = () => {
           )}
           {hideBagelChipsHeader && (
             <section>
-              {hideBagelChipsHeader && <p className='text-xl'><span className='text-xl font-serif font-black'>Bagels Chips</span>:</p>}
+              {hideBagelChipsHeader && (
+                <p className='text-xl'>
+                  <span className='text-xl font-serif font-black'>
+                    Bagels Chips
+                  </span>
+                  :
+                </p>
+              )}
               {state.data.bagelChips &&
                 Object.entries(
                   state.data.bagelChips
@@ -308,16 +326,20 @@ const ElementsForm = () => {
           )}
           <section className='my-4'>
             <p className='my-2'>
-            <span className='text-xl font-serif font-black'>Pickup Location</span>:{' '}
+              <span className='text-xl font-serif font-black'>
+                Pickup Location
+              </span>
+              :{' '}
               {state.data.formattedLocation ? state.data.formattedLocation : ''}
             </p>
             <p className='my-2'>
-            <span className='text-xl font-serif font-black'>Pickup Date</span>:{' '}
-              {state.data.formattedDate ? state.data.formattedDate : ''}
+              <span className='text-xl font-serif font-black'>Pickup Date</span>
+              : {state.data.formattedDate ? state.data.formattedDate : ''}
             </p>
           </section>
           <form onSubmit={handleSubmit} className='mb-8'>
             <StripeTestCards />
+            <AddressForm />
             <fieldset className='elements-style my-4'>
               <legend className='text-xl font-serif font-black'>
                 Your payment details:
