@@ -257,7 +257,7 @@ const ElementsForm = () => {
                 }}
               />
             </fieldset>
-            <p className='mb-4'>Processing Fee:&nbsp;$1.00</p>
+            <p className='mb-4'>Processing Fee:&nbsp;${processingFee}.00</p>
             <p className='text-2xl font-serif'>
               Total:&nbsp;
               <span className=' font-sans'>

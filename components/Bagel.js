@@ -13,11 +13,13 @@ const Bagel = ({ title, img, desc }) => {
               {img ? (
                 <img
                   className='object-cover h-48 w-full object-center'
+                  style={{ filter: 'saturate(1.2)' }}
                   src={img.node.sourceUrl}
                 />
               ) : (
                 <img
                   className='object-cover h-48 w-full object-center'
+                  style={{ filter: 'saturate(1.2)' }}
                   src={imageSrc}
                 />
               )}

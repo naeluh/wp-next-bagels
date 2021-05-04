@@ -64,14 +64,14 @@ const AddDateBrunchBag = ({ dates }) => {
 
   useEffect(() => {
     if (state.data.brunchBag.deliveryDate) {
-      setValue('BagelPickupDate', state.data.brunchBag.deliveryDate);
+      setValue('DeliveryDate', state.data.brunchBag.deliveryDate);
       setDate(state.data.brunchBag.deliveryDate);
     } else {
       setShowModal(true);
     }
     setFilteredDates(getDates());
     return () => {};
-  }, []);
+  }, [state.data.brunchBag.deliveryDate]);
 
   const onSubmit = data => {
     actions.updateAction({

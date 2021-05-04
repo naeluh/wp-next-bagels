@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Button from './Button';
 import Image from 'next/image';
+import updateAction from '../lib/updateAction';
+import { useStateMachine } from 'little-state-machine';
+import { useRouter } from 'next/router';
 
 export default function Header() {
+  const router = useRouter();
+  const { state } = useStateMachine({ updateAction });
+  const { bagelChips, bagelSelections, brunchBag } = state.data;
+  const { bags } = brunchBag;
+  const hideBagelChips =
+    Object.values(bagelChips).reduce((a, b) => a + b, 0) === 0 ? false : true;
   const [active, setActive] = useState(false);
+  const [editBagels, setEditBagels] = useState('');
+  const [editBags, setEditBags] = useState('');
   const image = (
     <Image
       src='/static/images/mamalagels-notag.png'
@@ -14,6 +25,12 @@ export default function Header() {
       height={88}
     />
   );
+
+  useEffect(() => {
+    setEditBags(bags.length > 0 ? 'Edit ' : '');
+    setEditBagels(hideBagelChips || bagelSelections.length > 0 ? 'Edit ' : '');
+  }, [hideBagelChips, bagelSelections, bags]);
+
   return (
     <nav
       className={` ${
@@ -46,11 +63,13 @@ export default function Header() {
             <a>
               <Button
                 type={'button'}
-                text={'Bagels'}
+                text={`${editBagels}Bagels & Bagels Chips`}
                 disabled={false}
                 style={{ transition: 'all .15s ease' }}
                 fullWidth={false}
-                onClick={() => {}}
+                onClick={() =>
+                  router.pathname === '/bagels' && setActive(!active)
+                }
               />
             </a>
           </Link>
@@ -60,11 +79,13 @@ export default function Header() {
             <a>
               <Button
                 type={'button'}
-                text={'Brunch Bag'}
+                text={`${editBags}Brunch Bags`}
                 disabled={false}
                 style={{ transition: 'all .15s ease' }}
                 fullWidth={false}
-                onClick={() => {}}
+                onClick={() =>
+                  router.pathname === '/brunch-bag' && setActive(!active)
+                }
               />
             </a>
           </Link>
@@ -78,7 +99,9 @@ export default function Header() {
                 disabled={false}
                 style={{ transition: 'all .15s ease' }}
                 fullWidth={false}
-                onClick={() => {}}
+                onClick={() =>
+                  router.pathname === '/special-request' && setActive(!active)
+                }
               />
             </a>
           </Link>
