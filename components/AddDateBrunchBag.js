@@ -36,46 +36,31 @@ const AddDateBrunchBag = ({ dates }) => {
   const { state, actions } = useStateMachine({ updateAction });
   const [date, setDate] = useState('');
   const [showModal, setShowModal] = useState(false);
-
-  const convertDateArray = string => {
-    let array = string.replace(/\n/g, ' ').split(' ');
-    array = array.map(item => new Date(item));
-    return array;
-  };
+  const [filteredDates, setFilteredDates] = useState([]);
 
   const handleDChange = selectedOption => {
     setValue('DeliveryDate', selectedOption);
     setDate(selectedOption);
   };
 
-  //let start = moment(this.absence.FromDate);
-  //let end = moment(this.absence.ToDate);
-
-  // Test values
-  let start = moment();
-  let end = moment().add(28, 'd');
-
-  let arr = [];
-  let tmp = start.clone().day(0);
-
-  if (tmp.isAfter(start, 'd')) {
-    arr.push(tmp.format('dddd, MMMM D, YYYY'));
-  }
-
-  while (tmp.isBefore(end)) {
-    tmp.add(7, 'days');
-    arr.push({
-      value: tmp.format('DD-MMM-YYYY'),
-      label: tmp.format('dddd, MMMM D, YYYY'),
-    });
-  }
-
-  if (
-    !moment().isBetween(moment().day(-6), moment().day(4)) ||
-    moment().isSame(moment().day(4))
-  ) {
+  const getDates = () => {
+    let start = moment().day(-3);
+    let end = moment().add(21, 'd');
+    let arr = [];
+    let tmp = start.clone().day(0);
+    if (tmp.isAfter(start, 'd')) {
+      arr.push(tmp.format('dddd, MMMM D, YYYY'));
+    }
+    while (tmp.isBefore(end)) {
+      tmp.add(7, 'days');
+      arr.push({
+        value: tmp.format('DD-MMM-YYYY'),
+        label: tmp.format('dddd, MMMM D, YYYY'),
+      });
+    }
     arr.shift();
-  }
+    return arr;
+  };
 
   useEffect(() => {
     if (state.data.brunchBag.deliveryDate) {
@@ -84,6 +69,7 @@ const AddDateBrunchBag = ({ dates }) => {
     } else {
       setShowModal(true);
     }
+    setFilteredDates(getDates());
     return () => {};
   }, []);
 
@@ -116,7 +102,7 @@ const AddDateBrunchBag = ({ dates }) => {
             className={classes.formControl}
             control={control}
             rules={{ required: true }}
-            options={arr}
+            options={filteredDates}
             ref={dRef}
             placeholder={'Select Delivery Date'}
           />
