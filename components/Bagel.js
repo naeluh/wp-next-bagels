@@ -12,12 +12,12 @@ const Bagel = ({ title, img, desc }) => {
             <div className='w-full overflow-hidden mb-6 border-black border-12'>
               {img ? (
                 <img
-                  className='object-cover h-48 w-full object-top'
+                  className='object-cover h-48 w-full object-center'
                   src={img.node.sourceUrl}
                 />
               ) : (
                 <img
-                  className='object-cover h-48 w-full object-top'
+                  className='object-cover h-48 w-full object-center'
                   src={imageSrc}
                 />
               )}

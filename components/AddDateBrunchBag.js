@@ -7,6 +7,7 @@ import { useStateMachine } from 'little-state-machine';
 import SelectList from './SelectList';
 import Modal from './Modal';
 import Button from './Button';
+import moment from 'moment';
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -47,6 +48,35 @@ const AddDateBrunchBag = ({ dates }) => {
     setDate(selectedOption);
   };
 
+  //let start = moment(this.absence.FromDate);
+  //let end = moment(this.absence.ToDate);
+
+  // Test values
+  let start = moment();
+  let end = moment().add(28, 'd');
+
+  let arr = [];
+  let tmp = start.clone().day(0);
+
+  if (tmp.isAfter(start, 'd')) {
+    arr.push(tmp.format('dddd, MMMM D, YYYY'));
+  }
+
+  while (tmp.isBefore(end)) {
+    tmp.add(7, 'days');
+    arr.push({
+      value: tmp.format('DD-MMM-YYYY'),
+      label: tmp.format('dddd, MMMM D, YYYY'),
+    });
+  }
+
+  if (
+    !moment().isBetween(moment().day(-6), moment().day(4)) ||
+    moment().isSame(moment().day(4))
+  ) {
+    arr.shift();
+  }
+
   useEffect(() => {
     if (state.data.brunchBag.deliveryDate) {
       setValue('BagelPickupDate', state.data.brunchBag.deliveryDate);
@@ -86,9 +116,9 @@ const AddDateBrunchBag = ({ dates }) => {
             className={classes.formControl}
             control={control}
             rules={{ required: true }}
-            options={dates}
+            options={arr}
             ref={dRef}
-            placeholder={'Select Pickup Date'}
+            placeholder={'Select Delivery Date'}
           />
           {errors.BagelPickupDate?.type === 'required' && (
             <p style={{ color: 'red' }}>Date is required</p>

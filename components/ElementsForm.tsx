@@ -40,7 +40,7 @@ const CARD_OPTIONS = {
 const ElementsForm = () => {
   const router = useRouter();
   const { actions, state } = useStateMachine({ updateAction });
-  const processingFee = 1;
+  const processingFee = state?.data?.brunchBag.bags.length > 0 ? 3 : 1;
   const [input, setInput] = useState({
     customDonation: state?.data?.totalCost + processingFee,
     cardholderName: '',

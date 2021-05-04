@@ -19,6 +19,11 @@ const BrunchBagBagelSelectionsModal = ({
   const [type, setType] = useState('');
   const [id, setId] = useState('');
   const [showAlertModal, setAlertShowModal] = useState(false);
+  const limitedBagels = bagelData
+    ? bagelData.filter(bagel =>
+        ['Mamalagel', 'Plain', 'Everything'].includes(bagel.node.title)
+      )
+    : [];
 
   const defaultValues = {
     large: 6,
@@ -112,8 +117,8 @@ const BrunchBagBagelSelectionsModal = ({
           </p>
         </section>
         <section className='flex-col md:flex-column flex md:justify-between'>
-          {bagelData &&
-            bagelData.map(
+          {limitedBagels &&
+            limitedBagels.map(
               bagel =>
                 bagel.node.title && (
                   <BagelNumberField
