@@ -112,12 +112,8 @@ const ElementsForm = () => {
 
   const updateBrunchBag = async (bags: any, data: any) => {
     if (!bags && !data) return false;
-    const { small, large } = data;
-    let l = bags.filter((bag: any) => bag.type === 'large');
-    let s = bags.filter((bag: any) => bag.type === 'small');
-    let newSmall = small - s.length;
-    let newLarge = large - l.length;
-    await fetchGetJSON(`/api/brunch?small=${newSmall}&large=${newLarge}`);
+
+    return true;
   };
 
   const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = e =>
@@ -177,6 +173,22 @@ const ElementsForm = () => {
 
       const { address } = oldState?.brunchBag;
 
+      // updateBrunchBag(state?.data?.brunchBag.bags, state?.data?.brunchBagData);
+
+      const { small, large } = state?.data?.brunchBagData;
+      let l = state?.data?.brunchBag.bags.filter(
+        (bag: any) => bag.type === 'large'
+      );
+      let s = state?.data?.brunchBag.bags.filter(
+        (bag: any) => bag.type === 'small'
+      );
+      let newSmall = small - s.length;
+      let newLarge = large - l.length;
+
+      console.log(newSmall, newLarge);
+
+      await fetchGetJSON(`/api/brunch?small=${newSmall}&large=${newLarge}`);
+
       await fetchGetJSON(
         encodeURI(
           `/api/email?desc=${description}&name=${input.cardholderName}&phone=${input.cardholderPhone}&email=${input.cardholderEmail}&time=${oldState.formattedDate}&location=${oldState.formattedLocation}&cost=${oldState.totalCost}&addresOne=${address.addressOne}&addresTwo=${address.addressTwo}&city=${address.city}&state=${address.state}&zip=${address.zip}`
@@ -187,8 +199,6 @@ const ElementsForm = () => {
         state?.data?.bagelChips,
         state?.data?.bagelChipData
       );
-
-      updateBrunchBag(state?.data?.brunchBag.bags, state?.data?.brunchBagData);
 
       // Reset Value on 'succeeded'
       actions.updateAction({

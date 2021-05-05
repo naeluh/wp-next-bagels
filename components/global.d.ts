@@ -11,7 +11,10 @@ declare module 'little-state-machine' {
       formattedDate: string;
       formattedLocation: string;
       totalCost: number;
-      brunchBagData: object;
+      brunchBagData: {
+        small: number;
+        large: number;
+      };
       brunchBag: {
         bags: array;
         deliveryDate: string;

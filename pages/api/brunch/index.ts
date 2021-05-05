@@ -1,7 +1,7 @@
 import fetch from '../../../lib/fetch';
 import btoa from 'btoa';
 
-export default async function wordPressPost(req: any, res: any) {
+export default async function brunch(req: any, res: any) {
   if (req.method !== 'GET') {
     res.setHeader('Allow', 'GET');
     return res.status(405).end();
@@ -17,7 +17,7 @@ export default async function wordPressPost(req: any, res: any) {
   const LARGE = req.query.large;
 
   const response = await fetch(
-    `https://mamalagels.com/wp-json/acf/v3/brunch_bag/cG9zdDo2ODQy?fields[small]=${SMALL}&fields[large]=${LARGE}`,
+    `https://mamalagels.com/wp-json/acf/v3/brunch_bag/6842?fields[small]=${SMALL}&fields[large]=${LARGE}`,
     {
       method: 'POST',
       headers: {
