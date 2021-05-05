@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import BagelSetAddRemove from './BagelSetAddRemove';
 import BagelChipSetAddRemove from './BagelChipSetAddRemove';
 import BrunchBagAddRemove from './BrunchBagAddRemove';
@@ -8,6 +8,11 @@ const SuccessfulPaymentResponse = ({ oldState, input }) => {
     Object.values(oldState.bagelChips).reduce((a, b) => a + b, 0) === 0
       ? false
       : true;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <section className='my-4 flex justify-start items-center border-b-4 border-m-yellow'>
