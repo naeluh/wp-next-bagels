@@ -9,7 +9,7 @@ import Button from './Button';
 import BrunchBagBagelSelectionsModal from './BrunchBagBagelSelectionsModal';
 import BrunchBagAddRemove from './BrunchBagAddRemove';
 
-const AddBrunchBag = ({ bagelData, pricing }) => {
+const AddBrunchBag = ({ bagelData, pricing, brunchBag }) => {
   const router = useRouter();
   const [dates, setDates] = useState([]);
   const { state, actions } = useStateMachine({ updateAction });
@@ -74,6 +74,9 @@ const AddBrunchBag = ({ bagelData, pricing }) => {
   useEffect(() => {
     setDates(nextFourteenDays(new Date()));
     setBrunchBagId(state.data.brunchBag.bags.length);
+    actions.updateAction({
+      brunchBagData: brunchBag.brunchBagsQuantities,
+    });
   }, []);
 
   return (
