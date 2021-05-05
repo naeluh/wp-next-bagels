@@ -110,6 +110,16 @@ const ElementsForm = () => {
     return true;
   };
 
+  const updateBrunchBag = async (bags: any, data: any) => {
+    if (!bags && !data) return false;
+    const { small, large } = data;
+    let l = bags.filter((bag: any) => bag.type === 'large');
+    let s = bags.filter((bag: any) => bag.type === 'small');
+    let newSmall = small - s.length;
+    let newLarge = large - l.length;
+    await fetchGetJSON(`/api/brunch?small=${newSmall}&large=${newLarge}`);
+  };
+
   const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = e =>
     setInput({
       ...input,
@@ -178,6 +188,8 @@ const ElementsForm = () => {
         state?.data?.bagelChipData
       );
 
+      updateBrunchBag(state?.data?.brunchBag.bags, state?.data?.brunchBagData);
+
       // Reset Value on 'succeeded'
       actions.updateAction({
         bagelSelections: [],
@@ -206,7 +218,7 @@ const ElementsForm = () => {
   return (
     <article>
       {['succeeded'].includes(payment.status) ? (
-        <SuccessfulPaymentResponse oldState={oldState} />
+        <SuccessfulPaymentResponse oldState={oldState} input={input} />
       ) : (
         <>
           <OrderDetails currentState={state} />
