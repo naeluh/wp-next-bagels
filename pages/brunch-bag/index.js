@@ -62,6 +62,7 @@ export default function Index() {
           pickupLocations={data.pickupLocations.edges}
           bagelChipsData={data.allBagelChips.edges}
           pricing={data.prices.edges}
+          brunchBag={data.brunchBag}
         />
       </Container>
     </Layout>
