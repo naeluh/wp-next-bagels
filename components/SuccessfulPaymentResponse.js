@@ -3,7 +3,7 @@ import BagelSetAddRemove from './BagelSetAddRemove';
 import BagelChipSetAddRemove from './BagelChipSetAddRemove';
 import BrunchBagAddRemove from './BrunchBagAddRemove';
 
-const SuccessfulPaymentResponse = ({ oldState }) => {
+const SuccessfulPaymentResponse = ({ oldState, input }) => {
   const hideBagelChipsHeaderfromOldState =
     Object.values(oldState.bagelChips).reduce((a, b) => a + b, 0) === 0
       ? false
@@ -51,11 +51,11 @@ const SuccessfulPaymentResponse = ({ oldState }) => {
           <p className='text-xl'>
             <span className='text-xl font-serif font-black'>Brunch Bags</span>:
           </p>
-          {oldState.brunchBag.bags.map(bags => (
+          {oldState.brunchBag.bags.map(bag => (
             <BrunchBagAddRemove
-              show
+              show={false}
               bag={bag}
-              editGroup={editGroup}
+              editGroup={() => {}}
               key={bag.id}
             />
           ))}
