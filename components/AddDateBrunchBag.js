@@ -29,10 +29,12 @@ const AddDateBrunchBag = ({ dates }) => {
     bagelPickupDates: '',
     bagelPickupLocations: '',
   };
+
   const { handleSubmit, errors, control, setValue, getValues } = useForm({
     defaultValues,
     mode: 'onChange',
   });
+
   const { state, actions } = useStateMachine({ updateAction });
   const [date, setDate] = useState('');
   const [showModal, setShowModal] = useState(false);
