@@ -78,7 +78,7 @@ const AddBrunchBag = ({ bagelData, pricing, brunchBag }) => {
 
     const process = async data => {
       return actions.updateAction({
-        brunchBagData: await processBrunchBags(brunchBag),
+        brunchBagData: await processBrunchBags(data),
       });
     };
 
