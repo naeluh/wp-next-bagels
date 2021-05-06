@@ -42,6 +42,7 @@
     "skypack": "^0.3.2",
     "stripe": "^8.144.0",
     "swr": "^0.5.5",
+    "unfetch": "^4.2.0",
     "use-shopping-cart": "^2.4.3"
   },
   "devDependencies": {

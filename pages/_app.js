@@ -17,7 +17,7 @@ createStore(
       totalCost: 0.0,
       formattedDate: '',
       formattedLocation: '',
-      brunchBagData: {},
+      brunchBagData: [],
       brunchBag: {
         bags: [],
         deliveryDate: null,

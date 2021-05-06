@@ -9,15 +9,32 @@ import fetch from '../../lib/graphqlFetch';
 import Image from 'next/image';
 import useSWR from 'swr';
 import AddBrunchBag from '../../components/AddBrunchBag';
+import unfetch from 'unfetch';
 
 const getData = async (...args) => {
   return await fetch(getDataQuery);
 };
 
+const fetcher = async url => {
+  const r = await unfetch(url);
+  const json = await r.json();
+  console.log(json);
+  return json;
+};
+/* unfetch(url)
+    .then(r => {
+      console.log(r.json());
+      return r.json();
+    })
+    .then(data => console.log(data)); */
+
 export default function Index() {
   const { data, error } = useSWR(getDataQuery, getData);
+  const response = useSWR('/api/bags', fetcher);
 
-  if (error) {
+  console.log(response.data, response.error);
+
+  if (error && response.error) {
     return (
       <div className='flex flex-col justify-center items-center w-full h-screen'>
         <Image
@@ -62,7 +79,7 @@ export default function Index() {
           pickupLocations={data.pickupLocations.edges}
           bagelChipsData={data.allBagelChips.edges}
           pricing={data.prices.edges}
-          brunchBag={data.brunchBag}
+          brunchBag={response.data}
         />
       </Container>
     </Layout>

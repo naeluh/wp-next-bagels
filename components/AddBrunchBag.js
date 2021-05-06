@@ -8,6 +8,7 @@ import TotalCost from './TotalCost';
 import Button from './Button';
 import BrunchBagBagelSelectionsModal from './BrunchBagBagelSelectionsModal';
 import BrunchBagAddRemove from './BrunchBagAddRemove';
+import processBrunchBags from '../lib/processBrunchBags';
 
 const AddBrunchBag = ({ bagelData, pricing, brunchBag }) => {
   const router = useRouter();
@@ -74,13 +75,17 @@ const AddBrunchBag = ({ bagelData, pricing, brunchBag }) => {
   useEffect(() => {
     setDates(nextFourteenDays(new Date()));
     setBrunchBagId(state.data.brunchBag.bags.length);
-    actions.updateAction({
-      brunchBagData: brunchBag.brunchBagsQuantities,
-    });
+
+    const process = async data => {
+      return actions.updateAction({
+        brunchBagData: await processBrunchBags(brunchBag),
+      });
+    };
+
+    process(brunchBag);
   }, []);
 
-  return state.data.brunchBagData.large !== 0 &&
-    state.data.brunchBagData.small !== 0 ? (
+  return (
     <>
       <section className='my-8 border-b-4 border-m-yellow pb-8'>
         <AddDateBrunchBag dates={dates} />
@@ -95,40 +100,39 @@ const AddBrunchBag = ({ bagelData, pricing, brunchBag }) => {
         <p className='text-xl'>
           <span className='text-xl font-serif font-black'>Brunch Bags</span>:
         </p>
-        {state.data.brunchBagData.large !== 0 && (
-          <>
-            <Button
-              type={'button'}
-              style={{ transition: 'all .15s ease' }}
-              text={`Add Large - ${priceLarge}.00`}
-              disabled={false}
-              name='large'
-              onClick={e => addGroup('large')}
-              fullWidth={false}
-            />
 
-            <p className='text-xl font-serif font-black'>
-              Choice of 6 Bagels, 12 Farm Fresh Eggs, and Microgreens
-            </p>
-          </>
-        )}
-        {state.data.brunchBagData.small !== 0 && (
-          <>
-            <Button
-              type={'button'}
-              style={{ transition: 'all .15s ease' }}
-              text={`Add Small - ${priceSmall}.00`}
-              disabled={false}
-              name='small'
-              onClick={e => addGroup('small')}
-              fullWidth={false}
-            />
+        <>
+          <Button
+            type={'button'}
+            style={{ transition: 'all .15s ease' }}
+            text={`Add Large - ${priceLarge}.00`}
+            disabled={false}
+            name='large'
+            onClick={e => addGroup('large')}
+            fullWidth={false}
+          />
 
-            <p className='text-xl font-serif font-black'>
-              Choice of 3 Bagels, 6 Farm Fresh Eggs, and Microgreens
-            </p>
-          </>
-        )}
+          <p className='text-xl font-serif font-black'>
+            Choice of 6 Bagels, 12 Farm Fresh Eggs, and Microgreens
+          </p>
+        </>
+
+        <>
+          <Button
+            type={'button'}
+            style={{ transition: 'all .15s ease' }}
+            text={`Add Small - ${priceSmall}.00`}
+            disabled={false}
+            name='small'
+            onClick={e => addGroup('small')}
+            fullWidth={false}
+          />
+
+          <p className='text-xl font-serif font-black'>
+            Choice of 3 Bagels, 6 Farm Fresh Eggs, and Microgreens
+          </p>
+        </>
+
         {state.data.brunchBag.bags.length > 0 &&
           state.data.brunchBag.bags.map(bag => (
             <BrunchBagAddRemove
@@ -160,10 +164,6 @@ const AddBrunchBag = ({ bagelData, pricing, brunchBag }) => {
         />
       </section>
     </>
-  ) : (
-    <section className='my-8 border-t-4 border-m-yellow pb-8'>
-      <p className='text-xl font-serif font-black'>Brunch bags sold out !</p>
-    </section>
   );
 };
 
