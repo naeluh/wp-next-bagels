@@ -21,12 +21,6 @@ const fetcher = async url => {
   console.log(json);
   return json;
 };
-/* unfetch(url)
-    .then(r => {
-      console.log(r.json());
-      return r.json();
-    })
-    .then(data => console.log(data)); */
 
 export default function Index() {
   const { data, error } = useSWR(getDataQuery, getData);

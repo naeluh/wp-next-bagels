@@ -1,5 +1,4 @@
 import fetch from '../../../lib/fetch';
-import btoa from 'btoa';
 
 export default async function brunch(req: any, res: any) {
   if (req.method !== 'GET') {
@@ -13,23 +12,15 @@ export default async function brunch(req: any, res: any) {
     });
   }
 
-  const SMALL = req.query.small;
-  const LARGE = req.query.large;
+  const DAY = req.query.day;
+  const BAGS = req.query.bags;
 
   const response = await fetch(
-    `https://mamalagels.com/wp-json/acf/v3/brunch_bag/6842?fields[small]=${SMALL}&fields[large]=${LARGE}`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'text/plain',
-        Authorization:
-          'Basic ' + btoa(process.env.USER + ':' + process.env.PASS),
-      },
-    }
+    encodeURI(`https://receipts.mamalagels.com/brunch?day=${DAY}&bags=${BAGS}`)
   );
 
   if (response.ok) {
-    // Cache the Wordpress response for 3 seconds
+    // Cache the Brunch response for 3 seconds
     res.setHeader('Cache-Control', 's-maxage=3, stale-while-revalidate');
     res.status(200).json({
       success: [{ message: `${response.status}` }],
@@ -38,7 +29,7 @@ export default async function brunch(req: any, res: any) {
     res.status(400).json({
       errors: [
         {
-          message: `Fetch to the Wordpress API failed with code: ${response.status}`,
+          message: `Fetch to the Brunch API failed with code: ${response.status}`,
         },
       ],
     });

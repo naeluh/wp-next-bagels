@@ -45,7 +45,7 @@ const AddDateBrunchBag = ({ dates }) => {
     setDate(selectedOption);
   };
 
-  const getDates = () => {
+  const getDates = data => {
     let start = moment().day(-3);
     let end = moment().add(21, 'd');
     let arr = [];
@@ -55,10 +55,16 @@ const AddDateBrunchBag = ({ dates }) => {
     }
     while (tmp.isBefore(end)) {
       tmp.add(7, 'days');
-      arr.push({
-        value: tmp.format('DD-MMM-YYYY'),
-        label: tmp.format('dddd, MMMM D, YYYY'),
-      });
+      if (
+        moment(data.brunchBagData.day).isSame(tmp) &&
+        data.brunchBagData.getLarge &&
+        data.brunchBagData.getSamll
+      ) {
+        arr.push({
+          value: tmp.format('DD-MMM-YYYY'),
+          label: tmp.format('dddd, MMMM D, YYYY'),
+        });
+      }
     }
     arr.shift();
     return arr;
@@ -71,7 +77,7 @@ const AddDateBrunchBag = ({ dates }) => {
     } else {
       setShowModal(true);
     }
-    setFilteredDates(getDates());
+    setFilteredDates(getDates(state.data));
     return () => {};
   }, [state.data.brunchBag.deliveryDate]);
 

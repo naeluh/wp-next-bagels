@@ -9,6 +9,7 @@ import Button from './Button';
 import BrunchBagBagelSelectionsModal from './BrunchBagBagelSelectionsModal';
 import BrunchBagAddRemove from './BrunchBagAddRemove';
 import processBrunchBags from '../lib/processBrunchBags';
+import moment from 'moment';
 
 const AddBrunchBag = ({ bagelData, pricing, brunchBag }) => {
   const router = useRouter();
@@ -101,37 +102,45 @@ const AddBrunchBag = ({ bagelData, pricing, brunchBag }) => {
           <span className='text-xl font-serif font-black'>Brunch Bags</span>:
         </p>
 
-        <>
-          <Button
-            type={'button'}
-            style={{ transition: 'all .15s ease' }}
-            text={`Add Large - ${priceLarge}.00`}
-            disabled={false}
-            name='large'
-            onClick={e => addGroup('large')}
-            fullWidth={false}
-          />
+        {moment(state.data.brunchBagData.day).isSame(
+          moment(state.data.brunchBagData.deliveryDate)
+        ) &&
+          data.brunchBagData.getLarge && (
+            <>
+              <Button
+                type={'button'}
+                style={{ transition: 'all .15s ease' }}
+                text={`Add Large - ${priceLarge}.00`}
+                disabled={false}
+                name='large'
+                onClick={e => addGroup('large')}
+                fullWidth={false}
+              />
+              <p className='text-xl font-serif font-black'>
+                Choice of 6 Bagels, 12 Farm Fresh Eggs, and Microgreens
+              </p>
+            </>
+          )}
 
-          <p className='text-xl font-serif font-black'>
-            Choice of 6 Bagels, 12 Farm Fresh Eggs, and Microgreens
-          </p>
-        </>
-
-        <>
-          <Button
-            type={'button'}
-            style={{ transition: 'all .15s ease' }}
-            text={`Add Small - ${priceSmall}.00`}
-            disabled={false}
-            name='small'
-            onClick={e => addGroup('small')}
-            fullWidth={false}
-          />
-
-          <p className='text-xl font-serif font-black'>
-            Choice of 3 Bagels, 6 Farm Fresh Eggs, and Microgreens
-          </p>
-        </>
+        {moment(state.data.brunchBagData.day).isSame(
+          moment(state.data.brunchBagData.deliveryDate)
+        ) &&
+          data.brunchBagData.getSmall && (
+            <>
+              <Button
+                type={'button'}
+                style={{ transition: 'all .15s ease' }}
+                text={`Add Small - ${priceSmall}.00`}
+                disabled={false}
+                name='small'
+                onClick={e => addGroup('small')}
+                fullWidth={false}
+              />
+              <p className='text-xl font-serif font-black'>
+                Choice of 3 Bagels, 6 Farm Fresh Eggs, and Microgreens
+              </p>
+            </>
+          )}
 
         {state.data.brunchBag.bags.length > 0 &&
           state.data.brunchBag.bags.map(bag => (

@@ -173,21 +173,9 @@ const ElementsForm = () => {
 
       const { address } = oldState?.brunchBag;
 
-      // updateBrunchBag(state?.data?.brunchBag.bags, state?.data?.brunchBagData);
-
-      const { small, large } = state?.data?.brunchBagData;
-      let l = state?.data?.brunchBag.bags.filter(
-        (bag: any) => bag.type === 'large'
+      await fetchGetJSON(
+        `/api/brunch?day=${state?.data?.brunchBag.deliveryDate}&bags=${state?.data?.brunchBag.bags}`
       );
-      let s = state?.data?.brunchBag.bags.filter(
-        (bag: any) => bag.type === 'small'
-      );
-      let newSmall = small - s.length;
-      let newLarge = large - l.length;
-
-      console.log(newSmall, newLarge);
-
-      await fetchGetJSON(`/api/brunch?small=${newSmall}&large=${newLarge}`);
 
       await fetchGetJSON(
         encodeURI(
@@ -210,6 +198,7 @@ const ElementsForm = () => {
         formattedDate: '',
         formattedLocation: '',
         totalCost: 0,
+        brunchBagData: [],
         brunchBag: {
           bags: [],
           deliveryDate: null,
