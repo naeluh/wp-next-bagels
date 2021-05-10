@@ -42,7 +42,7 @@ export default function Index() {
     );
   }
 
-  if (!data && !response.data) {
+  if (!data) {
     return (
       <div className='flex flex-col justify-center items-center w-full h-screen'>
         <Image
