@@ -24,6 +24,8 @@ const AddBrunchBag = ({ bagelData, pricing, brunchBag }) => {
   );
   const [open, setOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showLarge, setShowLarge] = useState(true);
+  const [showSmall, setShowSmall] = useState(true);
 
   const addGroup = type => {
     setBagelID(bagelID + 1);
@@ -76,20 +78,54 @@ const AddBrunchBag = ({ bagelData, pricing, brunchBag }) => {
   useEffect(() => {
     setDates(nextFourteenDays(new Date()));
     setBrunchBagId(state.data.brunchBag.bags.length);
+  }, []);
 
+  useEffect(() => {
     const process = async data => {
-      return actions.updateAction({
+      actions.updateAction({
         brunchBagData: await processBrunchBags(data),
       });
     };
 
     process(brunchBag);
-  }, []);
+  }, [state.data.brunchBag.bags, brunchBag]);
+
+  useEffect(() => {
+    const checkLarge = state?.data?.brunchBagData?.bb?.filter(
+      ({ day, getLarge }) =>
+        day &&
+        moment
+          .utc(day)
+          .isSame(
+            moment.utc(state.data.brunchBag.deliveryDate, 'dddd, MMMM D, YYYY')
+          ) &&
+        !getLarge
+          ? true
+          : false
+    );
+
+    setShowLarge(checkLarge?.length > 0 ? false : true);
+
+    const checkSmall = state?.data?.brunchBagData?.bb?.filter(
+      ({ day, getSmall }) =>
+        day &&
+        moment
+          .utc(day)
+          .isSame(
+            moment.utc(state.data.brunchBag.deliveryDate, 'dddd, MMMM D, YYYY')
+          ) &&
+        !getSmall
+          ? true
+          : false
+    );
+
+    setShowSmall(checkSmall?.length > 0 ? false : true);
+  }, [state]);
 
   return (
     <>
       <section className='my-8 border-b-4 border-m-yellow pb-8'>
-        <AddDateBrunchBag dates={dates} />
+        <AddDateBrunchBag dates={state?.data?.brunchBagData?.dates} />
         <p className='text-lg'>
           <span className='text-xl font-serif font-black'>Delivery Date</span>:{' '}
           {state.data.brunchBag.deliveryDate
@@ -102,45 +138,39 @@ const AddBrunchBag = ({ bagelData, pricing, brunchBag }) => {
           <span className='text-xl font-serif font-black'>Brunch Bags</span>:
         </p>
 
-        {moment(state.data.brunchBagData.day).isSame(
-          moment(state.data.brunchBagData.deliveryDate)
-        ) &&
-          data.brunchBagData.getLarge && (
-            <>
-              <Button
-                type={'button'}
-                style={{ transition: 'all .15s ease' }}
-                text={`Add Large - ${priceLarge}.00`}
-                disabled={false}
-                name='large'
-                onClick={e => addGroup('large')}
-                fullWidth={false}
-              />
-              <p className='text-xl font-serif font-black'>
-                Choice of 6 Bagels, 12 Farm Fresh Eggs, and Microgreens
-              </p>
-            </>
-          )}
+        {showLarge && (
+          <>
+            <Button
+              type={'button'}
+              style={{ transition: 'all .15s ease' }}
+              text={`Add Large - ${priceLarge}.00`}
+              disabled={false}
+              name='large'
+              onClick={e => addGroup('large')}
+              fullWidth={false}
+            />
+            <p className='text-xl font-serif font-black'>
+              Choice of 6 Bagels, 12 Farm Fresh Eggs, and Microgreens
+            </p>
+          </>
+        )}
 
-        {moment(state.data.brunchBagData.day).isSame(
-          moment(state.data.brunchBagData.deliveryDate)
-        ) &&
-          data.brunchBagData.getSmall && (
-            <>
-              <Button
-                type={'button'}
-                style={{ transition: 'all .15s ease' }}
-                text={`Add Small - ${priceSmall}.00`}
-                disabled={false}
-                name='small'
-                onClick={e => addGroup('small')}
-                fullWidth={false}
-              />
-              <p className='text-xl font-serif font-black'>
-                Choice of 3 Bagels, 6 Farm Fresh Eggs, and Microgreens
-              </p>
-            </>
-          )}
+        {showSmall && (
+          <>
+            <Button
+              type={'button'}
+              style={{ transition: 'all .15s ease' }}
+              text={`Add Small - ${priceSmall}.00`}
+              disabled={false}
+              name='small'
+              onClick={e => addGroup('small')}
+              fullWidth={false}
+            />
+            <p className='text-xl font-serif font-black'>
+              Choice of 3 Bagels, 6 Farm Fresh Eggs, and Microgreens
+            </p>
+          </>
+        )}
 
         {state.data.brunchBag.bags.length > 0 &&
           state.data.brunchBag.bags.map(bag => (
@@ -152,6 +182,7 @@ const AddBrunchBag = ({ bagelData, pricing, brunchBag }) => {
             />
           ))}
       </section>
+
       <BrunchBagBagelSelectionsModal
         setShowModal={setShowModal}
         showModal={showModal}

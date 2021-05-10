@@ -118,6 +118,7 @@ const SelectList = forwardRef(
               autoFocus={false}
               onChange={handleChange}
               defaultValue={value}
+              value={value}
               name={name}
               options={options}
               placeholder={placeholder}

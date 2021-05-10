@@ -7,7 +7,6 @@ import { useStateMachine } from 'little-state-machine';
 import SelectList from './SelectList';
 import Modal from './Modal';
 import Button from './Button';
-import moment from 'moment';
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -38,36 +37,10 @@ const AddDateBrunchBag = ({ dates }) => {
   const { state, actions } = useStateMachine({ updateAction });
   const [date, setDate] = useState('');
   const [showModal, setShowModal] = useState(false);
-  const [filteredDates, setFilteredDates] = useState([]);
 
   const handleDChange = selectedOption => {
     setValue('DeliveryDate', selectedOption);
     setDate(selectedOption);
-  };
-
-  const getDates = data => {
-    let start = moment().day(-3);
-    let end = moment().add(21, 'd');
-    let arr = [];
-    let tmp = start.clone().day(0);
-    if (tmp.isAfter(start, 'd')) {
-      arr.push(tmp.format('dddd, MMMM D, YYYY'));
-    }
-    while (tmp.isBefore(end)) {
-      tmp.add(7, 'days');
-      if (
-        moment(data.brunchBagData.day).isSame(tmp) &&
-        data.brunchBagData.getLarge &&
-        data.brunchBagData.getSamll
-      ) {
-        arr.push({
-          value: tmp.format('DD-MMM-YYYY'),
-          label: tmp.format('dddd, MMMM D, YYYY'),
-        });
-      }
-    }
-    arr.shift();
-    return arr;
   };
 
   useEffect(() => {
@@ -77,9 +50,8 @@ const AddDateBrunchBag = ({ dates }) => {
     } else {
       setShowModal(true);
     }
-    setFilteredDates(getDates(state.data));
     return () => {};
-  }, [state.data.brunchBag.deliveryDate]);
+  }, []);
 
   const onSubmit = data => {
     actions.updateAction({
@@ -90,6 +62,10 @@ const AddDateBrunchBag = ({ dates }) => {
     });
     setShowModal(false);
   };
+
+  useEffect(() => {
+    console.error(errors);
+  }, [errors]);
 
   return (
     <Modal
@@ -110,12 +86,12 @@ const AddDateBrunchBag = ({ dates }) => {
             className={classes.formControl}
             control={control}
             rules={{ required: true }}
-            options={filteredDates}
+            options={dates}
             ref={dRef}
             placeholder={'Select Delivery Date'}
           />
-          {errors.BagelPickupDate?.type === 'required' && (
-            <p style={{ color: 'red' }}>Date is required</p>
+          {errors.DeliveryDate?.type === 'required' && (
+            <p style={{ color: 'red' }}>Delivery Date is required</p>
           )}
         </section>
         <Button

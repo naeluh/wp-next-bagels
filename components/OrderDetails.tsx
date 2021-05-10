@@ -22,7 +22,7 @@ const OrderDetails = ({ currentState }: Props) => {
       : true;
 
   return (
-    <>
+    <div className='pt-14'>
       <section className='my-4 border-b-4 border-m-yellow flex justify-start items-center'>
         <p className=' text-3xl font-serif mr-4 text-black'>Cart</p>
       </section>
@@ -90,7 +90,7 @@ const OrderDetails = ({ currentState }: Props) => {
             </p>
           </section>
         ))}
-    </>
+    </div>
   );
 };
 

@@ -29,7 +29,7 @@ export default function Header() {
   useEffect(() => {
     setEditBags(bags.length > 0 ? 'Edit ' : '');
     setEditBagels(hideBagelChips || bagelSelections.length > 0 ? 'Edit ' : '');
-  }, [hideBagelChips, bagelSelections, bags]);
+  }, [hideBagelChips, bagelSelections, bags, state]);
 
   return (
     <nav

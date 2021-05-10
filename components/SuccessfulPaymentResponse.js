@@ -42,12 +42,10 @@ const SuccessfulPaymentResponse = ({ oldState, input }) => {
             Delivery Date: {oldState.brunchBag.deliveryDate}
           </p>
 
-          <p className='my-2 text-xl'>Delivery Address:</p>
-          {Object.entries(oldState.brunchBag.address).map((key, value) => {
-            <p className='my-2 text-xl' key={key}>
-              {key !== 'addressOne' || 'addressTwo' ? key : ''}:{value}
-            </p>;
-          })}
+          <p className='my-2 text-xl'>
+            Delivery Address: {input.addressOne} {input.addressTwo} {input.city}{' '}
+            {input.state} {input.zip}
+          </p>
         </section>
       )}
 

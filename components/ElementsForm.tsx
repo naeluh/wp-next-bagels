@@ -46,6 +46,11 @@ const ElementsForm = () => {
     cardholderName: '',
     cardholderEmail: '',
     cardholderPhone: '',
+    addressOne: '',
+    addressTwo: '',
+    city: '',
+    state: '',
+    zip: '',
   });
   const [payment, setPayment] = useState({ status: 'initial' });
   const [errorMessage, setErrorMessage] = useState('');
@@ -60,7 +65,7 @@ const ElementsForm = () => {
   useEffect(() => {
     setDescription(desc(state));
     if (state?.data?.totalCost === 0) {
-      router.push(`/bagels`);
+      router.push(`/`);
     }
   }, []);
 
@@ -171,15 +176,15 @@ const ElementsForm = () => {
     } else if (paymentIntent) {
       setPayment(paymentIntent);
 
-      const { address } = oldState?.brunchBag;
-
       await fetchGetJSON(
-        `/api/brunch?day=${state?.data?.brunchBag.deliveryDate}&bags=${state?.data?.brunchBag.bags}`
+        `/api/brunch?day=${
+          state?.data?.brunchBag.deliveryDate
+        }&bags=${JSON.stringify(state?.data?.brunchBag.bags)}`
       );
 
       await fetchGetJSON(
         encodeURI(
-          `/api/email?desc=${description}&name=${input.cardholderName}&phone=${input.cardholderPhone}&email=${input.cardholderEmail}&time=${oldState.formattedDate}&location=${oldState.formattedLocation}&cost=${oldState.totalCost}&addresOne=${address.addressOne}&addresTwo=${address.addressTwo}&city=${address.city}&state=${address.state}&zip=${address.zip}`
+          `/api/email?desc=${description}&name=${input.cardholderName}&phone=${input.cardholderPhone}&email=${input.cardholderEmail}&time=${oldState.formattedDate}&location=${oldState.formattedLocation}&cost=${oldState.totalCost}&deliveryDate=${oldState.brunchBag.deliveryDate}&addresOne=${input.addressOne}&addresTwo=${input.addressTwo}&city=${input.city}&state=${input.state}&zip=${input.zip}`
         )
       );
 
@@ -268,6 +273,7 @@ const ElementsForm = () => {
                 }}
               />
             </fieldset>
+            <PaymentStatus status={payment.status} />
             <p className='mb-4'>Processing Fee:&nbsp;${processingFee}.00</p>
             <p className='text-2xl font-serif'>
               Total:&nbsp;
@@ -290,8 +296,7 @@ const ElementsForm = () => {
         </>
       )}
 
-      {/* <PaymentStatus status={payment.status} />
-      <PrintObject content={payment} /> */}
+      {/*  <PrintObject content={payment} /> */}
     </article>
   );
 };

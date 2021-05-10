@@ -82,8 +82,6 @@ const BagelSelections = ({ bagelData }) => {
     }
   }, [totalBagels]);
 
-  console.log(getValues);
-
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}

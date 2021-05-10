@@ -18,15 +18,12 @@ const getData = async (...args) => {
 const fetcher = async url => {
   const r = await unfetch(url);
   const json = await r.json();
-  console.log(json);
   return json;
 };
 
 export default function Index() {
   const { data, error } = useSWR(getDataQuery, getData);
   const response = useSWR('/api/bags', fetcher);
-
-  console.log(response.data, response.error);
 
   if (error && response.error) {
     return (
@@ -45,7 +42,7 @@ export default function Index() {
     );
   }
 
-  if (!data) {
+  if (!data && !response.data) {
     return (
       <div className='flex flex-col justify-center items-center w-full h-screen'>
         <Image

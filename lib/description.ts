@@ -3,7 +3,7 @@ type Props = {
 };
 
 const desc = (data: Props) => {
-  const { bagelSelections, bagelChips } = data.data;
+  const { bagelSelections, bagelChips, brunchBag } = data.data;
 
   let bagelArray: any = [];
   let string = '';
@@ -40,6 +40,29 @@ const desc = (data: Props) => {
         `${chip[0]} ${chip[1]} ${chip[1] >= 2 ? `bags` : `bag`}<br>`
     )
     .join('');
+
+  const plural = (v: number) => (v >= 2 ? 'bagels' : 'bagel');
+
+  string += brunchBag.bags.length > 0 ? `Brunch Bags<br>` : ``;
+
+  string +=
+    brunchBag.bags.length > 0
+      ? brunchBag.bags.map((bag: any) => {
+          const bagels = bag.bagels.filter((bagel: any) => bagel.value > 0);
+
+          const bagDetails =
+            bag.type === `small`
+              ? '6 Farm Fresh Eggs, and Microgreens'
+              : '12 Farm Fresh Eggs, and Microgreens';
+
+          return bagels
+            ? `${bagels.map(
+                (bagel: any) =>
+                  `${bagel.value} ${bagel.key} ${plural(bagel.value)}`
+              )} ${bagDetails}`
+            : ``;
+        })
+      : ``;
 
   return string;
 };
