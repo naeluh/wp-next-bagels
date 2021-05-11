@@ -96,7 +96,7 @@ const BagelSelectionsModal = ({
           </h5>
           <h6
             className={`${
-              totalBagels === amount ? `${limit} px-8` : ``
+              totalBagels === amount ? `${limit}` : ``
             } text-2xl font-bold tracking-tighter leading-tight font-serif  text-black mb-4 py-4`}
           >
             Total Bagels: {totalBagels}
