@@ -8,7 +8,12 @@ type Props = {
   buttonProps: any;
 };
 
-const AlertModal = ({ alertText, setShowModal, showModal, buttonProps }: Props) => {
+const AlertModal = ({
+  alertText,
+  setShowModal,
+  showModal,
+  buttonProps,
+}: Props) => {
   return (
     <>
       {showModal ? (
@@ -53,26 +58,26 @@ const AlertModal = ({ alertText, setShowModal, showModal, buttonProps }: Props) 
                   </div>
                   <div className='mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left'>
                     <h3
-                      className='text-lg leading-6 font-medium text-gray-900 font-serif'
+                      className='text-lg leading-6 font-black text-gray-900 font-serif'
                       id='modal-headline'
                     >
                       Limit Reached
                     </h3>
                     <div className='mt-2'>
-                      <p className='text-sm text-gray-500'>{alertText}</p>
+                      <p className='text-sm text-m-black font-black'>
+                        {alertText}
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
-              
-              <div className='bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse'>
 
+              <div className='bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse'>
                 <button
                   type='button'
                   onClick={() => setShowModal(false)}
                   className='font-serif font-black leading-tight text-lg text-m-black border-m-red bg-white hover:border-m-black hover:text-m-yellow active:border-m-yellow hover:bg-m-black focus:outline-none disabled:opacity-25 border-4 px-4 py-2 block focus:ring-red-500 focus:ring-offset-2 w-full'
                 >
-                 
                   Change Bagel Choices
                 </button>
               </div>
