@@ -33,7 +33,7 @@ const BagelNumberField = ({
 
   return (
     <div className={outerNumberContainer}>
-      <label className='text-xl md:text-2xl tracking-tighter leading-tight md:pr-8 font-serif text-black px-5 flex items-center justify-center'>
+      <label className='text-xl md:text-2xl tracking-tighter leading-tight md:pr-8 font-serif font-black text-black px-5 flex items-center justify-center'>
         {bagel.node.title}
       </label>
 
@@ -58,7 +58,7 @@ const BagelNumberField = ({
             valueAsNumber: true,
             valueAsDate: true,
           })}
-          className='quantity font-serif'
+          className='quantity font-serif font-black'
           min='0'
           max='12'
           type='number'
