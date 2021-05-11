@@ -16,7 +16,7 @@ const Input = ({ placeholder, type, name, onChange, required }: Props) => {
       name={name}
       onChange={onChange}
       required={required}
-      className='bg-white w-full border-4 border-m-black text-m-black p-4 my-4 block focus:outline-none focus:ring-2 ring-m-yellow'
+      className='bg-white w-full border-4 border-m-black placeholder-m-black  text-m-black p-4 my-4 block focus:outline-none focus:ring-2 ring-m-yellow'
     />
   );
 };
