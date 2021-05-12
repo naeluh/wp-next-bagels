@@ -4,7 +4,7 @@
   "license": "MIT",
   "author": "naeluh",
   "contributors": [
-    "Nick Hulea <naeluh@gmail.com> (https://naeluh.com)",
+    "Nick Hulea <naeluh@gmail.com> (https://naeluh.com)"
   ],
   "scripts": {
     "dev": "next",
