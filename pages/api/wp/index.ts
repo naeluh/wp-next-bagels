@@ -1,7 +1,7 @@
 import fetch from '../../../lib/fetch';
-import btoa from 'btoa'
+import btoa from 'btoa';
 
-export default async function wordPressPost(req: any, res: any ) {
+export default async function wordPressPost(req: any, res: any) {
   if (req.method !== 'GET') {
     res.setHeader('Allow', 'GET');
     return res.status(405).end();
@@ -17,14 +17,14 @@ export default async function wordPressPost(req: any, res: any ) {
   const QUANTITY = req.query.quantity;
 
   const response = await fetch(
-    `https://mamalagels.com/wp-json/acf/v3/bagel_chips/${ID}?fields[quantity]=${QUANTITY}`,
+    `https://wp.mamalagels.com/wp-json/acf/v3/bagel_chips/${ID}?fields[quantity]=${QUANTITY}`,
     {
       method: 'POST',
-          headers: {
-            'Content-Type': 'text/plain',
-            Authorization:
-              'Basic ' + btoa(process.env.USER + ':' + process.env.PASS),
-          },
+      headers: {
+        'Content-Type': 'text/plain',
+        Authorization:
+          'Basic ' + btoa(process.env.USER + ':' + process.env.PASS),
+      },
     }
   );
 
@@ -36,8 +36,11 @@ export default async function wordPressPost(req: any, res: any ) {
     });
   } else {
     res.status(400).json({
-      errors: [{ message: `Fetch to the Wordpress API failed with code: ${response.status}` }],
+      errors: [
+        {
+          message: `Fetch to the Wordpress API failed with code: ${response.status}`,
+        },
+      ],
     });
   }
 }
-
