@@ -1,4 +1,4 @@
-export default async function getZipcodes() {
+export default async function getZipCodes() {
   const zipcodes = [
     {
       mahoning: [
