@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import React, { useState, useEffect } from 'react';
 import { CMS_NAME } from '../../lib/constants';
 import { getDataQuery } from '../../lib/queries';
 import Container from '../../components/Container';
@@ -10,6 +11,7 @@ import Image from 'next/image';
 import useSWR from 'swr';
 import AddBrunchBag from '../../components/AddBrunchBag';
 import unfetch from 'unfetch';
+import CheckZipCode from '../../components/CheckZipCode';
 
 const getData = async (...args) => {
   return await fetch(getDataQuery);
@@ -24,6 +26,11 @@ const fetcher = async url => {
 export default function Index() {
   const { data, error } = useSWR(getDataQuery, getData);
   const response = useSWR('/api/bags', fetcher);
+  const [checkZip, setCheckZip] = useState(true);
+
+  if (checkZip) {
+    return <CheckZipCode checkZip={checkZip} setCheckZip={setCheckZip} />;
+  }
 
   if (error && response.error) {
     return (

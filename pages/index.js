@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { useEffect } from 'react';
 import {
   getBagelsData,
   getHomePageData,
@@ -15,6 +16,8 @@ import BagelDetails from '../components/BagelDetails';
 import LocationsTimes from '../components/LocationsTimes';
 
 export default function Index({ preview, homeData, allBagels, locationTimes }) {
+  useEffect(() => document.body.classList.remove('modal-open'));
+
   return (
     <Layout preview={preview}>
       <Head>

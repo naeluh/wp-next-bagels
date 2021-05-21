@@ -7,6 +7,7 @@ import { useStateMachine } from 'little-state-machine';
 import SelectList from './SelectList';
 import Modal from './Modal';
 import Button from './Button';
+import zipcodes from '../utils/zipcodes';
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -50,8 +51,7 @@ const AddDateBrunchBag = ({ dates }) => {
     } else {
       setShowModal(true);
     }
-    return () => {};
-  }, []);
+  });
 
   const onSubmit = data => {
     actions.updateAction({
@@ -62,10 +62,6 @@ const AddDateBrunchBag = ({ dates }) => {
     });
     setShowModal(false);
   };
-
-  useEffect(() => {
-    console.error(errors);
-  }, [errors]);
 
   return (
     <Modal
@@ -94,6 +90,25 @@ const AddDateBrunchBag = ({ dates }) => {
             <p style={{ color: 'red' }}>Delivery Date is required</p>
           )}
         </section>
+
+        <section>
+          <SelectList
+            id='Zipcodes'
+            label='Check your zipcode'
+            handleChange={handleDChange}
+            value={zipcodes()[0]}
+            name='Zipcodes'
+            className={classes.formControl}
+            control={control}
+            rules={{ required: true }}
+            options={zipcodes()}
+            placeholder={'Check your zipcode'}
+          />
+          {errors.Zipcodes?.type === 'required' && (
+            <p style={{ color: 'red' }}>Delivery Date is required</p>
+          )}
+        </section>
+
         <Button
           type={'submit'}
           style={{ transition: 'all .15s ease' }}

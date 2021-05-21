@@ -5,7 +5,7 @@ const Time = ({ time }) => {
     <div>
       {time.textDate && (
         <p className='text-base font-normal tracking-tighter leading-tight md:pr-8 font-sans mb-4'>
-          {time.textDate}{' '}
+          {time.textDate}
         </p>
       )}
 
