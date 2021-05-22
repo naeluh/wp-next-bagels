@@ -4,10 +4,10 @@ import BagelChipSetAddRemove from './BagelChipSetAddRemove';
 import BrunchBagAddRemove from './BrunchBagAddRemove';
 
 type Props = {
-  currentState: any;
+  currentState?: any;
 };
 
-const OrderDetails = ({ currentState }: Props) => {
+const OrderDetails = ({ currentState = {} }: Props) => {
   const {
     bagelSelections,
     bagelChips,
@@ -69,6 +69,7 @@ const OrderDetails = ({ currentState }: Props) => {
           {bagelChips &&
             Object.entries(bagelChips).map((key: any, value: any) => (
               <BagelChipSetAddRemove
+                editChipGroup={() => {}}
                 show={false}
                 bagelChipKey={key}
                 key={key}
