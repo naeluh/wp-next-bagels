@@ -1,16 +1,23 @@
 import React, { forwardRef } from 'react';
 
 type Props = {
-  placeholder: any;
-  type: any;
-  name: any;
-  onChange: any;
-  required: any;
-  value: any;
+  placeholder?: any;
+  type?: any;
+  name?: any;
+  onChange?: any;
+  required?: any;
+  value?: any;
 };
 
 const Input = forwardRef(
-  ({ placeholder, type, name, onChange, required, value }: Props) => {
+  ({
+    placeholder = '',
+    type = '',
+    name = '',
+    onChange = () => {},
+    required = false,
+    value = '',
+  }: Props) => {
     return (
       <input
         value={value}
