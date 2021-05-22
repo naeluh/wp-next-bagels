@@ -15,6 +15,7 @@ const SelectList = forwardRef(
       options,
       value,
       placeholder,
+      noOptionsMessage,
       ...props
     },
     ref
@@ -112,6 +113,17 @@ const SelectList = forwardRef(
             border: 'none',
           };
         },
+        noOptionsMessage: (styles, state) => {
+          return {
+            ...styles,
+            borderRadius: 0,
+            minHeight: 52,
+            border: '1px solid #C6C6C6',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          };
+        },
       }),
       []
     );
@@ -132,6 +144,7 @@ const SelectList = forwardRef(
               options={options}
               placeholder={placeholder}
               className='font-serif font-bold'
+              noOptionsMessage={noOptionsMessage}
             />
           )}
           name={name}

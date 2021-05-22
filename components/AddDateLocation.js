@@ -37,8 +37,6 @@ const AddDateLocation = ({ dates, locations }) => {
   const { state, actions } = useStateMachine({ updateAction });
   const [date, setDate] = useState('');
   const [location, setLocation] = useState('');
-  const [dateError, setDateError] = useState(false);
-  const [locationError, setLocationError] = useState(false);
   const [dateOptions, setDateOptions] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
@@ -62,33 +60,70 @@ const AddDateLocation = ({ dates, locations }) => {
     };
   });
 
+  const convertDateFormat = date =>
+    new Date(date).toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+
+  const formatDate = date => {
+    const d = new Date(date);
+    const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
+    const mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(d);
+    const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
+    return `${da}-${mo}-${ye}`;
+  };
+
+  const mutateDateArray = dates => {
+    let dateArr = [];
+    if (!dates) return dateArr;
+    dateArr = dates.map(({ locationDate }) => {
+      return {
+        value: formatDate(locationDate.toString()),
+        label: convertDateFormat(locationDate.toString()),
+      };
+    });
+    return dateArr;
+  };
+
+  const locationDates = locations.map(location => {
+    return {
+      dates: location.locationData.locationDates
+        ? mutateDateArray(location.locationData.locationDates)
+        : [],
+      location: location.value,
+    };
+  });
+
   const checkDate = (location, dates) => {
-    let bods = blackOutDates.filter(bod => location === bod.location)[0].dates;
-    bods = bods.map(b => new Date(b).getTime());
-    dates = dates.filter(
-      date => !bods.includes(new Date(date.value).getTime())
-    );
-    setDateOptions(dates);
+    console.log(dates);
+
+    let lds = dates.filter(date => location === date.location)[0].dates;
+    console.log(lds.length > 0);
+
+    if (lds.length > 0) {
+      setDateOptions(lds);
+    } else {
+      setDateOptions([]);
+    }
   };
 
   const handleLChange = selectedOption => {
-    setLocationError(false);
     setValue('BagelPickupLocation', selectedOption);
     setLocation(selectedOption);
     setValue('BagelPickupDate', '');
     setDate('');
     dRef.current.select.clearValue();
-    checkDate(selectedOption.value, dates);
+    checkDate(selectedOption.value, locationDates);
   };
 
   const handleDChange = selectedOption => {
     const values = getValues();
-    setLocationError(false);
     if (values.BagelPickupLocation) {
       setValue('BagelPickupDate', selectedOption);
       setDate(selectedOption);
-    } else {
-      setLocationError(true);
     }
   };
 
@@ -112,6 +147,14 @@ const AddDateLocation = ({ dates, locations }) => {
       formattedLocation: data.BagelPickupLocation.label,
     });
     setShowModal(false);
+  };
+
+  const NoOptionsMessage = props => {
+    return (
+      <components.NoOptionsMessage {...props}>
+        <span className='custom-css-class'>Text</span>
+      </components.NoOptionsMessage>
+    );
   };
 
   return (
@@ -154,6 +197,7 @@ const AddDateLocation = ({ dates, locations }) => {
             rules={{ required: true }}
             options={dateOptions}
             ref={dRef}
+            noOptionsMessage={() => 'No dates available'}
             placeholder={'Select Pickup Date'}
           />
           {errors.BagelPickupDate?.type === 'required' && (

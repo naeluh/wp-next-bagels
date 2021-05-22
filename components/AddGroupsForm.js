@@ -59,7 +59,7 @@ const AddGroupsForm = ({
 
   const locations = pickupLocations.map(({ node }) => {
     return {
-      label: `${node.title}, ${node.location.locationAddress}`,
+      label: `${node.title}, ${node?.location?.locationAddress}`,
       value: node.title.toLowerCase().replace(/\s/g, '-'),
       locationData: node.location,
     };
@@ -98,8 +98,21 @@ const AddGroupsForm = ({
     return dateArr;
   };
 
+  const mutateDateArray = dates => {
+    let dateArr = [];
+    if (!dates) return dateArr;
+    dateArr = dates.map(({ locationDate }) => {
+      return {
+        value: formatDate(locationDate.toString()),
+        label: convertDateFormat(locationDate.toString()),
+      };
+    });
+    return dateArr;
+  };
+
   useEffect(() => {
-    setDates(nextFourteenDays(new Date()));
+    // setDates(nextFourteenDays(new Date()));
+    setDates(mutateDateArray(pickupLocations?.location?.locationDates));
     setBagelID(state.data.bagelSelections.length);
     actions.updateAction({
       bagelChipData: bagelChipsData.map(({ node }) => {

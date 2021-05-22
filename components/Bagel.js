@@ -9,7 +9,7 @@ const Bagel = ({ title, img, desc }) => {
       {({ isVisible }) => (
         <FadeInDirection isVisible={isVisible}>
           <div>
-            <div className='w-full overflow-hidden mb-6 border-black border-12'>
+            <div className='w-full overflow-hidden mb-6 border-black border-8'>
               {img ? (
                 <img
                   className='object-cover h-48 w-full object-center'
