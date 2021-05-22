@@ -4,7 +4,7 @@ import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import Button from './Button';
 
-const BagelChipSetAddRemove = ({ bagelChipKey, show }) => {
+const BagelChipSetAddRemove = ({ editChipGroup, bagelChipKey, show }) => {
   const { state, actions } = useStateMachine({ updateAction });
 
   const removeBagelChips = (array, bckey) => {
@@ -32,15 +32,16 @@ const BagelChipSetAddRemove = ({ bagelChipKey, show }) => {
       {show && (
         <>
           <p className='inline-block mr-4'>
-            <Link href={`/bagel-chips`} as={`/bagel-chips`}>
-              <Button
-                type={'button'}
-                text={'Edit'}
-                style={{ transition: 'all .15s ease' }}
-                disabled={false}
-                fullWidth={false}
-              />
-            </Link>
+            <Button
+              type={'button'}
+              text={'Edit'}
+              style={{ transition: 'all .15s ease' }}
+              disabled={false}
+              fullWidth={false}
+              onClick={() => {
+                editChipGroup();
+              }}
+            />
           </p>
           <p className='inline-block'>
             <Button

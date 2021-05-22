@@ -50,7 +50,7 @@ const ElementsForm = () => {
     addressTwo: '',
     city: '',
     state: '',
-    zip: '',
+    zip: state?.data?.brunchBag.address.zip,
   });
   const [payment, setPayment] = useState({ status: 'initial' });
   const [errorMessage, setErrorMessage] = useState('');
@@ -262,7 +262,7 @@ const ElementsForm = () => {
 
               <CardElement
                 options={CARD_OPTIONS}
-                className='bg-white w-full border-4 border-m-black p-4 my-4 block focus:outline-none focus:ring-2 ring-m-yellow'
+                className='bg-white w-full border-8 border-m-black p-4 my-4 block focus:outline-none focus:ring-2 ring-m-yellow'
                 onChange={(e: any) => {
                   if (e.error) {
                     setPayment({ status: 'error' });

@@ -23,12 +23,12 @@ const OrderDetails = ({ currentState }: Props) => {
 
   return (
     <div className='pt-14'>
-      <section className='my-4 border-b-4 border-m-yellow flex justify-start items-center'>
+      <section className='my-4 border-b-8 border-m-yellow flex justify-start items-center'>
         <p className=' text-3xl font-serif mr-4 text-black'>Cart</p>
       </section>
 
       {brunchBag.bags.length > 0 && (
-        <section className='my-4 border-b-4 border-m-yellow'>
+        <section className='my-4 border-b-8 border-m-yellow'>
           <p className='my-2 text-xl font-serif font-black'>Brunch Bags:</p>
           {brunchBag.bags.map((bag: any) => (
             <BrunchBagAddRemove
@@ -79,7 +79,7 @@ const OrderDetails = ({ currentState }: Props) => {
 
       {hideBagelChipsHeader ||
         (bagelSelections.length > 0 && (
-          <section className='my-4 pb-4 border-b-4 border-m-yellow'>
+          <section className='my-4 pb-4 border-b-8 border-m-yellow'>
             <p className='my-2 text-xl'>
               <span className=' text-xl'>Pickup Location</span>:{' '}
               {formattedLocation ? formattedLocation : ''}

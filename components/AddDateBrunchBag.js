@@ -87,25 +87,7 @@ const AddDateBrunchBag = ({ dates }) => {
             placeholder={'Select Delivery Date'}
           />
           {errors.DeliveryDate?.type === 'required' && (
-            <p style={{ color: 'red' }}>Delivery Date is required</p>
-          )}
-        </section>
-
-        <section>
-          <SelectList
-            id='Zipcodes'
-            label='Check your zipcode'
-            handleChange={handleDChange}
-            value={zipcodes()[0]}
-            name='Zipcodes'
-            className={classes.formControl}
-            control={control}
-            rules={{ required: true }}
-            options={zipcodes()}
-            placeholder={'Check your zipcode'}
-          />
-          {errors.Zipcodes?.type === 'required' && (
-            <p style={{ color: 'red' }}>Delivery Date is required</p>
+            <p className='text-m-red'>Delivery Date is required</p>
           )}
         </section>
 

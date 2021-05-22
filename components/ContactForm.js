@@ -45,6 +45,7 @@ const ContactForm = () => {
           type='email'
           name='email'
           required
+          className='bg-white w-full border-8 border-m-black placeholder-m-black  text-m-black p-4 block focus:outline-none focus:ring-2 ring-m-yellow'
         />
       </fieldset>
       <fieldset>
@@ -53,6 +54,7 @@ const ContactForm = () => {
           name='message'
           placeholder={`Message`}
           required
+          className='bg-white w-full border-8 border-m-black placeholder-m-black  text-m-black p-4 block focus:outline-none focus:ring-2 ring-m-yellow'
         ></textarea>
       </fieldset>
 

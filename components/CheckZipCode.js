@@ -9,6 +9,7 @@ import Modal from './Modal';
 import Button from './Button';
 import Input from './Input';
 import zipcodes from '../utils/zipcodes';
+import Link from 'next/link';
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -21,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const CheckZipCode = ({ checkZip, setCheckZip }) => {
+export default function CheckZipCode() {
   const defaultValues = {
     dozen: 12,
     halfDozen: 6,
@@ -29,58 +30,38 @@ const CheckZipCode = ({ checkZip, setCheckZip }) => {
     bagelPickupLocations: '',
   };
 
-  const { handleSubmit, errors, control, setValue, register, setError } =
-    useForm({
-      defaultValues,
-      mode: 'onChange',
-    });
+  const { handleSubmit, errors, setValue, register, setError } = useForm({
+    defaultValues,
+    mode: 'onChange',
+  });
 
   const { state, actions } = useStateMachine({ updateAction });
-  const [zip, setZip] = useState('');
   const [zips, setZips] = useState(zipcodes() || []);
   const [showModal, setShowModal] = useState(false);
 
-  const handleDChange = selectedOption => {
-    console.log(selectedOption);
-    setValue('zip', selectedOption);
-    setZip(selectedOption);
-  };
-
   const onSubmit = data => {
-    console.log(data);
-    console.log(zips.includes(Number(data.zip)));
     if (!zips.includes(Number(data.zip))) {
       setError('zip', {
         type: 'manual',
-        message: 'Sorry',
+        message:
+          'Sorry, zipcode is outside of delivery area. Try another zipcode or click here',
       });
+    } else {
+      actions.updateAction({
+        brunchBag: {
+          ...state.data.brunchBag,
+          address: { ...state.data.brunchBag.address, zip: data.zip },
+        },
+      });
+      setShowModal(false);
     }
   };
 
-  /* const onSubmit = data => {
-    console.log(data);
-    actions.updateAction({
-      brunchBag: {
-        ...state.data.brunchBag,
-        address: { zip: data.zip.label },
-      },
-    });
-    // setShowModal(false);
-  }; */
-
-  useEffect(() => {
-    console.log(errors?.zip);
-  }, [errors]);
-
-  useEffect(() => {
-    setZips(zipcodes());
-    console.log(zips);
-  }, []);
+  useEffect(() => setZips(zipcodes()));
 
   useEffect(() => {
     if (state.data.brunchBag.address.zip) {
       setValue('zip', state.data.brunchBag.address.zip);
-      setZip(state.data.brunchBag.address.zip);
     } else {
       setShowModal(true);
     }
@@ -93,52 +74,37 @@ const CheckZipCode = ({ checkZip, setCheckZip }) => {
       setShowModal={setShowModal}
       showModal={showModal}
       hideCloseButton={true}
+      z={'z-50'}
     >
-      <form onSubmit={handleSubmit(onSubmit)} className={`form ${bagelForm}`}>
+      <form onSubmit={handleSubmit(onSubmit)} className={`form`}>
         <section>
           <input
-            ref={register({
-              required: true,
-              validate: value => {
-                return zips.filter(z => {
-                  return value === z.value;
-                });
-              },
-            })}
-            className='bg-white w-full border-4 border-m-black placeholder-m-black  text-m-black p-4 my-4 block focus:outline-none focus:ring-2 ring-m-yellow'
+            ref={register({ required: true })}
+            className='bg-white w-full border-8 border-m-black placeholder-m-black  text-m-black p-4 my-4 block focus:outline-none focus:ring-2 ring-m-yellow'
             placeholder={'Check your zipcode'}
             type='text'
             name='zip'
           />
-          {/* <SelectList
-            id='Zipcodes'
-            label='Check your zipcode'
-            handleChange={handleDChange}
-            value={zip}
-            name='zip'
-            className={classes.formControl}
-            control={control}
-            rules={{
-              required: true,
-              validate: value => {
-                return zipOptions.filter(z => {
-                  console.log(value === z.value);
-                  return value === z.value;
-                });
-              },
-            }}
-            options={zipOptions}
-            placeholder={'Check your zipcode'}
-          /> */}
 
           {errors?.zip?.type === 'required' && (
-            <p style={{ color: 'red' }}>
+            <p className='text-m-red'>
               We need to know your zip to see if you are in the delivery area.
             </p>
           )}
 
           {errors?.zip?.type === 'manual' && (
-            <p style={{ color: 'red' }}>pattern</p>
+            <>
+              <p className='text-m-red'>{errors?.zip?.message}</p>
+              <Link href='/'>
+                <Button
+                  type={'button'}
+                  style={{ transition: 'all .15s ease' }}
+                  text={'Go Back to homepage'}
+                  disabled={false}
+                  fullWidth
+                />
+              </Link>
+            </>
           )}
         </section>
 
@@ -152,6 +118,4 @@ const CheckZipCode = ({ checkZip, setCheckZip }) => {
       </form>
     </Modal>
   );
-};
-
-export default CheckZipCode;
+}

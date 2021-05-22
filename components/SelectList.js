@@ -64,7 +64,7 @@ const SelectList = forwardRef(
           return {
             ...styles,
             borderRadius: 0,
-            border: '4px solid #fad113',
+            border: '8px solid #fad113',
             minHeight: 52,
             boxShadow: 'none',
           };
@@ -95,12 +95,21 @@ const SelectList = forwardRef(
           return {
             ...styles,
             borderRadius: 0,
+            color: 'transparent',
+            backgroundColor: 'transparent',
+          };
+        },
+        valueContainer: (styles, state) => {
+          return {
+            ...styles,
+            border: 'none',
           };
         },
         indicatorContainer: (styles, state) => {
           return {
             ...styles,
             borderRadius: 0,
+            border: 'none',
           };
         },
       }),

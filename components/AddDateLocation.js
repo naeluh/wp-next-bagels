@@ -138,7 +138,7 @@ const AddDateLocation = ({ dates, locations }) => {
             placeholder={'Select Pickup Location'}
           />
           {errors.BagelPickupLocation?.type === 'required' && (
-            <p style={{ color: 'red' }}>Location is required</p>
+            <p className='text-m-red'>Location is required</p>
           )}
         </section>
 
@@ -157,7 +157,7 @@ const AddDateLocation = ({ dates, locations }) => {
             placeholder={'Select Pickup Date'}
           />
           {errors.BagelPickupDate?.type === 'required' && (
-            <p style={{ color: 'red' }}>Date is required</p>
+            <p className='text-m-red'>Date is required</p>
           )}
         </section>
         <Button

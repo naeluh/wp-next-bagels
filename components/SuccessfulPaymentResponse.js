@@ -15,7 +15,7 @@ const SuccessfulPaymentResponse = ({ oldState, input }) => {
 
   return (
     <>
-      <section className='my-4 flex justify-start items-center border-b-4 border-m-yellow'>
+      <section className='my-4 flex justify-start items-center border-b-8 border-m-yellow'>
         <p className=' text-3xl font-serif mr-4'>Order Details 🥯</p>
       </section>
 

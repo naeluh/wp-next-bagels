@@ -76,7 +76,7 @@ const AlertModal = ({
                 <button
                   type='button'
                   onClick={() => setShowModal(false)}
-                  className='font-serif font-black leading-tight text-lg text-m-black border-m-red bg-white hover:border-m-black hover:text-m-yellow active:border-m-yellow hover:bg-m-black focus:outline-none disabled:opacity-25 border-4 px-4 py-2 block focus:ring-red-500 focus:ring-offset-2 w-full'
+                  className='font-serif font-black leading-tight text-lg text-m-black border-m-red bg-white hover:border-m-black hover:text-m-yellow active:border-m-yellow hover:bg-m-black focus:outline-none disabled:opacity-25 border-8 px-4 py-2 block focus:ring-red-500 focus:ring-offset-2 w-full'
                 >
                   Change Bagel Choices
                 </button>

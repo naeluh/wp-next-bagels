@@ -53,7 +53,9 @@ const AddGroupsForm = ({
     setShowChipModal(!showChipModal);
   };
 
-  const editChipGroup = () => {};
+  const editChipGroup = () => {
+    setShowChipModal(!showChipModal);
+  };
 
   const locations = pickupLocations.map(({ node }) => {
     return {
@@ -112,7 +114,7 @@ const AddGroupsForm = ({
 
   return (
     <>
-      <section className='my-8 border-b-4 border-m-yellow pb-8'>
+      <section className='my-8 border-b-8 border-m-yellow pb-8'>
         <AddDateLocation locations={locations} dates={dates} />
         <p className='text-lg my-4'>
           <span className='text-xl font-serif font-black'>Pickup Location</span>
@@ -123,7 +125,7 @@ const AddGroupsForm = ({
           {state.data.formattedDate ? state.data.formattedDate : ''}
         </p>
       </section>
-      <section className='my-8 border-b-4 border-m-yellow pb-4'>
+      <section className='my-8 border-b-8 border-m-yellow pb-4'>
         <p className='text-xl'>
           {' '}
           <span className='text-xl font-serif font-black'>Bagels Chips</span>:
@@ -150,6 +152,7 @@ const AddGroupsForm = ({
           showModal={showChipModal}
           bagelChipsData={bagelChipsData}
         />
+
         {state.data.bagelChips &&
           Object.entries(state.data.bagelChips).map((key, value) => (
             <BagelChipSetAddRemove
@@ -157,10 +160,11 @@ const AddGroupsForm = ({
               bagelChipValue={value}
               bagelChipKey={key}
               key={value}
+              editChipGroup={editChipGroup}
             />
           ))}
       </section>{' '}
-      <section className='pb-4 my-8 border-b-4 border-m-yellow'>
+      <section className='pb-4 my-8 border-b-8 border-m-yellow'>
         <p className='text-xl'>
           <span className='text-xl font-serif font-black'>Bagels</span>:
         </p>

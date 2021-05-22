@@ -24,13 +24,10 @@ const fetcher = async url => {
 };
 
 export default function Index() {
+  const [checkZip, setCheckZip] = useState(false);
+
   const { data, error } = useSWR(getDataQuery, getData);
   const response = useSWR('/api/bags', fetcher);
-  const [checkZip, setCheckZip] = useState(true);
-
-  if (checkZip) {
-    return <CheckZipCode checkZip={checkZip} setCheckZip={setCheckZip} />;
-  }
 
   if (error && response.error) {
     return (

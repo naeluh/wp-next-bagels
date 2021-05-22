@@ -28,7 +28,7 @@ p {
 @layer utilities {
   @variants responsive {
     .mama-border-bottom {
-      border-bottom: 12px solid #fad113;
+      border-bottom: 8px solid #fad113;
       width: 100%;
       display: flex;
       margin: 25px auto;

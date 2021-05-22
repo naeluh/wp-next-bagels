@@ -1,14 +1,9 @@
 .formStyles h4 {
-  border-bottom: 4px solid;
+  border-bottom: 8px solid;
 }
 
 .formStyles input,
 .formStyles textarea {
-  font-size: 16px;
-  padding: 0.25em 0.5em;
-  background-color: #fff;
-  border: 4px solid #fad113;
-  width: 100%;
   @apply font-sans;
 }
 

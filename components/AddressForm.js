@@ -49,6 +49,11 @@ const AddressForm = ({ handleInputChange }) => {
         type={'text'}
         name={'zip'}
         onChange={handleInputChange}
+        value={
+          state?.data?.brunchBag.address.zip
+            ? state?.data?.brunchBag.address.zip
+            : ''
+        }
         required
       />
     </>

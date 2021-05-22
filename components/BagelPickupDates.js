@@ -91,7 +91,7 @@ const BagelPickupDates = ({ dates, locations, control }) => {
       </SelectList>
 
       {errors.BagelPickupDate && (
-        <p style={{ color: 'red' }}>{errors.BagelPickupDate.message}</p>
+        <p className='text-m-red'>{errors.BagelPickupDate.message}</p>
       )}
     </>
   );

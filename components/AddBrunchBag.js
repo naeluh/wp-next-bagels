@@ -10,6 +10,7 @@ import BrunchBagBagelSelectionsModal from './BrunchBagBagelSelectionsModal';
 import BrunchBagAddRemove from './BrunchBagAddRemove';
 import processBrunchBags from '../lib/processBrunchBags';
 import moment from 'moment';
+import CheckZipCode from './CheckZipCode';
 
 const AddBrunchBag = ({ bagelData, pricing, brunchBag }) => {
   const router = useRouter();
@@ -124,7 +125,20 @@ const AddBrunchBag = ({ bagelData, pricing, brunchBag }) => {
 
   return (
     <>
-      <section className='my-8 border-b-4 border-m-yellow pb-8'>
+      <section className='my-8 border-b-8 border-m-yellow pb-8'>
+        <CheckZipCode />
+        <p className='text-lg'>
+          <span className='text-xl font-serif font-black'>
+            Delivery Zipcode
+          </span>
+          :{' '}
+          {state.data.brunchBag.address.zip
+            ? state.data.brunchBag.address.zip
+            : ''}
+        </p>
+      </section>
+
+      <section className='my-8 border-b-8 border-m-yellow pb-8'>
         <AddDateBrunchBag dates={state?.data?.brunchBagData?.dates} />
         <p className='text-lg'>
           <span className='text-xl font-serif font-black'>Delivery Date</span>:{' '}
@@ -133,7 +147,7 @@ const AddBrunchBag = ({ bagelData, pricing, brunchBag }) => {
             : ''}
         </p>
       </section>
-      <section className='pb-4 my-8 border-b-4 border-m-yellow'>
+      <section className='pb-4 my-8 border-b-8 border-m-yellow'>
         <p className='text-xl'>
           <span className='text-xl font-serif font-black'>Brunch Bags</span>:
         </p>

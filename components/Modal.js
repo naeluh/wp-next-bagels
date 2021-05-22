@@ -10,6 +10,7 @@ const Modal = ({
   children,
   hideButton,
   hideCloseButton,
+  z,
 }) => {
   useEffect(() => {
     if (showModal) {
@@ -33,7 +34,7 @@ const Modal = ({
       )}
       {showModal ? (
         <>
-          <div className={`${wrapperClass} fixed z-50`}>
+          <div className={`${wrapperClass} fixed ${z ? z : `z-40`}`}>
             <div className={``}>
               <div
                 className={`border-0 relative flex flex-col w-full h-screen bg-white outline-none focus:outline-none`}
@@ -66,8 +67,6 @@ const Modal = ({
               </div>
             </div>
           </div>
-
-          <div className='opacity-25 fixed inset-0 z-40 bg-black'></div>
         </>
       ) : null}
     </>
