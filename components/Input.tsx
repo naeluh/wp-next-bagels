@@ -6,7 +6,6 @@ type Props = {
   name?: any;
   onChange?: any;
   required?: any;
-  value?: any;
 };
 
 const Input = forwardRef(
@@ -16,11 +15,9 @@ const Input = forwardRef(
     name = '',
     onChange = () => {},
     required = false,
-    value = '',
   }: Props) => {
     return (
       <input
-        value={value}
         placeholder={placeholder}
         type={type}
         name={name}
