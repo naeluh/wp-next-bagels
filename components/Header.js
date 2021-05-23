@@ -43,7 +43,7 @@ export default function Header() {
         </Link>
         <div
           onClick={() => setActive(!active)}
-          className={`sm:hidden tham tham-e-squeeze tham-w-8 ${
+          className={`md:hidden tham tham-e-squeeze tham-w-8 ${
             active ? `tham-active` : ``
           }`}
         >
