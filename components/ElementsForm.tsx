@@ -227,8 +227,6 @@ const ElementsForm = () => {
         <>
           <OrderDetails currentState={state} />
           <form onSubmit={handleSubmit} className='mb-8'>
-            <StripeTestCards />
-
             <fieldset className='elements-style my-4'>
               <AddressForm handleInputChange={handleInputChange} />
 
