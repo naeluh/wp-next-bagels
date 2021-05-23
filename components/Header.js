@@ -37,7 +37,7 @@ export default function Header() {
         active ? `bg-white z-10 h-screen` : `bg-transparent`
       } sm:h-auto sm:bg-transparent mx-auto px-5 py-5 flex sm:items-center justify-between fixed top-0 w-full flex-col sm:flex-row z-10`}
     >
-      <div className='flex flex-row justify-between w-full sm:flex-1'>
+      <div className='flex flex-row justify-between w-full sm:flex-1 mr-4'>
         <Link href='/'>
           <a>{image}</a>
         </Link>
@@ -54,18 +54,26 @@ export default function Header() {
       </div>
 
       <ul
-        className={`sm:justify-end flex-1 sm:flex sm:flex-row ${
+        className={`sm:justify-end flex-3 sm:flex sm:flex-row flex ${
           active ? `active` : `hidden`
         }`}
+        style={{
+          flex: '1 1 25%',
+          maxWidth: '700px',
+          justifyContent: 'space-between',
+        }}
       >
-        <li className='pr-5'>
+        <li className='mr-2'>
           <Link href='/bagels'>
             <a>
               <Button
                 type={'button'}
                 text={`${editBagels}Bagels & Bagels Chips`}
                 disabled={false}
-                style={{ transition: 'all .15s ease' }}
+                style={{
+                  transition: 'all .15s ease',
+                  fontSize: '14px',
+                }}
                 fullWidth={false}
                 onClick={() =>
                   router.pathname === '/bagels' && setActive(!active)
@@ -74,14 +82,17 @@ export default function Header() {
             </a>
           </Link>
         </li>
-        <li className='pr-5'>
+        <li className='mr-2'>
           <Link href='/brunch-bag'>
             <a>
               <Button
                 type={'button'}
                 text={`${editBags}Brunch Bags`}
                 disabled={false}
-                style={{ transition: 'all .15s ease' }}
+                style={{
+                  transition: 'all .15s ease',
+                  fontSize: '14px',
+                }}
                 fullWidth={false}
                 onClick={() =>
                   router.pathname === '/brunch-bag' && setActive(!active)
@@ -97,7 +108,10 @@ export default function Header() {
                 type={'button'}
                 text={'Special Request'}
                 disabled={false}
-                style={{ transition: 'all .15s ease' }}
+                style={{
+                  transition: 'all .15s ease',
+                  fontSize: '14px',
+                }}
                 fullWidth={false}
                 onClick={() =>
                   router.pathname === '/special-request' && setActive(!active)
