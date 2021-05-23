@@ -47,19 +47,6 @@ const AddDateLocation = ({ dates, locations }) => {
     };
   });
 
-  const convertDateArray = string => {
-    let array = string.replace(/\n/g, ' ').split(' ');
-    array = array.map(item => new Date(item));
-    return array;
-  };
-
-  const blackOutDates = locations.map(location => {
-    return {
-      dates: convertDateArray(location.locationData.blackoutDates),
-      location: location.value,
-    };
-  });
-
   const convertDateFormat = date =>
     new Date(date).toLocaleDateString('en-US', {
       weekday: 'long',
@@ -98,15 +85,11 @@ const AddDateLocation = ({ dates, locations }) => {
   });
 
   const checkDate = (location, dates) => {
-    console.log(dates);
-
     let lds = dates.filter(date => location === date.location)[0].dates;
-    console.log(lds.length > 0);
-
     if (lds.length > 0) {
-      setDateOptions(lds);
+      return lds;
     } else {
-      setDateOptions([]);
+      return [];
     }
   };
 
@@ -116,7 +99,7 @@ const AddDateLocation = ({ dates, locations }) => {
     setValue('BagelPickupDate', '');
     setDate('');
     dRef.current.select.clearValue();
-    checkDate(selectedOption.value, locationDates);
+    setDateOptions(checkDate(selectedOption.value, locationDates));
   };
 
   const handleDChange = selectedOption => {
@@ -136,7 +119,6 @@ const AddDateLocation = ({ dates, locations }) => {
     } else {
       setShowModal(true);
     }
-    return () => {};
   }, []);
 
   const onSubmit = data => {
@@ -147,14 +129,6 @@ const AddDateLocation = ({ dates, locations }) => {
       formattedLocation: data.BagelPickupLocation.label,
     });
     setShowModal(false);
-  };
-
-  const NoOptionsMessage = props => {
-    return (
-      <components.NoOptionsMessage {...props}>
-        <span className='custom-css-class'>Text</span>
-      </components.NoOptionsMessage>
-    );
   };
 
   return (
