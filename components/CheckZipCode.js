@@ -57,7 +57,9 @@ export default function CheckZipCode() {
     }
   };
 
-  useEffect(() => setZips(zipcodes()));
+  useEffect(() => {
+    setZips(zipcodes());
+  }, []);
 
   useEffect(() => {
     if (state.data.brunchBag.address.zip) {
@@ -65,7 +67,7 @@ export default function CheckZipCode() {
     } else {
       setShowModal(true);
     }
-  });
+  }, []);
 
   return (
     <Modal
@@ -82,8 +84,9 @@ export default function CheckZipCode() {
             ref={register({ required: true })}
             className='bg-white w-full border-8 border-m-black placeholder-m-black  text-m-black p-4 my-4 block focus:outline-none focus:ring-2 ring-m-yellow'
             placeholder={'Check your zipcode'}
-            type='text'
+            type='tel'
             name='zip'
+            maxlength='5'
           />
 
           {errors?.zip?.type === 'required' && (
