@@ -1,12 +1,12 @@
 import React from 'react';
 
 type Props = {
-  type: any;
-  text: any;
-  disabled: any;
-  style: any;
-  onClick: any;
-  fullWidth: boolean;
+  type?: any;
+  text?: any;
+  disabled?: any;
+  style?: any;
+  onClick?: any;
+  fullWidth?: boolean;
 };
 
 const Button = ({
