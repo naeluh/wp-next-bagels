@@ -35,15 +35,15 @@ export default function Header() {
     <nav
       className={` ${
         active ? `bg-white z-10 h-screen` : `bg-transparent`
-      } sm:h-auto sm:bg-transparent mx-auto px-5 py-5 flex sm:items-center justify-between fixed top-0 w-full flex-col sm:flex-row z-10`}
+      } lg:h-auto lg:bg-transparent mx-auto px-5 py-5 flex lg:items-center justify-between fixed top-0 w-full flex-col lg:flex-row z-10`}
     >
-      <div className='flex flex-row justify-between w-full sm:flex-1 mr-4'>
+      <div className='flex flex-row justify-between w-full lg:flex-1 mr-4'>
         <Link href='/'>
           <a>{image}</a>
         </Link>
         <div
           onClick={() => setActive(!active)}
-          className={`md:hidden tham tham-e-squeeze tham-w-8 ${
+          className={`lg:hidden tham tham-e-squeeze tham-w-8 ${
             active ? `tham-active` : ``
           }`}
         >
@@ -54,7 +54,7 @@ export default function Header() {
       </div>
 
       <ul
-        className={`sm:justify-end flex-3 sm:flex sm:flex-row flex ${
+        className={`lg:justify-end flex-3 lg:flex lg:flex-row ${
           active ? `active` : `hidden`
         }`}
         style={{
