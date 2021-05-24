@@ -58,6 +58,7 @@ const BagelNumberField = ({
           layout='fill'
           objectFit='cover'
           objectPosition='center'
+          style={{ filter: 'saturate(1.2)' }}
         />
       </div>
 
