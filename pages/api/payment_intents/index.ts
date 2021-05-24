@@ -43,7 +43,6 @@ export default async function handler(
         amount: formatAmountForStripe(amount, CURRENCY),
         currency: CURRENCY,
         description: description ?? '',
-        receipt_email: email,
       };
 
       // Create Customer from body params.
