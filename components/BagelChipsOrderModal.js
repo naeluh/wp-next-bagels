@@ -51,21 +51,20 @@ const BagelChipsOrderModal = ({ bagelChipsData, showModal, setShowModal }) => {
     >
       {!allBagelChipsEmpty ? (
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className='flex-col md:flex-column flex md:justify-between'>
-            {bagelChipsData.map(bagelChip =>
-              checkBagelChipNode(bagelChip) ? (
-                <BagelChipNumberField
-                  register={register}
-                  defaultValues={defaultValues}
-                  bagelChip={bagelChip}
-                  key={bagelChip.node.databaseId}
-                  errors={errors}
-                  setValue={setValue}
-                  state={state}
-                />
-              ) : (
-                <span></span>
-              )
+          <div className='grid grid-flow-row grid-cols-1 grid-rows-1 md:grid-cols-2 md:grid-rows-2 lg:grid-cols-3 lg:grid-rows-3 xl:grid-cols-4 xl:grid-rows-4 md:gap-4'>
+            {bagelChipsData.map(
+              bagelChip =>
+                checkBagelChipNode(bagelChip) && (
+                  <BagelChipNumberField
+                    register={register}
+                    defaultValues={defaultValues}
+                    bagelChip={bagelChip}
+                    key={bagelChip.node.databaseId}
+                    errors={errors}
+                    setValue={setValue}
+                    state={state}
+                  />
+                )
             )}
           </div>
           <section

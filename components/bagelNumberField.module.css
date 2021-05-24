@@ -1,26 +1,31 @@
 .outerNumberContainer {
   display: grid;
   grid-template-columns: 1fr;
-  grid-gap: 20px;
+  grid-gap: 12px;
   margin-bottom: 10px;
   padding: 10px;
-  border: 4px solid #333;
+  border: 8px solid #333;
 }
 
-@media only screen and (min-width: 768px) {
+/* @media only screen and (min-width: 768px) {
   .outerNumberContainer {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 20px;
     margin-bottom: 10px;
     padding: 10px;
-    border: 4px solid #333;
+    border: 8px solid #333;
   }
+} */
+
+.outerNumberContainer img {
+  border: 8px solid #333;
 }
 
 .numberContainer {
   display: flex;
   margin: 0 auto;
+  max-height: 76px;
 }
 
 .numberContainer,
@@ -36,7 +41,7 @@
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
-  border: 4px solid #333;
+  border: 8px solid #333;
   padding: 12px;
   margin: 0 12px;
   color: #333;
@@ -83,7 +88,7 @@
   color: white;
   border: none;
   text-transform: uppercase;
-  padding: 22px 26px;
+  padding: 22px 24px;
 }
 
 button[type='button'].limit {
