@@ -78,7 +78,7 @@ const OrderDetails = ({ currentState = {} }: Props) => {
         </section>
       )}
 
-      {hideBagelChipsHeader ||
+      {!hideBagelChipsHeader ||
         (bagelSelections.length > 0 && (
           <section className='my-4 pb-4 border-b-8 border-m-yellow'>
             <p className='my-2 text-xl'>
