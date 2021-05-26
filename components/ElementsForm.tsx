@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
@@ -59,6 +59,7 @@ const ElementsForm = () => {
   const [oldState, setOldState] = useState(state?.data);
   const stripe = useStripe();
   const elements = useElements();
+  const ref = useRef(null);
 
   // if total cost is 0 we dont need to checkout.
   // Redirect back to the bagels page
@@ -68,6 +69,24 @@ const ElementsForm = () => {
       router.push(`/`);
     }
   }, []);
+
+  const forceReflow = (ref: any) => {
+    const el = ref.current;
+
+    if (el) {
+      const initialDisplay = el.style.display;
+
+      el.style.display = 'none';
+      el.offsetHeight;
+      el.style.display = initialDisplay;
+    }
+  };
+
+  useEffect(() => {
+    if (stripe && elements) {
+      forceReflow(ref);
+    }
+  }, [stripe, elements]);
 
   const PaymentStatus = ({ status }: { status: string }) => {
     switch (status) {
@@ -258,18 +277,20 @@ const ElementsForm = () => {
                 required
               />
 
-              <CardElement
-                options={CARD_OPTIONS}
-                className='bg-white w-full border-8 border-m-black p-4 my-4 block focus:outline-none focus:ring-2 ring-m-yellow'
-                onChange={(e: any) => {
-                  if (e.error) {
-                    setPayment({ status: 'error' });
-                    setErrorMessage(
-                      e.error.message ?? 'An unknown error occured'
-                    );
-                  }
-                }}
-              />
+              <span ref={ref}>
+                <CardElement
+                  options={CARD_OPTIONS}
+                  className='bg-white w-full border-8 border-m-black p-4 my-4 block focus:outline-none focus:ring-2 ring-m-yellow'
+                  onChange={(e: any) => {
+                    if (e.error) {
+                      setPayment({ status: 'error' });
+                      setErrorMessage(
+                        e.error.message ?? 'An unknown error occured'
+                      );
+                    }
+                  }}
+                />
+              </span>
             </fieldset>
             <PaymentStatus status={payment.status} />
             <p className='mb-4'>Processing Fee:&nbsp;${processingFee}.00</p>
