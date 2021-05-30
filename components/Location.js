@@ -18,9 +18,28 @@ const Location = ({ title, img, times }) => {
             <h4 className='text-xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4'>
               {title}
             </h4>
-            {times.map((item, index) => (
-              <Time time={item} key={item + index} />
-            ))}
+            {times.map(
+              ({ textDate }, index) =>
+                textDate && (
+                  <span
+                    className='text-base font-normal tracking-tighter leading-tight font-sans'
+                    key={`time_${index}`}
+                  >
+                    {(index ? ', ' : '') + textDate}
+                  </span>
+                )
+            )}
+            {times.map(
+              ({ dateAndTime }, index) =>
+                dateAndTime && (
+                  <span
+                    className='text-base font-normal tracking-tighter leading-tight font-sans'
+                    key={`time_${index}`}
+                  >
+                    {(index ? ', ' : '') + dateAndTime}
+                  </span>
+                )
+            )}
           </div>
         </FadeInDirection>
       )}
