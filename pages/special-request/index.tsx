@@ -1,4 +1,3 @@
-
 import Head from 'next/head';
 import { CMS_NAME } from '../../lib/constants';
 import Container from '../../components/Container';
@@ -10,7 +9,8 @@ const SpecialRequestPage = () => {
   return (
     <Layout preview={false}>
       <Head>
-        <title>{CMS_NAME}</title>
+        <title>{CMS_NAME} 🥯 Special Request</title>
+        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
       <Header />
       <Container>

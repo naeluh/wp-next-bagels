@@ -22,6 +22,7 @@ export default function Index({ preview, homeData, allBagels, locationTimes }) {
     <Layout preview={preview}>
       <Head>
         <title>{CMS_NAME}</title>
+        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
       <Header />
       <Container>

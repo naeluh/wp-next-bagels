@@ -52,7 +52,8 @@ export default function Index() {
   return (
     <Layout preview={false}>
       <Head>
-        <title>{CMS_NAME}</title>
+        <title>{CMS_NAME} 🥯 Bagels and Bagel Chips</title>
+        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
       <Header />
       <FullWidthHero image={`/static/images/penguin-city-pretzel.jpg`} />

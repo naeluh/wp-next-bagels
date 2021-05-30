@@ -12,7 +12,8 @@ const CheckoutPage: NextPage = () => {
   return (
     <Layout preview={false}>
       <Head>
-        <title>{CMS_NAME}</title>
+        <title>{CMS_NAME} 🥯 Checkout </title>
+        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
       <Header />
       <Container>
