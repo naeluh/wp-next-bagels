@@ -9,6 +9,7 @@ import {
 } from './bagelNumberField.module.css';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
+import Image from 'next/image';
 
 const BagelNumberField = ({
   control,
@@ -18,6 +19,7 @@ const BagelNumberField = ({
   amount,
   bagelSet,
 }) => {
+  const imageSrc = `/static/images/bagels.jpg`;
   const [currentValue, setCurrentValue] = useState(
     bagelSet
       ? bagelSet.bagels.filter(b => b.key === bagel.node.title)[0].value
@@ -31,11 +33,34 @@ const BagelNumberField = ({
     setTotalBagels(sum);
   }, [currentValue]);
 
+  console.log(bagel.node.featuredImage);
+
   return (
     <div className={outerNumberContainer}>
       <label className='text-xl md:text-2xl tracking-tighter leading-tight md:pr-8 font-serif font-black text-black px-5 flex items-center justify-center'>
         {bagel.node.title}
       </label>
+      <div
+        style={{
+          position: 'relative',
+          width: '100%',
+          height: '0',
+          paddingBottom: '67%',
+        }}
+      >
+        <Image
+          src={
+            bagel.node.featuredImage
+              ? bagel.node.featuredImage.node.sourceUrl
+              : imageSrc
+          }
+          alt={bagel.node.title}
+          layout='fill'
+          objectFit='cover'
+          objectPosition='center'
+          style={{ filter: 'saturate(1.2)' }}
+        />
+      </div>
 
       <div className={numberContainer}>
         <button

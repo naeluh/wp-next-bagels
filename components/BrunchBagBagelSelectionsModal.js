@@ -100,13 +100,6 @@ const BrunchBagBagelSelectionsModal = ({
           <h5 className='text-2xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4 text-black'>
             Let's add {`${type === `small` ? 3 : 6}`} bagels ...
           </h5>
-          <h6
-            className={`${
-              totalBagels === amount ? `${limit}` : ``
-            } text-2xl font-bold tracking-tighter leading-tight font-serif  text-black mb-4 py-4`}
-          >
-            Total Bagels: {totalBagels}
-          </h6>
           <p>
             <AlertModal
               showModal={showAlertModal}
@@ -116,7 +109,7 @@ const BrunchBagBagelSelectionsModal = ({
             />
           </p>
         </section>
-        <section className='flex-col md:flex-column flex md:justify-between'>
+        <section className='grid grid-flow-row grid-cols-1 grid-rows-1 md:grid-cols-2 md:grid-rows-2 lg:grid-cols-3 lg:grid-rows-3 md:gap-4'>
           {limitedBagels &&
             limitedBagels.map(
               bagel =>

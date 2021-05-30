@@ -94,13 +94,6 @@ const BagelSelectionsModal = ({
             Let's add a {` ${type === `halfDozen` ? `half dozen` : `dozen`}`}{' '}
             bagels ...
           </h5>
-          <h6
-            className={`${
-              totalBagels === amount ? `${limit}` : ``
-            } text-2xl font-bold tracking-tighter leading-tight font-serif  text-black mb-4 py-4`}
-          >
-            Total Bagels: {totalBagels}
-          </h6>
           <p>
             <AlertModal
               showModal={showAlertModal}
@@ -110,7 +103,7 @@ const BagelSelectionsModal = ({
             />
           </p>
         </section>
-        <section className='flex-col md:flex-column flex md:justify-between'>
+        <section className='grid grid-flow-row grid-cols-1 grid-rows-1 md:grid-cols-2 md:grid-rows-2 lg:grid-cols-3 lg:grid-rows-3 xl:grid-cols-4 xl:grid-rows-4 md:gap-4'>
           {bagelData &&
             bagelData.map(
               bagel =>
