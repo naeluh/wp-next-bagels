@@ -20,6 +20,7 @@ const ContactInfo = () => {
               <a
                 href='https://www.facebook.com/mamalagelsbagels/'
                 target='_blank'
+                rel='noreferrer'
                 className='inline-block mr-3'
                 aria-label='facebook'
               >
@@ -31,6 +32,7 @@ const ContactInfo = () => {
               <a
                 href='https://www.instagram.com/mamalagelsbagels/'
                 target='_blank'
+                rel='noreferrer'
                 className='inline-block mr-3'
                 aria-label='instagram'
               >
