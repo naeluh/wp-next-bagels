@@ -13,6 +13,7 @@ const BagelChipsOrderModal = ({ bagelChipsData, showModal, setShowModal }) => {
     bagelChipVal: 0,
   };
   const [allBagelChipsEmpty, setAllBagelChipsEmpty] = useState(false);
+  const [filterChips, setFilteredChips] = useState(bagelChipsData);
 
   const { handleSubmit, errors, register, setValue } = useForm({
     defaultValues,
@@ -34,6 +35,7 @@ const BagelChipsOrderModal = ({ bagelChipsData, showModal, setShowModal }) => {
           bagelChip.node.bagelChipsDetails.quantity !== null
       ).length === 0
     );
+    setFilteredChips(bagelChipsData.filter(c => checkBagelChipNode(c)));
   }, []);
 
   const checkBagelChipNode = bagelChip =>
@@ -51,7 +53,11 @@ const BagelChipsOrderModal = ({ bagelChipsData, showModal, setShowModal }) => {
     >
       {!allBagelChipsEmpty ? (
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className='flex-col md:flex-column flex md:justify-between'>
+          <div
+            className={`flex-col md:flex-column flex md:justify-between ${
+              filterChips.length > 2 ? `mb-36` : ``
+            }`}
+          >
             {bagelChipsData.map(bagelChip =>
               checkBagelChipNode(bagelChip) ? (
                 <BagelChipNumberField

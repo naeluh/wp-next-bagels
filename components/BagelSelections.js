@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import styles from './bagelSelections.module.css';
+import { limit, error } from './bagelSelections.module.css';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import { useRouter } from 'next/router';
@@ -85,7 +85,7 @@ const BagelSelections = ({ bagelData }) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className={`form ${totalBagels === amount ? styles.error : ``}`}
+      className={`form ${totalBagels === amount ? error : ``}`}
     >
       <section className='flex-col md:flex-column flex md:justify-between md:mb-4'>
         <h5 className='text-2xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4 text-black'>
@@ -94,7 +94,7 @@ const BagelSelections = ({ bagelData }) => {
         </h5>
         <h6
           className={`${
-            totalBagels === amount ? `${styles.limit} px-8` : ``
+            totalBagels === amount ? `px-8` : ``
           } text-2xl font-bold tracking-tighter leading-tight font-serif  text-black mb-4 py-4`}
         >
           Total Bagels: {totalBagels}
