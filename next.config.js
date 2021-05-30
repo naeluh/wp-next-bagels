@@ -21,4 +21,7 @@ module.exports = {
     USER: process.env.USER,
     PASS: process.env.PASS,
   },
+  images: {
+    domains: ['i2.wp.com', 'i1.wp.com', 'i0.wp.com', 'wp.mamalagels.com'],
+  },
 };

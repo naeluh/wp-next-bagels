@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './featuredBagel.module.css';
 import Img from 'next/image';
 
 const FeaturedBagel = ({ title, subtitle, img }) => {
@@ -11,6 +10,7 @@ const FeaturedBagel = ({ title, subtitle, img }) => {
           alt='bagel'
           width={1440}
           height={1440}
+          quality={50}
         />
       </div>
       <div className={`flex-1 relative`}>

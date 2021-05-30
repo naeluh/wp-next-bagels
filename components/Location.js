@@ -1,7 +1,7 @@
 import React from 'react';
-import Time from './Time';
 import FadeInDirection from './FadeInDirection';
 import VsensorAnimate from './VsensorAnimate';
+import Image from 'next/image';
 
 const Location = ({ title, img, times }) => {
   return (
@@ -9,13 +9,20 @@ const Location = ({ title, img, times }) => {
       {({ isVisible }) => (
         <FadeInDirection isVisible={isVisible}>
           <div>
-            <div className='w-full overflow-hidden mb-6'>
-              <img
-                className='object-cover object-top h-48 w-full'
+            <div
+              className='w-full h-full relative overflow-hidden mb-6 border-m-yellow border-8 block pb-8'
+              style={{ paddingBottom: '67%' }}
+            >
+              <Image
                 src={img ? img.node.sourceUrl : `/static/images/tent.jpg`}
+                alt={title}
+                layout='fill'
+                objectFit='cover'
+                objectPosition='center'
+                style={{ filter: 'saturate(1.2)' }}
               />
             </div>
-            <h4 className='text-xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4'>
+            <h4 className='text-xl font-bold tracking-tighter leading-tight font-serif mb-2'>
               {title}
             </h4>
             {times.map(
