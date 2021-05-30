@@ -19,7 +19,7 @@ export default function Custom404({}) {
       </Head>
       <Header />
       <Container>
-        <div className='flex flex-col justify-center items-center w-full h-screen fixed top-0 left-0'>
+        <div className='flex flex-col justify-center items-center w-full h-screen absolute top-0 left-0'>
           <Image
             src='/static/images/mamalagels-notag.png'
             alt='Mamalagels'
