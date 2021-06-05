@@ -22,19 +22,19 @@ export default async function emailPost(req: any, res: any) {
     deliveryDate,
   } = req.query;
 
-  const DESC = desc ? desc : ``;
-  const EMAIL = email ? email : ``;
-  const PHONE = phone ? phone : ``;
-  const NAME = name ? name : ``;
-  const COST = cost ? cost : ``;
-  const LOCATION = location ? location : ``;
-  const TIME = time ? time : ``;
-  const ADDRESS_ONE = addresOne ? addresOne : ``;
-  const ADDRESS_TWO = addresTwo ? addresTwo : ``;
-  const CITY = city ? city : ``;
-  const STATE = state ? state : ``;
-  const ZIP = zip ? zip : ``;
-  const DELIVERY_DATE = deliveryDate ? deliveryDate : ``;
+  const DESC = desc ? desc : null;
+  const EMAIL = email ? email : null;
+  const PHONE = phone ? phone : null;
+  const NAME = name ? name : null;
+  const COST = cost ? cost : null;
+  const LOCATION = location ? location : null;
+  const TIME = time ? time : null;
+  const ADDRESS_ONE = addresOne ? addresOne : null;
+  const ADDRESS_TWO = addresTwo ? addresTwo : null;
+  const CITY = city ? city : null;
+  const STATE = state ? state : null;
+  const ZIP = zip ? zip : null;
+  const DELIVERY_DATE = deliveryDate ? deliveryDate : null;
 
   const response = await fetch(
     encodeURI(
