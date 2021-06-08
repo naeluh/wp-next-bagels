@@ -38,7 +38,7 @@ const SpecialRequestForm = () => {
     >
       <fieldset>
         <legend className='text-xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4 border-bottom pb-4'>
-          Special Request Form
+          Special 🥯 Request Form
         </legend>
         <Input
           placeholder={'Name'}
@@ -70,7 +70,7 @@ const SpecialRequestForm = () => {
       </fieldset>
 
       {status === 'SUCCESS' ? (
-        <p>Thanks! We'll be in touch soon!</p>
+        <p>Thanks! We'll be in touch soon! 🥯 🥯 🥯 </p>
       ) : (
         <Button
           type={'submit'}

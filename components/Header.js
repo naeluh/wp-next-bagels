@@ -106,7 +106,7 @@ export default function Header() {
             <a>
               <Button
                 type={'button'}
-                text={'Special Request'}
+                text={'Special 🥯 Request'}
                 disabled={false}
                 style={{
                   transition: 'all .15s ease',
