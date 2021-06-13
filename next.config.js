@@ -24,4 +24,13 @@ module.exports = {
   images: {
     domains: ['i2.wp.com', 'i1.wp.com', 'i0.wp.com', 'wp.mamalagels.com'],
   },
+  async redirects() {
+    return [
+      {
+        source: '/bagel',
+        destination: '/bagels',
+        permanent: true,
+      },
+    ];
+  },
 };
