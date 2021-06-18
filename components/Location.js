@@ -2,6 +2,7 @@ import React from 'react';
 import FadeInDirection from './FadeInDirection';
 import VsensorAnimate from './VsensorAnimate';
 import Image from 'next/image';
+import moment from 'moment';
 
 const Location = ({ title, img, times }) => {
   return (
@@ -32,7 +33,10 @@ const Location = ({ title, img, times }) => {
                     className='text-base font-normal tracking-tighter leading-tight font-sans'
                     key={`time_${index}`}
                   >
-                    {(index ? ', ' : '') + textDate}
+                    {(index ? ', ' : '') +
+                      moment(textDate, 'DD-MM-YYYY').format(
+                        'dddd, MMMM Do YYYY, h:mm:ss a'
+                      )}
                   </span>
                 )
             )}
@@ -43,7 +47,8 @@ const Location = ({ title, img, times }) => {
                     className='text-base font-normal tracking-tighter leading-tight font-sans'
                     key={`time_${index}`}
                   >
-                    {(index ? ', ' : '') + dateAndTime}
+                    {(index ? ', ' : '') +
+                      moment(dateAndTime, 'DD-MM-YYYY').format('MMMM Do YYYY')}
                   </span>
                 )
             )}
