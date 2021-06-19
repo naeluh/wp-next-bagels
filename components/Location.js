@@ -34,9 +34,7 @@ const Location = ({ title, img, times }) => {
                     key={`time_${index}`}
                   >
                     {(index ? ', ' : '') +
-                      moment(textDate, 'DD-MM-YYYY').format(
-                        'dddd, MMMM Do YYYY, h:mm:ss a'
-                      )}
+                      moment(textDate).format('dddd, MMMM Do YYYY, h:mm:ss a')}
                   </span>
                 )
             )}
@@ -48,7 +46,7 @@ const Location = ({ title, img, times }) => {
                     key={`time_${index}`}
                   >
                     {(index ? ', ' : '') +
-                      moment(dateAndTime, 'DD-MM-YYYY').format('MMMM Do YYYY')}
+                      moment(dateAndTime).format('MMMM Do YYYY')}
                   </span>
                 )
             )}
