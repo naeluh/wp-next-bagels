@@ -29,6 +29,7 @@ const AddDateLocation = ({ dates, locations }) => {
     bagelPickupDates: '',
     bagelPickupLocations: '',
   };
+
   const { handleSubmit, errors, control, setValue, getValues } = useForm({
     defaultValues,
     mode: 'onChange',
@@ -63,15 +64,28 @@ const AddDateLocation = ({ dates, locations }) => {
     return `${da}-${mo}-${ye}`;
   };
 
+  const dateInPast = (firstDate, secondDate) => {
+    if (firstDate.setHours(0, 0, 0, 0) <= secondDate.setHours(0, 0, 0, 0)) {
+      return true;
+    }
+
+    return false;
+  };
+
   const mutateDateArray = dates => {
     let dateArr = [];
     if (!dates) return dateArr;
-    dateArr = dates.map(({ locationDate }) => {
-      return {
-        value: formatDate(locationDate.toString()),
-        label: convertDateFormat(locationDate.toString()),
-      };
-    });
+    dateArr = dates
+      .filter(
+        ({ locationDate }) =>
+          !dateInPast(new Date(formatDate(locationDate.toString())), new Date())
+      )
+      .map(({ locationDate }) => {
+        return {
+          value: formatDate(locationDate.toString()),
+          label: convertDateFormat(locationDate.toString()),
+        };
+      });
     return dateArr;
   };
 
