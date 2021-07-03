@@ -1,7 +1,7 @@
 import Head from 'next/head';
-import { CMS_NAME, HOME_OG_IMAGE_URL } from '../lib/constants';
+import { HOME_OG_IMAGE_URL } from '../lib/constants';
 
-export default function Meta() {
+const Meta = ({ title, desc }) => {
   return (
     <Head>
       <link
@@ -25,18 +25,27 @@ export default function Meta() {
       <link
         rel='mask-icon'
         href='/favicon/safari-pinned-tab.svg'
-        color='#333333'
+        color='#fad113'
       />
       <link rel='shortcut icon' href='/favicon/favicon.ico' />
-      <meta name='msapplication-TileColor' content='#333333' />
+      <meta name='msapplication-TileColor' content='#fad113' />
       <meta name='msapplication-config' content='/favicon/browserconfig.xml' />
       <meta name='theme-color' content='#333' />
       <link rel='alternate' type='application/rss+xml' href='/feed.xml' />
-      <meta
-        name='description'
-        content={`${CMS_NAME} Home of the signature Mămălagel 🥯`}
-      />
+      <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+      <title>{title}</title>
+      <meta name='description' content={desc} />
       <meta property='og:image' content={HOME_OG_IMAGE_URL} />
+      <meta property='og:title' content={title} />
+      <meta property='og:type' content='website' />
+      <meta property='og:description' content={desc} />
+      <meta property='og:locale' content='en_US' />
+      <meta name='twitter:title' content={title} />
+      <meta name='twitter:description' content={desc} />
+      <meta name='twitter:image' content={HOME_OG_IMAGE_URL} />
+      <meta name='twitter:card' content='summary_large_image' />
     </Head>
   );
-}
+};
+
+export default Meta;

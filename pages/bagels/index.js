@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { CMS_NAME } from '../../lib/constants';
 import { getDataQuery } from '../../lib/queries';
 import Container from '../../components/Container';
@@ -50,11 +49,11 @@ export default function Index() {
   }
 
   return (
-    <Layout preview={false}>
-      <Head>
-        <title>{CMS_NAME} 🥯 Bagels and Bagel Chips</title>
-        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
-      </Head>
+    <Layout
+      preview={false}
+      title={`${CMS_NAME} 🥯 Bagels and Bagel Chips`}
+      desc={`${CMS_NAME} Mămălagel 🥯 Bagels and Bagel Chips Page`}
+    >
       <Header />
       <FullWidthHero image={`/static/images/penguin-city-pretzel.jpg`} />
       <Container>

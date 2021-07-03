@@ -13,7 +13,7 @@ module.exports = function ({ addComponents }) {
     8: {
       hamburgerWidth: 32,
       spacing: 4,
-      barHeight: 4,
+      barHeight: 8,
     },
     12: {
       hamburgerWidth: 48,

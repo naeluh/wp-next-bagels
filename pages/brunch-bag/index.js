@@ -62,11 +62,11 @@ export default function Index() {
   }
 
   return (
-    <Layout preview={false}>
-      <Head>
-        <title>{CMS_NAME} 🥯 Brunch Bags</title>
-        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
-      </Head>
+    <Layout
+      preview={false}
+      title={`${CMS_NAME} 🥯 Brunch Bags`}
+      desc={`${CMS_NAME} Mămălagel 🥯 Brunch Bags Page`}
+    >
       <Header />
       <FullWidthHero image={`/static/images/brunch-bag.jpg`} />
       <Container>

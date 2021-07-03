@@ -31,11 +31,20 @@ export default function Header() {
     setEditBagels(hideBagelChips || bagelSelections.length > 0 ? 'Edit ' : '');
   }, [hideBagelChips, bagelSelections, bags, state]);
 
+  useEffect(() => {
+    const html = document.querySelector('html');
+    if (active) {
+      html.style.overflow = 'hidden';
+    } else {
+      html.style.overflow = '';
+    }
+  }, [active]);
+
   return (
     <nav
       className={` ${
         active ? `bg-white z-10 h-screen` : `bg-transparent`
-      } lg:h-auto lg:bg-transparent mx-auto px-5 py-5 flex lg:items-center justify-between fixed top-0 w-full flex-col lg:flex-row z-10`}
+      } lg:h-auto lg:bg-transparent mx-auto px-5 py-5 flex lg:items-center justify-between absolute top-0 w-full flex-col lg:flex-row z-10`}
     >
       <div className='flex flex-row justify-between w-full lg:flex-1 mr-4'>
         <Link href='/'>

@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { useEffect } from 'react';
 import {
   getBagelsData,
@@ -19,11 +18,11 @@ export default function Index({ preview, homeData, allBagels, locationTimes }) {
   useEffect(() => document.body.classList.remove('modal-open'));
 
   return (
-    <Layout preview={preview}>
-      <Head>
-        <title>{CMS_NAME}</title>
-        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
-      </Head>
+    <Layout
+      preview={preview}
+      title={`${CMS_NAME} 🥯 `}
+      desc={`${CMS_NAME} Home of the signature Mămălagel 🥯`}
+    >
       <Header />
       <Container>
         {homeData.featuredBagel && (

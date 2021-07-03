@@ -1,9 +1,8 @@
-import Alert from './Alert';
 import Footer from './Footer';
 import Meta from './Meta';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core';
 
-const Layout = ({ preview, children }) => {
+const Layout = ({ preview, children, title, desc }) => {
   const theme = createMuiTheme({
     palette: {
       type: 'light',
@@ -11,7 +10,7 @@ const Layout = ({ preview, children }) => {
   });
   return (
     <ThemeProvider theme={theme}>
-      <Meta />
+      <Meta title={title} desc={desc} />
       <div className='min-h-screen'>
         <main>{children}</main>
       </div>
