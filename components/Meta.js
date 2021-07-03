@@ -44,6 +44,21 @@ const Meta = ({ title, desc }) => {
       <meta name='twitter:description' content={desc} />
       <meta name='twitter:image' content={HOME_OG_IMAGE_URL} />
       <meta name='twitter:card' content='summary_large_image' />
+      {/* Global Site Tag (gtag.js) - Google Analytics */}
+      <script
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=G-2JTX9SXTHM`}
+      />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-2JTX9SXTHM');
+          `,
+        }}
+      />
     </Head>
   );
 };
