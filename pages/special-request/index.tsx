@@ -9,7 +9,7 @@ const SpecialRequestPage = () => {
     <Layout
       preview={false}
       title={`${CMS_NAME} 🥯 Special Request`}
-      desc={`${CMS_NAME} Mămălagel 🥯 Special Request Page`}
+      desc={`${CMS_NAME} Mămălagels 🥯 Special Request Page`}
     >
       <Header />
       <Container>

@@ -65,7 +65,7 @@ export default function Index() {
     <Layout
       preview={false}
       title={`${CMS_NAME} 🥯 Brunch Bags`}
-      desc={`${CMS_NAME} Mămălagel 🥯 Brunch Bags Page`}
+      desc={`${CMS_NAME} Mămălagel's 🥯 Brunch Bags Page`}
     >
       <Header />
       <FullWidthHero image={`/static/images/brunch-bag.jpg`} />

@@ -12,7 +12,7 @@ const CheckoutPage: NextPage = () => {
     <Layout
       preview={false}
       title={`${CMS_NAME} 🥯 Checkout`}
-      desc={`${CMS_NAME} Mămălagel 🥯 Checkout Page`}
+      desc={`${CMS_NAME} Mămălagels 🥯 Checkout Page`}
     >
       <Header />
       <Container>

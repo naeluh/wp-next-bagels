@@ -52,7 +52,7 @@ export default function Index() {
     <Layout
       preview={false}
       title={`${CMS_NAME} 🥯 Bagels and Bagel Chips`}
-      desc={`${CMS_NAME} Mămălagel 🥯 Bagels and Bagel Chips Page`}
+      desc={`${CMS_NAME} Mămălagel's 🥯 Bagels and Bagel Chips Page`}
     >
       <Header />
       <FullWidthHero image={`/static/images/penguin-city-pretzel.jpg`} />
