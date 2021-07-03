@@ -22,7 +22,7 @@ export default function Post({ post, posts, preview }) {
   }
 
   return (
-    <Layout preview={preview}>
+    <Layout preview={false} title={``} desc={``}>
       {/* <Container>
         <Header />
         {router.isFallback ? (
