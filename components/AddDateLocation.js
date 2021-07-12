@@ -75,7 +75,7 @@ const AddDateLocation = ({ dates, locations }) => {
   const mutateDateArray = dates => {
     let dateArr = [];
     let d = new Date();
-    let futureDate = new Date(d.setDate(d.getDate() + 3));
+    let futureDate = new Date(d.setDate(d.getDate() + 2));
 
     if (!dates) return dateArr;
     dateArr = dates
