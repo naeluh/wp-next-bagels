@@ -7,7 +7,6 @@ import { useStateMachine } from 'little-state-machine';
 import SelectList from './SelectList';
 import Modal from './Modal';
 import Button from './Button';
-import zipcodes from '../utils/zipcodes';
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -85,6 +84,7 @@ const AddDateBrunchBag = ({ dates }) => {
             options={dates}
             ref={dRef}
             placeholder={'Select Delivery Date'}
+            noOptionsMessage={() => 'No Delivery Dates Available'}
           />
           {errors.DeliveryDate?.type === 'required' && (
             <p className='text-m-red'>Delivery Date is required</p>
