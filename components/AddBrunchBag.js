@@ -12,9 +12,13 @@ import processBrunchBags from '../lib/processBrunchBags';
 import moment from 'moment';
 import CheckZipCode from './CheckZipCode';
 
-const AddBrunchBag = ({ bagelData, pricing, brunchBag }) => {
+const AddBrunchBag = ({
+  bagelData,
+  pricing,
+  brunchBag,
+  brunchBagBlackOutDates,
+}) => {
   const router = useRouter();
-  const [dates, setDates] = useState([]);
   const { state, actions } = useStateMachine({ updateAction });
   const [bagelID, setBagelID] = useState(state.data.brunchBag.bags.length);
   const priceSmall = Number(pricing[0].node.prices.brunchBagSmall);
@@ -43,48 +47,14 @@ const AddBrunchBag = ({ bagelData, pricing, brunchBag }) => {
     setShowModal(!showModal);
   };
 
-  const convertDateFormat = date =>
-    new Date(date).toLocaleDateString('en-US', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-
-  const formatDate = date => {
-    const d = new Date(date);
-    const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
-    const mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(d);
-    const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
-    return `${da}-${mo}-${ye}`;
-  };
-
-  const nextFourteenDays = () => {
-    const curr = new Date();
-    const first = curr.getDate();
-    let dateArr = [];
-
-    for (var i = 0; i < 18; i++) {
-      let next = new Date(curr.getTime());
-      next.setDate(first + i);
-      dateArr.push({
-        value: formatDate(next.toString()),
-        label: convertDateFormat(next.toString()),
-      });
-    }
-    dateArr = dateArr.slice(3);
-    return dateArr;
-  };
-
   useEffect(() => {
-    setDates(nextFourteenDays(new Date()));
     setBrunchBagId(state.data.brunchBag.bags.length);
   }, []);
 
   useEffect(() => {
     const process = async data => {
       actions.updateAction({
-        brunchBagData: await processBrunchBags(data),
+        brunchBagData: await processBrunchBags(data, brunchBagBlackOutDates),
       });
     };
 
