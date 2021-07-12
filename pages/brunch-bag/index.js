@@ -1,5 +1,4 @@
-import Head from 'next/head';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { CMS_NAME } from '../../lib/constants';
 import { getDataQuery } from '../../lib/queries';
 import Container from '../../components/Container';
@@ -11,7 +10,7 @@ import Image from 'next/image';
 import useSWR from 'swr';
 import AddBrunchBag from '../../components/AddBrunchBag';
 import unfetch from 'unfetch';
-import CheckZipCode from '../../components/CheckZipCode';
+import { getBrunchBagDates } from '../../lib/api';
 
 const getData = async (...args) => {
   return await fetch(getDataQuery);
@@ -23,9 +22,7 @@ const fetcher = async url => {
   return json;
 };
 
-export default function Index() {
-  const [checkZip, setCheckZip] = useState(false);
-
+export default function Index({ bbDates }) {
   const { data, error } = useSWR(getDataQuery, getData);
   const response = useSWR('/api/bags', fetcher);
 
@@ -76,8 +73,16 @@ export default function Index() {
           bagelChipsData={data.allBagelChips.edges}
           pricing={data.prices.edges}
           brunchBag={response.data}
+          brunchBagBlackOutDates={bbDates}
         />
       </Container>
     </Layout>
   );
+}
+
+export async function getStaticProps() {
+  const bbDates = await getBrunchBagDates();
+  return {
+    props: { bbDates },
+  };
 }
