@@ -81,6 +81,7 @@ const AddDateLocation = ({ dates, locations }) => {
     dateArr = dates
       .filter(
         ({ locationDate }) =>
+          locationDate &&
           !dateInPast(new Date(formatDate(locationDate.toString())), futureDate)
       )
       .map(({ locationDate }) => {
