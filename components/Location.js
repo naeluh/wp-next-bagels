@@ -2,6 +2,7 @@ import React from 'react';
 import FadeInDirection from './FadeInDirection';
 import VsensorAnimate from './VsensorAnimate';
 import Image from 'next/image';
+import styles from './bagel.module.css';
 
 const Location = ({ title, img, times }) => {
   const dateInPast = (firstDate, secondDate) => {
@@ -44,7 +45,7 @@ const Location = ({ title, img, times }) => {
                 layout='fill'
                 objectFit='cover'
                 objectPosition='center'
-                style={{ filter: 'saturate(1.2)' }}
+                className={styles.bagelStyles}
               />
             </div>
             <h4 className='text-xl font-bold tracking-tighter leading-tight font-serif mb-2'>

@@ -25,3 +25,7 @@
 .p {
   letter-spacing: -1px;
 }
+
+.bagelStyles {
+  filter: saturate(1.2);
+}
