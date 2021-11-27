@@ -5,8 +5,10 @@ import Image from 'next/image';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import { useRouter } from 'next/router';
+import useWindowDimensions from '../hooks/useWindowDimensions';
 
 export default function Header() {
+  const { width } = useWindowDimensions();
   const router = useRouter();
   const { state } = useStateMachine({ updateAction });
   const { bagelChips, bagelSelections, brunchBag } = state.data;
@@ -85,7 +87,9 @@ export default function Header() {
                 }}
                 fullWidth={false}
                 onClick={() =>
-                  router.pathname === '/bagels' && setActive(!active)
+                  router.pathname === '/bagels' &&
+                  width <= 1024 &&
+                  setActive(!active)
                 }
               />
             </a>
@@ -104,7 +108,9 @@ export default function Header() {
                 }}
                 fullWidth={false}
                 onClick={() =>
-                  router.pathname === '/brunch-bag' && setActive(!active)
+                  router.pathname === '/brunch-bag' &&
+                  width <= 1024 &&
+                  setActive(!active)
                 }
               />
             </a>
@@ -123,7 +129,9 @@ export default function Header() {
                 }}
                 fullWidth={false}
                 onClick={() =>
-                  router.pathname === '/special-request' && setActive(!active)
+                  router.pathname === '/special-request' &&
+                  width <= 1024 &&
+                  setActive(!active)
                 }
               />
             </a>

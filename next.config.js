@@ -2,11 +2,8 @@
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    config.node = {
-      fs: 'empty',
-    };
-    config.plugins.push(new Dotenv({ silent: true }));
+  webpack: config => {
+    config.resolve.fallback = { fs: false };
     return config;
   },
   reactStrictMode: false,

@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import desc from '../lib/description';
-import StripeTestCards from './StripeTestCards';
 import { fetchPostJSON, fetchGetJSON } from '../utils/api-helpers';
 import { formatAmountForDisplay } from '../utils/stripe-helpers';
 import * as config from '../config';
@@ -37,12 +36,24 @@ const CARD_OPTIONS = {
   },
 };
 
+const percentage = (partialValue: number, totalValue: number) => {
+  return (partialValue / 100) * totalValue;
+};
+
+const formatCost = (number: number) => {
+  return Math.round((number + Number.EPSILON) * 100) / 100;
+};
+
 const ElementsForm = () => {
   const router = useRouter();
   const { actions, state } = useStateMachine({ updateAction });
-  const processingFee = state?.data?.brunchBag.bags.length > 0 ? 3 : 1;
+  const stripeFee = formatCost(percentage(2.9, state?.data?.totalCost) + 0.3);
+  const processingFee = formatCost(
+    state?.data?.brunchBag.bags.length > 0 ? 3 : 1
+  );
+  const totalFee = stripeFee + processingFee;
   const [input, setInput] = useState({
-    customDonation: state?.data?.totalCost + processingFee,
+    customDonation: state?.data?.totalCost + totalFee,
     cardholderName: '',
     cardholderEmail: '',
     cardholderPhone: '',
@@ -55,8 +66,10 @@ const ElementsForm = () => {
   const [payment, setPayment] = useState({ status: 'initial' });
   const [errorMessage, setErrorMessage] = useState('');
   const [description, setDescription] = useState('');
+
   // Set state so it can used even though its stale
-  const [oldState, setOldState] = useState(state?.data);
+  const oldState = state?.data;
+
   const stripe = useStripe();
   const elements = useElements();
   const ref = useRef(null);
@@ -86,7 +99,7 @@ const ElementsForm = () => {
     if (stripe && elements) {
       forceReflow(ref);
     }
-  }, [stripe, elements]);
+  }, [stripe, elements, ref]);
 
   const PaymentStatus = ({ status }: { status: string }) => {
     switch (status) {
@@ -130,12 +143,6 @@ const ElementsForm = () => {
         }
       });
     });
-
-    return true;
-  };
-
-  const updateBrunchBag = async (bags: any, data: any) => {
-    if (!bags && !data) return false;
 
     return true;
   };
@@ -203,7 +210,7 @@ const ElementsForm = () => {
 
       await fetchGetJSON(
         encodeURI(
-          `/api/email?desc=${description}&name=${input.cardholderName}&phone=${input.cardholderPhone}&email=${input.cardholderEmail}&time=${oldState.formattedDate}&location=${oldState.formattedLocation}&cost=${oldState.totalCost}&deliveryDate=${oldState.brunchBag.deliveryDate}&addresOne=${input.addressOne}&addresTwo=${input.addressTwo}&city=${input.city}&state=${input.state}&zip=${input.zip}`
+          `/api/email?desc=${description}&name=${input.cardholderName}&phone=${input.cardholderPhone}&email=${input.cardholderEmail}&time=${oldState.formattedDate}&location=${oldState.formattedLocation}&cost=${input.customDonation}&deliveryDate=${oldState.brunchBag.deliveryDate}&addresOne=${input.addressOne}&addresTwo=${input.addressTwo}&city=${input.city}&state=${input.state}&zip=${input.zip}&fee=${totalFee}`
         )
       );
 
@@ -293,7 +300,7 @@ const ElementsForm = () => {
               </span>
             </fieldset>
             <PaymentStatus status={payment.status} />
-            <p className='mb-4'>Processing Fee:&nbsp;${processingFee}.00</p>
+            <p className='mb-4'>Processing Fee:&nbsp;${totalFee}</p>
             <p className='text-2xl font-serif'>
               Total:&nbsp;
               <span className=' font-sans'>

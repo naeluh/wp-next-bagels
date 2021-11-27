@@ -20,6 +20,7 @@ export default async function emailPost(req: any, res: any) {
     state,
     zip,
     deliveryDate,
+    fee,
   } = req.query;
 
   const DESC = desc ? desc : null;
@@ -35,10 +36,11 @@ export default async function emailPost(req: any, res: any) {
   const STATE = state ? state : null;
   const ZIP = zip ? zip : null;
   const DELIVERY_DATE = deliveryDate ? deliveryDate : null;
+  const FEE = fee ? fee : null;
 
   const response = await fetch(
     encodeURI(
-      `https://receipts.mamalagels.com/receipt?desc=${DESC}&name=${NAME}&phone=${PHONE}&email=${EMAIL}&time=${TIME}&location=${LOCATION}&cost=${COST}&addresOne=${ADDRESS_ONE}&addresTwo=${ADDRESS_TWO}&city=${CITY}&state=${STATE}&zip=${ZIP}&deliveryDate=${DELIVERY_DATE}`
+      `https://receipts.mamalagels.com/receipt?desc=${DESC}&name=${NAME}&phone=${PHONE}&email=${EMAIL}&time=${TIME}&location=${LOCATION}&cost=${COST}&addresOne=${ADDRESS_ONE}&addresTwo=${ADDRESS_TWO}&city=${CITY}&state=${STATE}&zip=${ZIP}&deliveryDate=${DELIVERY_DATE}&fee=${FEE}`
     )
   );
 
