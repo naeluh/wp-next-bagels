@@ -1,9 +1,9 @@
 import Footer from './Footer';
 import Meta from './Meta';
-import { ThemeProvider, createMuiTheme } from '@material-ui/core';
+import { ThemeProvider, createTheme } from '@material-ui/core';
 
 const Layout = ({ preview, children, title, desc }) => {
-  const theme = createMuiTheme({
+  const theme = createTheme({
     palette: {
       type: 'light',
     },

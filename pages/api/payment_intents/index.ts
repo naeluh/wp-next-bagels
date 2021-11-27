@@ -10,7 +10,8 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 });
 
 const validateEmail = (email: string) => {
-  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const re =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
 };
 
@@ -54,9 +55,8 @@ export default async function handler(
       };
 
       // Create payment
-      const payment_intent: Stripe.PaymentIntent = await stripe.paymentIntents.create(
-        params
-      );
+      const payment_intent: Stripe.PaymentIntent =
+        await stripe.paymentIntents.create(params);
 
       // List current customers
       const customers = await stripe.customers.list();
@@ -78,7 +78,9 @@ export default async function handler(
 
       res.status(200).json(payment_intent);
     } catch (err) {
-      res.status(500).json({ statusCode: 500, message: err.message });
+      res
+        .status(500)
+        .json({ statusCode: 500, message: (err as Error).message });
     }
   } else {
     res.setHeader('Allow', 'POST');
