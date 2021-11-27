@@ -8,6 +8,7 @@ const BrunchBagAddRemove = ({ editGroup, bag, show }) => {
   const removeBagelSet = (array, value) => {
     actions.updateAction({
       brunchBag: {
+        ...state.data.brunchBag,
         bags: array.filter(item => {
           return item.id !== value;
         }),
