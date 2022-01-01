@@ -1,5 +1,4 @@
 import 'little-state-machine';
-
 declare module 'little-state-machine' {
   interface GlobalState {
     data: {
@@ -32,3 +31,5 @@ declare module 'little-state-machine' {
     };
   }
 }
+declare module '*.module.css';
+declare module '*.module.scss';

@@ -72,7 +72,7 @@ export default function CheckZipCode() {
   return (
     <Modal
       button={`Edit Zipcode`}
-      title={`Zipcode`}
+      title={`Check your zipcode`}
       setShowModal={setShowModal}
       showModal={showModal}
       hideCloseButton={true}

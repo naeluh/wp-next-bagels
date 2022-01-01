@@ -26,8 +26,7 @@ module.exports = function ({ addComponents }) {
       barHeight: 8,
     },
   };
-  const barRadius = 0;
-  const color = '#000';
+  const color = '#fad113';
   const baseTransition = {
     transitionTimingFunction: 'ease',
     transitionDuration: '15ms',
@@ -36,7 +35,6 @@ module.exports = function ({ addComponents }) {
   const part = {
     position: 'absolute',
     display: 'block',
-    borderRadius: barRadius,
   };
   const hamburgers = {
     '.tham': {
@@ -67,19 +65,28 @@ module.exports = function ({ addComponents }) {
     '.tham-active': {
       '&.tham-e-squeeze': {
         '.tham-inner': {
+          backgroundColor: color,
           transitionDelay: '.12s',
           transitionTimingFunction: 'cubic-bezier(.215,.61,.355,1)',
           transform: 'rotate(45deg)',
           '&::before': {
             top: 0,
-            transition: 'top 75ms ease,opacity 75ms ease .12s',
+            transition:
+              'border-radius 75ms ease,top 75ms ease,opacity 75ms ease .12s',
             opacity: 0,
+            borderRadius: '0',
           },
           '&::after': {
             bottom: 0,
             transition:
-              'bottom 75ms ease,transform 75ms cubic-bezier(.215,.61,.355,1) .12s',
+              'border-radius 75ms ease,bottom 75ms ease,transform 75ms cubic-bezier(.215,.61,.355,1) .12s',
             transform: 'rotate(-90deg)',
+            borderRadius: '0',
+          },
+          '.tham-inner-span': {
+            '&::before': {
+              content: '""',
+            },
           },
         },
       },
@@ -91,18 +98,20 @@ module.exports = function ({ addComponents }) {
     '.tham-inner': {
       top: '50%',
       display: 'block',
-      backgroundColor: color,
+      backgroundColor: '#FFF',
       ...part,
       ...baseTransition,
       '&::before': {
         content: '""',
-        backgroundColor: 'inherit',
+        backgroundColor: color,
+        borderRadius: '20px 20px 0 0',
         ...part,
         ...baseTransition,
       },
       '&::after': {
         content: '""',
-        backgroundColor: 'inherit',
+        backgroundColor: color,
+        borderRadius: '0 0 20px 20px',
         ...part,
         ...baseTransition,
       },

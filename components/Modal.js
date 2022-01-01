@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, FC } from 'react';
 import { maxheight, wrapperClass } from './modal.module.css';
 import Button from './Button';
+import Link from 'next/link';
 
 const Modal = ({
   button,
@@ -43,10 +44,15 @@ const Modal = ({
                   className='flex justify-between p-6 border-b border-solid border-gray-300'
                   style={{ minHeight: '85px' }}
                 >
-                  <h3 className='text-3xl font-semibold font-serif'>
+                  <h3 className='text-3xl font-bold font-serif'>
                     {' '}
                     {title ? title : `Title`}
                   </h3>
+                  {hideCloseButton && (
+                    <Link href='/'>
+                      <a className='text-3xl font-bold font-serif'>Back</a>
+                    </Link>
+                  )}
                   {!hideCloseButton && (
                     <button
                       className='p-1 ml-auto bg-transparent border-0 text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none font-serif'

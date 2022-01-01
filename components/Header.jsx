@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FC } from 'react';
 import Link from 'next/link';
 import Button from './Button';
 import Image from 'next/image';
@@ -6,8 +6,9 @@ import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import { useRouter } from 'next/router';
 import useWindowDimensions from '../hooks/useWindowDimensions';
+import * as styles from './Header.module.css';
 
-export default function Header() {
+const Header = () => {
   const { width } = useWindowDimensions();
   const router = useRouter();
   const { state } = useStateMachine({ updateAction });
@@ -18,27 +19,22 @@ export default function Header() {
   const [active, setActive] = useState(false);
   const [editBagels, setEditBagels] = useState('');
   const [editBags, setEditBags] = useState('');
-  const image = (
-    <Image
-      src='/static/images/mamalagels-notag.png'
-      alt='Mamalagels'
-      layout='fixed'
-      width={175}
-      height={88}
-    />
-  );
 
   useEffect(() => {
-    setEditBags(bags.length > 0 ? 'Edit ' : '');
-    setEditBagels(hideBagelChips || bagelSelections.length > 0 ? 'Edit ' : '');
+    setEditBags(bags.length > 0 ? 'Edit ' : 'Buy ');
+    setEditBagels(
+      hideBagelChips || bagelSelections.length > 0 ? 'Edit ' : 'Buy '
+    );
   }, [hideBagelChips, bagelSelections, bags, state]);
 
   useEffect(() => {
     const html = document.querySelector('html');
-    if (active) {
-      html.style.overflow = 'hidden';
-    } else {
-      html.style.overflow = '';
+    if (html) {
+      if (active) {
+        html.style.overflow = 'hidden';
+      } else {
+        html.style.overflow = '';
+      }
     }
   }, [active]);
 
@@ -50,7 +46,15 @@ export default function Header() {
     >
       <div className='flex flex-row justify-between w-full lg:flex-1 mr-4'>
         <Link href='/'>
-          <a>{image}</a>
+          <a>
+            <Image
+              src='/static/images/mamalagels-notag.png'
+              alt='Mamalagels'
+              layout='fixed'
+              width={175}
+              height={88}
+            />
+          </a>
         </Link>
         <div
           onClick={() => setActive(!active)}
@@ -59,7 +63,11 @@ export default function Header() {
           }`}
         >
           <div className='tham-box'>
-            <div className='tham-inner bg-m-yellow' />
+            <div className={['tham-inner font-bold font-sans'].join(' ')}>
+              <span
+                className={[styles.menuButton, 'tham-inner-span'].join(' ')}
+              ></span>
+            </div>
           </div>
         </div>
       </div>
@@ -88,6 +96,7 @@ export default function Header() {
                 fullWidth={false}
                 onClick={() =>
                   router.pathname === '/bagels' &&
+                  width &&
                   width <= 1024 &&
                   setActive(!active)
                 }
@@ -109,6 +118,7 @@ export default function Header() {
                 fullWidth={false}
                 onClick={() =>
                   router.pathname === '/brunch-bag' &&
+                  width &&
                   width <= 1024 &&
                   setActive(!active)
                 }
@@ -130,6 +140,7 @@ export default function Header() {
                 fullWidth={false}
                 onClick={() =>
                   router.pathname === '/special-request' &&
+                  width &&
                   width <= 1024 &&
                   setActive(!active)
                 }
@@ -140,4 +151,6 @@ export default function Header() {
       </ul>
     </nav>
   );
-}
+};
+
+export default Header;

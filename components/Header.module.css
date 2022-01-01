@@ -1,0 +1,12 @@
+.menuButton {
+  line-height: 0.25;
+  height: 8px;
+  position: relative;
+}
+
+.menuButton::before {
+  content: 'menu';
+  position: absolute;
+  height: 8px;
+  transform: translateX(-5px);
+}
