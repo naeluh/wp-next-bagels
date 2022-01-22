@@ -65,7 +65,14 @@ const Header = () => {
           <div className='tham-box'>
             <div className={['tham-inner font-bold font-sans'].join(' ')}>
               <span
-                className={[styles.menuButton, 'tham-inner-span'].join(' ')}
+                className={[
+                  styles.menuButton,
+                  router.pathname === '/brunch-bag' ||
+                  router.pathname === '/bagels'
+                    ? styles.variantColor
+                    : '',
+                  'tham-inner-span',
+                ].join(' ')}
               ></span>
             </div>
           </div>

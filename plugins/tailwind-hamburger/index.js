@@ -51,6 +51,7 @@ module.exports = function ({ addComponents }) {
     },
     '.tham-e-squeeze': {
       '.tham-inner': {
+        backgroundColor: 'transparent',
         transitionTimingFunction: 'cubic-bezier(.55,.055,.675,.19)',
         transitionDuration: '75ms',
         '&::before': {

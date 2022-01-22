@@ -9,4 +9,9 @@
   position: absolute;
   height: 8px;
   transform: translateX(-5px);
+  background-color: transparent;
+}
+
+.variantColor::before {
+  color: #fad113;
 }
