@@ -18,10 +18,8 @@ const Header = () => {
     Object.values(bagelChips).reduce((a, b) => a + b, 0) === 0 ? false : true;
   const [active, setActive] = useState(false);
   const [editBagels, setEditBagels] = useState('');
-  const [editBags, setEditBags] = useState('');
 
   useEffect(() => {
-    setEditBags(bags.length > 0 ? 'Edit ' : 'Buy ');
     setEditBagels(
       hideBagelChips || bagelSelections.length > 0 ? 'Edit ' : 'Buy '
     );
@@ -42,7 +40,7 @@ const Header = () => {
     <nav
       className={` ${
         active ? `bg-white z-10 h-screen` : `bg-transparent`
-      } lg:h-auto lg:bg-transparent mx-auto px-5 py-5 flex lg:items-center justify-between absolute top-0 w-full flex-col lg:flex-row z-10`}
+      } lg:h-auto lg:bg-transparent mx-auto px-5 py-5 flex lg:items-center absolute top-0 w-full flex-col lg:flex-row z-10`}
     >
       <div className='flex flex-row justify-between w-full lg:flex-1 mr-4'>
         <Link href='/'>
@@ -84,7 +82,6 @@ const Header = () => {
           active ? `active` : `hidden`
         }`}
         style={{
-          flex: '1 1 25%',
           maxWidth: '700px',
           justifyContent: 'space-between',
         }}
@@ -103,28 +100,6 @@ const Header = () => {
                 fullWidth={false}
                 onClick={() =>
                   router.pathname === '/bagels' &&
-                  width &&
-                  width <= 1024 &&
-                  setActive(!active)
-                }
-              />
-            </a>
-          </Link>
-        </li>
-        <li className='mr-2'>
-          <Link href='/brunch-bag'>
-            <a>
-              <Button
-                type={'button'}
-                text={`${editBags}Brunch Bags`}
-                disabled={false}
-                style={{
-                  transition: 'all .15s ease',
-                  fontSize: '14px',
-                }}
-                fullWidth={false}
-                onClick={() =>
-                  router.pathname === '/brunch-bag' &&
                   width &&
                   width <= 1024 &&
                   setActive(!active)

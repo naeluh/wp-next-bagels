@@ -20,7 +20,6 @@ const Links: FC<{ wrapperClass?: string }> = ({ wrapperClass }) => {
   const [editBags, setEditBags] = useState('');
 
   useEffect(() => {
-    setEditBags(bags.length > 0 ? 'Edit ' : 'Buy ');
     setEditBagels(
       hideBagelChips || bagelSelections.length > 0 ? 'Edit ' : 'Buy '
     );
@@ -42,27 +41,6 @@ const Links: FC<{ wrapperClass?: string }> = ({ wrapperClass }) => {
             fullWidth={true}
             onClick={() =>
               router.pathname === '/bagels' &&
-              width &&
-              width <= 1024 &&
-              setActive(!active)
-            }
-          />
-        </a>
-      </Link>
-      <Link href='/brunch-bag'>
-        <a>
-          <Button
-            type={'button'}
-            text={`${editBags}Brunch Bags`}
-            disabled={false}
-            style={{
-              marginTop: 0,
-              transition: 'all .15s ease',
-              fontSize: '16px',
-            }}
-            fullWidth={true}
-            onClick={() =>
-              router.pathname === '/brunch-bag' &&
               width &&
               width <= 1024 &&
               setActive(!active)

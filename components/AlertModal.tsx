@@ -6,6 +6,7 @@ type Props = {
   setShowModal: any;
   showModal: any;
   buttonProps: any;
+  setTotalBagels: any;
 };
 
 const AlertModal = ({
@@ -13,7 +14,9 @@ const AlertModal = ({
   setShowModal,
   showModal,
   buttonProps,
+  setTotalBagels,
 }: Props) => {
+  const { data, reset, defaultValues, totalBagels, amount } = buttonProps;
   return (
     <>
       {showModal ? (
@@ -75,7 +78,10 @@ const AlertModal = ({
               <div className='bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse'>
                 <button
                   type='button'
-                  onClick={() => setShowModal(false)}
+                  onClick={() => {
+                    setShowModal(false);
+                    setTotalBagels(0);
+                  }}
                   className='font-serif font-black leading-tight text-lg text-m-black border-m-red bg-white hover:border-m-black hover:text-m-yellow active:border-m-yellow hover:bg-m-black focus:outline-none disabled:opacity-25 border-8 px-4 py-2 block focus:ring-red-500 focus:ring-offset-2 w-full'
                 >
                   Change Bagel Choices

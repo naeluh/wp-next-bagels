@@ -94,6 +94,10 @@ const BagelSelectionsModal = ({
             Let's add a {` ${type === `halfDozen` ? `half dozen` : `dozen`}`}{' '}
             bagels ...
           </h5>
+          <p>
+            Choices are limited to
+            {` ${type === `halfDozen` ? `2` : `4`}`} bagels 🥯 selections
+          </p>
           <h6
             className={`${
               totalBagels === amount ? `` : ``
@@ -101,12 +105,14 @@ const BagelSelectionsModal = ({
           >
             Total Bagels: {totalBagels}
           </h6>
+
           <p>
             <AlertModal
               showModal={showAlertModal}
               setShowModal={setAlertShowModal}
+              setTotalBagels={setTotalBagels}
               alertText={`You have reached the limit of ${amount} 🥯 for this 🥯 selection, reduce the amount of one of your 🥯 or submit your 🥯 !`}
-              buttonProps={(data, reset, defaultValues, totalBagels, amount)}
+              buttonProps={{ data, reset, defaultValues, totalBagels, amount }}
             />
           </p>
         </section>

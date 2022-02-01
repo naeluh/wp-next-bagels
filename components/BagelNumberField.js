@@ -4,7 +4,6 @@ import {
   numberContainer,
   add,
   remove,
-  errorColor,
   limit,
 } from './bagelNumberField.module.css';
 import AddIcon from '@material-ui/icons/Add';
@@ -31,6 +30,11 @@ const BagelNumberField = ({
     setTotalBagels(sum);
   }, [currentValue]);
 
+  useEffect(
+    () => setCurrentValue(totalBagels !== 0 ? currentValue : totalBagels),
+    [totalBagels]
+  );
+
   return (
     <div className={outerNumberContainer}>
       <label className='text-xl md:text-2xl tracking-tighter leading-tight md:pr-8 font-serif font-black text-black px-5 flex items-center justify-center'>
@@ -44,7 +48,7 @@ const BagelNumberField = ({
           onClick={() => {
             totalBagels !== amount &&
               currentValue <= 12 &&
-              setCurrentValue(currentValue + 1);
+              setCurrentValue(currentValue + 3);
           }}
           className={`${add} add ${totalBagels >= amount && limit}`}
         >
@@ -74,7 +78,7 @@ const BagelNumberField = ({
           onClick={() => {
             currentValue <= 12 &&
               currentValue >= 1 &&
-              setCurrentValue(currentValue - 1);
+              setCurrentValue(currentValue - 3);
           }}
           className={`${remove} remove ${totalBagels >= amount && limit}`}
         >
