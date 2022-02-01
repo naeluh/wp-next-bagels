@@ -300,7 +300,7 @@ const ElementsForm = () => {
               </span>
             </fieldset>
             <PaymentStatus status={payment.status} />
-            <p className='mb-4'>Processing Fee:&nbsp;${totalFee}</p>
+            <p className='mb-4'>Processing Fee:&nbsp;${totalFee.toFixed(2)}</p>
             <p className='text-2xl font-serif'>
               Total:&nbsp;
               <span className=' font-sans'>
