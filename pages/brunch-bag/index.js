@@ -67,6 +67,7 @@ export default function Index({ bbDates }) {
       <Header />
       <FullWidthHero image={`/static/images/brunch-bag.jpg`} />
       <Container>
+        <h1 className='sr-only'>Brunch Bags</h1>
         <AddBrunchBag
           bagelData={data.allBagels.edges}
           pickupLocations={data.pickupLocations.edges}

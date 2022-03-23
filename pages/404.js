@@ -17,6 +17,7 @@ export default function Custom404({}) {
     >
       <Header />
       <Container>
+        <h1 className='sr-only'>Page Not Found</h1>
         <div className='flex flex-col justify-center items-center w-full h-screen absolute top-0 left-0'>
           <Image
             src='/static/images/mamalagels-notag.png'
