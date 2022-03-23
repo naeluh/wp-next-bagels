@@ -13,7 +13,7 @@ const SpecialRequestPage = () => {
     >
       <Header />
       <Container>
-        <h1 className='hidden'>Special Request</h1>
+        <h1 className='sr-only'>Special Request</h1>
         <SpecialRequestForm />
       </Container>
     </Layout>

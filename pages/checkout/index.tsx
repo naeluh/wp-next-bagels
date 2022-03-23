@@ -16,7 +16,7 @@ const CheckoutPage: NextPage = () => {
     >
       <Header />
       <Container>
-        <h1 className='hidden'>Checkout</h1>
+        <h1 className='sr-only'>Checkout</h1>
         <Elements stripe={getStripe()}>
           <ElementsForm />
         </Elements>
