@@ -57,6 +57,7 @@ export default function Index() {
       <Header />
       <FullWidthHero image={`/static/images/penguin-city-pretzel.jpg`} />
       <Container>
+        <h1 className='hidden'>Bagels and Bagel Chips</h1>
         <AddGroups
           bagelData={data.allBagels.edges}
           pickupLocations={data.pickupLocations.edges}

@@ -25,6 +25,7 @@ export default function Index({ preview, homeData, allBagels, locationTimes }) {
     >
       <Header />
       <Container>
+        <h1 className='hidden'>Mamalagels Bagels</h1>
         {homeData.featuredBagel && (
           <FeaturedBagel
             title={homeData.featuredBagel.bagelTitle}
