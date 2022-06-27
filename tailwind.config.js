@@ -4,7 +4,11 @@ module.exports = {
     purgeLayersByDefault: true,
   },
   plugins: [require('./plugins/tailwind-hamburger/index.js')],
-  variants: {
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+  ],
+  theme: {
     extend: {
       opacity: ['disabled'],
       backgroundColor: ['disabled'],
@@ -14,11 +18,6 @@ module.exports = {
       borderColor: ['checked'],
       backgroundColor: ['active'],
       borderColor: ['active'],
-    },
-  },
-  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
-  theme: {
-    extend: {
       borderWidth: {
         default: '1px',
         0: '0',
