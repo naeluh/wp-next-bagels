@@ -38,9 +38,13 @@ const Header = () => {
 
   return (
     <nav
-      className={` ${
+      className={`${
+        router.pathname === '/brunch-bag' || router.pathname === '/bagels'
+          ? `absolute`
+          : ``
+      } ${
         active ? `bg-white z-10 h-screen` : `bg-transparent`
-      } lg:h-auto lg:bg-transparent mx-auto px-5 py-5 flex lg:items-center absolute top-0 w-full flex-col lg:flex-row z-10`}
+      } lg:h-auto lg:bg-transparent mx-auto px-5 py-5 flex lg:items-center top-0 w-full flex-col lg:flex-row z-10`}
     >
       <div className='flex flex-row justify-between w-full lg:flex-1 mr-4'>
         <Link href='/'>
@@ -56,7 +60,7 @@ const Header = () => {
         </Link>
         <div
           onClick={() => setActive(!active)}
-          className={`lg:hidden tham tham-e-squeeze tham-w-8 ${
+          className={`lg:hidden tham tham-e-squeeze tham-w-8 mr-2 ${
             active ? `tham-active` : ``
           }`}
         >

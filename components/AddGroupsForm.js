@@ -53,10 +53,6 @@ const AddGroupsForm = ({
     setShowChipModal(!showChipModal);
   };
 
-  const editChipGroup = () => {
-    setShowChipModal(!showChipModal);
-  };
-
   const locations = pickupLocations.map(({ node }) => {
     return {
       label: `${node.title}, ${node?.location?.locationAddress}`,
@@ -81,23 +77,6 @@ const AddGroupsForm = ({
     return `${da}-${mo}-${ye}`;
   };
 
-  const nextFourteenDays = () => {
-    const curr = new Date();
-    const first = curr.getDate();
-    let dateArr = [];
-
-    for (var i = 0; i < 18; i++) {
-      let next = new Date(curr.getTime());
-      next.setDate(first + i);
-      dateArr.push({
-        value: formatDate(next.toString()),
-        label: convertDateFormat(next.toString()),
-      });
-    }
-    dateArr = dateArr.slice(3);
-    return dateArr;
-  };
-
   const mutateDateArray = dates => {
     let dateArr = [];
     if (!dates) return dateArr;
@@ -111,7 +90,6 @@ const AddGroupsForm = ({
   };
 
   useEffect(() => {
-    // setDates(nextFourteenDays(new Date()));
     setDates(mutateDateArray(pickupLocations?.location?.locationDates));
     setBagelID(state.data.bagelSelections.length);
     actions.updateAction({
@@ -138,8 +116,7 @@ const AddGroupsForm = ({
           {state.data.formattedDate ? state.data.formattedDate : ''}
         </p>
       </section>
-
-      {/* <section className='my-8 border-b-8 border-m-yellow pb-4'>
+      <section className='my-8 border-b-8 border-m-yellow pb-4'>
         <p className='text-xl'>
           {' '}
           <span className='text-xl font-serif font-black'>Bagels Chips</span>:
@@ -177,8 +154,7 @@ const AddGroupsForm = ({
               editChipGroup={editChipGroup}
             />
           ))}
-      </section>{' '} */}
-
+      </section>{' '}
       <section className='pb-4 my-8 border-b-8 border-m-yellow'>
         <p className='text-xl'>
           <span className='text-xl font-serif font-black'>Bagels</span>:

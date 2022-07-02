@@ -47,7 +47,6 @@ module.exports = {
           'Noto Color Emoji',
         ],
         serif: [
-          'autumn',
           'Vollkorn',
           'Georgia',
           'Cambria',

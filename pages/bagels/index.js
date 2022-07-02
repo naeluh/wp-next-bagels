@@ -55,7 +55,7 @@ export default function Index() {
       desc={`${CMS_NAME} Mămălagel's 🥯 Bagels and Bagel Chips Page`}
     >
       <Header />
-      <FullWidthHero image={`/static/images/penguin-city-pretzel.jpg`} />
+      <FullWidthHero image={`/static/images/bagels.jpg`} />
       <Container>
         <AddGroups
           bagelData={data.allBagels.edges}
