@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import Layout from '../components/Layout';
 import { getAllPostsWithSlug, getPostAndMorePosts } from '../lib/api';
 import PostTitle from '../components/PostTitle';
+import PostBody from '../components/PostBody';
 
 export default function Page({ post, preview }) {
   const router = useRouter();
@@ -22,7 +23,10 @@ export default function Page({ post, preview }) {
     >
       <Header />
       <Container>
-        <PostTitle>{post?.title}</PostTitle>
+        <div className='max-w-4xl mx-auto mt-20'>
+          <PostTitle>{post?.title}</PostTitle>
+          <PostBody content={post?.content} />
+        </div>
       </Container>
     </Layout>
   );
@@ -30,6 +34,8 @@ export default function Page({ post, preview }) {
 
 export async function getStaticProps({ params, preview = false, previewData }) {
   const data = await getPostAndMorePosts(params.slug, preview, previewData);
+
+  console.log(data);
 
   return {
     props: {
