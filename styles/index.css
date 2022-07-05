@@ -26,26 +26,24 @@ p {
 }
 
 @layer utilities {
-  @variants responsive {
-    .mama-border-bottom {
-      border-bottom: 8px solid #fad113;
-      width: 100%;
-      display: flex;
-      margin: 25px auto;
-    }
+  .mama-border-bottom {
+    border-bottom: 8px solid #fad113;
+    width: 100%;
+    display: flex;
+    margin: 25px auto;
+  }
 
-    .mama-border-none {
-      border-bottom: none;
-      display: none;
-    }
+  .mama-border-none {
+    border-bottom: none;
+    display: none;
+  }
 
-    .offset-color::after {
-      content: '';
-      position: absolute;
-      height: 100%;
-      width: 100%;
-      background-color: #fad113;
-    }
+  .offset-color::after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #fad113;
   }
 }
 

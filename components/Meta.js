@@ -1,4 +1,6 @@
+import { oneLine, stripIndent } from 'common-tags';
 import Head from 'next/head';
+import Script from 'next/script';
 import { HOME_OG_IMAGE_URL } from '../lib/constants';
 
 const Meta = ({ title, desc }) => {
@@ -45,18 +47,20 @@ const Meta = ({ title, desc }) => {
       <meta name='twitter:image' content={HOME_OG_IMAGE_URL} />
       <meta name='twitter:card' content='summary_large_image' />
       {/* Global Site Tag (gtag.js) - Google Analytics */}
-      <script
+      <Script
         async
-        src={`https://www.googletagmanager.com/gtag/js?id=G-2JTX9SXTHM`}
-      />
-      <script
+        src='https://www.googletagmanager.com/gtag/js?id=G-2JTX9SXTHM'
+      ></Script>
+      <div
         dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-2JTX9SXTHM');
-          `,
+          __html: oneLine`${stripIndent`
+           <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-2JTX9SXTHM');
+            </script>
+          `}`,
         }}
       />
     </Head>
