@@ -1,4 +1,5 @@
 import { CMS_NAME } from '../../lib/constants';
+import { getNavItems } from '../../lib/api';
 import { getDataQuery } from '../../lib/queries';
 import Container from '../../components/Container';
 import Header from '../../components/Header';
@@ -13,7 +14,7 @@ const getData = async (...args) => {
   return await fetch(getDataQuery);
 };
 
-export default function Index() {
+export default function Index({ navItems }) {
   const { data, error } = useSWR(getDataQuery, getData);
 
   if (error) {
@@ -54,7 +55,7 @@ export default function Index() {
       title={`${CMS_NAME} 🥯 Bagels and Bagel Chips`}
       desc={`${CMS_NAME} Mămălagel's 🥯 Bagels and Bagel Chips Page`}
     >
-      <Header />
+      <Header navItems={navItems} />
       <FullWidthHero image={`/static/images/bagels.jpg`} />
       <Container>
         <AddGroups
@@ -66,4 +67,14 @@ export default function Index() {
       </Container>
     </Layout>
   );
+}
+
+export async function getStaticProps({ preview = false }) {
+  const { navItems } = await getNavItems(preview);
+  return {
+    props: {
+      preview,
+      navItems,
+    },
+  };
 }

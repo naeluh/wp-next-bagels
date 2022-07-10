@@ -1,4 +1,6 @@
 import React from 'react';
+import Link from 'next/link';
+import styles from './button.module.css';
 
 type Props = {
   type?: any;
@@ -7,6 +9,8 @@ type Props = {
   style?: any;
   onClick?: any;
   fullWidth?: boolean;
+  link?: boolean;
+  url?: string;
 };
 
 const Button = ({
@@ -16,16 +20,33 @@ const Button = ({
   style,
   onClick,
   fullWidth = false,
+  link = false,
+  url,
 }: Props) => {
-  return (
+  return !link ? (
     <button
-      className={`font-serif font-bold leading-tight text-lg text-m-black border-m-yellow bg-white hover:border-m-black hover:text-m-yellow active:border-m-yellow hover:bg-m-black focus:outline-none disabled:opacity-25 border-8 px-4 py-2 my-4 block ${
-        fullWidth ? `w-full` : ``
-      }`}
+      className={`${styles.mainButton}  ${fullWidth ? `w-full` : ``}`}
       type={type}
       style={style}
       disabled={disabled}
       onClick={onClick}
+    >
+      {text}
+    </button>
+  ) : !disabled ? (
+    <Link href={`/${url}`}>
+      <a
+        className={`${styles.mainButton}  ${fullWidth ? `w-full` : ``}`}
+        style={style}
+        onClick={onClick}
+      >
+        {text}
+      </a>
+    </Link>
+  ) : (
+    <button
+      disabled={disabled}
+      className={`${styles.mainButton}  ${fullWidth ? `w-full` : ``}`}
     >
       {text}
     </button>

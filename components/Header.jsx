@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import useWindowDimensions from '../hooks/useWindowDimensions';
 import * as styles from './Header.module.css';
 
-const Header = () => {
+const Header = ({ navItems }) => {
   const { width } = useWindowDimensions();
   const router = useRouter();
   const { state } = useStateMachine({ updateAction });
@@ -82,7 +82,9 @@ const Header = () => {
       </div>
 
       <ul
-        className={`lg:justify-end flex-3 lg:flex lg:flex-row ${
+        className={`${
+          styles.headerList
+        } lg:justify-end flex-3 lg:flex lg:flex-row ${
           active ? `active` : `hidden`
         }`}
         style={{
@@ -90,50 +92,69 @@ const Header = () => {
           justifyContent: 'space-between',
         }}
       >
-        <li className='mr-2'>
-          <Link href='/bagels'>
-            <a>
-              <Button
-                type={'button'}
-                text={`${editBagels}Bagels & Bagels Chips`}
-                disabled={false}
-                style={{
-                  transition: 'all .15s ease',
-                  fontSize: '14px',
-                }}
-                fullWidth={false}
-                onClick={() =>
-                  router.pathname === '/bagels' &&
-                  width &&
-                  width <= 1024 &&
-                  setActive(!active)
-                }
-              />
-            </a>
-          </Link>
+        <li>
+          <Button
+            link
+            url={'bagels'}
+            type={''}
+            text={`${editBagels}Bagels & Bagels Chips`}
+            disabled={false}
+            style={{
+              transition: 'all .15s ease',
+            }}
+            fullWidth={false}
+            onClick={() =>
+              router.pathname === '/bagels' &&
+              width &&
+              width <= 1024 &&
+              setActive(!active)
+            }
+          />
         </li>
-        <li className=''>
-          <Link href='/special-request'>
-            <a>
-              <Button
-                type={'button'}
-                text={'Special 🥯 Request'}
-                disabled={false}
-                style={{
-                  transition: 'all .15s ease',
-                  fontSize: '14px',
-                }}
-                fullWidth={false}
-                onClick={() =>
-                  router.pathname === '/special-request' &&
-                  width &&
-                  width <= 1024 &&
-                  setActive(!active)
-                }
-              />
-            </a>
-          </Link>
+        <li>
+          <Button
+            link
+            url={'special-request'}
+            type={''}
+            text={'Special 🥯 Request'}
+            disabled={false}
+            style={{
+              transition: 'all .15s ease',
+            }}
+            fullWidth={false}
+            onClick={() =>
+              router.pathname === '/special-request' &&
+              width &&
+              width <= 1024 &&
+              setActive(!active)
+            }
+          />
         </li>
+        {navItems &&
+          navItems.map(({ label, url }, index) => {
+            return (
+              <li key={index}>
+                <Button
+                  link
+                  url={`${url}`}
+                  type={''}
+                  type={'button'}
+                  text={`${label}`}
+                  disabled={false}
+                  style={{
+                    transition: 'all .15s ease',
+                  }}
+                  fullWidth={false}
+                  onClick={() =>
+                    router.pathname === `/${url}` &&
+                    width &&
+                    width <= 1024 &&
+                    setActive(!active)
+                  }
+                />
+              </li>
+            );
+          })}
       </ul>
     </nav>
   );

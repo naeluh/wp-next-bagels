@@ -25,25 +25,33 @@ p {
   letter-spacing: -0.5px;
 }
 
-@layer utilities {
-  .mama-border-bottom {
-    border-bottom: 8px solid #fad113;
-    width: 100%;
-    display: flex;
-    margin: 25px auto;
-  }
+.mama-border-bottom {
+  border-bottom: 8px solid #fad113;
+  width: 100%;
+  display: flex;
+  margin: 25px auto;
+}
 
-  .mama-border-none {
-    border-bottom: none;
+.mama-border-none {
+  border-bottom: none;
+  display: none;
+}
+
+.offset-color::after {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #fad113;
+}
+
+@media only screen and (min-width: 1024px) {
+  .mama-border-bottom {
     display: none;
   }
 
   .offset-color::after {
-    content: '';
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background-color: #fad113;
+    display: none;
   }
 }
 
@@ -153,4 +161,13 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type='number'] {
   -moz-appearance: textfield;
+}
+
+.wp-block-image {
+  margin: 2em 0;
+  border-bottom: 0;
+}
+
+.wp-block-image figcaption {
+  margin-top: 1em;
 }
