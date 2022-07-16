@@ -82,7 +82,7 @@ export default function Index({ bbDates, getNavItems }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getStaticProps(preview = false) {
   const { navItems } = await getNavItems(preview);
   const bbDates = await getBrunchBagDates();
   return {
