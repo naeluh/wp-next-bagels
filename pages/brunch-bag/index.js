@@ -35,6 +35,7 @@ export default function Index({ bbDates, getNavItems }) {
           layout='fixed'
           width={175}
           height={88}
+          priority
         />
         <p className=' text-3xl font-serif mt-6 font-black text-m-red'>
           Error 🥯
@@ -52,6 +53,7 @@ export default function Index({ bbDates, getNavItems }) {
           layout='fixed'
           width={175}
           height={88}
+          priority
         />
         <p className=' text-3xl mt-6 font-black font-serif'>Loading... 🥯</p>
       </div>

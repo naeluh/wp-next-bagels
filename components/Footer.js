@@ -12,6 +12,7 @@ export default function Footer() {
       layout='fixed'
       width={175}
       height={88}
+      priority
     />
   );
   return (

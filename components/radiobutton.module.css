@@ -1,0 +1,88 @@
+.radioButtons {
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.radioButtons label.active {
+  @apply bg-m-yellow border-black text-black;
+  --tw-bg-opacity: 0.75;
+}
+
+.radioButtons span {
+  display: block;
+  margin-bottom: auto;
+}
+
+.radioButtons li {
+  border-radius: 1rem;
+  border: 8px solid;
+  height: 100%;
+}
+
+.radioButtons label {
+  height: 100%;
+  padding: 1rem;
+  display: grid;
+  align-items: center;
+  grid-template-columns: auto auto;
+  gap: 1em;
+  justify-content: space-between;
+}
+
+.radioButtonHeading {
+  @apply text-2xl mt-8 mb-4 leading-snug font-serif;
+}
+
+.radioButtonHeading.active {
+  @apply text-2xl mt-8 mb-4 leading-snug font-serif  bg-m-yellow border-black text-black;
+}
+
+.radioButtonSection {
+  @apply mt-10 mb-10;
+}
+
+.radioButtons input[type='radio'] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  /* Remove most all native input styles */
+  appearance: none;
+  /* For iOS < 15 */
+  background-color: var(--form-background);
+  /* Not removed via appearance */
+  margin: 0 auto 0 0;
+
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid currentColor;
+  border-radius: 50%;
+  transform: translateY(-0.075em);
+  padding: 0.7em;
+  display: grid;
+  place-content: center;
+}
+
+.radioButtons input[type='radio']::before {
+  content: '';
+  width: 0.65em;
+  height: 0.65em;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+  /* Windows High Contrast Mode */
+  background-color: CanvasText;
+  margin: 0 auto 0 0;
+}
+
+.radioButtons input[type='radio']:checked::before {
+  transform: scale(1);
+}
+
+.radioButtons input[type='radio']:focus {
+  outline: max(2px, 0.15em) solid currentColor;
+  outline-offset: max(2px, 0.15em);
+}

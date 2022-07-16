@@ -4,6 +4,7 @@ import { bagelForm } from './addGroupsForm.module.css';
 import { makeStyles } from '@material-ui/core';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
+import SelectList from './SelectList';
 import Modal from './Modal';
 import Button from './Button';
 import RadioButtons from './RadioButtons';
@@ -31,18 +32,11 @@ const AddDateLocation = ({ dates, locations }) => {
     bagelPickupLocations: '',
   };
 
-  const {
-    handleSubmit,
-    register,
-    errors,
-    clearErrors,
-    control,
-    setValue,
-    getValues,
-  } = useForm({
-    defaultValues,
-    mode: 'onChange',
-  });
+  const { handleSubmit, register, errors, control, setValue, getValues } =
+    useForm({
+      defaultValues,
+      mode: 'onChange',
+    });
 
   const { state, actions } = useStateMachine({ updateAction });
   const [date, setDate] = useState('');
@@ -114,10 +108,12 @@ const AddDateLocation = ({ dates, locations }) => {
   });
 
   const checkDate = (location, dates) => {
+    // console.log(location, dates);
     if (!location) {
       return [];
     }
     let lds = dates.filter(date => {
+      // console.log(date);
       return location === date.location;
     })[0].dates;
     if (lds.length > 0) {
@@ -128,22 +124,22 @@ const AddDateLocation = ({ dates, locations }) => {
   };
 
   const handleLChange = selectedOption => {
-    console.log(selectedOption);
+    // console.log(selectedOption);
     setValue('BagelPickupLocation', selectedOption);
     setLocation(selectedOption);
     setValue('BagelPickupDate', '');
-    clearErrors('BagelPickupLocation');
-    clearErrors('BagelPickupDate');
     setDate([]);
+
+    // dRef.current.select.clearValue();
+
     setDateOptions(checkDate(selectedOption.value, locationDates));
   };
 
   const handleDChange = selectedOption => {
     const values = getValues();
-    if (values.BagelPickupLocation && selectedOption) {
+    if (values.BagelPickupLocation) {
       setValue('BagelPickupDate', selectedOption);
       setDate(selectedOption);
-      clearErrors('BagelPickupDate');
     }
   };
 
@@ -153,11 +149,14 @@ const AddDateLocation = ({ dates, locations }) => {
       setValue('BagelPickupDate', state.data.time);
       setLocation(state.data.location);
       setDate(state.data.time);
-      console.log(state.data);
     } else {
       setShowModal(true);
     }
   }, []);
+
+  useEffect(() => {
+    console.log(state.data);
+  }, [state.data]);
 
   const onSubmit = data => {
     console.log(data);
@@ -170,19 +169,33 @@ const AddDateLocation = ({ dates, locations }) => {
     setShowModal(false);
   };
 
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
-
   return (
     <Modal
       button={`Edit Location and Date`}
       title={`Pickup Location and date`}
       setShowModal={setShowModal}
       showModal={showModal}
-      hideCloseButton={false}
+      hideCloseButton={true}
     >
       <form onSubmit={handleSubmit(onSubmit)} className={`form ${bagelForm}`}>
+        {/* <section>
+           <SelectList
+            id='BagelPickupLocation'
+            label='Select Location'
+            handleChange={handleLChange}
+            value={location}
+            name='BagelPickupLocation'
+            className={classes.formControl}
+            control={control}
+            rules={{ required: true }}
+            options={locationOptions}
+            ref={lRef}
+            placeholder={'Select Pickup Location'}
+          />
+          {errors.BagelPickupLocation?.type === 'required' && (
+            <p className='text-m-red'>Location is required</p>
+          )}
+        </section>*/}
         <section className={[styles.radioButtonSection].join(' ')}>
           <RadioButtons
             id='BagelPickupLocation'
@@ -193,6 +206,10 @@ const AddDateLocation = ({ dates, locations }) => {
             className={classes.formControl}
             control={control}
             rules={{ required: true }}
+            options={locationOptions}
+            ref={lRef}
+            elementRef={lRef}
+            placeholder={'Select Pickup Location'}
             title={'Select Pickup Location'}
             group={locationOptions}
             errors={errors}
@@ -208,34 +225,58 @@ const AddDateLocation = ({ dates, locations }) => {
             <p className='text-m-red'>Location is required</p>
           )}
         </section>
-        {date && (
-          <section className={[styles.radioButtonSection].join(' ')}>
-            <RadioButtons
-              id='BagelPickupDate'
-              label='Select Date'
-              handleChange={handleDChange}
-              radioVal={date}
-              name='BagelPickupDate'
-              className={classes.formControl}
-              control={control}
-              rules={{ required: true }}
-              noOptionsMessage={() => 'No dates available'}
-              title={'Select Pickup Date'}
-              group={dateOptions}
-              errors={errors}
-              register={register}
-              defaultValues={defaultValues.bagelPickupDates}
-              type={'time'}
-              state={state.data.time}
-              currentValue={currentDValue}
-              setCurrentValue={setCurrentDValue}
-            />
 
-            {errors.BagelPickupDate?.type === 'required' && (
-              <p className='text-m-red'>Date is required</p>
-            )}
-          </section>
-        )}
+        {/*<section>
+           <SelectList
+            id='BagelPickupDate'
+            label='Select Date'
+            handleChange={handleDChange}
+            value={date}
+            name='BagelPickupDate'
+            className={classes.formControl}
+            control={control}
+            rules={{ required: true }}
+            options={dateOptions}
+            group={dateOptions}
+            ref={dRef}
+            noOptionsMessage={() => 'No dates available'}
+            placeholder={'Select Pickup Date'}
+            errors={errors}
+          />
+          {errors.BagelPickupDate?.type === 'required' && (
+            <p className='text-m-red'>Date is required</p>
+          )}
+        </section>*/}
+        <section className={[styles.radioButtonSection].join(' ')}>
+          <RadioButtons
+            id='BagelPickupDate'
+            label='Select Date'
+            handleChange={handleDChange}
+            radioVal={date}
+            name='BagelPickupDate'
+            className={classes.formControl}
+            control={control}
+            rules={{ required: true }}
+            options={dateOptions}
+            ref={dRef}
+            elementRef={dRef}
+            noOptionsMessage={() => 'No dates available'}
+            placeholder={'Select Pickup Date'}
+            title={'Select Pickup Date'}
+            group={dateOptions}
+            errors={errors}
+            register={register}
+            defaultValues={defaultValues.bagelPickupDates}
+            type={'time'}
+            state={state.data.time}
+            currentValue={currentDValue}
+            setCurrentValue={setCurrentDValue}
+          />
+
+          {errors.BagelPickupDate?.type === 'required' && (
+            <p className='text-m-red'>Date is required</p>
+          )}
+        </section>
 
         <Button
           type={'submit'}

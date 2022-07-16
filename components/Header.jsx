@@ -55,6 +55,7 @@ const Header = ({ navItems }) => {
               layout='fixed'
               width={175}
               height={88}
+              priority
             />
           </a>
         </Link>
