@@ -8,7 +8,11 @@ import Layout from '../../components/Layout';
 import ElementsForm from '../../components/ElementsForm';
 import { getNavItems } from '../../lib/api';
 
-const CheckoutPage: NextPage = ({ navItems }) => {
+type Props = {
+  navItems: any;
+};
+
+const CheckoutPage: NextPage<Props> = ({ navItems }: Props) => {
   return (
     <Layout
       preview={false}
