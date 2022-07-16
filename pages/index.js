@@ -11,19 +11,9 @@ import Header from '../components/Header';
 import Layout from '../components/Layout';
 import FeaturedBagel from '../components/FeaturedBagel';
 import BagelDefinition from '../components/BagelDefinition';
-import BagelList from '../components/BagelList';
-import BagelDetails from '../components/BagelDetails';
-import LocationsTimes from '../components/LocationsTimes';
 
-export default function Index({
-  preview,
-  homeData,
-  allBagels,
-  locationTimes,
-  navItems,
-}) {
+export default function Index({ preview, homeData, navItems }) {
   useEffect(() => document.body.classList.remove('modal-open'));
-
   return (
     <Layout
       preview={preview}
@@ -47,16 +37,6 @@ export default function Index({
             desc={homeData.bagelDefinition.bagelDescription}
           />
         )}
-        {homeData.bagelList && (
-          <BagelList
-            title={homeData.bagelList.bagelListTitle}
-            desc={homeData.bagelList.bagelListDescription}
-            priceTitle={homeData.bagelList.bagelPriceTitle}
-            priceDesc={homeData.bagelList.bagelPriceDescription}
-          />
-        )}
-        {allBagels && <BagelDetails bagels={allBagels} />}
-        {locationTimes && <LocationsTimes locations={locationTimes} />}
       </Container>
     </Layout>
   );

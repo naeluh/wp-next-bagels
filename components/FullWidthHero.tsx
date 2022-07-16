@@ -9,7 +9,7 @@ type FullWidthHeroVars = {
 
 const FullWidthHero = ({ image }: FullWidthHeroVars) => {
   return (
-    <div className={`${styles.flex} bg-cover bg-no-repeat bg-center`}>
+    <header className={`${styles.flex} bg-cover bg-no-repeat bg-center`}>
       <div
         className={`${styles.backgroundimage} bg-cover bg-no-repeat bg-center pb-96 bg-m-yellow`}
       >
@@ -21,7 +21,7 @@ const FullWidthHero = ({ image }: FullWidthHeroVars) => {
           quality={100}
         />
       </div>
-    </div>
+    </header>
   );
 };
 

@@ -11,14 +11,18 @@ const RadioButton = ({
   radioVal,
 }) => {
   return (
-    <li>
+    <div
+      className={[
+        styles.listItem,
+        radioVal.value === value ? styles.active : '',
+      ].join(' ')}
+    >
       <label
         className={radioVal.value === value ? styles.active : ''}
         htmlFor={`rb-${name}-${index}`}
       >
         <span>{label}</span>
         <input
-          required
           aria-required='true'
           ref={register(name, { required: true })}
           id={`rb-${name}-${index}`}
@@ -31,7 +35,7 @@ const RadioButton = ({
           }
         />
       </label>
-    </li>
+    </div>
   );
 };
 export default RadioButton;

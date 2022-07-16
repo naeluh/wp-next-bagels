@@ -1,5 +1,9 @@
 .mainButton {
-  @apply font-serif font-bold leading-tight text-lg text-m-black border-m-yellow border-8 border-transparent hover:border-m-black hover:text-m-yellow  hover:bg-m-black focus:outline-none px-4 py-2 my-4 block relative;
+  @apply font-serif font-bold leading-tight text-lg text-m-black border-m-yellow border-8 border-transparent hover:border-m-black hover:text-m-yellow  hover:bg-m-black focus:outline-none px-4 py-2 my-4 block relative bg-white;
+}
+
+.mainButton:focus {
+  @apply outline-black;
 }
 
 .mainButton:hover {

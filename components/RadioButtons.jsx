@@ -24,8 +24,13 @@ const RadioButtons = ({
   const rbRef = useRef(null);
   console.log(errors[name], type);
   return (
-    <>
-      <h3
+    <fieldset
+      className={[
+        'radiogroup-fieldset',
+        radioVal.value === state.value ? styles.active : '',
+      ].join(' ')}
+    >
+      <legend
         className={[
           errors[name]?.type === 'required' ? styles.active : '',
           styles.radioButtonHeading,
@@ -34,18 +39,16 @@ const RadioButtons = ({
         data-content={`required`}
       >
         {title}
-      </h3>
+        <span className={styles.requiredBadge}>Required</span>
+      </legend>
 
-      <ul
+      <div
         className={[
-          'radiogroup-activedescendant',
+          'radiogroup',
           styles.radioButtons,
           radioVal.value === state.value ? styles.active : '',
         ].join(' ')}
-        role='radiogroup'
         aria-labelledby={`group_label_${name}`}
-        aria-activedescendant='rb11'
-        tabIndex='0'
         ref={rbRef}
       >
         {group.map((g, index) => {
@@ -69,8 +72,8 @@ const RadioButtons = ({
             />
           );
         })}
-      </ul>
-    </>
+      </div>
+    </fieldset>
   );
 };
 

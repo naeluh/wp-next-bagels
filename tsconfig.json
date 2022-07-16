@@ -23,12 +23,5 @@
     ]
   },
   "exclude": ["node_modules"],
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "components/PostBody.jsx",
-    "components/PostTitle.js",
-    "components/PostTitle.jsx"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

@@ -40,10 +40,7 @@ const Modal = ({
               <div
                 className={`border-0 relative flex flex-col w-full h-screen bg-white outline-none focus:outline-none`}
               >
-                <div
-                  className='flex justify-between p-6 border-b border-solid border-gray-300'
-                  style={{ minHeight: '85px' }}
-                >
+                <div className='flex justify-between p-6 border-b border-solid border-gray-300'>
                   <h3 className='text-3xl font-bold font-serif'>
                     {' '}
                     {title ? title : `Title`}

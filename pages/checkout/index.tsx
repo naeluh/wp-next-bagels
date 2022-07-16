@@ -9,7 +9,7 @@ import ElementsForm from '../../components/ElementsForm';
 import { getNavItems } from '../../lib/api';
 
 type Props = {
-  navItems: any;
+  navItems: [];
 };
 
 const CheckoutPage: NextPage<Props> = ({ navItems }: Props) => {

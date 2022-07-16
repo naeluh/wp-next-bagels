@@ -5,20 +5,20 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
-.radioButtons label.active {
-  @apply bg-m-yellow border-black text-black;
-  --tw-bg-opacity: 0.75;
-}
-
 .radioButtons span {
   display: block;
   margin-bottom: auto;
 }
 
-.radioButtons li {
+.radioButtons div.listItem {
   border-radius: 1rem;
   border: 8px solid;
   height: 100%;
+}
+
+.radioButtons div.listItem.active {
+  @apply bg-m-yellow border-black text-black;
+  --tw-bg-opacity: 0.75;
 }
 
 .radioButtons label {
@@ -29,30 +29,26 @@
   grid-template-columns: auto auto;
   gap: 1em;
   justify-content: space-between;
+  cursor: pointer;
 }
 
 .radioButtonHeading {
-  @apply text-2xl mt-8 mb-4 leading-snug font-serif;
+  @apply text-2xl mt-8 mb-4 leading-snug font-serif flex items-center;
 }
 
-.radioButtonHeading.active {
+/* .radioButtonHeading.active {
   @apply text-2xl mt-8 mb-4 leading-snug font-serif  bg-m-yellow border-black text-black;
-}
+} */
 
 .radioButtonSection {
   @apply mt-10 mb-10;
 }
 
 .radioButtons input[type='radio'] {
-  /* Add if not using autoprefixer */
   -webkit-appearance: none;
-  /* Remove most all native input styles */
   appearance: none;
-  /* For iOS < 15 */
   background-color: var(--form-background);
-  /* Not removed via appearance */
   margin: 0 auto 0 0;
-
   font: inherit;
   color: currentColor;
   width: 1.15em;
@@ -63,6 +59,7 @@
   padding: 0.7em;
   display: grid;
   place-content: center;
+  cursor: pointer;
 }
 
 .radioButtons input[type='radio']::before {
@@ -73,7 +70,6 @@
   transform: scale(0);
   transition: 120ms transform ease-in-out;
   box-shadow: inset 1em 1em var(--form-control-color);
-  /* Windows High Contrast Mode */
   background-color: CanvasText;
   margin: 0 auto 0 0;
 }
@@ -85,4 +81,12 @@
 .radioButtons input[type='radio']:focus {
   outline: max(2px, 0.15em) solid currentColor;
   outline-offset: max(2px, 0.15em);
+}
+
+.requiredBadge {
+  @apply bg-accent-2 p-2 text-sm ml-4 rounded-md font-semibold font-sans;
+}
+
+.active .requiredBadge {
+  @apply bg-m-red text-white;
 }

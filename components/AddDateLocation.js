@@ -128,7 +128,6 @@ const AddDateLocation = ({ dates, locations }) => {
   };
 
   const handleLChange = selectedOption => {
-    console.log(selectedOption);
     setValue('BagelPickupLocation', selectedOption);
     setLocation(selectedOption);
     setValue('BagelPickupDate', '');
@@ -160,7 +159,6 @@ const AddDateLocation = ({ dates, locations }) => {
   }, []);
 
   const onSubmit = data => {
-    console.log(data);
     actions.updateAction({
       location: data.BagelPickupLocation,
       time: data.BagelPickupDate,
@@ -169,10 +167,6 @@ const AddDateLocation = ({ dates, locations }) => {
     });
     setShowModal(false);
   };
-
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
 
   return (
     <Modal
@@ -203,10 +197,6 @@ const AddDateLocation = ({ dates, locations }) => {
             currentValue={currentLValue}
             setCurrentValue={setCurrentLValue}
           />
-
-          {errors.BagelPickupLocation?.type === 'required' && (
-            <p className='text-m-red'>Location is required</p>
-          )}
         </section>
         {date && (
           <section className={[styles.radioButtonSection].join(' ')}>
@@ -230,10 +220,6 @@ const AddDateLocation = ({ dates, locations }) => {
               currentValue={currentDValue}
               setCurrentValue={setCurrentDValue}
             />
-
-            {errors.BagelPickupDate?.type === 'required' && (
-              <p className='text-m-red'>Date is required</p>
-            )}
           </section>
         )}
 
