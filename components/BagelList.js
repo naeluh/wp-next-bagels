@@ -11,7 +11,7 @@ const BagelList = ({ title, desc, priceTitle, priceDesc }) => {
           {title}
         </h3>
         <span className={borderBottom}></span>
-        <h4 className='text-2xl font-regular tracking-tighter leading-tight mb-4 text-black'>
+        <h4 className='text-2xl font-regular tracking-tighter leading-tight mb-4 text-black font-serif'>
           {desc}
         </h4>
         <span className={borderBottom}></span>

@@ -88,10 +88,6 @@ const Header = ({ navItems }) => {
         } lg:justify-end flex-3 lg:flex lg:flex-row ${
           active ? `active` : `hidden`
         }`}
-        style={{
-          maxWidth: '700px',
-          justifyContent: 'space-between',
-        }}
       >
         <li>
           <Button
@@ -106,6 +102,44 @@ const Header = ({ navItems }) => {
             fullWidth={false}
             onClick={() =>
               router.pathname === '/bagels' &&
+              width &&
+              width <= 1024 &&
+              setActive(!active)
+            }
+          />
+        </li>
+        <li>
+          <Button
+            link
+            url={'menu'}
+            type={''}
+            text={`The Bagels`}
+            disabled={false}
+            style={{
+              transition: 'all .15s ease',
+            }}
+            fullWidth={false}
+            onClick={() =>
+              router.pathname === '/menu' &&
+              width &&
+              width <= 1024 &&
+              setActive(!active)
+            }
+          />
+        </li>
+        <li>
+          <Button
+            link
+            url={'location-times'}
+            type={''}
+            text={`Locations and Times`}
+            disabled={false}
+            style={{
+              transition: 'all .15s ease',
+            }}
+            fullWidth={false}
+            onClick={() =>
+              router.pathname === '/location-times' &&
               width &&
               width <= 1024 &&
               setActive(!active)
