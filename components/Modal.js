@@ -1,5 +1,5 @@
 import React, { useEffect, FC } from 'react';
-import { maxheight, wrapperClass } from './modal.module.css';
+import { maxheight, wrapperClass, closeButton } from './modal.module.css';
 import Button from './Button';
 import Link from 'next/link';
 
@@ -40,8 +40,8 @@ const Modal = ({
               <div
                 className={`border-0 relative flex flex-col w-full h-screen bg-white outline-none focus:outline-none`}
               >
-                <div className='flex justify-between p-6 border-b border-solid border-gray-300'>
-                  <h3 className='text-3xl font-bold font-serif'>
+                <div className='flex items-baseline justify-between p-6 border-b border-solid border-gray-300'>
+                  <h3 className='text-3xl font-bold font-serif capitalize'>
                     {' '}
                     {title ? title : `Title`}
                   </h3>
@@ -55,9 +55,12 @@ const Modal = ({
                       className='p-1 ml-auto bg-transparent border-0 text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none font-serif'
                       onClick={() => setShowModal(false)}
                     >
-                      <span className='bg-transparent text-black h-6 w-6 text-2xl block outline-none focus:outline-none font-serif'>
-                        x
-                      </span>
+                      <span
+                        className={[
+                          'bg-transparent text-black h-6 w-6 text-2xl block outline-none focus:outline-none font-serif',
+                          closeButton,
+                        ].join(' ')}
+                      ></span>
                     </button>
                   )}
                 </div>

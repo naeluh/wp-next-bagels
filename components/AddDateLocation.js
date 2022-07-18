@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef, forwardRef } from 'react';
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { bagelForm } from './addGroupsForm.module.css';
 import { makeStyles } from '@material-ui/core';
@@ -21,8 +22,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const AddDateLocation = ({ dates, locations }) => {
-  const lRef = useRef(null);
-  const dRef = useRef(null);
+  const router = useRouter();
   const classes = useStyles();
   const defaultValues = {
     dozen: 12,
@@ -152,11 +152,17 @@ const AddDateLocation = ({ dates, locations }) => {
       setValue('BagelPickupDate', state.data.time);
       setLocation(state.data.location);
       setDate(state.data.time);
-      console.log(state.data);
     } else {
       setShowModal(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (!state.data.location && !state.data.time && showModal) {
+      // router.push('/');
+    }
+    console.log(state.data.location, state.data.time, showModal);
+  }, [showModal]);
 
   const onSubmit = data => {
     actions.updateAction({
@@ -171,10 +177,10 @@ const AddDateLocation = ({ dates, locations }) => {
   return (
     <Modal
       button={`Edit Location and Date`}
-      title={`Pickup Location and date`}
+      title={`Location and date`}
       setShowModal={setShowModal}
       showModal={showModal}
-      hideCloseButton={false}
+      hideCloseButton={!state.data.location && !state.data.time ? true : false}
     >
       <form onSubmit={handleSubmit(onSubmit)} className={`form ${bagelForm}`}>
         <section className={[styles.radioButtonSection].join(' ')}>

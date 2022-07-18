@@ -14,7 +14,9 @@ const Bagel = ({ title, img, desc }) => {
           styles.bagelHeader,
         ].join(' ')}
       >
-        {title}
+        {' '}
+        <span className={styles.bagelIcon}></span>
+        <span className={styles.bagelText}>{title}</span>
       </h5>
       {desc && (
         <p className='text-base font-normal tracking-tighter leading-tight font-sans'>
