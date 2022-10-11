@@ -72,7 +72,7 @@ const FeaturedBagel: FC<{
           >
             <Image
               src={imgSrc}
-              alt='bagel'
+              alt='the mamalagel'
               layout='fill'
               objectFit='cover'
               objectPosition='center'
