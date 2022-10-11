@@ -14,6 +14,20 @@ import BagelDefinition from '../components/BagelDefinition';
 
 export default function Index({ preview, homeData, navItems }) {
   useEffect(() => document.body.classList.remove('modal-open'));
+  if (!homeData && !navItems) {
+    return (
+      <Layout
+        preview={preview}
+        title={`${CMS_NAME} 🥯 `}
+        desc={`${CMS_NAME} Home of the signature Mămălagel 🥯`}
+      >
+        <Header navItems={navItems} />
+        <Container>
+          <strong>Could not connect to server ...</strong>
+        </Container>
+      </Layout>
+    );
+  }
   return (
     <Layout
       preview={preview}

@@ -53,6 +53,11 @@
   pointer-events: none;
 }
 
+.add svg,
+.remove svg {
+  width: 30px;
+}
+
 .numberContainer input[type='button']:active {
   transition: 0.3s all;
   transform: translateY(3px);

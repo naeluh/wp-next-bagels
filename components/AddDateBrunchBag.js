@@ -1,27 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { bagelForm } from './addGroupsForm.module.css';
-import { makeStyles } from '@material-ui/core';
+
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import SelectList from './SelectList';
 import Modal from './Modal';
 import Button from './Button';
 
-const useStyles = makeStyles(theme => ({
-  button: {
-    display: 'block',
-    marginTop: theme.spacing(2),
-  },
-  formControl: {
-    marginBottom: theme.spacing(2),
-    minWidth: '100%',
-  },
-}));
-
 const AddDateBrunchBag = ({ dates }) => {
   const dRef = useRef(null);
-  const classes = useStyles();
+
   const defaultValues = {
     dozen: 12,
     halfDozen: 6,
@@ -78,7 +67,6 @@ const AddDateBrunchBag = ({ dates }) => {
             handleChange={handleDChange}
             value={date}
             name='DeliveryDate'
-            className={classes.formControl}
             control={control}
             rules={{ required: true }}
             options={dates}

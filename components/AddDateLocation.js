@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useRef, forwardRef } from 'react';
-import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { bagelForm } from './addGroupsForm.module.css';
-import { makeStyles } from '@material-ui/core';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import Modal from './Modal';
@@ -10,20 +8,7 @@ import Button from './Button';
 import RadioButtons from './RadioButtons';
 import styles from './addDateLocation.module.css';
 
-const useStyles = makeStyles(theme => ({
-  button: {
-    display: 'block',
-    marginTop: theme.spacing(2),
-  },
-  formControl: {
-    marginBottom: theme.spacing(2),
-    minWidth: '100%',
-  },
-}));
-
 const AddDateLocation = ({ dates, locations }) => {
-  const router = useRouter();
-  const classes = useStyles();
   const defaultValues = {
     dozen: 12,
     halfDozen: 6,
@@ -161,7 +146,7 @@ const AddDateLocation = ({ dates, locations }) => {
     if (!state.data.location && !state.data.time && showModal) {
       // router.push('/');
     }
-    console.log(state.data.location, state.data.time, showModal);
+    // console.log(state.data.location, state.data.time, showModal);
   }, [showModal]);
 
   const onSubmit = data => {
@@ -190,7 +175,6 @@ const AddDateLocation = ({ dates, locations }) => {
             handleChange={handleLChange}
             radioVal={location}
             name='BagelPickupLocation'
-            className={classes.formControl}
             control={control}
             rules={{ required: true }}
             title={'Select Pickup Location'}
@@ -212,7 +196,6 @@ const AddDateLocation = ({ dates, locations }) => {
               handleChange={handleDChange}
               radioVal={date}
               name='BagelPickupDate'
-              className={classes.formControl}
               control={control}
               rules={{ required: true }}
               noOptionsMessage={() => 'No dates available'}

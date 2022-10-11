@@ -22,7 +22,6 @@ const RadioButtons = ({
   setCurrentValue,
 }) => {
   const rbRef = useRef(null);
-  console.log(errors[name], type);
   return (
     <fieldset
       className={[

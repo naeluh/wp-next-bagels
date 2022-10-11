@@ -5,7 +5,11 @@ import { CMS_NAME } from '../lib/constants';
 import Container from '../components/Container';
 import Header from '../components/Header';
 import Layout from '../components/Layout';
-import { getAllPostsWithSlug, getPostAndMorePosts } from '../lib/api';
+import {
+  getAllPostsWithSlug,
+  getPostAndMorePosts,
+  getNavItems,
+} from '../lib/api';
 import PostTitle from '../components/PostTitle';
 import PostBody from '../components/PostBody';
 
@@ -36,12 +40,14 @@ export default function Page({ post, navItems, preview }) {
 }
 
 export async function getStaticProps({ params, preview = false, previewData }) {
-  const data = await getPostAndMorePosts(params.slug, preview, previewData);
+  const { slug } = params;
+  const { navItems } = await getNavItems(preview);
+  const data = await getPostAndMorePosts(slug, preview, previewData);
   return {
     props: {
       preview,
       post: data.post,
-      navItems: data.navItems,
+      navItems: navItems,
     },
     revalidate: 10,
   };
@@ -50,7 +56,7 @@ export async function getStaticProps({ params, preview = false, previewData }) {
 export async function getStaticPaths() {
   const allPosts = await getAllPostsWithSlug();
   return {
-    paths: allPosts.edges.map(({ node }) => `/${node.slug}`) || [],
+    paths: allPosts ? allPosts.edges.map(({ node }) => `/${node.slug}`) : [],
     fallback: true,
   };
 }

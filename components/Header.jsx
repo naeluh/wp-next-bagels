@@ -172,7 +172,6 @@ const Header = ({ navItems }) => {
                 <Button
                   link
                   url={`${url}`}
-                  type={''}
                   type={'button'}
                   text={`${label}`}
                   disabled={false}
