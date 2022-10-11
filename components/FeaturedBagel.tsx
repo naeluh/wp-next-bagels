@@ -55,19 +55,30 @@ const Links: FC<{ wrapperClass?: string }> = ({ wrapperClass }) => {
 const FeaturedBagel: FC<{
   title?: string;
   subtitle?: string;
-  img?: { sourceUrl?: string };
+  img?: { sourceUrl?: string | undefined | null };
 }> = ({ title, subtitle, img }) => {
+  const imgSrc = img ? `${img.sourceUrl}` : ``;
   return (
-    <section className='mt-32 md:mt-48 px-5 py-6 flex-col md:flex-row flex lg:items-center md:justify-between mb-16 md:mb-24 md:px-4 md:py-4 xl:mt-32 border-m-yellow border-8'>
+    <section className=' px-5 py-6 flex-col md:flex-row flex lg:items-center md:justify-between mb-16 md:mb-24 md:px-4 md:py-4 border-m-yellow border-8'>
       <div className='mb-6 md:mb-0 flex-1 md:mr-8 lg:mr-16'>
         <Links wrapperClass='flex flex-col md:hidden' />
-        <Img
-          src='/static/images/penguin-city-pretzel.jpg'
-          alt='bagel'
-          width={1440}
-          height={1440}
-          quality={50}
-        />
+        {img ? (
+          <Img
+            src={imgSrc}
+            alt='bagel'
+            width={1440}
+            height={1440}
+            quality={100}
+          />
+        ) : (
+          <Img
+            src='/static/images/penguin-city-pretzel.jpg'
+            alt='bagel'
+            width={1440}
+            height={1440}
+            quality={50}
+          />
+        )}
       </div>
       <div className='flex-1 relative'>
         <Links wrapperClass='hidden md:flex md:flex-col lg:hidden' />
@@ -76,7 +87,7 @@ const FeaturedBagel: FC<{
             <div className='w-full overflow-hidden mb-6'>
               <img
                 className='object-contain'
-                src={img.sourceUrl}
+                src='/static/images/mamalagels-notag.png'
                 alt={title}
                 width='200'
               />
