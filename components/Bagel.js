@@ -3,8 +3,11 @@ import dynamic from 'next/dynamic';
 import { useSpring, animated } from 'react-spring';
 import styles from './bagel.module.css';
 import { useHasBeenVisible } from '../hooks/useVisibility';
+
 const BagelWebGl = dynamic(() => import('./BagelWebGl'), {
+  ssr: true,
   suspense: true,
+  loading: undefined,
 });
 
 const Bagel = ({ title, img, desc }) => {
@@ -52,7 +55,7 @@ const Bagel = ({ title, img, desc }) => {
               height: '100%',
               width: '100%',
             }}
-          ></div>
+          />
         )}
       </div>
 

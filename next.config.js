@@ -17,6 +17,7 @@ module.exports = {
     STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
     USER: process.env.USER,
     PASS: process.env.PASS,
+    PREVIEW: process.env.PREVIEW,
   },
   images: {
     domains: ['i2.wp.com', 'i1.wp.com', 'i0.wp.com', 'wp.mamalagels.com'],
