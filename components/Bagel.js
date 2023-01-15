@@ -3,6 +3,8 @@ import dynamic from 'next/dynamic';
 import { useSpring, animated } from 'react-spring';
 import styles from './bagel.module.css';
 import { useHasBeenVisible } from '../hooks/useVisibility';
+import FadeInDirection from './FadeInDirection';
+import VsensorAnimate from './VsensorAnimate';
 
 const BagelWebGl = dynamic(() => import('./BagelWebGl'), {
   loading: () => 'Loading...',
@@ -20,17 +22,20 @@ const Bagel = ({ title, img, desc }) => {
     transition: 'opacity 0.5s linear',
   });
   return (
-    <div className={styles.bagelContainer} ref={nodeRef}>
-      <h5
-        className={[
-          'text-3xl font-semibold tracking-tighter leading-tight font-serif',
-          styles.bagelHeader,
-        ].join(' ')}
-      >
-        <span className={styles.bagelIcon}></span>
-        <span className={styles.bagelText}>{title}</span>
-      </h5>
-      {/* <div
+    <VsensorAnimate once>
+      {({ isVisible }) => (
+        <FadeInDirection isVisible={isVisible}>
+          <div className={styles.bagelContainer} ref={nodeRef}>
+            <h5
+              className={[
+                'text-3xl font-semibold tracking-tighter leading-tight font-serif',
+                styles.bagelHeader,
+              ].join(' ')}
+            >
+              <span className={styles.bagelIcon}></span>
+              <span className={styles.bagelText}>{title}</span>
+            </h5>
+            {/* <div
         style={{
           maxHeight: '99vh',
           flex: '100%',
@@ -57,12 +62,15 @@ const Bagel = ({ title, img, desc }) => {
         )}
       </div> */}
 
-      {desc && (
-        <p className='text-base font-normal tracking-tighter leading-tight font-sans'>
-          {desc}
-        </p>
+            {desc && (
+              <p className='text-base font-normal tracking-tighter leading-tight font-sans'>
+                {desc}
+              </p>
+            )}
+          </div>
+        </FadeInDirection>
       )}
-    </div>
+    </VsensorAnimate>
   );
 };
 
