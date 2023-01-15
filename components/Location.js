@@ -51,9 +51,11 @@ const Location = ({ title, img, times }) => {
                 <Image
                   src={img ? img.node.sourceUrl : `/static/images/tent.jpg`}
                   alt={title}
-                  fill='true'
-                  objectFit='cover'
-                  objectPosition='center'
+                  fill
+                  style={{
+                    objectFit: 'cover',
+                    objectPosition: 'center',
+                  }}
                   className={styles.bagelStyles}
                 />
               </span>

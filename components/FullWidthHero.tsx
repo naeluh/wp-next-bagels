@@ -16,8 +16,10 @@ const FullWidthHero = ({ image }: FullWidthHeroVars) => {
         <Image
           alt='bagels'
           src={image}
-          fill='true'
-          objectFit='cover'
+          fill
+          style={{
+            objectFit: 'cover',
+          }}
           quality={100}
         />
       </div>

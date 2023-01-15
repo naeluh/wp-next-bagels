@@ -23,7 +23,7 @@ export default function Index({ navItems }) {
         <Image
           src='/static/images/mamalagels-notag.png'
           alt='Mamalagels'
-          fixed='true'
+          fixed
           width={175}
           height={88}
           priority
@@ -41,7 +41,7 @@ export default function Index({ navItems }) {
         <Image
           src='/static/images/mamalagels-notag.png'
           alt='Mamalagels'
-          fixed='true'
+          fixed
           width={175}
           height={88}
           priority

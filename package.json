@@ -23,6 +23,7 @@
     "common-tags": "^1.8.2",
     "date-fns": "2.21.1",
     "dotenv-webpack": "^7.0.2",
+    "focus-trap": "^7.2.0",
     "little-state-machine": "^4.1.0",
     "micro": "^9.3.4",
     "micro-cors": "^0.1.1",

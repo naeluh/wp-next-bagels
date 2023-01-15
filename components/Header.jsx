@@ -51,7 +51,7 @@ const Header = ({ navItems }) => {
           <Image
             src='/static/images/mamalagels-notag.png'
             alt='Mamalagels'
-            fixed='true'
+            fixed
             width={175}
             height={88}
             priority

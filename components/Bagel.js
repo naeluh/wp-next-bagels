@@ -5,9 +5,7 @@ import styles from './bagel.module.css';
 import { useHasBeenVisible } from '../hooks/useVisibility';
 
 const BagelWebGl = dynamic(() => import('./BagelWebGl'), {
-  ssr: true,
-  suspense: true,
-  loading: undefined,
+  loading: () => 'Loading...',
 });
 
 const Bagel = ({ title, img, desc }) => {
@@ -32,7 +30,7 @@ const Bagel = ({ title, img, desc }) => {
         <span className={styles.bagelIcon}></span>
         <span className={styles.bagelText}>{title}</span>
       </h5>
-      <div
+      {/* <div
         style={{
           maxHeight: '99vh',
           flex: '100%',
@@ -57,7 +55,7 @@ const Bagel = ({ title, img, desc }) => {
             }}
           />
         )}
-      </div>
+      </div> */}
 
       {desc && (
         <p className='text-base font-normal tracking-tighter leading-tight font-sans'>

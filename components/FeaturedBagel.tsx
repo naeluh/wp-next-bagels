@@ -71,9 +71,11 @@ const FeaturedBagel: FC<{
             <Image
               src={imgSrc}
               alt='bagel'
-              fill='true'
-              objectFit='cover'
-              objectPosition='center'
+              fill
+              style={{
+                objectFit: 'cover',
+                objectPosition: 'center',
+              }}
               className={styles.bagelStyles}
             />
           </span>

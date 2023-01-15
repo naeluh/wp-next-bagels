@@ -9,16 +9,16 @@ const Torus = props => {
   const mapRepeatSize = 1.1;
   const map = useLoader(TextureLoader, '/static/images/bagelTexture2.png');
   const displaceMap = useLoader(TextureLoader, '/static/images/bagelMap2.png');
-  const [colorMap, displacementMap, normalMap, roughnessMap, aoMap] = useLoader(
-    TextureLoader,
-    [
-      '/static/images/PavingStones092_1K-JPG/PavingStones092_1K_Color.jpg',
-      '/static/images/PavingStones092_1K-JPG/PavingStones092_1K_Displacement.jpg',
-      '/static/images/PavingStones092_1K-JPG/PavingStones092_1K_NormalGL.jpg',
-      '/static/images/PavingStones092_1K-JPG/PavingStones092_1K_Roughness.jpg',
-      '/static/images/PavingStones092_1K-JPG/PavingStones092_1K_AmbientOcclusion.jpg',
-    ]
-  );
+  // const [colorMap, displacementMap, normalMap, roughnessMap, aoMap] = useLoader(
+  //   TextureLoader,
+  //   [
+  //     '/static/images/PavingStones092_1K-JPG/PavingStones092_1K_Color.jpg',
+  //     '/static/images/PavingStones092_1K-JPG/PavingStones092_1K_Displacement.jpg',
+  //     '/static/images/PavingStones092_1K-JPG/PavingStones092_1K_NormalGL.jpg',
+  //     '/static/images/PavingStones092_1K-JPG/PavingStones092_1K_Roughness.jpg',
+  //     '/static/images/PavingStones092_1K-JPG/PavingStones092_1K_AmbientOcclusion.jpg',
+  //   ]
+  // );
   // map.magFilter = THREE.NearestFilter; // no effect
   // map.minFilter = THREE.LinearMipMapLinearFilter; // no effect
   // map.wrapS = map.wrapT = THREE.RepeatWrapping; // has effect
