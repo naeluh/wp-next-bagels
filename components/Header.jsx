@@ -48,16 +48,16 @@ const Header = ({ navItems }) => {
     >
       <div className='flex flex-row justify-between w-full lg:flex-1 mr-4'>
         <Link href='/'>
-          <a>
-            <Image
-              src='/static/images/mamalagels-notag.png'
-              alt='Mamalagels'
-              layout='fixed'
-              width={175}
-              height={88}
-              priority
-            />
-          </a>
+
+          <Image
+            src='/static/images/mamalagels-notag.png'
+            alt='Mamalagels'
+            layout='fixed'
+            width={175}
+            height={88}
+            priority
+          />
+
         </Link>
         <div
           onClick={() => setActive(!active)}

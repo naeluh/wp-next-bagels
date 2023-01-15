@@ -21,7 +21,7 @@ export default function Footer() {
         <div className='flex flex-col lg:flex-row'>
           <div className='w-full flex flex-col lg:flex-column justify-start items-start lg:w-1/2'>
             <Link href='/'>
-              <a>{image}</a>
+              {image}
             </Link>
             <ContactInfo />
           </div>

@@ -29,25 +29,25 @@ const Links: FC<{ wrapperClass?: string }> = ({ wrapperClass }) => {
   return (
     <div className={wrapperClass}>
       <Link href='/bagels'>
-        <a>
-          <Button
-            type={'button'}
-            text={`${editBagels}Bagels & Bagels Chips`}
-            disabled={false}
-            style={{
-              marginTop: 0,
-              transition: 'all .15s ease',
-              fontSize: '16px',
-            }}
-            fullWidth={true}
-            onClick={() =>
-              router.pathname === '/bagels' &&
-              width &&
-              width <= 1024 &&
-              setActive(!active)
-            }
-          />
-        </a>
+
+        <Button
+          type={'button'}
+          text={`${editBagels}Bagels & Bagels Chips`}
+          disabled={false}
+          style={{
+            marginTop: 0,
+            transition: 'all .15s ease',
+            fontSize: '16px',
+          }}
+          fullWidth={true}
+          onClick={() =>
+            router.pathname === '/bagels' &&
+            width &&
+            width <= 1024 &&
+            setActive(!active)
+          }
+        />
+
       </Link>
     </div>
   );

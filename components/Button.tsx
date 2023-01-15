@@ -34,15 +34,15 @@ const Button = ({
       {text}
     </button>
   ) : !disabled ? (
-    <Link href={`/${url}`}>
-      <a
-        className={`${styles.mainButton}  ${fullWidth ? `w-full` : ``}`}
-        style={style}
-        onClick={onClick}
-      >
-        {text}
-      </a>
-    </Link>
+    (<Link
+      href={`/${url}`}
+      className={`${styles.mainButton}  ${fullWidth ? `w-full` : ``}`}
+      style={style}
+      onClick={onClick}>
+
+      {text}
+
+    </Link>)
   ) : (
     <button
       disabled={disabled}
