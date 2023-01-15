@@ -12,10 +12,10 @@ const VsensorAnimate = ({ once, children, ...theRest }: Props) => {
   return (
     <VSensor
       active={active}
-      onChange={isVisible => once && isVisible && setActive(false)}
+      onChange={(isVisible: boolean) => once && isVisible && setActive(false)}
       {...theRest}
     >
-      {({ isVisible }) => children({ isVisible })}
+      {({ isVisible }: { isVisible: boolean }) => children({ isVisible })}
     </VSensor>
   );
 };

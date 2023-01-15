@@ -3,6 +3,19 @@ module.exports = {
     removeDeprecatedGapUtilities: true,
     purgeLayersByDefault: true,
   },
+  purge: {
+    enabled: process.env.ENV === 'production',
+    content: [
+      'components/**/*.js',
+      'components/**/*.jsx',
+      'components/**/*.ts',
+      'components/**/*.tsx',
+      'pages/**/*.js',
+      'pages/**/*.jsx',
+      'pages/**/*.ts',
+      'pages/**/*.tsx',
+    ],
+  },
   plugins: [require('./plugins/tailwind-hamburger/index.js')],
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
