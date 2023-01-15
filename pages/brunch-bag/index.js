@@ -32,7 +32,7 @@ export default function Index({ bbDates, getNavItems }) {
         <Image
           src='/static/images/mamalagels-notag.png'
           alt='Mamalagels'
-          layout='fixed'
+          fixed='true'
           width={175}
           height={88}
           priority
@@ -50,7 +50,7 @@ export default function Index({ bbDates, getNavItems }) {
         <Image
           src='/static/images/mamalagels-notag.png'
           alt='Mamalagels'
-          layout='fixed'
+          fixed='true'
           width={175}
           height={88}
           priority

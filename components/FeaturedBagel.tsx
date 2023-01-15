@@ -29,7 +29,6 @@ const Links: FC<{ wrapperClass?: string }> = ({ wrapperClass }) => {
   return (
     <div className={wrapperClass}>
       <Link href='/bagels'>
-
         <Button
           type={'button'}
           text={`${editBagels}Bagels & Bagels Chips`}
@@ -47,7 +46,6 @@ const Links: FC<{ wrapperClass?: string }> = ({ wrapperClass }) => {
             setActive(!active)
           }
         />
-
       </Link>
     </div>
   );
@@ -73,7 +71,7 @@ const FeaturedBagel: FC<{
             <Image
               src={imgSrc}
               alt='bagel'
-              layout='fill'
+              fill='true'
               objectFit='cover'
               objectPosition='center'
               className={styles.bagelStyles}

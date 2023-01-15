@@ -21,7 +21,7 @@ export default function Custom404({}) {
           <Image
             src='/static/images/mamalagels-notag.png'
             alt='Mamalagels'
-            layout='fixed'
+            fixed='true'
             width={175}
             height={88}
             priority

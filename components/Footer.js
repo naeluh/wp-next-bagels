@@ -9,7 +9,7 @@ export default function Footer() {
     <Image
       src='/static/images/mamalagels-notag.png'
       alt='Mamalagels'
-      layout='fixed'
+      fixed='true'
       width={175}
       height={88}
       priority
@@ -20,9 +20,7 @@ export default function Footer() {
       <Container classes='container mx-auto px-5 py-12 bg-accent-1'>
         <div className='flex flex-col lg:flex-row'>
           <div className='w-full flex flex-col lg:flex-column justify-start items-start lg:w-1/2'>
-            <Link href='/'>
-              {image}
-            </Link>
+            <Link href='/'>{image}</Link>
             <ContactInfo />
           </div>
           <span className='mama-border-bottom lg:mama-border-none'></span>

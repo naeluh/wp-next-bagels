@@ -51,7 +51,7 @@ const Location = ({ title, img, times }) => {
                 <Image
                   src={img ? img.node.sourceUrl : `/static/images/tent.jpg`}
                   alt={title}
-                  layout='fill'
+                  fill='true'
                   objectFit='cover'
                   objectPosition='center'
                   className={styles.bagelStyles}
