@@ -116,45 +116,7 @@ const AddGroupsForm = ({
           {state.data.formattedDate ? state.data.formattedDate : ''}
         </p>
       </section>
-      <section className='my-8 border-b-8 border-m-yellow pb-4'>
-        <p className='text-xl'>
-          {' '}
-          <span className='text-xl font-serif font-black'>Bagels Chips</span>:
-        </p>
 
-        <Button
-          type={'button'}
-          style={{ transition: 'all .15s ease' }}
-          text={
-            bagelChips > 0
-              ? `Edit Bagel Chips - ${priceChips}.00`
-              : `Add Bagel Chips - ${priceChips}.00`
-          }
-          onClick={() => {
-            addChipGroup();
-          }}
-          disabled={false}
-          fullWidth={false}
-        />
-
-        <BagelChipsOrderModal
-          show={open}
-          setShowModal={setShowChipModal}
-          showModal={showChipModal}
-          bagelChipsData={bagelChipsData}
-        />
-
-        {state.data.bagelChips &&
-          Object.entries(state.data.bagelChips).map((key, value) => (
-            <BagelChipSetAddRemove
-              show
-              bagelChipValue={value}
-              bagelChipKey={key}
-              key={value}
-              editChipGroup={editChipGroup}
-            />
-          ))}
-      </section>{' '}
       <section className='pb-4 my-8 border-b-8 border-m-yellow'>
         <p className='text-xl'>
           <span className='text-xl font-serif font-black'>Bagels</span>:

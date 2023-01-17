@@ -14,7 +14,7 @@ export default function FooterLinks() {
 
   return (
     <>
-      <div className='border-m-black border-4 mt-4 lg:hidden'></div>
+      <div className='border-m-black border-b-8 my-4 lg:hidden'></div>
       <h4 className='text-xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4 border-b-8 pb-4 border-m-black'>
         Quick Links
       </h4>

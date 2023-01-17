@@ -55,6 +55,7 @@ const Location = ({ title, img, times }) => {
                   style={{
                     objectFit: 'cover',
                     objectPosition: 'center',
+                    borderRadius: '0.5em',
                   }}
                   className={styles.bagelStyles}
                 />

@@ -140,14 +140,14 @@ const AddDateLocation = ({ dates, locations }) => {
     } else {
       setShowModal(true);
     }
-  }, []);
+  }, [showModal]);
 
   useEffect(() => {
-    if (!state.data.location && !state.data.time && showModal) {
-      // router.push('/');
+    if (dateOptions.length <= 0) {
+      setValue('BagelPickupLocation', '');
+      setLocation('');
     }
-    // console.log(state.data.location, state.data.time, showModal);
-  }, [showModal]);
+  }, [dateOptions]);
 
   const onSubmit = data => {
     actions.updateAction({
@@ -209,6 +209,11 @@ const AddDateLocation = ({ dates, locations }) => {
               currentValue={currentDValue}
               setCurrentValue={setCurrentDValue}
             />
+            <b>
+              {dateOptions.length === 0
+                ? `No Pickup Dates Available, Please select another pickup location.`
+                : ''}
+            </b>
           </section>
         )}
 
