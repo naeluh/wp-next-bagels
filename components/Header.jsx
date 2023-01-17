@@ -92,7 +92,7 @@ const Header = ({ navItems }) => {
             link
             url={'bagels'}
             type={''}
-            text={`${editBagels}Bagels & Bagels Chips`}
+            text={`${editBagels}Bagels`}
             disabled={false}
             style={{
               transition: 'all .15s ease',

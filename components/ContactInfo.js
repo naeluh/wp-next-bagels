@@ -4,7 +4,7 @@ import { SocialIcon } from 'react-social-icons';
 
 const ContactInfo = () => {
   return (
-    <div className={styles.contactInfoContainer}>
+    <div className={`${styles.contactInfoContainer} w-full`}>
       <h4 className='text-xl font-bold tracking-tighter leading-tight md:pr-8 font-serif my-4 pb-4 border-m-black'>
         Contact Information
       </h4>
