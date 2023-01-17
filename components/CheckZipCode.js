@@ -1,26 +1,11 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { bagelForm } from './addGroupsForm.module.css';
-import { makeStyles } from '@material-ui/core';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
-import SelectList from './SelectList';
 import Modal from './Modal';
 import Button from './Button';
-import Input from './Input';
 import zipcodes from '../utils/zipcodes';
 import Link from 'next/link';
-
-const useStyles = makeStyles(theme => ({
-  button: {
-    display: 'block',
-    marginTop: theme.spacing(2),
-  },
-  formControl: {
-    marginBottom: theme.spacing(2),
-    minWidth: '100%',
-  },
-}));
 
 export default function CheckZipCode() {
   const defaultValues = {

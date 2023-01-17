@@ -6,8 +6,6 @@ import {
   remove,
   limit,
 } from './bagelNumberField.module.css';
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
 
 const BagelNumberField = ({
   control,
@@ -52,7 +50,15 @@ const BagelNumberField = ({
           }}
           className={`${add} add ${totalBagels >= amount && limit}`}
         >
-          <AddIcon />
+          <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'>
+            <path
+              d='M20,0V40m20-20H0'
+              fill='none'
+              stroke='#fff'
+              strokeMiterlimit='10'
+              strokeWidth='12'
+            />
+          </svg>
         </button>
 
         <input
@@ -82,7 +88,17 @@ const BagelNumberField = ({
           }}
           className={`${remove} remove ${totalBagels >= amount && limit}`}
         >
-          <RemoveIcon />
+          <svg id='a' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'>
+            <line
+              x1='40'
+              y1='20'
+              y2='20'
+              fill='none'
+              stroke='#fff'
+              strokeMiterlimit='10'
+              strokeWidth='12'
+            />
+          </svg>
         </button>
       </div>
     </div>

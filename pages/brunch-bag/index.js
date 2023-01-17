@@ -10,7 +10,7 @@ import Image from 'next/image';
 import useSWR from 'swr';
 import AddBrunchBag from '../../components/AddBrunchBag';
 import unfetch from 'unfetch';
-import { getBrunchBagDates } from '../../lib/api';
+import { getBrunchBagDates, getNavItems } from '../../lib/api';
 
 const getData = async (...args) => {
   return await fetch(getDataQuery);
@@ -22,7 +22,7 @@ const fetcher = async url => {
   return json;
 };
 
-export default function Index({ bbDates }) {
+export default function Index({ bbDates, getNavItems }) {
   const { data, error } = useSWR(getDataQuery, getData);
   const response = useSWR('/api/bags', fetcher);
 
@@ -32,9 +32,10 @@ export default function Index({ bbDates }) {
         <Image
           src='/static/images/mamalagels-notag.png'
           alt='Mamalagels'
-          layout='fixed'
+          fixed
           width={175}
           height={88}
+          priority
         />
         <p className=' text-3xl font-serif mt-6 font-black text-m-red'>
           Error 🥯
@@ -49,9 +50,10 @@ export default function Index({ bbDates }) {
         <Image
           src='/static/images/mamalagels-notag.png'
           alt='Mamalagels'
-          layout='fixed'
+          fixed
           width={175}
           height={88}
+          priority
         />
         <p className=' text-3xl mt-6 font-black font-serif'>Loading... 🥯</p>
       </div>
@@ -64,7 +66,7 @@ export default function Index({ bbDates }) {
       title={`${CMS_NAME} 🥯 Brunch Bags`}
       desc={`${CMS_NAME} Mămălagel's 🥯 Brunch Bags Page`}
     >
-      <Header />
+      <Header navItems={navItems} />
       <FullWidthHero image={`/static/images/brunch-bag.jpg`} />
       <Container>
         <AddBrunchBag
@@ -80,9 +82,10 @@ export default function Index({ bbDates }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getStaticProps(preview = false) {
+  const { navItems } = await getNavItems(preview);
   const bbDates = await getBrunchBagDates();
   return {
-    props: { bbDates },
+    props: { bbDates, navItems },
   };
 }

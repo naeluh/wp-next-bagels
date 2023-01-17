@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import useWindowDimensions from '../hooks/useWindowDimensions';
 import * as styles from './Header.module.css';
 
-const Header = () => {
+const Header = ({ navItems }) => {
   const { width } = useWindowDimensions();
   const router = useRouter();
   const { state } = useStateMachine({ updateAction });
@@ -38,25 +38,28 @@ const Header = () => {
 
   return (
     <nav
-      className={` ${
+      className={`${
+        router.pathname === '/brunch-bag' || router.pathname === '/bagels'
+          ? `absolute`
+          : ``
+      } ${
         active ? `bg-white z-10 h-screen` : `bg-transparent`
-      } lg:h-auto lg:bg-transparent mx-auto px-5 py-5 flex lg:items-center absolute top-0 w-full flex-col lg:flex-row z-10`}
+      } lg:h-auto lg:bg-transparent mx-auto px-5 py-5 flex lg:items-center top-0 w-full flex-col lg:flex-row z-10`}
     >
       <div className='flex flex-row justify-between w-full lg:flex-1 mr-4'>
         <Link href='/'>
-          <a>
-            <Image
-              src='/static/images/mamalagels-notag.png'
-              alt='Mamalagels'
-              layout='fixed'
-              width={175}
-              height={88}
-            />
-          </a>
+          <Image
+            src='/static/images/mamalagels-notag.png'
+            alt='Mamalagels'
+            fixed
+            width={175}
+            height={88}
+            priority
+          />
         </Link>
         <div
           onClick={() => setActive(!active)}
-          className={`lg:hidden tham tham-e-squeeze tham-w-8 ${
+          className={`lg:hidden tham tham-e-squeeze tham-w-8 mr-2 ${
             active ? `tham-active` : ``
           }`}
         >
@@ -78,58 +81,112 @@ const Header = () => {
       </div>
 
       <ul
-        className={`lg:justify-end flex-3 lg:flex lg:flex-row ${
+        className={`${
+          styles.headerList
+        } lg:justify-end flex-3 lg:flex lg:flex-row ${
           active ? `active` : `hidden`
         }`}
-        style={{
-          maxWidth: '700px',
-          justifyContent: 'space-between',
-        }}
       >
-        <li className='mr-2'>
-          <Link href='/bagels'>
-            <a>
-              <Button
-                type={'button'}
-                text={`${editBagels}Bagels & Bagels Chips`}
-                disabled={false}
-                style={{
-                  transition: 'all .15s ease',
-                  fontSize: '14px',
-                }}
-                fullWidth={false}
-                onClick={() =>
-                  router.pathname === '/bagels' &&
-                  width &&
-                  width <= 1024 &&
-                  setActive(!active)
-                }
-              />
-            </a>
-          </Link>
+        <li>
+          <Button
+            link
+            url={'bagels'}
+            type={''}
+            text={`${editBagels}Bagels`}
+            disabled={false}
+            style={{
+              transition: 'all .15s ease',
+            }}
+            fullWidth={false}
+            onClick={() =>
+              router.pathname === '/bagels' &&
+              width &&
+              width <= 1024 &&
+              setActive(!active)
+            }
+          />
         </li>
-        <li className=''>
-          <Link href='/special-request'>
-            <a>
-              <Button
-                type={'button'}
-                text={'Special 🥯 Request'}
-                disabled={false}
-                style={{
-                  transition: 'all .15s ease',
-                  fontSize: '14px',
-                }}
-                fullWidth={false}
-                onClick={() =>
-                  router.pathname === '/special-request' &&
-                  width &&
-                  width <= 1024 &&
-                  setActive(!active)
-                }
-              />
-            </a>
-          </Link>
+        <li>
+          <Button
+            link
+            url={'menu'}
+            type={''}
+            text={`The Bagels`}
+            disabled={false}
+            style={{
+              transition: 'all .15s ease',
+            }}
+            fullWidth={false}
+            onClick={() =>
+              router.pathname === '/menu' &&
+              width &&
+              width <= 1024 &&
+              setActive(!active)
+            }
+          />
         </li>
+        <li>
+          <Button
+            link
+            url={'location-times'}
+            type={''}
+            text={`Locations and Times`}
+            disabled={false}
+            style={{
+              transition: 'all .15s ease',
+            }}
+            fullWidth={false}
+            onClick={() =>
+              router.pathname === '/location-times' &&
+              width &&
+              width <= 1024 &&
+              setActive(!active)
+            }
+          />
+        </li>
+        <li>
+          <Button
+            link
+            url={'special-request'}
+            type={''}
+            text={'Special 🥯 Request'}
+            disabled={false}
+            style={{
+              transition: 'all .15s ease',
+            }}
+            fullWidth={false}
+            onClick={() =>
+              router.pathname === '/special-request' &&
+              width &&
+              width <= 1024 &&
+              setActive(!active)
+            }
+          />
+        </li>
+        {navItems &&
+          navItems.map(({ label, url }, index) => {
+            return (
+              <li key={index}>
+                <Button
+                  link
+                  url={`${url}`}
+                  type={'button'}
+                  text={`${label}`}
+                  disabled={false}
+                  style={{
+                    transition: 'all .15s ease',
+                  }}
+                  fullWidth={false}
+                  onClick={() =>
+                    router.pathname === `/${url}` &&
+                    width &&
+                    width <= 1024 &&
+                    setActive(!active)
+                  }
+                />
+              </li>
+            );
+          })}
       </ul>
     </nav>
   );

@@ -1,4 +1,5 @@
 import { CMS_NAME } from '../../lib/constants';
+import { getNavItems } from '../../lib/api';
 import { getDataQuery } from '../../lib/queries';
 import Container from '../../components/Container';
 import Header from '../../components/Header';
@@ -13,7 +14,7 @@ const getData = async (...args) => {
   return await fetch(getDataQuery);
 };
 
-export default function Index() {
+export default function Index({ navItems }) {
   const { data, error } = useSWR(getDataQuery, getData);
 
   if (error) {
@@ -22,9 +23,10 @@ export default function Index() {
         <Image
           src='/static/images/mamalagels-notag.png'
           alt='Mamalagels'
-          layout='fixed'
+          fixed
           width={175}
           height={88}
+          priority
         />
         <p className=' text-3xl font-serif mt-6 font-black text-m-red'>
           Error 🥯
@@ -39,9 +41,10 @@ export default function Index() {
         <Image
           src='/static/images/mamalagels-notag.png'
           alt='Mamalagels'
-          layout='fixed'
+          fixed
           width={175}
           height={88}
+          priority
         />
         <p className=' text-3xl mt-6 font-black font-serif'>Loading... 🥯</p>
       </div>
@@ -54,8 +57,8 @@ export default function Index() {
       title={`${CMS_NAME} 🥯 Bagels and Bagel Chips`}
       desc={`${CMS_NAME} Mămălagel's 🥯 Bagels and Bagel Chips Page`}
     >
-      <Header />
-      <FullWidthHero image={`/static/images/penguin-city-pretzel.jpg`} />
+      <Header navItems={navItems} />
+      <FullWidthHero image={`/static/images/bagels.jpg`} />
       <Container>
         <AddGroups
           bagelData={data.allBagels.edges}
@@ -66,4 +69,14 @@ export default function Index() {
       </Container>
     </Layout>
   );
+}
+
+export async function getStaticProps({ preview = false }) {
+  const { navItems } = await getNavItems(preview);
+  return {
+    props: {
+      preview,
+      navItems,
+    },
+  };
 }

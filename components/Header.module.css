@@ -15,3 +15,21 @@
 .variantColor::before {
   color: #fad113;
 }
+
+.headerList > * + * {
+  margin-left: 0;
+}
+
+.headerList a {
+  font-size: 16px;
+}
+
+@media only screen and (min-width: 1024px) {
+  .headerList > * + * {
+    margin-left: 1em;
+  }
+
+  .headerList a {
+    font-size: 12px;
+  }
+}

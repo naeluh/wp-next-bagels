@@ -33,7 +33,7 @@ const ContactForm = () => {
       onSubmit={submitForm}
       action='https://formspree.io/f/xzbkgnpk'
       method='POST'
-      className={`w-full ${formStyles} lg:max-w-xs`}
+      className={`w-full h-full ${formStyles} `}
     >
       <h4 className='text-xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4 border-bottom pb-4 border-m-black'>
         Questions ?

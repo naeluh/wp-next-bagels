@@ -58,20 +58,19 @@ const BagelChipsOrderModal = ({ bagelChipsData, showModal, setShowModal }) => {
               filterChips.length > 2 ? `mb-36` : ``
             }`}
           >
-            {bagelChipsData.map(bagelChip =>
-              checkBagelChipNode(bagelChip) ? (
-                <BagelChipNumberField
-                  register={register}
-                  defaultValues={defaultValues}
-                  bagelChip={bagelChip}
-                  key={bagelChip.node.databaseId}
-                  errors={errors}
-                  setValue={setValue}
-                  state={state}
-                />
-              ) : (
-                <span></span>
-              )
+            {bagelChipsData.map(
+              bagelChip =>
+                checkBagelChipNode(bagelChip) && (
+                  <BagelChipNumberField
+                    register={register}
+                    defaultValues={defaultValues}
+                    bagelChip={bagelChip}
+                    key={bagelChip.node.databaseId}
+                    errors={errors}
+                    setValue={setValue}
+                    state={state}
+                  />
+                )
             )}
           </div>
           <section

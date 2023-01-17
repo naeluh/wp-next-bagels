@@ -1,57 +1,6 @@
-import React, { useState, useEffect, FC } from 'react';
+import React, { FC } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import Button from './Button';
-import updateAction from '../lib/updateAction';
-import { useStateMachine } from 'little-state-machine';
-import { useRouter } from 'next/router';
-import useWindowDimensions from '../hooks/useWindowDimensions';
 import styles from './bagel.module.css';
-
-const Links: FC<{ wrapperClass?: string }> = ({ wrapperClass }) => {
-  const { width } = useWindowDimensions();
-  const router = useRouter();
-  const { state } = useStateMachine({ updateAction });
-  const { bagelChips, bagelSelections, brunchBag } = state.data;
-  const { bags } = brunchBag;
-  const hideBagelChips =
-    Object.values(bagelChips).reduce((a, b) => a + b, 0) === 0 ? false : true;
-  const [active, setActive] = useState(false);
-  const [editBagels, setEditBagels] = useState('');
-  const [editBags, setEditBags] = useState('');
-
-  useEffect(() => {
-    setEditBagels(
-      hideBagelChips || bagelSelections.length > 0 ? 'Edit ' : 'Buy '
-    );
-  }, [hideBagelChips, bagelSelections, bags, state]);
-
-  return (
-    <div className={wrapperClass}>
-      <Link href='/bagels'>
-        <a>
-          <Button
-            type={'button'}
-            text={`${editBagels}Bagels & Bagels Chips`}
-            disabled={false}
-            style={{
-              marginTop: 0,
-              transition: 'all .15s ease',
-              fontSize: '16px',
-            }}
-            fullWidth={true}
-            onClick={() =>
-              router.pathname === '/bagels' &&
-              width &&
-              width <= 1024 &&
-              setActive(!active)
-            }
-          />
-        </a>
-      </Link>
-    </div>
-  );
-};
 
 const FeaturedBagel: FC<{
   title?: string;
@@ -73,16 +22,18 @@ const FeaturedBagel: FC<{
             <Image
               src={imgSrc}
               alt='the mamalagel'
-              layout='fill'
-              objectFit='cover'
-              objectPosition='center'
+              fill
+              style={{
+                objectFit: 'cover',
+                objectPosition: 'center',
+              }}
               className={styles.bagelStyles}
             />
           </span>
         ) : (
           <Image
             src='/static/images/penguin-city-pretzel.jpg'
-            alt='bagel'
+            alt='the mamalagel'
             width={1440}
             height={1440}
             quality={50}

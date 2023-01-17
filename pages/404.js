@@ -21,9 +21,10 @@ export default function Custom404({}) {
           <Image
             src='/static/images/mamalagels-notag.png'
             alt='Mamalagels'
-            layout='fixed'
+            fixed
             width={175}
             height={88}
+            priority
           />
           <p className=' text-3xl mt-6 font-black font-serif'>
             🥯 Whoops ! Page not found ! 🥯

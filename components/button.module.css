@@ -1,0 +1,43 @@
+.mainButton {
+  @apply font-serif font-bold leading-tight text-lg text-m-black border-m-yellow border-8 border-transparent hover:border-m-black hover:text-m-yellow  hover:bg-m-black focus:outline-none px-4 py-2 my-4 block relative bg-white;
+}
+
+.mainButton:focus {
+  @apply outline-black;
+}
+
+.mainButton:hover {
+  @apply border-8;
+}
+
+.mainButton:active {
+  @apply border-m-yellow text-white;
+}
+
+.mainButton:disabled {
+  @apply opacity-25;
+}
+
+/* .mainButton::after {
+  content: '';
+  @apply border-m-yellow border-8 absolute;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  top: -8px;
+  left: -8px;
+  box-sizing: border-box;
+  z-index: -1;
+  transition: top linear 0.25s, left linear 0.25s;
+}
+
+.mainButton:hover::after {
+  content: '';
+  @apply border-m-yellow border-8 absolute;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  top: 0px;
+  left: 0px;
+  box-sizing: border-box;
+  z-index: -1;
+  transition: top linear 0.25s, left linear 0.25s;
+} */

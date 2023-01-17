@@ -1,5 +1,5 @@
 .content {
-  @apply text-lg leading-relaxed;
+  @apply text-m-black text-lg leading-relaxed;
 }
 
 .content p,
@@ -11,6 +11,12 @@
 
 .content a {
   @apply underline;
+  text-decoration-thickness: 4px;
+}
+
+.content a:hover {
+  @apply text-m-yellow;
+  text-decoration-thickness: 4px;
 }
 
 .content ul,
@@ -36,15 +42,22 @@
 }
 
 .content h2 {
-  @apply text-3xl mt-12 mb-4 leading-snug;
+  @apply text-3xl mt-12 mb-4 leading-snug font-serif;
 }
 
 .content h3 {
-  @apply text-2xl mt-8 mb-4 leading-snug;
+  @apply text-2xl mt-8 mb-4 leading-snug font-serif;
 }
 
 .content h4 {
-  @apply text-xl mt-6 mb-4 leading-snug;
+  @apply text-xl mt-6 mb-4 leading-snug font-serif;
+}
+
+.content h5 {
+  @apply text-lg mt-4 mb-2 leading-snug font-serif;
+}
+.content h6 {
+  @apply text-lg mt-4 mb-2 leading-snug;
 }
 
 .content pre {
@@ -60,7 +73,7 @@
 }
 
 .content blockquote {
-  @apply border-l-4 border-gray-500 bg-gray-200 italic ml-0 py-4 px-6;
+  @apply border-l-8 border-m-black bg-m-yellow italic ml-0 py-4 px-6;
 }
 
 .content blockquote p {
@@ -73,4 +86,8 @@
 
 .content audio {
   @apply w-full;
+}
+
+.content hr {
+  @apply mt-8 mb-8 border-t-4 border-m-black w-60 mx-auto;
 }
