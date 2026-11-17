@@ -1,3 +1,5 @@
+@reference '../styles/index.css';
+
 .formStyles h4 {
   border-bottom: 8px solid;
 }

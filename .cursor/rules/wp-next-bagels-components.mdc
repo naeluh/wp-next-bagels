@@ -1,0 +1,22 @@
+---
+description: Component file conventions (exports, naming, Tailwind, TS props)
+globs: components/**/*
+alwaysApply: false
+---
+
+# Components
+
+- **Files**: PascalCase (`Button.tsx`, `Header.jsx`). One primary component per file is typical.
+- **Exports**: Prefer **default export** for the main component (`export default function Container` or `const X = …; export default X`).
+- **Styling**: Prefer **Tailwind** `className` strings; use **`import styles from './name.module.css'`** when the component already uses CSS modules. Combine with template literals or string concatenation as in existing files.
+- **TypeScript**: For `.tsx`, define a **`Props` type** or inline props type. Match strictness of the file: legacy code uses `any` in places—**do not** widen types in unrelated edits; for **new** props, prefer explicit types.
+- **React**: Functional components only; import `React` / hooks as in sibling files.
+- **Paths**: Import shared UI from `components/`; data from `lib/` or `hooks/` with relative paths from the component’s depth.
+
+```tsx
+type Props = { children?: React.ReactNode; classes?: string };
+
+export default function Container({ children, classes = 'container mx-auto …' }: Props) {
+  return <article className={`${classes}`}>{children}</article>;
+}
+```

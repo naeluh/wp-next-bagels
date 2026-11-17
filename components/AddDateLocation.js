@@ -19,11 +19,11 @@ const AddDateLocation = ({ dates, locations }) => {
   const {
     handleSubmit,
     register,
-    errors,
     clearErrors,
     control,
     setValue,
     getValues,
+    formState: { errors },
   } = useForm({
     defaultValues,
     mode: 'onChange',

@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://mamalagels.com
+
+# Sitemaps
+Sitemap: https://mamalagels.com/sitemap.xml

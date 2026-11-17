@@ -1,3 +1,5 @@
+'use client';
+
 // Customize this 'myform.js' script and add it to your JS bundle.
 // Then import it with 'import MyForm from "./myform.js"'.
 // Finally, add a <MyForm/> element whereever you wish to display the form.

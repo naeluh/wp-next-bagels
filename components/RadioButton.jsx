@@ -10,6 +10,8 @@ const RadioButton = ({
   register,
   radioVal,
 }) => {
+  const registration = register(name, { required: true });
+  const { onChange: registerOnChange, ...registerRest } = registration;
   return (
     <div
       className={[
@@ -24,15 +26,15 @@ const RadioButton = ({
         <span>{label}</span>
         <input
           aria-required='true'
-          ref={register(name, { required: true })}
+          {...registerRest}
           id={`rb-${name}-${index}`}
           type='radio'
-          name={name}
           value={value}
           checked={radioVal.value === value ? true : false}
-          onChange={event =>
-            handleChange({ label: label, value: event.target.value })
-          }
+          onChange={event => {
+            registerOnChange(event);
+            handleChange({ label: label, value: event.target.value });
+          }}
         />
       </label>
     </div>

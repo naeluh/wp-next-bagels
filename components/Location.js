@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import FadeInDirection from './FadeInDirection';
 import VsensorAnimate from './VsensorAnimate';

@@ -1,8 +1,10 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import BagelChipNumberField from './BagelChipNumberField';
 import Button from './Button';
 import Link from 'next/link';
@@ -15,7 +17,12 @@ const BagelChipsOrderPage = ({ bagelChipsData }) => {
   };
   const [allBagelChipsEmpty, setAllBagelChipsEmpty] = useState(false);
 
-  const { handleSubmit, errors, register, setValue } = useForm({
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    formState: { errors },
+  } = useForm({
     defaultValues,
     mode: 'onChange',
   });
@@ -24,7 +31,7 @@ const BagelChipsOrderPage = ({ bagelChipsData }) => {
     actions.updateAction({
       bagelChips: data,
     });
-    router.replace(`/bagels`, `/bagels`);
+    router.replace('/bagels');
   };
 
   useEffect(() => {

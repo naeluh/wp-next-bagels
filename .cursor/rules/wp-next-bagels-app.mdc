@@ -1,0 +1,28 @@
+---
+description: App Router routes — server components, metadata, Route Handlers, draft mode
+globs: app/**/*
+alwaysApply: false
+---
+
+# App routes (`app/`)
+
+- **UI routes**: Default to **Server Components**. Use `'use client'` only for hooks, browser APIs, Stripe Elements, `little-state-machine`, SWR, Three.js, etc.
+- **Nav data**: In server `page.tsx`, load navigation via `getNavItems(preview)` from `lib/api` when the page shows `Header`.
+- **Caching**: Prefer `export const revalidate = 10` (or per-fetch `next: { revalidate }`) to mirror ISR where appropriate. Use `cache: 'no-store'` or `draftMode()` for WordPress preview flows.
+- **TypeScript pages**: Use explicit prop types for client components; server pages may use `Metadata` from `next`.
+- **Client fetch**: SWR + `lib/graphqlFetch.js` (proxied to `/api/graphql`) on bagels/brunch-bag client sections; keep the same query + fetcher pattern when extending.
+- **Route Handlers** (`app/api/**/route.ts`): Guard HTTP method; return `405` with `Allow` when appropriate. Respond with `NextResponse.json`. Use native `fetch` for outbound HTTP. Read secrets from `process.env`. Set `Cache-Control` when responses should be CDN-cached.
+
+```ts
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '…',
+  description: '…',
+};
+
+export default async function Page() {
+  const { navItems } = await getNavItems(false);
+  return (…);
+}
+```

@@ -1,4 +1,6 @@
-module.exports = function ({ addComponents }) {
+const plugin = require('tailwindcss/plugin');
+
+module.exports = plugin(function ({ addComponents }) {
   const sizes = {
     4: {
       hamburgerWidth: 16,
@@ -146,4 +148,4 @@ module.exports = function ({ addComponents }) {
   }
 
   addComponents(hamburgers);
-};
+});

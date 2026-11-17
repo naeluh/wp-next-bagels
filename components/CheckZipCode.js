@@ -15,7 +15,13 @@ export default function CheckZipCode() {
     bagelPickupLocations: '',
   };
 
-  const { handleSubmit, errors, setValue, register, setError } = useForm({
+  const {
+    handleSubmit,
+    setValue,
+    register,
+    setError,
+    formState: { errors },
+  } = useForm({
     defaultValues,
     mode: 'onChange',
   });
@@ -66,12 +72,11 @@ export default function CheckZipCode() {
       <form onSubmit={handleSubmit(onSubmit)} className={`form`}>
         <section>
           <input
-            ref={register({ required: true })}
+            {...register('zip', { required: true })}
             className='bg-white w-full border-8 border-m-black placeholder-m-black  text-m-black p-4 my-4 block focus:outline-none focus:ring-2 ring-m-yellow'
             placeholder={'Check your zipcode'}
             type='tel'
-            name='zip'
-            maxlength='5'
+            maxLength={5}
           />
 
           {errors?.zip?.type === 'required' && (

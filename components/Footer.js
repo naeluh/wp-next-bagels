@@ -1,3 +1,5 @@
+'use client';
+
 import Container from './Container';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -10,7 +12,6 @@ export default function Footer() {
     <Image
       src='/static/images/mamalagels-notag.png'
       alt='Mamalagels'
-      fixed='true'
       width={175}
       height={88}
       priority

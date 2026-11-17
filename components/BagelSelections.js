@@ -1,15 +1,21 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { limit, error } from './bagelSelections.module.css';
+import { error } from './bagelSelections.module.css';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
-import { useRouter } from 'next/router';
+import { useRouter, useSearchParams } from 'next/navigation';
 import AlertModal from './AlertModal';
 import ButtonsResult from './ButtonResult';
 import BagelNumberField from './BagelNumberField';
 
 const BagelSelections = ({ bagelData }) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const bagelSelectionsID = searchParams.get('bagelSelectionsID');
+  const typeQuery = searchParams.get('type');
+
   const { actions, state } = useStateMachine({ updateAction });
   const [data] = useState(null);
   const [type, setType] = useState('');
@@ -22,11 +28,9 @@ const BagelSelections = ({ bagelData }) => {
     totalbagels: 0,
   };
 
-  const { handleSubmit, errors, control, reset, getValues, setValue } = useForm(
-    {
-      defaultValues,
-    }
-  );
+  const { handleSubmit, reset, getValues } = useForm({
+    defaultValues,
+  });
 
   const [totalBagels, setTotalBagels] = useState(defaultValues.totalbagels);
 
@@ -35,17 +39,21 @@ const BagelSelections = ({ bagelData }) => {
 
   const bagelSet =
     state.data.bagelSelections &&
-    router.query &&
+    bagelSelectionsID &&
     state.data.bagelSelections.filter(bagelSelection => {
-      return bagelSelection.id === router.query.bagelSelectionsID;
+      return bagelSelection.id === bagelSelectionsID;
     })[0];
 
-  const onSubmit = data => {
+  const onSubmit = () => {
     const vals = getValues();
-    const output = Object.entries(vals).map(([key, value]) => ({ key, value }));
-    state.data.bagelSelections[router.query.bagelSelectionsID] = {
-      id: router.query.bagelSelectionsID,
-      bagelSetType: router.query.type,
+    const output = Object.entries(vals).map(([key, value]) => ({
+      key,
+      value,
+    }));
+    if (!bagelSelectionsID) return;
+    state.data.bagelSelections[bagelSelectionsID] = {
+      id: bagelSelectionsID,
+      bagelSetType: typeQuery,
       bagels: output,
     };
     actions.updateAction({
@@ -55,15 +63,16 @@ const BagelSelections = ({ bagelData }) => {
   };
 
   useEffect(() => {
-    if (!router.query) {
+    if (!bagelSelectionsID && !typeQuery) {
       router.push(`/bagels`);
+      return;
     }
     if (bagelSet) {
       setType(bagelSet.bagelSetType);
       setId(bagelSet.id);
-    } else if (router.query.bagelSelectionsID) {
-      setType(router.query.type);
-      setId(router.query.bagelSelectionsID);
+    } else if (bagelSelectionsID) {
+      setType(typeQuery || '');
+      setId(bagelSelectionsID);
     } else {
       router.push(`/bagels`);
     }

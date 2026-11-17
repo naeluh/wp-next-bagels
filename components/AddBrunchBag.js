@@ -1,8 +1,10 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import { grid } from './addBrunchBag.module.css';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import AddDateBrunchBag from './AddDateBrunchBag';
 import TotalCost from './TotalCost';
 import Button from './Button';

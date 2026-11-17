@@ -30,6 +30,10 @@ const BagelChipNumberField = ({
 
   const fieldName = bagelChip.node.title.toString();
 
+  useEffect(() => {
+    setValue(fieldName, currentValue);
+  }, [currentValue, fieldName, setValue]);
+
   return (
     <div className={outerNumberContainer}>
       <label className='text-xl md:text-2xl tracking-tighter leading-tight md:pr-8 font-serif text-black px-5 flex items-center justify-center'>
@@ -58,18 +62,15 @@ const BagelChipNumberField = ({
         </button>
 
         <input
-          ref={register({
+          {...register(fieldName, {
             min: 0,
             valueAsNumber: true,
-            valueAsDate: true,
           })}
           className={`quantity font-serif`}
           min='0'
           max='12'
           type='number'
           step='10'
-          name={fieldName}
-          value={currentValue}
           readOnly
         />
 

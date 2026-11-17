@@ -1,0 +1,29 @@
+---
+description: Core stack and UI shell for wp-next-bagels (Next App Router, WP, Stripe, global state)
+alwaysApply: true
+---
+
+# wp-next-bagels stack
+
+- **Router**: Next.js **App Router** (`app/`). Route Handlers live under `app/api/**/route.ts`.
+- **Languages**: `.js`, `.jsx`, and `.tsx` coexist. Match the extension and typing style of the file you edit; prefer TypeScript for **new** files only when neighboring code is already TS.
+- **Page shell** (most routes): `Header` → `Container`. Import from `components/Header`, `components/Container`. Root chrome (`html`/`body`, global styles, footer) is in `app/layout.tsx`.
+- **SEO / titles**: Export `metadata` or `generateMetadata` from each `page.tsx`. Use `CMS_NAME` from `lib/constants.js`. Emoji in titles (e.g. 🥯) matches existing pages.
+- **Imports**: Use relative paths into `lib/`, `utils/`, `config/`, `components/` (e.g. `../../lib/api`).
+- **Global client state**: `little-state-machine` is configured in `app/providers.tsx`; extend the store shape there only when adding persisted UI/order fields.
+- **Styling**: Tailwind utility classes; optional colocated `*.module.css` per component.
+
+```tsx
+// Typical page (Server Component) + metadata
+export const metadata = { title: `${CMS_NAME} …`, description: `${CMS_NAME} …` };
+
+export default async function Page() {
+  const { navItems } = await getNavItems(false);
+  return (
+    <>
+      <Header navItems={navItems} />
+      <Container>{/* content */}</Container>
+    </>
+  );
+}
+```

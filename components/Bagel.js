@@ -1,6 +1,8 @@
+'use client';
+
 import React from 'react';
 import dynamic from 'next/dynamic';
-import { useSpring, animated } from 'react-spring';
+import { useSpring, animated } from '@react-spring/web';
 import styles from './bagel.module.css';
 import { useHasBeenVisible } from '../hooks/useVisibility';
 import FadeInDirection from './FadeInDirection';
@@ -15,11 +17,19 @@ const Bagel = ({ title, img, desc }) => {
   const nodeRef = React.useRef();
   const isVisible = useHasBeenVisible(nodeRef);
   const style = useSpring({
-    opacity: isVisible ? '1' : '0',
-    maxHeight: '99vh',
-    flex: '100%',
-    aspectRatio: '16/9',
-    transition: 'opacity 0.5s linear',
+    from: {
+      opacity: 0,
+      maxHeight: '99vh',
+      flex: '100%',
+      aspectRatio: '16/9',
+    },
+    to: {
+      opacity: isVisible ? 1 : 0,
+      maxHeight: '99vh',
+      flex: '100%',
+      aspectRatio: '16/9',
+    },
+    config: { duration: 500 },
   });
   return (
     <VsensorAnimate once>

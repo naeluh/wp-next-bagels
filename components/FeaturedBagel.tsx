@@ -5,8 +5,9 @@ import styles from './bagel.module.css';
 const FeaturedBagel: FC<{
   title?: string;
   subtitle?: string;
+  desc?: string;
   img?: { sourceUrl?: string | undefined | null };
-}> = ({ title, subtitle, img }) => {
+}> = ({ title, subtitle, desc, img }) => {
   const imgSrc = img ? `${img.sourceUrl}` : ``;
   return (
     <section className=' w-full px-5 py-6 flex-col md:flex-row flex lg:items-center md:justify-between mb-16 md:mb-24 md:px-4 md:py-4 border-m-yellow border-8'>
@@ -57,6 +58,11 @@ const FeaturedBagel: FC<{
           <h2 className='text-2xl md:text-4xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4'>
             {subtitle}
           </h2>
+        )}
+        {desc && (
+          <p className='text-lg md:text-xl leading-relaxed md:pr-8 font-sans'>
+            {desc}
+          </p>
         )}
       </div>
     </section>

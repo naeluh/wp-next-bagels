@@ -1,7 +1,9 @@
-@tailwind base;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600;700;900&family=Vollkorn:ital,wght@0,700;0,900;1,400&display=swap');
+
+@import 'tailwindcss';
+@config '../tailwind.config.js';
 
 /* Write your own custom base styles here */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600;700;900&family=Vollkorn:ital,wght@0,700;0,900;1,400&display=swap');
 
 @font-face {
   font-family: 'autumn';
@@ -9,15 +11,8 @@
   src: url('autumn-webfont.woff2') format('woff2'),
     url('autumn-webfont.woff') format('woff');
 }
-/* Start purging... */
-@tailwind components;
-/* Stop purging. */
 
 /* Write you own custom component styles here */
-
-/* Start purging... */
-@tailwind utilities;
-/* Stop purging. */
 
 /* Your own custom utilities */
 p {

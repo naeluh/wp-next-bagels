@@ -1,3 +1,5 @@
+@reference '../styles/index.css';
+
 .radioButtons {
   margin: 0 auto;
   display: grid;

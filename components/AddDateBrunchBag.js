@@ -18,7 +18,12 @@ const AddDateBrunchBag = ({ dates }) => {
     bagelPickupLocations: '',
   };
 
-  const { handleSubmit, errors, control, setValue, getValues } = useForm({
+  const {
+    handleSubmit,
+    control,
+    setValue,
+    formState: { errors },
+  } = useForm({
     defaultValues,
     mode: 'onChange',
   });

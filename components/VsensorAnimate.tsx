@@ -1,22 +1,43 @@
-import React, { useState } from 'react';
-import VSensor from 'react-visibility-sensor';
+'use client';
+
+import React, { useState, useEffect, useRef } from 'react';
 
 type Props = {
-  once: boolean;
-  children: any;
-  theRest: any;
-};
+  once?: boolean;
+  children: (state: { isVisible: boolean }) => React.ReactNode;
+} & React.HTMLAttributes<HTMLDivElement>;
 
-const VsensorAnimate = ({ once, children, ...theRest }: Props) => {
-  const [active, setActive] = useState(true);
+const VsensorAnimate = ({ once, children, ...rest }: Props) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const vis = entry.isIntersecting;
+        if (once) {
+          if (vis) {
+            setIsVisible(true);
+            observer.unobserve(el);
+          }
+        } else {
+          setIsVisible(vis);
+        }
+      },
+      { threshold: 0 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [once]);
+
   return (
-    <VSensor
-      active={active}
-      onChange={(isVisible: boolean) => once && isVisible && setActive(false)}
-      {...theRest}
-    >
-      {({ isVisible }: { isVisible: boolean }) => children({ isVisible })}
-    </VSensor>
+    <div ref={ref} {...rest}>
+      {children({ isVisible })}
+    </div>
   );
 };
 

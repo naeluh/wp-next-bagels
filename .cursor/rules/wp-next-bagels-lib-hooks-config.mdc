@@ -1,0 +1,14 @@
+---
+description: lib, hooks, config, utils — GraphQL API, fetch wrapper, hooks exports
+globs: lib/**/*,hooks/**/*,config/**/*,utils/**/*
+alwaysApply: false
+---
+
+# lib / hooks / config / utils
+
+- **`lib/api.js`**: WordPress GraphQL via `fetchAPI` (POST JSON to `WORDPRESS_API_URL`). New queries belong here or in `lib/queries.js` + wiring in `fetchAPI` callers. Preserve existing error handling (`console`, empty object returns where already used).
+- **`lib/fetch.ts`**: Default export wraps **native `fetch`** for **Route Handlers** and server code that performs outbound HTTP.
+- **`lib/graphqlFetch.js`**: Client GraphQL helper — **POSTs to `/api/graphql`**, which proxies to `WORDPRESS_API_URL` on the server (keeps the WP URL off the public client bundle). Do not duplicate fetch stacks for the same data path.
+- **`config/index.ts`**: **Stripe money constants only** (`CURRENCY`, `MIN_AMOUNT`, `MAX_AMOUNT`, `AMOUNT_STEP`). Do not turn this into general app config.
+- **Hooks** (`hooks/`): One hook per file → **default export** (`useWindowDimensions`). Multiple related hooks in one file → **named exports** (`useIsVisible`, `useHasBeenVisible`, …).
+- **`utils/`**: Shared helpers (Stripe.js loader, zipcodes, API helpers) — keep pure/small; import from `app/` / `components/` with relative paths.

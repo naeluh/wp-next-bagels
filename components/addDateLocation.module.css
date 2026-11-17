@@ -1,3 +1,5 @@
+@reference '../styles/index.css';
+
 .radioButtonSection {
   @apply mt-10 mb-10;
 }

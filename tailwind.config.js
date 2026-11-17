@@ -1,36 +1,26 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
-  },
-  purge: {
-    enabled: process.env.ENV === 'production',
-    content: [
-      'components/**/*.js',
-      'components/**/*.jsx',
-      'components/**/*.ts',
-      'components/**/*.tsx',
-      'pages/**/*.js',
-      'pages/**/*.jsx',
-      'pages/**/*.ts',
-      'pages/**/*.tsx',
-    ],
-  },
-  plugins: [require('./plugins/tailwind-hamburger/index.js')],
   content: [
+    './app/**/*.{js,ts,jsx,tsx}',
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
-      opacity: ['disabled'],
-      backgroundColor: ['disabled'],
-      borderColor: ['disabled'],
-      textColor: ['visited'],
-      backgroundColor: ['checked'],
-      borderColor: ['checked'],
-      backgroundColor: ['active'],
-      borderColor: ['active'],
+      opacity: {
+        disabled: '0.5',
+      },
+      backgroundColor: {
+        disabled: '#f3f4f6',
+        checked: 'inherit',
+      },
+      borderColor: {
+        disabled: '#e5e7eb',
+        checked: 'inherit',
+      },
+      textColor: {
+        visited: 'inherit',
+      },
       borderWidth: {
         default: '1px',
         0: '0',
@@ -109,4 +99,5 @@ module.exports = {
       },
     },
   },
+  plugins: [require('./plugins/tailwind-hamburger/index.js')],
 };

@@ -1,5 +1,7 @@
+'use client';
+
 import React, { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import desc from '../lib/description';

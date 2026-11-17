@@ -15,7 +15,12 @@ const BagelChipsOrderModal = ({ bagelChipsData, showModal, setShowModal }) => {
   const [allBagelChipsEmpty, setAllBagelChipsEmpty] = useState(false);
   const [filterChips, setFilteredChips] = useState(bagelChipsData);
 
-  const { handleSubmit, errors, register, setValue } = useForm({
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    formState: { errors },
+  } = useForm({
     defaultValues,
     mode: 'onChange',
   });

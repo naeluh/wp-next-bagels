@@ -10,12 +10,12 @@ const SelectList = forwardRef(
       control,
       children,
       handleChange,
-      errors,
       rules,
       options,
       value,
       placeholder,
       noOptionsMessage,
+      id,
       ...props
     },
     ref
@@ -131,26 +131,28 @@ const SelectList = forwardRef(
     return (
       <div {...props}>
         <Controller
-          render={({ onChange, value, name, getOptionValue }) => (
+          name={name}
+          control={control}
+          rules={rules}
+          render={({ field }) => (
             <Rselect
               ref={ref}
               isSearchable={false}
               styles={customStyles}
               autoFocus={false}
-              onChange={handleChange}
-              defaultValue={value}
-              value={value}
-              name={name}
+              inputId={id}
+              onChange={selected => {
+                field.onChange(selected);
+                if (handleChange) handleChange(selected);
+              }}
+              value={field.value ?? null}
+              name={field.name}
               options={options}
               placeholder={placeholder}
               className='font-serif font-bold'
               noOptionsMessage={noOptionsMessage}
             />
           )}
-          name={name}
-          control={control}
-          defaultValue={value}
-          rules={rules}
         />
       </div>
     );

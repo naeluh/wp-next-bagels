@@ -112,7 +112,7 @@ const BrunchBagBagelSelectionsModal = ({
               showModal={showAlertModal}
               setShowModal={setAlertShowModal}
               alertText={`You have reached the limit of ${amount} 🥯 for this 🥯 selection, reduce the amount of one of your 🥯 or submit your 🥯 !`}
-              buttonProps={(data, reset, defaultValues, totalBagels, amount)}
+              buttonProps={{ data, reset, defaultValues, totalBagels, amount }}
             />
           </p>
         </section>
