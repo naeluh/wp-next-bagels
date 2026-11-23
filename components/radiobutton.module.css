@@ -1,3 +1,5 @@
+@reference "../styles/index.css";
+
 .radioButtons {
   margin: 0 auto;
   display: grid;
@@ -17,8 +19,7 @@
 }
 
 .radioButtons div.listItem.active {
-  @apply bg-m-yellow border-black text-black;
-  --tw-bg-opacity: 0.75;
+  @apply bg-m-yellow/75 border-black text-black;
 }
 
 .radioButtons label {

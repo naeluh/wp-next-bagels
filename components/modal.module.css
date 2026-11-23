@@ -1,3 +1,5 @@
+@reference "../styles/index.css";
+
 .maxheight {
   overflow-y: auto;
   padding-bottom: 200px;

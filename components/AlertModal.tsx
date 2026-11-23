@@ -1,12 +1,14 @@
+'use client';
+
 import React from 'react';
 import ButtonsResult from './ButtonResult';
 
 type Props = {
   alertText: string;
-  setShowModal: any;
-  showModal: any;
-  buttonProps: any;
-  setTotalBagels: any;
+  setShowModal: (show: boolean) => void;
+  showModal: boolean;
+  buttonProps: React.ComponentProps<typeof ButtonsResult>;
+  setTotalBagels: (total: number) => void;
 };
 
 const AlertModal = ({
@@ -35,14 +37,14 @@ const AlertModal = ({
               &#8203;
             </span>
             <div
-              className='inline-block align-bottom bg-white text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full'
+              className='inline-block align-bottom bg-white text-left overflow-hidden shadow-xl relative transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full'
               role='dialog'
               aria-modal='true'
               aria-labelledby='modal-headline'
             >
               <div className='bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4'>
                 <div className='sm:flex sm:items-start'>
-                  <div className='mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 bg-red-100 sm:mx-0 sm:h-10 sm:w-10'>
+                  <div className='mx-auto shrink-0 flex items-center justify-center h-12 w-12 bg-red-100 sm:mx-0 sm:h-10 sm:w-10'>
                     <svg
                       className='h-6 w-6 text-red-600'
                       xmlns='http://www.w3.org/2000/svg'
@@ -52,9 +54,9 @@ const AlertModal = ({
                       aria-hidden='true'
                     >
                       <path
-                        stroke-linecap='round'
-                        stroke-linejoin='round'
-                        stroke-width='2'
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        strokeWidth='2'
                         d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z'
                       />
                     </svg>
@@ -82,7 +84,7 @@ const AlertModal = ({
                     setShowModal(false);
                     setTotalBagels(0);
                   }}
-                  className='font-serif font-black leading-tight text-lg text-m-black border-m-red bg-white hover:border-m-black hover:text-m-yellow active:border-m-yellow hover:bg-m-black focus:outline-none disabled:opacity-25 border-8 px-4 py-2 block focus:ring-red-500 focus:ring-offset-2 w-full'
+                  className='font-serif font-black leading-tight text-lg text-m-black border-m-red bg-white hover:border-m-black hover:text-m-yellow active:border-m-yellow hover:bg-m-black focus:outline-hidden disabled:opacity-25 border-8 px-4 py-2 block focus:ring-red-500 focus:ring-offset-2 w-full'
                 >
                   Change Bagel Choices
                 </button>

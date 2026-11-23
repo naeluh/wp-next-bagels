@@ -1,3 +1,5 @@
+@reference "../styles/index.css";
+
 .image {
   position: relative;
 }
@@ -45,8 +47,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  @apply bg-m-yellow border-black text-black;
-  --tw-bg-opacity: 0.15;
+  @apply bg-m-yellow/15 border-black text-black;
   border-radius: 1rem;
   border: 8px solid;
   flex-direction: column;
@@ -69,7 +70,7 @@
 }
 
 .bagelIcon::before {
-  @apply border-m-yellow border-8 bg-m-yellow;
+  @apply border-m-yellow border-8 bg-m-yellow/50;
   content: '';
   position: absolute;
   border-radius: 50%;
@@ -79,11 +80,13 @@
   top: 50%;
   left: 50%;
   z-index: -1;
-  background-image: radial-gradient(#212121 10%, transparent 10%),
+  background-image:
+    radial-gradient(#212121 10%, transparent 10%),
     radial-gradient(#fafafa 10%, transparent 10%);
-  background-position: 0 0, 12px 12px;
+  background-position:
+    0 0,
+    12px 12px;
   background-size: 25px 25px;
-  --tw-bg-opacity: 0.5;
 }
 
 .bagelIcon::after {

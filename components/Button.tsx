@@ -3,11 +3,11 @@ import Link from 'next/link';
 import styles from './button.module.css';
 
 type Props = {
-  type?: any;
-  text?: any;
-  disabled?: any;
-  style?: any;
-  onClick?: any;
+  type?: 'button' | 'submit' | 'reset' | '';
+  text?: React.ReactNode;
+  disabled?: boolean;
+  style?: React.CSSProperties;
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
   fullWidth?: boolean;
   link?: boolean;
   url?: string;
@@ -26,7 +26,7 @@ const Button = ({
   return !link ? (
     <button
       className={`${styles.mainButton}  ${fullWidth ? `w-full` : ``}`}
-      type={type}
+      type={type || undefined}
       style={style}
       disabled={disabled}
       onClick={onClick}
@@ -34,15 +34,14 @@ const Button = ({
       {text}
     </button>
   ) : !disabled ? (
-    (<Link
+    <Link
       href={`/${url}`}
       className={`${styles.mainButton}  ${fullWidth ? `w-full` : ``}`}
       style={style}
-      onClick={onClick}>
-
+      onClick={onClick}
+    >
       {text}
-
-    </Link>)
+    </Link>
   ) : (
     <button
       disabled={disabled}
