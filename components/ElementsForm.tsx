@@ -1,12 +1,20 @@
+'use client';
+
 import React, { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 import desc from '../lib/description';
 import { fetchPostJSON, fetchGetJSON } from '../utils/api-helpers';
 import { formatAmountForDisplay } from '../utils/stripe-helpers';
 import * as config from '../config';
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import {
+  CardElement,
+  Elements,
+  useStripe,
+  useElements,
+} from '@stripe/react-stripe-js';
+import getStripe from '../utils/get-stripejs';
 import Button from './Button';
 import Input from './Input';
 import AddressForm from './AddressForm';
@@ -44,9 +52,12 @@ const formatCost = (number: number) => {
   return Math.round((number + Number.EPSILON) * 100) / 100;
 };
 
-const ElementsForm = () => {
+// Shape of the WordPress bagel chip rows stored in state.data.bagelChipData.
+type ChipData = { id: number; title: string; quantity: number };
+
+const Form = () => {
   const router = useRouter();
-  const { actions, state } = useStateMachine({ updateAction });
+  const { actions, state } = useStateMachine({ actions: { updateAction } });
   const stripeFee = formatCost(percentage(2.9, state?.data?.totalCost) + 0.3);
   const processingFee = formatCost(
     state?.data?.brunchBag.bags.length > 0 ? 3 : 1
@@ -63,16 +74,20 @@ const ElementsForm = () => {
     state: '',
     zip: state?.data?.brunchBag.address.zip,
   });
-  const [payment, setPayment] = useState({ status: 'initial' });
+  // source: which part of the form an error belongs to ('card' or 'details').
+  const [payment, setPayment] = useState<{ status: string; source?: string }>({
+    status: 'initial',
+  });
   const [errorMessage, setErrorMessage] = useState('');
   const [description, setDescription] = useState('');
 
-  // Set state so it can used even though its stale
   const oldState = state?.data;
+  // Copy of the paid order; the cart is reset right after payment succeeds.
+  const [paidOrder, setPaidOrder] = useState(oldState);
 
   const stripe = useStripe();
   const elements = useElements();
-  const ref = useRef(null);
+  const ref = useRef<HTMLSpanElement>(null);
 
   // if total cost is 0 we dont need to checkout.
   // Redirect back to the bagels page
@@ -83,7 +98,7 @@ const ElementsForm = () => {
     }
   }, []);
 
-  const forceReflow = (ref: any) => {
+  const forceReflow = (ref: React.RefObject<HTMLSpanElement | null>) => {
     const el = ref.current;
 
     if (el) {
@@ -127,14 +142,17 @@ const ElementsForm = () => {
     }
   };
 
-  const updateBagelChipsQuantity = (chips: any, chipData: any) => {
+  const updateBagelChipsQuantity = (
+    chips: Record<string, number>,
+    chipData: unknown[]
+  ) => {
     if (!chips && !chipData) return false;
 
-    const handleUpdateQuantity = async (id: any, quantity: any) =>
+    const handleUpdateQuantity = async (id: number, quantity: number) =>
       await fetchGetJSON(`/api/wp?id=${id}&quantity=${quantity}`);
 
-    Object.entries(chips).forEach((chip: any) => {
-      chipData.forEach((data: any) => {
+    Object.entries(chips).forEach(chip => {
+      (chipData as ChipData[]).forEach(data => {
         if (chip[0] === data.title) {
           if (chip[1] > 0) {
             const newQuantity = data.quantity - chip[1];
@@ -147,11 +165,20 @@ const ElementsForm = () => {
     return true;
   };
 
-  const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = e =>
+  // Editing the part of the form an error belongs to clears that error, so it
+  // shows only while the problem it describes can still be there.
+  const clearError = (source: string) =>
+    setPayment(p =>
+      p.status === 'error' && p.source === source ? { status: 'initial' } : p
+    );
+
+  const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = e => {
+    clearError('details');
     setInput({
       ...input,
       [e.currentTarget.name]: e.currentTarget.value,
     });
+  };
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async e => {
     e.preventDefault();
@@ -171,7 +198,7 @@ const ElementsForm = () => {
     setPayment(response);
 
     if (response.statusCode === 500) {
-      setPayment({ status: 'error' });
+      setPayment({ status: 'error', source: 'details' });
       setErrorMessage(response.message);
       return;
     }
@@ -197,7 +224,7 @@ const ElementsForm = () => {
     );
 
     if (error) {
-      setPayment({ status: 'error' });
+      setPayment({ status: 'error', source: 'card' });
       setErrorMessage(error.message ?? 'An unknown error occured');
     } else if (paymentIntent) {
       setPayment(paymentIntent);
@@ -220,6 +247,7 @@ const ElementsForm = () => {
       );
 
       // Reset Value on 'succeeded'
+      setPaidOrder(oldState);
       actions.updateAction({
         bagelSelections: [],
         bagelChips: {},
@@ -248,7 +276,7 @@ const ElementsForm = () => {
   return (
     <article>
       {['succeeded'].includes(payment.status) ? (
-        <SuccessfulPaymentResponse oldState={oldState} input={input} />
+        <SuccessfulPaymentResponse oldState={paidOrder} input={input} />
       ) : (
         <>
           <OrderDetails currentState={state} />
@@ -287,13 +315,15 @@ const ElementsForm = () => {
               <span ref={ref}>
                 <CardElement
                   options={CARD_OPTIONS}
-                  className='bg-white w-full border-8 border-m-black p-4 my-4 block focus:outline-none focus:ring-2 ring-m-yellow'
-                  onChange={(e: any) => {
+                  className='bg-white w-full border-8 border-m-black p-4 my-4 block focus:outline-hidden focus:ring-2 ring-m-yellow'
+                  onChange={e => {
                     if (e.error) {
-                      setPayment({ status: 'error' });
+                      setPayment({ status: 'error', source: 'card' });
                       setErrorMessage(
                         e.error.message ?? 'An unknown error occured'
                       );
+                    } else {
+                      clearError('card');
                     }
                   }}
                 />
@@ -327,4 +357,19 @@ const ElementsForm = () => {
   );
 };
 
-export default ElementsForm;
+// app/checkout/page.tsx is a server component, so the Stripe provider lives here.
+export default function ElementsForm() {
+  // The cart lives in sessionStorage, which the server can't read, so render
+  // after hydration; otherwise server and client markup differ.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  if (!mounted) return null;
+
+  return (
+    <Elements stripe={getStripe()}>
+      <Form />
+    </Elements>
+  );
+}

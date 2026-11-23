@@ -3,11 +3,11 @@ import styles from './FullWidthHero.module.css';
 
 import Image from 'next/image';
 
-type FullWidthHeroVars = {
-  image: any;
+type Props = {
+  image: string;
 };
 
-const FullWidthHero = ({ image }: FullWidthHeroVars) => {
+const FullWidthHero = ({ image }: Props) => {
   return (
     <header className={`${styles.flex} bg-cover bg-no-repeat bg-center`}>
       <div
@@ -21,6 +21,7 @@ const FullWidthHero = ({ image }: FullWidthHeroVars) => {
             objectFit: 'cover',
           }}
           quality={100}
+          loading='eager'
         />
       </div>
     </header>

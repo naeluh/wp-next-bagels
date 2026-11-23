@@ -1,16 +1,17 @@
+'use client';
 import React from 'react';
 import Button from './Button';
 import updateAction from '../lib/updateAction';
 import { useStateMachine } from 'little-state-machine';
 
 export default function FooterLinks() {
-  const { state } = useStateMachine({ updateAction });
+  const { state } = useStateMachine({ actions: { updateAction } });
   const { bagelSelections } = state.data;
   const [editBagels, setEditBagels] = React.useState('');
 
   React.useEffect(() => {
     setEditBagels(bagelSelections.length > 0 ? 'Edit ' : 'Buy ');
-  }, [bagelSelections]);
+  }, [bagelSelections.length]);
 
   return (
     <>

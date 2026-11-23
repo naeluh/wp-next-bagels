@@ -1,173 +1,365 @@
-@tailwind base;
+@import 'tailwindcss';
 
-/* Write your own custom base styles here */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600;700;900&family=Vollkorn:ital,wght@0,700;0,900;1,400&display=swap');
-
-@font-face {
-  font-family: 'autumn';
-  font-display: swap;
-  src: url('autumn-webfont.woff2') format('woff2'),
-    url('autumn-webfont.woff') format('woff');
+/* Hamburger menu (was the tailwind-hamburger JS plugin; only size 8 is used). */
+@layer components {
+  .tham {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.15s linear;
+  }
+  .tham:hover {
+    opacity: 0.7;
+  }
+  .tham-e-squeeze .tham-inner {
+    background-color: transparent;
+    transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    transition-duration: 75ms;
+  }
+  .tham-e-squeeze .tham-inner::before {
+    transition:
+      top 75ms ease 0.12s,
+      opacity 75ms ease;
+  }
+  .tham-e-squeeze .tham-inner::after {
+    transition:
+      bottom 75ms ease 0.12s,
+      transform 75ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  .tham-active.tham-e-squeeze .tham-inner {
+    background-color: #fad113;
+    transition-delay: 0.12s;
+    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    transform: rotate(45deg);
+  }
+  .tham-active.tham-e-squeeze .tham-inner::before {
+    top: 0;
+    transition:
+      border-radius 75ms ease,
+      top 75ms ease,
+      opacity 75ms ease 0.12s;
+    opacity: 0;
+    border-radius: 0;
+  }
+  .tham-active.tham-e-squeeze .tham-inner::after {
+    bottom: 0;
+    transition:
+      border-radius 75ms ease,
+      bottom 75ms ease,
+      transform 75ms cubic-bezier(0.215, 0.61, 0.355, 1) 0.12s;
+    transform: rotate(-90deg);
+    border-radius: 0;
+  }
+  .tham-box {
+    position: relative;
+    display: inline-block;
+  }
+  .tham-inner,
+  .tham-inner::before,
+  .tham-inner::after {
+    position: absolute;
+    display: block;
+    transition: transform 15ms ease;
+  }
+  .tham-inner {
+    top: 50%;
+    background-color: #fff;
+  }
+  .tham-inner::before,
+  .tham-inner::after {
+    content: '';
+    background-color: #fad113;
+  }
+  .tham-inner::before {
+    border-radius: 20px 20px 0 0;
+  }
+  .tham-inner::after {
+    border-radius: 0 0 20px 20px;
+  }
+  .tham-w-8,
+  .tham-w-8 .tham-box {
+    width: 32px;
+    height: 32px;
+  }
+  .tham-w-8 .tham-inner {
+    margin-top: -4px;
+  }
+  .tham-w-8 .tham-inner,
+  .tham-w-8 .tham-inner::before,
+  .tham-w-8 .tham-inner::after {
+    width: 32px;
+    height: 8px;
+  }
+  .tham-w-8 .tham-inner::before {
+    top: -12px;
+  }
+  .tham-w-8 .tham-inner::after {
+    bottom: -12px;
+  }
 }
-/* Start purging... */
-@tailwind components;
-/* Stop purging. */
 
-/* Write you own custom component styles here */
-
-/* Start purging... */
-@tailwind utilities;
-/* Stop purging. */
-
-/* Your own custom utilities */
-p {
-  font-weight: 500;
-  letter-spacing: -0.5px;
-}
-
-.mama-border-bottom {
-  border-bottom: 8px solid #fad113;
-  width: 100%;
-  display: flex;
-  margin: 25px auto;
-}
-
-.mama-border-none {
-  border-bottom: none;
-  display: none;
-}
-
-.offset-color::after {
+/* Unlayered on purpose: must beat Header.module.css `.menuButton::before { content: 'menu' }`. */
+.tham-active.tham-e-squeeze .tham-inner .tham-inner-span::before {
   content: '';
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background-color: #fad113;
 }
 
-@media only screen and (min-width: 1024px) {
+@utility container {
+  @media (width >= --theme(--breakpoint-sm)) {
+    max-width: none;
+  }
+  @media (width >= 768px) {
+    max-width: 768px;
+  }
+  @media (width >= 1024px) {
+    max-width: 1024px;
+  }
+  @media (width >= 1280px) {
+    max-width: 1280px;
+  }
+  @media (width >= 1536px) {
+    max-width: 1536px;
+  }
+}
+
+@theme {
+  --border-width-0: 0;
+  --border-width-2: 2px;
+  --border-width-3: 3px;
+  --border-width-4: 4px;
+  --border-width-6: 6px;
+  --border-width-8: 8px;
+  --border-width-10: 10px;
+  --border-width-12: 12px;
+  --default-border-width: 1px;
+
+  /* --font-inter / --font-vollkorn come from next/font in app/layout.tsx */
+  --font-sans:
+    var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
+    Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  --font-serif:
+    var(--font-vollkorn), Georgia, Cambria, Times New Roman, Times, serif;
+
+  --color-accent-1: #fafafa;
+  --color-accent-2: #eaeaea;
+  --color-accent-7: #333333;
+  --color-m-yellow: #fad113;
+  --color-m-black: #333333;
+  --color-m-red: #bf1650;
+  --color-success: #0070f3;
+  --color-cyan: #79ffe1;
+
+  --tracking-tighter: -0.04em;
+
+  --leading-tight: 1.2;
+
+  --text-oneRem: 1.25rem;
+  --text-5xl: 2.5rem;
+  --text-6xl: 2.75rem;
+  --text-7xl: 4.5rem;
+  --text-8xl: 6.25rem;
+
+  --shadow-small: 0 5px 10px rgba(0, 0, 0, 0.12);
+  --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+
+  /* Tailwind v4 dropped the pointer cursor on buttons; keep the v2 behavior. */
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+
+  /* v2 preflight did not make form controls inherit font-weight. */
+  button,
+  input,
+  optgroup,
+  select,
+  textarea {
+    font-weight: normal;
+  }
+
+  @font-face {
+    font-family: 'autumn';
+    font-display: swap;
+    src:
+      url('autumn-webfont.woff2') format('woff2'),
+      url('autumn-webfont.woff') format('woff');
+  }
+}
+
+/*
+  Site-wide custom rules. Kept in the utilities layer, after Tailwind's own
+  utilities, so specificity/order decide conflicts exactly as they did in v2
+  (unlayered CSS would otherwise beat every utility, e.g. `p` over `font-black`).
+*/
+@layer utilities {
+  p {
+    font-weight: 500;
+    letter-spacing: -0.5px;
+  }
+
   .mama-border-bottom {
+    border-bottom: 8px solid #fad113;
+    width: 100%;
+    display: flex;
+    margin: 25px auto;
+  }
+
+  .mama-border-none {
+    border-bottom: none;
     display: none;
   }
 
   .offset-color::after {
-    display: none;
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #fad113;
   }
-}
 
-.h1 {
-  margin-top: 80px;
-  color: black;
-  font-size: 25px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgb(79, 98, 148);
-}
+  @media only screen and (min-width: 1024px) {
+    .mama-border-bottom {
+      display: none;
+    }
 
-.form {
-  margin: 0 auto;
-}
+    .offset-color::after {
+      display: none;
+    }
+  }
 
-.input {
-  display: block;
-  box-sizing: border-box;
-  width: 100%;
-  border-radius: 4px;
-  border: 1px solid black;
-  padding: 10px 15px;
-  margin-bottom: 10px;
-  font-size: 14px;
-}
+  .h1 {
+    margin-top: 80px;
+    color: black;
+    font-size: 25px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(79, 98, 148);
+  }
 
-.label,
-section > label {
-  line-height: 2;
-  text-align: left;
-  display: block;
-  margin-bottom: 13px;
-  margin-top: 20px;
-  color: black;
-  font-size: 14px;
-  font-weight: 200;
-}
+  .form {
+    margin: 0 auto;
+  }
 
-.button {
-  text-transform: uppercase;
-  border: none;
-  margin-top: 40px;
-  margin-bottom: 50px;
-  padding: 20px;
-  font-size: 16px;
-  letter-spacing: 10px;
-  display: block;
-  appearance: none;
-  border-radius: 4px;
-  width: 100%;
-}
+  .input {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid black;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
 
-.buttonBlack {
-  border: 1px solid black;
-}
+  .label,
+  section > label {
+    line-height: 2;
+    text-align: left;
+    display: block;
+    margin-bottom: 13px;
+    margin-top: 20px;
+    color: black;
+    font-size: 14px;
+    font-weight: 200;
+  }
 
-.counter {
-  font-weight: 400;
-  color: black;
-  padding: 10px 15px;
-  border-radius: 4px;
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 9999999;
-  border: 1px solid rgb(79, 98, 148);
-  box-shadow: 0 0 4px rgb(79, 98, 148);
-}
+  .button {
+    text-transform: uppercase;
+    border: none;
+    margin-top: 40px;
+    margin-bottom: 50px;
+    padding: 20px;
+    font-size: 16px;
+    letter-spacing: 10px;
+    display: block;
+    appearance: none;
+    border-radius: 4px;
+    width: 100%;
+  }
 
-pre {
-  color: black;
-}
+  .buttonBlack {
+    border: 1px solid black;
+  }
 
-.modal-maxheight {
-  max-height: 25vh;
-}
+  .counter {
+    font-weight: 400;
+    color: black;
+    padding: 10px 15px;
+    border-radius: 4px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999999;
+    border: 1px solid rgb(79, 98, 148);
+    box-shadow: 0 0 4px rgb(79, 98, 148);
+  }
 
-section {
-  width: 100%;
-}
+  pre {
+    color: black;
+  }
 
-.MuiInputBase-root {
-  border-radius: 0 !important;
-}
+  .modal-maxheight {
+    max-height: 25vh;
+  }
 
-.MuiOutlinedInput-root {
-  border-radius: 0 !important;
-}
+  section {
+    width: 100%;
+  }
 
-.MuiFormControl-root,
-.makeStyles-formControl-2 {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
+  .MuiInputBase-root {
+    border-radius: 0 !important;
+  }
 
-body.modal-open {
-  overflow: hidden;
-}
+  .MuiOutlinedInput-root {
+    border-radius: 0 !important;
+  }
 
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+  .MuiFormControl-root,
+  .makeStyles-formControl-2 {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
 
-/* Firefox */
-input[type='number'] {
-  -moz-appearance: textfield;
-}
+  body.modal-open {
+    overflow: hidden;
+  }
 
-.wp-block-image {
-  margin: 2em 0;
-  border-bottom: 0;
-}
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
-.wp-block-image figcaption {
-  margin-top: 1em;
+  /* Firefox */
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+
+  .wp-block-image {
+    margin: 2em 0;
+    border-bottom: 0;
+  }
+
+  .wp-block-image figcaption {
+    margin-top: 1em;
+  }
 }

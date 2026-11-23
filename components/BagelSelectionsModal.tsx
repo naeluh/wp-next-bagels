@@ -1,0 +1,157 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
+import { useForm } from 'react-hook-form';
+import type { FieldValues } from 'react-hook-form';
+import styles from './bagelSelections.module.css';
+import { DOZEN_NAME } from '../lib/constants';
+import updateAction from '../lib/updateAction';
+import { useStateMachine } from 'little-state-machine';
+import AlertModal from './AlertModal';
+import BagelNumberField from './BagelNumberField';
+import Modal from './Modal';
+import type { Bagel, Edge } from '../lib/types';
+
+type Props = {
+  show?: boolean;
+  showModal: boolean;
+  setShowModal: Dispatch<SetStateAction<boolean>>;
+  bagelData: Edge<Bagel>[];
+  bagelSetType: string;
+  bagelSelectionsID: number;
+};
+
+const BagelSelectionsModal = ({
+  showModal,
+  setShowModal,
+  bagelData,
+  bagelSetType,
+  bagelSelectionsID,
+}: Props) => {
+  const { actions, state } = useStateMachine({ actions: { updateAction } });
+  const [data] = useState(null);
+  const [type, setType] = useState('');
+  const [id, setId] = useState<string | number>('');
+  const [showAlertModal, setAlertShowModal] = useState(false);
+
+  const defaultValues = {
+    dozen: 12,
+    halfDozen: 6,
+    totalbagels: 0,
+  };
+
+  const { handleSubmit, register, setValue, reset, getValues } = useForm();
+
+  const [totalBagels, setTotalBagels] = useState(defaultValues.totalbagels);
+
+  const amount =
+    type === 'dozen' ? defaultValues.dozen : defaultValues.halfDozen;
+
+  const bagelSet =
+    state.data.bagelSelections &&
+    state.data.bagelSelections.filter(bagelSelection => {
+      return bagelSelection.id === bagelSelectionsID;
+    })[0];
+
+  const onSubmit = (data: FieldValues) => {
+    const vals = getValues();
+    const output = Object.entries(vals).map(([key, value]) => ({ key, value }));
+    state.data.bagelSelections[bagelSelectionsID] = {
+      id: bagelSelectionsID,
+      bagelSetType: bagelSetType,
+      bagels: output,
+    };
+    actions.updateAction({
+      bagelSelections: state.data.bagelSelections,
+    });
+    setShowModal(!showModal);
+  };
+
+  useEffect(() => {
+    if (bagelSet) {
+      setType(bagelSet.bagelSetType);
+      setId(bagelSet.id);
+    } else {
+      setType(bagelSetType);
+      setId(bagelSelectionsID);
+    }
+  }, [type, bagelSetType, bagelSelectionsID]);
+
+  useEffect(() => {
+    setAlertShowModal(totalBagels === amount);
+    if (totalBagels === amount) {
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth',
+      });
+    }
+  }, [totalBagels]);
+
+  return (
+    <Modal
+      button={`bagels`}
+      title={`bagels`}
+      setShowModal={setShowModal}
+      showModal={showModal}
+      hideButton={true}
+    >
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className={`form ${totalBagels === amount ? styles.error : ``}`}
+      >
+        <section className='flex-col md:flex-column flex md:justify-between md:mb-4'>
+          <h5 className='text-2xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4 text-black'>
+            Let's add a {` ${type === `halfDozen` ? `half dozen` : state.data.dozenName || DOZEN_NAME}`}{' '}
+            bagels ...
+          </h5>
+          <p>
+            Choices are limited to
+            {` ${type === `halfDozen` ? `2` : `4`}`} bagels 🥯 selections
+          </p>
+          <h6
+            className={`${
+              totalBagels === amount ? `` : ``
+            } text-2xl font-bold tracking-tighter leading-tight font-serif  text-black mb-4 py-4`}
+          >
+            Total Bagels: {totalBagels}
+          </h6>
+
+          <div>
+            <AlertModal
+              showModal={showAlertModal}
+              setShowModal={setAlertShowModal}
+              setTotalBagels={setTotalBagels}
+              alertText={`You have reached the limit of ${amount} 🥯 for this 🥯 selection, reduce the amount of one of your 🥯 or submit your 🥯 !`}
+              buttonProps={{ data, reset, defaultValues, totalBagels, amount }}
+            />
+          </div>
+        </section>
+        <section className='flex-col md:flex-column flex md:justify-between'>
+          {bagelData &&
+            bagelData.map(
+              bagel =>
+                bagel.node.title && (
+                  <BagelNumberField
+                    bagelSet={bagelSet}
+                    amount={amount}
+                    totalBagels={totalBagels}
+                    setTotalBagels={setTotalBagels}
+                    register={register}
+                    setValue={setValue}
+                    getValues={getValues}
+                    bagel={bagel}
+                    defaultValues={defaultValues}
+                    key={bagel.node.title}
+                  />
+                )
+            )}
+        </section>
+        <section style={{ height: '120px' }}></section>
+      </form>
+    </Modal>
+  );
+};
+
+export default BagelSelectionsModal;

@@ -1,12 +1,16 @@
-import React, { FC } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import styles from './bagel.module.css';
+import type { WPImage } from '../lib/types';
 
-const FeaturedBagel: FC<{
+type Props = {
   title?: string;
   subtitle?: string;
-  img?: { sourceUrl?: string | undefined | null };
-}> = ({ title, subtitle, img }) => {
+  desc?: string;
+  img?: WPImage;
+};
+
+const FeaturedBagel = ({ title, subtitle, img }: Props) => {
   const imgSrc = img ? `${img.sourceUrl}` : ``;
   return (
     <section className=' w-full px-5 py-6 flex-col md:flex-row flex lg:items-center md:justify-between mb-16 md:mb-24 md:px-4 md:py-4 border-m-yellow border-8'>
@@ -42,7 +46,7 @@ const FeaturedBagel: FC<{
       </div>
       <div className='flex-1 relative'>
         {img && (
-          <div className='text-4xl md:text-6xl md:pr-10 mb-4'>
+          <div className='text-4xl md:text-6xl md:leading-10 md:pr-10 mb-4'>
             <div className='w-full overflow-hidden mb-6'>
               <img
                 className='object-contain'
@@ -54,7 +58,7 @@ const FeaturedBagel: FC<{
           </div>
         )}
         {subtitle && (
-          <h2 className='text-2xl md:text-4xl font-bold tracking-tighter leading-tight md:pr-8 font-serif mb-4'>
+          <h2 className='text-2xl md:text-4xl font-bold tracking-tighter leading-tight md:leading-10 md:pr-8 font-serif mb-4'>
             {subtitle}
           </h2>
         )}

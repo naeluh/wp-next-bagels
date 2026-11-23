@@ -1,3 +1,4 @@
+'use client';
 // Customize this 'myform.js' script and add it to your JS bundle.
 // Then import it with 'import MyForm from "./myform.js"'.
 // Finally, add a <MyForm/> element whereever you wish to display the form.
@@ -11,9 +12,9 @@ import TextArea from './TextArea';
 const SpecialRequestForm = () => {
   const [status, setStatus] = useState('');
 
-  const submitForm = (ev: any) => {
+  const submitForm = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const form = ev.target;
+    const form = ev.target as HTMLFormElement;
     const data = new FormData(form);
     const xhr = new XMLHttpRequest();
     xhr.open(form.method, form.action);

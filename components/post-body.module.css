@@ -1,3 +1,5 @@
+@reference "../styles/index.css";
+
 .content {
   @apply text-m-black text-lg leading-relaxed;
 }

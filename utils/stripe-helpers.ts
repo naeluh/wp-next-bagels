@@ -6,8 +6,8 @@ export function formatAmountForDisplay(
     style: 'currency',
     currency: currency,
     currencyDisplay: 'symbol',
-  })
-  return numberFormat.format(amount)
+  });
+  return numberFormat.format(amount);
 }
 
 export function formatAmountForStripe(
@@ -18,13 +18,13 @@ export function formatAmountForStripe(
     style: 'currency',
     currency: currency,
     currencyDisplay: 'symbol',
-  })
-  const parts = numberFormat.formatToParts(amount)
-  let zeroDecimalCurrency: boolean = true
+  });
+  const parts = numberFormat.formatToParts(amount);
+  let zeroDecimalCurrency: boolean = true;
   for (let part of parts) {
     if (part.type === 'decimal') {
-      zeroDecimalCurrency = false
+      zeroDecimalCurrency = false;
     }
   }
-  return zeroDecimalCurrency ? amount : Math.round(amount * 100)
+  return zeroDecimalCurrency ? amount : Math.round(amount * 100);
 }
